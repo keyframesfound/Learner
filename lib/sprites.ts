@@ -71,3 +71,15 @@ export const BOSS_SVG = `<svg viewBox="0 0 180 176"><g ${S0}>
       <path d="M74 99.2q16 3 32 0l-2 4.5q-14 3-28 0z" fill="#fff" stroke="none"/>
       <circle cx="25" cy="170" r="9" fill="${SKIN}"/><circle cx="155" cy="170" r="9" fill="${SKIN}"/>
     </g></svg>`;
+
+export const ROBOT_SVG = `<svg viewBox="0 0 100 100" fill="none">
+  <path d="M18 34h64v46a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8z" fill="#111"/>
+  <path d="M28 34V22m44 12V22" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="28" cy="18" r="6" fill="#111"/>
+  <circle cx="72" cy="18" r="6" fill="#111"/>
+  <rect x="8" y="48" width="9" height="20" rx="4" fill="#111"/>
+  <rect x="83" y="48" width="9" height="20" rx="4" fill="#111"/>
+  <rect x="33" y="46" width="13" height="15" rx="2" fill="#D4FF3F"/>
+  <rect x="54" y="46" width="13" height="15" rx="2" fill="#D4FF3F"/>
+  <path d="M34 72h32" stroke="#D4FF3F" stroke-width="7" stroke-linecap="square"/>
+</svg>`;

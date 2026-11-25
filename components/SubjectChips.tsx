@@ -1,41 +1,24 @@
 import Link from "next/link";
 import { subjects } from "@/lib/content";
 
-export type ChipModule = {
-  id: string;
-  code: string;
-  name: string;
-  track: string;
-  track_name: string;
-  accent: string | null;
-};
-
-export default function SubjectChips({
-  modules,
-  activeId,
-}: {
-  modules: ChipModule[];
-  activeId: string;
-}) {
+/* The mockup shows every subject across the top, not just the ones with content.
+   A subject without a published module simply lands on an empty path. */
+export default function SubjectChips({ activeTrack }: { activeTrack: string }) {
   return (
     <div className="subs">
-      {modules.map((m) => {
-        const icon = subjects.find((s) => s.id === m.track);
-        const accent = m.accent ?? icon?.colour ?? "#2D5BFF";
-        return (
-          <Link
-            key={m.id}
-            href={`/drill?m=${encodeURIComponent(m.id)}`}
-            className={"chip" + (m.id === activeId ? " on" : "")}
-            style={{ ["--c" as string]: accent }}
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
-              {icon ? <path d={icon.d} /> : <circle cx="12" cy="12" r="4" />}
-            </svg>
-            {m.track_name} · {m.code}
-          </Link>
-        );
-      })}
+      {subjects.map((s) => (
+        <Link
+          key={s.id}
+          href={s.id === activeTrack ? "/drill" : `/drill?t=${s.id}`}
+          className={"chip" + (s.id === activeTrack ? " on" : "")}
+          style={{ ["--c" as string]: s.colour }}
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none">
+            <path d={s.d} />
+          </svg>
+          {s.name}
+        </Link>
+      ))}
     </div>
   );
 }

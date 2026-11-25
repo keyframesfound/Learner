@@ -1,16 +1,26 @@
 import Link from "next/link";
-import SubjectChips, { type ChipModule } from "@/components/SubjectChips";
+import SubjectChips from "@/components/SubjectChips";
+import { subjects } from "@/lib/content";
 import { getModules, getPath, getStats, viewer } from "@/lib/repo";
 
-type ModuleRow = ChipModule & { lessons: number };
+type ModuleRow = {
+  id: string; code: string; name: string; track: string;
+  track_name: string; accent: string | null; lessons: number;
+};
 
-export default async function Path({ searchParams }: { searchParams: Promise<{ m?: string }> }) {
+export default async function Path({
+  searchParams,
+}: {
+  searchParams: Promise<{ m?: string; t?: string }>;
+}) {
   const v = await viewer();
+  const { m, t } = await searchParams;
+
   if (!v) {
     return (
       <>
-        <div className="hd"><h1>Drill</h1></div>
-        <div style={{ padding: "0 16px" }}>
+        <SubjectChips activeTrack="ict" />
+        <div style={{ padding: "0 18px" }}>
           <div className="empty">
             <b>Sign in to drill</b>
             <p>Your path appears here once you are signed in.</p>
@@ -20,17 +30,39 @@ export default async function Path({ searchParams }: { searchParams: Promise<{ m
     );
   }
 
-  const { m } = await searchParams;
   const [rows, stats] = await Promise.all([getModules(), getStats(v.id)]);
   const modules = rows as ModuleRow[];
-  const path = await getPath(v.id, m);
+
+  /* a subject chip (t) picks the first module on that track; a module chip (m) pins one */
+  const picked = t ? modules.find((x) => x.track === t) : undefined;
+  const requested = m ?? picked?.id;
+  const path = await getPath(v.id, requested);
   const mod = path.module;
+
+  if (t && !picked) {
+    const subject = subjects.find((s) => s.id === t);
+    return (
+      <>
+        <SubjectChips activeTrack={t} />
+        <div style={{ padding: "18px" }}>
+          <div className="empty">
+            <b>{subject?.name ?? "This subject"} has no drills yet</b>
+            <p>A teacher can publish lessons for it from the teaching portal. ICT is live now.</p>
+            <Link href="/drill" className="btn" style={{ display: "grid", placeItems: "center",
+              textDecoration: "none", marginTop: 14, maxWidth: 260, marginInline: "auto" }}>
+              Back to ICT
+            </Link>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   if (!mod) {
     return (
       <>
-        <div className="hd"><h1>Drill</h1></div>
-        <div style={{ padding: "0 16px" }}>
+        <SubjectChips activeTrack="ict" />
+        <div style={{ padding: "18px" }}>
           <div className="empty">
             <b>Nothing to drill yet</b>
             <p>No curriculum has been published yet.</p>
@@ -42,24 +74,21 @@ export default async function Path({ searchParams }: { searchParams: Promise<{ m
 
   return (
     <>
-      <SubjectChips modules={modules} activeId={mod.id} />
+      <SubjectChips activeTrack={mod.track} />
 
       <div className="hd">
-        <div>
-          <h1>{mod.code}</h1>
-          <div className="mod" style={{ marginTop: 4 }}>{mod.name}</div>
-        </div>
+        <span className="mod">{mod.track_name} · {mod.code}</span>
         <span className="mod dim">{path.done} of {path.total} done</span>
         <span className="streak">
           <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
             <path d="M12 2.6c3.4 4 6.2 6.6 6.2 10.4a6.2 6.2 0 0 1-12.4 0c0-2.2 1.2-4 3-6.2.4 1.8 1.4 2.8 2.4 3.2-.4-2.6.2-5 .8-7.4z" />
           </svg>
-          {stats.streak}
+          {stats.streak} in a row
         </span>
       </div>
 
       {path.lessons.length === 0 ? (
-        <div style={{ padding: "0 16px" }}>
+        <div style={{ padding: "18px" }}>
           <div className="empty">
             <b>No lessons yet</b>
             <p>This curriculum has no lessons yet — a teacher can add them.</p>

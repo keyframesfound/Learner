@@ -26,7 +26,7 @@ const TABS = [
   },
 ];
 
-export default function TabBar() {
+export default function TabBar({ badge = 0 }: { badge?: number }) {
   const path = usePathname() ?? "/";
   if (path.endsWith("/login")) return null;
   const active = (href: string) =>
@@ -45,6 +45,7 @@ export default function TabBar() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
               strokeLinecap="round" strokeLinejoin="round">{t.icon}</svg>
             <span className="lbl">{t.label}</span>
+            {t.tab === "drills" && badge > 0 ? <i className="streak-badge">{badge}</i> : null}
           </span>
         </Link>
       ))}

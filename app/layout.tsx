@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import TabBar from "@/components/TabBar";
+import { getStats, viewer } from "@/lib/repo";
 
 const DESCRIPTION =
   "ICT and Physics revision for HKDSE: short drills, quick notes and boss raids that make the exam feel smaller.";
@@ -37,7 +38,10 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  /* the tab bar's badge is the streak, so it needs the signed-in member */
+  const v = await viewer();
+  const streak = v ? (await getStats(v.id)).streak : 0;
   return (
     <html lang="en-HK">
       <head>
@@ -50,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <div className="app"><main className="page">{children}</main></div>
-        <TabBar />
+        <TabBar badge={streak} />
       </body>
     </html>
   );

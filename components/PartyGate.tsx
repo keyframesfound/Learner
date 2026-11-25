@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { PartyView } from "@/lib/party";
-import { BOSS_SVG } from "@/lib/sprites";
+import { ROBOT_SVG } from "@/lib/sprites";
 
 const API = "/learner/api/party";
 const SEATS = 5;
@@ -326,7 +326,7 @@ export default function PartyGate() {
       </div>
 
       <div className="preview">
-        <div dangerouslySetInnerHTML={{ __html: BOSS_SVG }} />
+        <div dangerouslySetInnerHTML={{ __html: ROBOT_SVG }} />
         <div>
           <h1>Segfault</h1>
           <span>Level 3 · 12,000 HP</span>
