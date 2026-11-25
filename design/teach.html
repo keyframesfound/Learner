@@ -30,11 +30,12 @@
   /* ── rail ─────────────────────────────────── */
   .rail{width:236px;flex:0 0 236px;background:#FBFAF5;border-right:3px solid var(--ink);
     display:flex;flex-direction:column;padding:16px 12px}
-  .brand{display:flex;align-items:center;gap:8px;padding:2px 6px 16px}
-  .brand b{font-family:'Archivo Black',sans-serif;font-size:21px;letter-spacing:-.7px}
+  .brand{display:flex;align-items:center;gap:7px;padding:2px 6px 16px}
+  .brand b{font-family:'Archivo Black',sans-serif;font-size:21px;letter-spacing:-.7px;
+    line-height:1;display:block}
   .brand i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;
-    font-weight:700;letter-spacing:.8px;border:2px solid var(--ink-3);color:var(--ink-3);
-    padding:1px 4px;border-radius:3px;transform:translateY(-1px)}
+    font-weight:700;letter-spacing:.7px;border:2px solid var(--ink-3);color:var(--ink-3);
+    padding:0 4px;border-radius:3px;line-height:1.15;transform:translateY(-1px)}
   .course{margin:0 4px 14px;padding:9px 10px;border:3px solid var(--ink);border-radius:8px;
     background:#fff;box-shadow:3px 3px 0 var(--line)}
   .course i{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;
@@ -108,8 +109,15 @@
   .ch .n{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9.5px;
     font-weight:600;color:var(--ink-3)}
   .ch.open{background:#FBFAF5}
-  .fr{display:flex;align-items:baseline;gap:9px;padding:7px 14px 7px 36px;font-size:12px;
-    color:var(--ink-2);cursor:pointer;border-left:3px solid transparent}
+  .fr{display:flex;align-items:baseline;gap:8px;padding:7px 14px 7px 24px;font-size:12px;
+    color:var(--ink-2);cursor:grab;border-left:3px solid transparent}
+  .fr .g{font-family:'JetBrains Mono',monospace;font-size:10px;line-height:1;letter-spacing:-1px;
+    color:var(--ink-3);opacity:.4;flex:0 0 10px}
+  .fr:hover .g{opacity:.95}
+  .fr.on .g{color:var(--lime);opacity:.75}
+  .fr.dragging{opacity:.35;background:var(--paper);cursor:grabbing}
+  .fr.dragging .g{opacity:.9}
+  .thint{font-size:10px;color:var(--ink-3);padding:9px 14px 0 24px}
   .fr .i{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-3)}
   .fr.on{background:var(--ink);color:var(--paper);border-left-color:var(--lime);font-weight:700}
   .fr.on .i{color:var(--lime)}
@@ -333,12 +341,13 @@
         <div class="ch"><span class="i">5</span><span>Combating famine</span><span class="n">9</span></div>
             <div class="ch open" style="margin-top:6px"><span class="i">6</span><span>Weather and climate</span><span class="n">14</span><span class="dots">⋯</span></div>
 
-        <div class="fr "><span class="i">1</span><span>What the monsoon is</span></div>
-        <div class="fr "><span class="i">2</span><span>Pressure gradient force</span></div>
-        <div class="fr on"><span class="i">3</span><span>Why Hong Kong is humid in summer</span></div>
-        <div class="fr "><span class="i">4</span><span>Reading a synoptic chart</span></div>
-            <div class="fr"><span class="i">5</span><span>The monsoon trough</span></div>
-            <div class="fr"><span class="i">6</span><span>Humidity and dew point</span></div>
+        <div class="fr"><span class="g">⋮⋮</span><span class="i">1</span><span>What the monsoon is</span></div>
+        <div class="fr"><span class="g">⋮⋮</span><span class="i">2</span><span>Pressure gradient force</span></div>
+        <div class="fr on"><span class="g">⋮⋮</span><span class="i">3</span><span>Why Hong Kong is humid in summer</span></div>
+        <div class="fr"><span class="g">⋮⋮</span><span class="i">4</span><span>Reading a synoptic chart</span></div>
+            <div class="fr"><span class="g">⋮⋮</span><span class="i">5</span><span>The monsoon trough</span></div>
+            <div class="fr"><span class="g">⋮⋮</span><span class="i">6</span><span>Humidity and dew point</span></div>
+            <div class="thint">Drag a note by its grip to reorder it in this chapter</div>
             <div class="addrow in"><b>+</b> New note in Weather and climate</div>
             <div class="addrow"><b>+</b> New chapter</div>
           </div>
@@ -813,6 +822,44 @@
     document.querySelectorAll(".switcher a").forEach(a =>
       a.classList.toggle("on", a.getAttribute("href") === "#" + id));
   }
+  (function reorder() {
+    const tree = document.querySelector("#curriculum .tree");
+    if (!tree) return;
+    let dragged = null;
+
+    tree.querySelectorAll(".fr").forEach(el => {
+      el.draggable = true;
+      el.addEventListener("dragstart", e => {
+        dragged = el;
+        el.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+        try { e.dataTransfer.setData("text/plain", ""); } catch (_) {}
+      });
+      el.addEventListener("dragend", () => {
+        el.classList.remove("dragging");
+        dragged = null;
+        renumber();
+      });
+    });
+
+    tree.addEventListener("dragover", e => {
+      if (!dragged) return;
+      const target = e.target.closest(".fr");
+      if (!target || target === dragged) return;
+      e.preventDefault();
+      const box = target.getBoundingClientRect();
+      const after = e.clientY > box.top + box.height / 2;
+      target.parentNode.insertBefore(dragged, after ? target.nextSibling : target);
+    });
+
+    function renumber() {
+      tree.querySelectorAll(".fr").forEach((el, i) => {
+        const n = el.querySelector(".i");
+        if (n) n.textContent = i + 1;
+      });
+    }
+  })();
+
   addEventListener("hashchange", () => show(location.hash.slice(1)));
   document.querySelectorAll('a[href="#preview"], .b').forEach(el => {
     if (el.textContent.trim() === "Preview as student") el.addEventListener("click", () => { location.hash = "preview"; });
