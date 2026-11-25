@@ -4,12 +4,6 @@ import { lessons, subjects } from "@/lib/content";
 export default function Path() {
   return (
     <>
-      <div className="hd">
-        <span className="mod">ICT · E2C</span>
-        <span className="mod dim">2 of 5 done</span>
-        <span className="streak">12 in a row</span>
-      </div>
-
       <div className="subs">
         {subjects.map((s, i) => (
           <Link key={s.id} href={i === 0 ? "/drill" : "/drill"} className={"chip" + (i === 0 ? " on" : "")}
@@ -18,6 +12,12 @@ export default function Path() {
             {s.name}
           </Link>
         ))}
+      </div>
+
+      <div className="hd">
+        <span className="mod">ICT · E2C</span>
+        <span className="mod dim">2 of 5 done</span>
+        <span className="streak">12 in a row</span>
       </div>
 
       <div className="rows">
