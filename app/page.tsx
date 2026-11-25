@@ -1,34 +1,70 @@
 import Link from "next/link";
-import { profile, subjects } from "@/lib/content";
-import { currentUser, firstName } from "@/lib/session";
+import { subjects } from "@/lib/content";
+import { getModules, getPath, getStats, viewer } from "@/lib/repo";
 
-function Mark({ colour, d }: { colour: string; d: string }) {
+type ModuleRow = {
+  id: string;
+  code: string;
+  name: string;
+  track: string;
+  track_name: string;
+  accent: string | null;
+  lessons: number;
+};
+
+const FALLBACK_ACCENT = "#2D5BFF";
+
+function Mark({ colour, d }: { colour: string; d?: string }) {
   return (
     <span className="mk" style={{ background: colour }}>
       <svg viewBox="0 0 24 24" width="17" height="17" fill="#fff" stroke="none">
-        <path d={d} />
+        {d ? <path d={d} /> : <circle cx="12" cy="12" r="4" />}
       </svg>
     </span>
   );
 }
 
 export default async function Learn() {
-  const user = await currentUser();
-  const name = firstName(user?.name ?? "", "there");
+  const v = await viewer();
+  if (!v) {
+    return (
+      <>
+        <div className="hd">
+          <h1>Today</h1>
+        </div>
+        <div style={{ padding: "0 16px" }}>
+          <div className="empty">
+            <b>Sign in to see today</b>
+            <p>Your daily mix, streak and progress appear here.</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  const [stats, rows] = await Promise.all([getStats(v.id), getModules()]);
+  const modules = rows as ModuleRow[];
+  const paths = await Promise.all(modules.map((m) => getPath(v.id, m.id)));
+  const progress = new Map(
+    paths.map((p) => [p.module?.id ?? "", { done: p.done, total: p.total }]),
+  );
+  const nextLesson = paths.flatMap((p) => p.lessons).find((l) => l.state === "now") ?? null;
+  const startHref = nextLesson ? `/drill/${nextLesson.slug}` : "/drill";
+
   return (
     <>
       <div className="hd">
         <div>
           <h1>Today</h1>
           <div className="mod" style={{ marginTop: 4 }}>
-            Hi {name} · {profile.daysToDse} days to DSE · {profile.coverage} of {profile.coverageTotal} topics
+            {v.name} · {stats.daysToDse} days to DSE · {stats.covered} of {stats.coverageTotal} items
           </div>
         </div>
         <span className="streak">
           <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
             <path d="M12 2.6c3.4 4 6.2 6.6 6.2 10.4a6.2 6.2 0 0 1-12.4 0c0-2.2 1.2-4 3-6.2.4 1.8 1.4 2.8 2.4 3.2-.4-2.6.2-5 .8-7.4z" />
           </svg>
-          {profile.streak}
+          {stats.streak}
         </span>
       </div>
 
@@ -39,40 +75,61 @@ export default async function Learn() {
           borderRadius: 10, padding: "14px 16px", boxShadow: "5px 5px 0 var(--orange)",
         }}>
           <div className="mono" style={{ fontSize: 9.5, letterSpacing: 1, color: "var(--lime)" }}>
-            {profile.dueToday} DUE TODAY
+            {stats.dueToday > 0 ? `${stats.dueToday} DUE TODAY` : nextLesson ? "NOTHING DUE" : "PATH COMPLETE"}
           </div>
           <div style={{ fontSize: 19, fontWeight: 700, margin: "6px 0 10px" }}>
-            Items you are about to forget
+            {stats.dueToday > 0
+              ? `${stats.dueToday} ${stats.dueToday === 1 ? "item is" : "items are"} about to slip`
+              : nextLesson
+                ? "Nothing due. Start the next lesson."
+                : "You are done for today"}
           </div>
-          <Link href="/drill/identifiers" className="btn"
-            style={{ display: "grid", placeItems: "center", minHeight: 44, textDecoration: "none" }}>
-            Start
-          </Link>
+          {(stats.dueToday > 0 || nextLesson) && (
+            <Link href={startHref} className="btn"
+              style={{ display: "grid", placeItems: "center", minHeight: 44, textDecoration: "none" }}>
+              Start
+            </Link>
+          )}
         </div>
       </div>
 
-      <div className="sec"><h2>Drill</h2><span>6 chapters · 4 min each</span></div>
-      <div className="cards">
-        {subjects.slice(0, 3).map((s) => (
-          <Link key={s.id} href="/drill" className="card">
-            <Mark colour={s.colour} d={s.d} />
-            <span className="txt">
-              <b>{s.name}</b>
-              <span>{s.id === "ict" ? "Chapter 6 · Weather and climate" : "Not started"}</span>
-            </span>
-            <span className="go">Start</span>
-          </Link>
-        ))}
-      </div>
+      <div className="sec"><h2>Drill</h2><span>pick up where you left off</span></div>
+      {modules.length === 0 ? (
+        <div style={{ padding: "0 16px" }}>
+          <div className="empty">
+            <b>No curriculum yet</b>
+            <p>A teacher can publish the first module.</p>
+          </div>
+        </div>
+      ) : (
+        <div className="cards">
+          {modules.map((m) => {
+            const icon = subjects.find((s) => s.id === m.track);
+            const p = progress.get(m.id);
+            const done = p?.done ?? 0;
+            const total = p?.total ?? m.lessons;
+            return (
+              <Link key={m.id} href={`/drill?m=${encodeURIComponent(m.id)}`} className="card">
+                <Mark colour={icon?.colour ?? m.accent ?? FALLBACK_ACCENT} d={icon?.d} />
+                <span className="txt">
+                  <b>{m.name}</b>
+                  <span>{done} of {total} lessons</span>
+                </span>
+                <span className="go">{total > 0 && done >= total ? "Review" : "Start"}</span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
 
-      <div className="sec"><h2>QuickBits</h2><span>one concept a screen</span></div>
+      <div className="sec"><h2>QuickBits</h2><span>study, don&apos;t drill</span></div>
       <div className="cards">
         {subjects.slice(0, 3).map((s) => (
           <Link key={s.id} href="/quickbits" className="card">
             <Mark colour={s.colour} d={s.d} />
             <span className="txt">
               <b>{s.name}</b>
-              <span>{s.id === "ict" ? "14 notes read" : "0 notes read"}</span>
+              <span>one concept a screen</span>
             </span>
             <span className="go">Study</span>
           </Link>

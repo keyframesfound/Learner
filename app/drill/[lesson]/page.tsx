@@ -1,6 +1,34 @@
+import { notFound } from "next/navigation";
 import ItemPlayer from "@/components/ItemPlayer";
+import { getLesson, getPath, viewer } from "@/lib/repo";
 
 export default async function ItemPage({ params }: { params: Promise<{ lesson: string }> }) {
-  const { lesson } = await params;
-  return <ItemPlayer lesson={lesson} />;
+  const { lesson: slug } = await params;
+  const [v, data] = await Promise.all([viewer(), getLesson(slug)]);
+  if (!data) notFound();
+
+  const { lesson, items } = data;
+
+  let nextSlug: string | undefined;
+  let nextTitle: string | undefined;
+  if (v) {
+    const path = await getPath(v.id, lesson.module_id);
+    const idx = path.lessons.findIndex((l) => l.slug === lesson.slug);
+    const next = idx >= 0 ? path.lessons[idx + 1] : undefined;
+    if (next) {
+      nextSlug = next.slug;
+      nextTitle = next.title;
+    }
+  }
+
+  return (
+    <ItemPlayer
+      items={items}
+      lessonId={lesson.id}
+      moduleId={lesson.module_id}
+      lessonTitle={lesson.title}
+      nextSlug={nextSlug}
+      nextTitle={nextTitle}
+    />
+  );
 }

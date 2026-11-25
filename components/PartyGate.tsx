@@ -1,40 +1,183 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import type { PartyView } from "@/lib/party";
 
-const ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const API = "/learner/api/party";
+const SEATS = 5;
 
-function makeCode(): string {
-  const pick = (n: number) =>
-    Array.from({ length: n }, () => ALPHABET[Math.floor(Math.random() * ALPHABET.length)]).join("");
-  return pick(3) + "-" + pick(3);
+function cleanCode(raw: string) {
+  return raw.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
 }
 
-type Mode = "choose" | "host" | "join" | "joined";
+function display(code: string) {
+  return code.length === 6 ? `${code.slice(0, 3)}-${code.slice(3)}` : code;
+}
 
-const SEATS = [
-  { name: "You", tag: "Host", you: true },
-  { name: "Kai", tag: "Ready" },
-  { name: "Mei", tag: "Ready" },
-];
+function initials(name: string) {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 0) return "?";
+  if (parts.length === 1) return parts[0]!.slice(0, 2).toUpperCase();
+  return (parts[0]!.slice(0, 1) + parts[parts.length - 1]!.slice(0, 1)).toUpperCase();
+}
+
+type Mode = "choose" | "join" | "lobby";
 
 export default function PartyGate() {
+  const router = useRouter();
   const [mode, setMode] = useState<Mode>("choose");
-  const [code, setCode] = useState("");
+  const [view, setView] = useState<PartyView | null>(null);
   const [typed, setTyped] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [signedOut, setSignedOut] = useState(false);
+  const [resume, setResume] = useState<PartyView | null>(null);
 
-  const host = () => {
-    setCode(makeCode());
-    setMode("host");
-  };
+  /* resume a raid that is already running, or a lobby you are still sitting in */
+  useEffect(() => {
+    let alive = true;
+    (async () => {
+      try {
+        const r = await fetch(API, { cache: "no-store" });
+        if (!alive) return;
+        if (r.status === 401) { setSignedOut(true); return; }
+        if (!r.ok) return;
+        const data = (await r.json()) as { party?: PartyView | null };
+        const party = data.party;
+        if (!alive || !party) return;
+        if (party.status === "live") { setResume(party); return; }
+        if (party.status !== "lobby") return;
+        setView(party);
+        setMode("lobby");
+      } catch {
+        /* the chooser still works offline */
+      }
+    })();
+    return () => { alive = false; };
+  }, []);
 
-  const join = () => {
-    const clean = typed.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
-    if (clean.length < 6) return;
-    setCode(clean.slice(0, 3) + "-" + clean.slice(3));
-    setMode("joined");
-  };
+  /* lobby poll: names appear, and everyone leaves for the arena when the host starts */
+  const code = view?.code ?? "";
+  const status = view?.status ?? "";
+  useEffect(() => {
+    if (mode !== "lobby" || !code || status !== "lobby") return;
+    const id = setInterval(async () => {
+      try {
+        const r = await fetch(`${API}/${code}`, { cache: "no-store" });
+        if (!r.ok) return;
+        const next = (await r.json()) as PartyView;
+        setView(next);
+        if (next.status !== "lobby") router.push(`/party/battle?code=${next.code}`);
+      } catch {
+        /* keep the seat list on screen */
+      }
+    }, 1500);
+    return () => clearInterval(id);
+  }, [mode, code, status, router]);
+
+  const create = useCallback(async () => {
+    if (busy) return;
+    setBusy(true);
+    setError("");
+    try {
+      const r = await fetch(API, { method: "POST" });
+      if (r.status === 401) { setSignedOut(true); return; }
+      const data = (await r.json().catch(() => null)) as PartyView | { error?: string } | null;
+      if (!r.ok || !data || !("code" in data)) {
+        setError((data && "error" in data && data.error) || "Could not create a party.");
+        return;
+      }
+      setView(data);
+      setMode("lobby");
+    } catch {
+      setError("Could not create a party.");
+    } finally {
+      setBusy(false);
+    }
+  }, [busy]);
+
+  const join = useCallback(async () => {
+    if (busy) return;
+    const wanted = cleanCode(typed);
+    if (wanted.length < 6) return;
+    setBusy(true);
+    setError("");
+    try {
+      const r = await fetch(`${API}/join`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ code: wanted }),
+      });
+      if (r.status === 401) { setSignedOut(true); return; }
+      const data = (await r.json().catch(() => null)) as PartyView | { error?: string } | null;
+      if (!r.ok || !data || !("code" in data)) {
+        setError((data && "error" in data && data.error) || "Could not join that party.");
+        return;
+      }
+      setView(data);
+      setMode("lobby");
+    } catch {
+      setError("Could not join that party.");
+    } finally {
+      setBusy(false);
+    }
+  }, [busy, typed]);
+
+  const start = useCallback(async () => {
+    if (!view || busy) return;
+    setBusy(true);
+    setError("");
+    try {
+      const r = await fetch(`${API}/${view.code}/start`, { method: "POST" });
+      const data = (await r.json().catch(() => null)) as PartyView | { error?: string } | null;
+      if (!r.ok || !data || !("code" in data)) {
+        setError((data && "error" in data && data.error) || "Could not start the raid.");
+        return;
+      }
+      router.push(`/party/battle?code=${data.code}`);
+    } catch {
+      setError("Could not start the raid.");
+    } finally {
+      setBusy(false);
+    }
+  }, [view, busy, router]);
+
+  const leave = useCallback(async () => {
+    if (!view || busy) return;
+    setBusy(true);
+    try {
+      await fetch(`${API}/${view.code}/leave`, { method: "POST" });
+    } catch {
+      /* leaving is best-effort; the lobby is gone from this device anyway */
+    } finally {
+      setView(null);
+      setMode("choose");
+      setBusy(false);
+      setError("");
+    }
+  }, [view, busy]);
+
+  if (signedOut) {
+    return (
+      <>
+        <div className="hd">
+          <div>
+            <h1>Boss battle</h1>
+            <div className="mod" style={{ marginTop: 4 }}>5 players · 30s a question · 4 lives</div>
+          </div>
+        </div>
+        <div className="empty" style={{ margin: 16 }}>
+          <b>You are signed out</b>
+          <p>Sign in with your school Google account to start a party.</p>
+          <Link href="/login" className="btn" style={{ display: "grid", placeItems: "center", textDecoration: "none", marginTop: 14 }}>
+            Sign in
+          </Link>
+        </div>
+      </>
+    );
+  }
 
   if (mode === "choose") {
     return (
@@ -48,16 +191,16 @@ export default function PartyGate() {
         </div>
 
         <div className="party-grid">
-          <button className="party-card" onClick={host}>
+          <button className="party-card" onClick={create} disabled={busy}>
             <span className="pc-top">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
                 strokeWidth="2.2" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
             </span>
             <b>Create a party</b>
-            <span>Get a code, share it with four friends, start when two are in.</span>
+            <span>Get a code, share it with up to four friends, start when they are in.</span>
           </button>
 
-          <button className="party-card" onClick={() => setMode("join")}>
+          <button className="party-card" onClick={() => { setMode("join"); setError(""); }} disabled={busy}>
             <span className="pc-top">
               <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
                 strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
@@ -69,18 +212,43 @@ export default function PartyGate() {
           </button>
         </div>
 
+        {resume && (
+          <div className="party-grid" style={{ paddingTop: 0 }}>
+            <Link href={`/party/battle?code=${resume.code}`} className="party-card">
+              <span className="pc-top">
+                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
+                  strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M7 4l13 8-13 8z" />
+                </svg>
+              </span>
+              <b>Raid in progress</b>
+              <span>
+                Party {display(resume.code)} · round {resume.round} of {resume.total}. Rejoin your friends.
+              </span>
+            </Link>
+          </div>
+        )}
+
+        {error && (
+          <div className="empty" style={{ margin: 16 }}>
+            <b>Could not do that</b>
+            <p>{error}</p>
+          </div>
+        )}
+
         <div className="party-note">
-          You can also start alone: the empty seats are filled by your other characters.
+          Five seats, one question each, thirty seconds a round. The host starts the raid.
         </div>
       </>
     );
   }
 
   if (mode === "join") {
+    const wanted = cleanCode(typed);
     return (
       <>
         <div className="hd">
-          <button className="linkish" onClick={() => setMode("choose")}>← Back</button>
+          <button className="linkish" onClick={() => { setMode("choose"); setError(""); }}>← Back</button>
           <span className="mod">Join a party</span>
           <span />
         </div>
@@ -92,43 +260,69 @@ export default function PartyGate() {
           <input
             className="code-input"
             value={typed}
-            onChange={(e) => setTyped(e.target.value.toUpperCase())}
+            onChange={(e) => setTyped(cleanCode(e.target.value))}
             onKeyDown={(e) => e.key === "Enter" && join()}
             placeholder="K4M2PX"
             maxLength={7}
             autoFocus
           />
-          <button className="btn" onClick={join} disabled={typed.replace(/[^A-Z0-9]/gi, "").length < 6}>
+          <button className="btn" onClick={join} disabled={busy || wanted.length < 6}>
             Join party
           </button>
-          <p className="mono" style={{ fontSize: 9.5, color: "var(--ink-3)", textAlign: "center" }}>
-            Ask the host to read it out. Six characters, no spaces.
-          </p>
+
+          {error && (
+            <div className="empty">
+              <b>{error}</b>
+              <p>Ask the host to read the code again. Six characters, no spaces.</p>
+            </div>
+          )}
+
+          {!error && (
+            <p className="mono" style={{ fontSize: 9.5, color: "var(--ink-3)", textAlign: "center" }}>
+              Ask the host to read it out. Six characters, no spaces.
+            </p>
+          )}
         </div>
       </>
     );
   }
 
-  const joining = mode === "joined";
+  if (!view) {
+    return (
+      <>
+        <div className="hd">
+          <div><h1>Party</h1></div>
+        </div>
+        <div className="empty" style={{ margin: 16 }}>
+          <b>Loading your party…</b>
+          <p>Give it a second.</p>
+        </div>
+      </>
+    );
+  }
+
+  const host = view.host;
+  const inLobby = view.status === "lobby";
+  const open = Math.max(0, SEATS - view.players.length);
 
   return (
     <>
       <div className="hd">
-        <button className="linkish" onClick={() => setMode("choose")}>✕</button>
-        <span className="mod">{joining ? "You joined" : "Your party"}</span>
-        <span className="mod dim">2 of 4</span>
+        <button className="linkish" onClick={leave} disabled={busy}>✕</button>
+        <span className="mod">Your party</span>
+        <span className="mod dim">{view.players.length} of {SEATS}</span>
       </div>
 
       <div className="lobby-code">
         <div>
           <div className="mono" style={{ fontSize: 8.5, letterSpacing: ".9px", color: "#9A9A90" }}>
-            {joining ? "PARTY CODE" : "SHARE THIS CODE"}
+            SHARE THIS CODE
           </div>
-          <div className="code-val">{code}</div>
+          <div className="code-val">{display(view.code)}</div>
         </div>
         <button
           className="mono"
-          onClick={() => navigator.clipboard?.writeText(code)}
+          onClick={() => navigator.clipboard?.writeText(display(view.code))}
           style={{ fontSize: 10, fontWeight: 700, padding: "6px 10px", border: "3px solid var(--ink)",
             borderRadius: 6, background: "var(--paper)", cursor: "pointer" }}
         >
@@ -137,31 +331,55 @@ export default function PartyGate() {
       </div>
 
       <div className="sub" style={{ paddingTop: 18 }}>
-        Party · {joining ? "you + 2 friends in" : "you + 2 of 4 friends in"}
+        {inLobby
+          ? `Party · ${view.players.length} of ${SEATS} in`
+          : "The raid is live"}
       </div>
 
       <div className="seat-grid">
-        {SEATS.map((s) => (
-          <div key={s.name} className="seat">
-            <span className="av">{s.you ? "You" : s.name.slice(0, 2).toUpperCase()}</span>
-            <span className="txt"><b>{s.name}</b><span>{s.tag}</span></span>
+        {view.players.map((p, i) => (
+          <div key={`${p.name}-${i}`} className="seat">
+            <span className="av">{p.you ? "You" : initials(p.name)}</span>
+            <span className="txt">
+              <b>{p.name}{p.you ? " · you" : ""}</b>
+              <span>{i === 0 ? "Host" : "Ready"}</span>
+            </span>
           </div>
         ))}
-        {[3, 4].map((n) => (
-          <div key={n} className="seat open">
+        {Array.from({ length: open }, (_, i) => (
+          <div key={`open-${i}`} className="seat open">
             <span className="av">+</span>
-            <span className="txt"><b>Friend {n}</b><span>Invite</span></span>
+            <span className="txt"><b>Open seat</b><span>Share the code</span></span>
           </div>
         ))}
       </div>
 
+      {error && (
+        <div className="empty" style={{ margin: "14px 16px 0" }}>
+          <b>{error}</b>
+          <p>Try again, or start a fresh party.</p>
+        </div>
+      )}
+
       <div className="lobby-foot">
-        <Link href="/party/battle" className="btn"
-          style={{ display: "grid", placeItems: "center", textDecoration: "none" }}>
-          Start raid
-        </Link>
+        {!inLobby ? (
+          <Link href={`/party/battle?code=${view.code}`} className="btn"
+            style={{ display: "grid", placeItems: "center", textDecoration: "none" }}>
+            Enter the arena
+          </Link>
+        ) : host ? (
+          <button className="btn" onClick={start} disabled={busy || view.players.length < 1}>
+            Start raid
+          </button>
+        ) : (
+          <button className="btn" disabled>
+            Waiting for host
+          </button>
+        )}
         <p className="mono" style={{ fontSize: 9.5, color: "var(--ink-3)", textAlign: "center", marginTop: 9 }}>
-          Five seats, one question each, thirty seconds a round.
+          {inLobby
+            ? "Five seats, one question each, thirty seconds a round."
+            : "The host has started. Jump back in."}
         </p>
       </div>
     </>

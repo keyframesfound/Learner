@@ -1,226 +1,264 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { bank } from "@/lib/content";
 import { HEROES, BOSS_SVG } from "@/lib/sprites";
+import type { PartyView } from "@/lib/party";
 
-const YOU = 0;
+const API = "/learner/api/party";
 const LIVES = 4;
 const PIPS = 10;
 const PIP_HP = 10;
+const BOSS_HP = PIPS * PIP_HP;
 const ROUND_MS = 30_000;
+const REVEAL_MS = 1800;
 
-type Q = { topic: string; q: string; options: string[]; correct: number };
-type Seat = { lives: number; streak: number };
-type Sticker = { id: number; text: string; side: "boss" | "party" } | null;
-
-type Game = {
-  boss: number;
-  party: Seat[];
+type Reveal = {
   round: number;
-  q: Q | null;
-  phase: "thinking" | "resolved" | "over";
-  picked: number | null;
-  showAnswer: boolean;
-  note: string;
-  noteKind: "" | "ok" | "no";
-  outcome: "win" | "lose" | null;
-  deadline: number;
-  hitHero: number | null;
-  bossSeq: number;
-  sticker: Sticker;
+  q: string;
+  a: string[];
+  c: number;
+  choice: number | null;
 };
 
-function shuffle<T>(a: T[]): T[] {
-  const out = a.slice();
-  for (let i = out.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [out[i], out[j]] = [out[j] as T, out[i] as T];
-  }
-  return out;
+type Sticker = { id: number; text: string; side: "boss" | "party" } | null;
+
+function display(code: string) {
+  return code.length === 6 ? `${code.slice(0, 3)}-${code.slice(3)}` : code;
 }
 
-function pick(last: Q | null): Q {
-  let raw = bank[Math.floor(Math.random() * bank.length)]!;
-  let guard = 0;
-  while (last && raw.q === last.q && guard++ < 8) {
-    raw = bank[Math.floor(Math.random() * bank.length)]!;
-  }
-  const order = shuffle([0, 1, 2, 3]);
-  return { topic: raw.topic, q: raw.q, options: order.map((i) => raw.a[i]!), correct: order.indexOf(raw.c) };
+function heroAt(i: number) {
+  return HEROES[i % HEROES.length] ?? HEROES[0]!;
 }
 
-function fresh(): Game {
-  return {
-    boss: PIPS,
-    party: HEROES.map(() => ({ lives: LIVES, streak: 0 })),
-    round: 1,
-    q: null,
-    phase: "thinking",
-    picked: null,
-    showAnswer: false,
-    note: "",
-    noteKind: "",
-    outcome: null,
-    deadline: 0,
-    hitHero: null,
-    bossSeq: 0,
-    sticker: null,
-  };
-}
+export default function BossBattle({ code }: { code: string }) {
+  const [view, setView] = useState<PartyView | null>(null);
+  const [fatal, setFatal] = useState<"signed-out" | "missing" | "denied" | null>(null);
+  const [error, setError] = useState("");
+  const [now, setNow] = useState(() => Date.now());
+  const [skew, setSkew] = useState(0);
+  const [reveal, setReveal] = useState<Reveal | null>(null);
+  const [revealUntil, setRevealUntil] = useState(0);
+  const [hits, setHits] = useState<Record<number, number>>({});
+  const [bossSeq, setBossSeq] = useState(0);
+  const [sticker, setSticker] = useState<Sticker>(null);
+  const [pending, setPending] = useState<number | null>(null);
 
-const allDown = (g: Game) => g.party.every((p) => p.lives <= 0);
+  const before = useRef<PartyView | null>(null);
+  const lastReveal = useRef(0);
 
-function begin(g: Game): Game {
-  if (g.boss <= 0) return { ...g, phase: "over", outcome: "win" };
-  if (allDown(g)) return { ...g, phase: "over", outcome: "lose" };
-  const out = g.party[YOU]!.lives <= 0;
-  return {
-    ...g,
-    phase: "thinking",
-    q: out ? null : pick(g.q),
-    picked: null,
-    showAnswer: false,
-    note: out ? "You are out. The party fights on without you." : "",
-    noteKind: "",
-    deadline: Date.now() + ROUND_MS,
-  };
-}
+  const poll = useCallback(async () => {
+    try {
+      const r = await fetch(`${API}/${code}`, { cache: "no-store" });
+      if (r.status === 401) { setFatal("signed-out"); return; }
+      if (r.status === 404) { setFatal("missing"); return; }
+      if (r.status === 403) { setFatal("denied"); return; }
+      if (!r.ok) return;
+      const next = (await r.json()) as PartyView;
 
-function resolve(g: Game, choice: number | null): Game {
-  if (g.phase !== "thinking" || !g.q) return g;
-  const me = g.party[YOU]!;
-  const correct = choice !== null && choice === g.q.correct;
-  const streak = correct ? me.streak + 1 : 0;
-  const crit = correct && streak % 3 === 0;
-  const dmg = correct ? (crit ? 2 : 1) : 0;
+      setSkew(Date.parse(next.serverTime) - Date.now());
+      setError("");
+      setView(next);
 
-  const party = g.party.map((p, i) =>
-    i === YOU ? { lives: correct ? p.lives : Math.max(0, p.lives - 1), streak } : p,
+      const previous = before.current;
+      if (!previous) {
+        /* a reload mid-raid should not replay an old answer */
+        lastReveal.current = next.previous?.round ?? 0;
+      } else {
+        if (previous.status !== "lobby" && next.status !== "lobby") {
+          const hurtIdx: number[] = [];
+          next.players.forEach((player, i) => {
+            const old = previous.players.find((p) => p.name === player.name && p.you === player.you);
+            if (old && player.lives < old.lives) hurtIdx.push(i);
+          });
+          if (hurtIdx.length > 0) {
+            setHits((h) => {
+              const copy = { ...h };
+              for (const i of hurtIdx) copy[i] = (copy[i] ?? 0) + 1;
+              return copy;
+            });
+            setSticker({ id: Date.now(), text: "-1 life", side: "party" });
+          }
+          const oldScore = previous.players.reduce((n, p) => n + p.score, 0);
+          const newScore = next.players.reduce((n, p) => n + p.score, 0);
+          if (newScore > oldScore) {
+            setBossSeq((s) => s + 1);
+            setSticker({ id: Date.now() + 1, text: `-${(newScore - oldScore) * PIP_HP}`, side: "boss" });
+          }
+        }
+        if (next.previous && next.previous.round > lastReveal.current) {
+          lastReveal.current = next.previous.round;
+          setReveal(next.previous);
+          setRevealUntil(Date.now() + REVEAL_MS);
+        }
+      }
+      before.current = next;
+    } catch {
+      /* a dropped poll: keep the last known state and try again in a second */
+    }
+  }, [code]);
+
+  /* the poll is the only source of truth; no local game simulation */
+  useEffect(() => {
+    void poll();
+    const id = setInterval(() => { void poll(); }, 1000);
+    return () => clearInterval(id);
+  }, [poll]);
+
+  /* smooth countdown, driven by serverTime + roundEndsAt */
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 200);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    if (!sticker) return;
+    const id = setTimeout(() => setSticker(null), 1100);
+    return () => clearTimeout(id);
+  }, [sticker]);
+
+  const answer = useCallback(
+    async (choice: number) => {
+      if (!view || pending !== null) return;
+      if (view.status !== "live" || !view.you.alive || view.you.answered) return;
+      setPending(choice);
+      setError("");
+      try {
+        const r = await fetch(`${API}/${view.code}/answer`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ choice, round: view.round }),
+        });
+        if (r.status === 401) { setFatal("signed-out"); return; }
+        const data = (await r.json().catch(() => null)) as PartyView | { error?: string } | null;
+        if (!r.ok || !data || !("code" in data)) {
+          setError((data && "error" in data && data.error) || "Could not send that answer.");
+          void poll();
+          return;
+        }
+        if (data.previous && data.previous.round > lastReveal.current) {
+          lastReveal.current = data.previous.round;
+          setReveal(data.previous);
+          setRevealUntil(Date.now() + REVEAL_MS);
+        }
+        setView(data);
+      } catch {
+        setError("Could not send that answer.");
+        void poll();
+      } finally {
+        setPending(null);
+      }
+    },
+    [view, pending, poll],
   );
 
-  return {
-    ...g,
-    phase: "resolved",
-    picked: choice,
-    showAnswer: true,
-    boss: Math.max(0, g.boss - dmg),
-    party,
-    note: correct
-      ? `${HEROES[YOU]!.name} used ${HEROES[YOU]!.move}${crit ? " — critical!" : ""}`
-      : choice === null
-        ? "Out of time — the boss strikes."
-        : `${HEROES[YOU]!.name} is hit.`,
-    noteKind: correct ? "ok" : "no",
-    hitHero: correct ? null : YOU,
-    bossSeq: correct ? g.bossSeq + 1 : g.bossSeq,
-    sticker: {
-      id: Date.now(),
-      text: correct ? (crit ? `Crit -${dmg * PIP_HP}` : `-${PIP_HP}`) : "-1 life",
-      side: correct ? "boss" : "party",
-    },
-  };
-}
+  if (fatal) {
+    const copy =
+      fatal === "signed-out"
+        ? { title: "You are signed out", body: "Sign in with your school Google account and rejoin the party." }
+        : fatal === "denied"
+          ? { title: "You are not in this party", body: "This code belongs to a raid you have not joined." }
+          : { title: "That code does not exist", body: "Check the six characters the host read out." };
+    return (
+      <div className="bb">
+        <div className="bb-top">
+          <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
+          <span>Boss battle</span>
+        </div>
+        <div className="empty" style={{ margin: 24 }}>
+          <b>{copy.title}</b>
+          <p>{copy.body}</p>
+          <Link href={fatal === "signed-out" ? "/login" : "/party"} className="btn"
+            style={{ display: "grid", placeItems: "center", textDecoration: "none", marginTop: 14 }}>
+            {fatal === "signed-out" ? "Sign in" : "Back to parties"}
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
-function timeUp(g: Game): Game {
-  if (g.phase !== "thinking") return g;
-  if (g.party[YOU]!.lives <= 0) return next(g);
-  return resolve(g, null);
-}
+  if (!view) {
+    return (
+      <div className="bb">
+        <div className="bb-top">
+          <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
+          <span>Boss battle · {display(code)}</span>
+        </div>
+        <div className="empty" style={{ margin: 24 }}>
+          <b>Loading the raid…</b>
+          <p>Joining party {display(code)}.</p>
+        </div>
+      </div>
+    );
+  }
 
-function next(g: Game): Game {
-  if (g.boss <= 0) return { ...g, phase: "over", outcome: "win" };
-  if (allDown(g)) return { ...g, phase: "over", outcome: "lose" };
-  return begin({ ...g, round: g.round + 1 });
-}
+  if (view.status === "lobby") {
+    return (
+      <div className="bb">
+        <div className="bb-top">
+          <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
+          <span>Boss battle · lobby</span>
+        </div>
+        <div className="empty" style={{ margin: 24 }}>
+          <b>The host has not started yet</b>
+          <p>
+            Party {display(view.code)} · {view.players.length} of 5 in. Keep this screen open — the raid
+            begins on the host&apos;s word.
+          </p>
+        </div>
+        <div className="seat-grid" style={{ paddingTop: 4 }}>
+          {view.players.map((p, i) => (
+            <div key={`${p.name}-${i}`} className="seat">
+              <span className="av">{p.you ? "You" : p.name.slice(0, 2).toUpperCase()}</span>
+              <span className="txt"><b>{p.name}</b><span>{i === 0 ? "Host" : "Ready"}</span></span>
+            </div>
+          ))}
+        </div>
+        <div style={{ height: 20 }} />
+      </div>
+    );
+  }
 
-function remote(g: Game, i: number): Game {
-  if (g.phase !== "thinking") return g;
-  if (g.party[i]!.lives <= 0) return g;
-  const good = Math.random() < 0.7;
-  const party = g.party.map((p, k) => {
-    if (k !== i) return p;
-    const streak = good ? p.streak + 1 : 0;
-    return { streak, lives: good ? p.lives : Math.max(0, p.lives - 1) };
-  });
-  const streak = party[i]!.streak;
-  const crit = good && streak % 3 === 0;
-  const dmg = good ? (crit ? 2 : 1) : 0;
-  return {
-    ...g,
-    boss: Math.max(0, g.boss - dmg),
-    party,
-    bossSeq: dmg ? g.bossSeq + 1 : g.bossSeq,
-    hitHero: good ? null : i,
-    sticker: dmg
-      ? { id: Date.now(), text: crit ? "Crit -20" : "-10", side: "boss" }
-      : { id: Date.now(), text: "-1", side: "party" },
-  };
-}
+  const myIndex = Math.max(0, view.players.findIndex((p) => p.you));
+  const hero = heroAt(myIndex);
+  const me = view.you;
+  const up = view.players.filter((p) => p.alive).length;
+  const totalCorrect = view.players.reduce((n, p) => n + p.score, 0);
+  const bossHp = Math.max(0, BOSS_HP - totalCorrect * PIP_HP);
+  const bossPips = Math.ceil(bossHp / PIP_HP);
+  const survivors = view.players.filter((p) => p.alive).length;
+  const done = view.status === "done";
 
-export default function BossBattle() {
-  const [g, setG] = useState<Game>(fresh);
-  const [now, setNow] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const serverNow = now + skew;
+  const endsAt = view.roundEndsAt ? Date.parse(view.roundEndsAt) : 0;
+  const live = view.status === "live" && endsAt > 0;
+  const left = live ? Math.max(0, endsAt - serverNow) : 0;
+  const frac = live ? Math.min(1, left / ROUND_MS) : 1;
+  const clock = `0:${String(Math.ceil(left / 1000)).padStart(2, "0")}`;
 
-  useEffect(() => {
-    setMounted(true);
-    setG(begin(fresh()));
-    setNow(Date.now());
-  }, []);
-
-  /* clock */
-  useEffect(() => {
-    if (!mounted || g.phase !== "thinking" || g.outcome) return;
-    const id = setInterval(() => {
-      setNow(Date.now());
-      setG((prev) => (prev.phase === "thinking" && Date.now() >= prev.deadline ? timeUp(prev) : prev));
-    }, 100);
-    return () => clearInterval(id);
-  }, [mounted, g.phase, g.outcome]);
-
-  /* the four friends resolve on their own schedule inside the round */
-  useEffect(() => {
-    if (!mounted || g.phase !== "thinking" || g.outcome) return;
-    const ids = g.party
-      .map((p, i) => {
-        if (i === YOU || p.lives <= 0) return null;
-        const at = 2500 + Math.random() * 12000;
-        return setTimeout(() => setG((prev) => remote(prev, i)), at);
-      })
-      .filter((x): x is ReturnType<typeof setTimeout> => x !== null);
-    return () => ids.forEach(clearTimeout);
-  }, [mounted, g.round, g.phase, g.outcome]);
-
-  /* after a resolve, move on */
-  useEffect(() => {
-    if (!mounted || g.phase !== "resolved") return;
-    const id = setTimeout(() => setG((prev) => next(prev)), 1200);
-    return () => clearTimeout(id);
-  }, [mounted, g.phase, g.round]);
-
-  /* clear the damage sticker */
-  useEffect(() => {
-    if (!g.sticker) return;
-    const id = setTimeout(() => setG((prev) => ({ ...prev, sticker: null })), 1000);
-    return () => clearTimeout(id);
-  }, [g.sticker]);
-
-  const answer = useCallback((i: number) => {
-    setG((prev) => (prev.phase === "thinking" ? resolve(prev, i) : prev));
-  }, []);
-
-  const left = Math.max(0, g.deadline - now);
-  const frac = Math.min(1, left / ROUND_MS);
-  const out = g.party[YOU]!.lives <= 0;
-  const thinking = g.phase === "thinking" && !g.outcome;
+  const showingReveal = !!reveal && now < revealUntil && !done;
+  const shown = showingReveal
+    ? {
+        q: reveal!.q,
+        a: reveal!.a,
+        c: reveal!.c,
+        picked: reveal!.choice,
+        resolved: true,
+      }
+    : {
+        q: view.question?.q ?? "",
+        a: view.question?.a ?? [],
+        c: undefined as number | undefined,
+        picked: pending ?? me.choice,
+        resolved: false,
+      };
+  const canTap = !showingReveal && !done && me.alive && !me.answered && pending === null && !!view.question;
 
   return (
     <div className="bb">
       <div className="bb-top">
-        <Link href="/drill" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
-        <span>Boss battle · Round {g.round} · Streak {g.party[YOU]!.streak}</span>
+        <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
+        <span>Boss battle · Round {view.round} of {view.total} · {me.score} correct</span>
       </div>
 
       <div className="bb-arena">
@@ -231,79 +269,93 @@ export default function BossBattle() {
               background: "var(--ink)", color: "var(--lime)", padding: "1px 4px", borderRadius: 2 }}>HP</span>
             <span className="pips">
               {Array.from({ length: PIPS }, (_, i) => (
-                <i key={i} className={"pip" + (i >= g.boss ? " off" : "")} />
+                <i key={i} className={"pip" + (i >= bossPips ? " off" : "")} />
               ))}
             </span>
           </div>
-          <div className="num">{g.boss * PIP_HP} / {PIPS * PIP_HP}</div>
+          <div className="num">{bossHp} / {BOSS_HP}</div>
         </div>
 
         <div className="bb-plat boss" />
         <div className="bb-boss">
-          <div key={g.bossSeq} className={g.bossSeq ? "hurt" : ""}
+          <div key={bossSeq} className={bossSeq ? "hurt" : ""}
             dangerouslySetInnerHTML={{ __html: BOSS_SVG }} />
         </div>
 
         <div className="bb-plat party" />
         <div className="bb-party">
-          {HEROES.map((h, i) => (
-            <div key={h.name} className={"bb-slot" + (g.party[i]!.lives <= 0 ? " down" : "")}>
-              {i === YOU && <span className="you">You</span>}
-              <span className="hp">
-                {Array.from({ length: LIVES }, (_, k) => (
-                  <i key={k} className={k >= g.party[i]!.lives ? "off" : ""} />
-                ))}
-              </span>
-              <span className="name">{h.name}</span>
-              <div key={g.hitHero === i ? "hit" + g.bossSeq : "idle"}
-                className={"bb-hero" + (g.hitHero === i ? " hurt" : "")}
-                dangerouslySetInnerHTML={{ __html: h.svg }} />
-            </div>
-          ))}
+          {Array.from({ length: 5 }, (_, i) => {
+            const p = view.players[i];
+            const down = !p || !p.alive;
+            return (
+              <div key={i} className={"bb-slot" + (down ? " down" : "")}>
+                {p?.you && <span className="you">You</span>}
+                {p && down && (
+                  <span className="you" style={{ background: "var(--ink)", color: "#fff" }}>Down</span>
+                )}
+                <span className="hp">
+                  {Array.from({ length: LIVES }, (_, k) => (
+                    <i key={k} className={k >= (p?.lives ?? 0) ? "off" : ""} />
+                  ))}
+                </span>
+                <span className="name">{p ? p.name.split(" ")[0] : "Open"}</span>
+                <div key={`${i}-${hits[i] ?? 0}`} className={"bb-hero" + ((hits[i] ?? 0) > 0 ? " hurt" : "")}
+                  dangerouslySetInnerHTML={{ __html: heroAt(i).svg }} />
+              </div>
+            );
+          })}
         </div>
 
         <div className="bb-plate party">
-          <div className="row"><span className="nm">You · {HEROES[YOU]!.name}</span>
-            <span className="lv">4 friends</span></div>
+          <div className="row">
+            <span className="nm">You · {hero.name}</span>
+            <span className="lv">{up} of {view.players.length} up</span>
+          </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
             <span style={{ fontFamily: "var(--font-mono)", fontSize: 8.5, fontWeight: 700,
               background: "var(--ink)", color: "var(--lime)", padding: "1px 4px", borderRadius: 2 }}>♥</span>
             <span className="pips">
               {Array.from({ length: LIVES }, (_, i) => (
-                <i key={i} className={"pip" + (i >= g.party[YOU]!.lives ? " off" : "")} />
+                <i key={i} className={"pip" + (i >= me.lives ? " off" : "")} />
               ))}
             </span>
           </div>
           <div className="num">
-            {g.party.filter((p) => p.lives > 0).length} of 5 up · {g.party[YOU]!.lives} / {LIVES} lives
+            {up} of {view.players.length} up · {me.lives} / {LIVES} lives
           </div>
         </div>
 
-        {g.sticker && (
-          <span key={g.sticker.id} className="bb-sticker"
+        {sticker && (
+          <span key={sticker.id} className="bb-sticker"
             style={{
-              background: g.sticker.side === "boss" ? "#fff" : "var(--orange)",
-              ...(g.sticker.side === "boss"
+              background: sticker.side === "boss" ? "#fff" : "var(--orange)",
+              ...(sticker.side === "boss"
                 ? { right: "24%", top: "22%" }
                 : { left: "24%", bottom: "34%" }),
             }}>
-            {g.sticker.text}
+            {sticker.text}
           </span>
         )}
 
-        {g.outcome && (
+        {done && (
           <div className="bb-banner">
-            <h2 style={g.outcome === "lose" ? { color: "var(--orange)" } : undefined}>
-              {g.outcome === "win" ? "Boss cleared" : "Party down"}
+            <h2 style={survivors === 0 ? { color: "var(--orange)" } : undefined}>
+              {survivors > 0 ? "Boss cleared" : "Party down"}
             </h2>
-            <p>
-              Round {g.round} · {g.outcome === "win"
-                ? `${g.party.filter((p) => p.lives > 0).length} of 5 still standing`
-                : "out of lives"}
-            </p>
-            <button className="bb-btn" onClick={() => setG(begin(fresh()))}>
-              {g.outcome === "win" ? "Fight again" : "Try again"}
-            </button>
+            <p>Round {view.round} of {view.total} · {survivors} of {view.players.length} survivors</p>
+            <div className="table" style={{ width: "100%", maxWidth: 360, textAlign: "left" }}>
+              {view.players.map((p, i) => (
+                <div key={`${p.name}-${i}`} className="tr">
+                  <span>{p.name}{p.you ? " · you" : ""}</span>
+                  <span className="mono">
+                    {p.score} correct · {p.alive ? `${p.lives} lives` : "down"}
+                  </span>
+                </div>
+              ))}
+            </div>
+            <Link href="/party" className="bb-btn" style={{ textDecoration: "none" }}>
+              Back to the lobby
+            </Link>
           </div>
         )}
       </div>
@@ -312,49 +364,90 @@ export default function BossBattle() {
         <div className="bb-dialog">
           <div className="bb-meta">
             <span>
-              {out && thinking ? (
-                <span>Spectating · {g.party.filter((p) => p.lives > 0).length} of 5 still up</span>
-              ) : g.showAnswer ? (
-                g.noteKind === "ok" ? <b style={{ color: "var(--blue)" }}>Correct</b>
-                  : <span>Answer: <b style={{ color: "var(--blue)" }}>{g.q?.options[g.q.correct]}</b></span>
+              {showingReveal ? (
+                shown.picked !== null && shown.picked === shown.c
+                  ? <b style={{ color: "var(--blue)" }}>Correct</b>
+                  : <span>Answer: <b style={{ color: "var(--blue)" }}>{shown.a[shown.c ?? 0] ?? ""}</b></span>
+              ) : !me.alive ? (
+                <span>Spectating · {up} of {view.players.length} still up</span>
               ) : (
-                <span><b style={{ color: "var(--blue)" }}>{g.q?.topic}</b> · you are {HEROES[YOU]!.name}</span>
+                <span><b style={{ color: "var(--blue)" }}>Round {view.round} of {view.total}</b> · you are {hero.name}</span>
               )}
             </span>
-            <b className="bb-clock">{mounted ? `0:${String(Math.ceil(left / 1000)).padStart(2, "0")}` : "0:30"}</b>
+            <b className="bb-clock">{live ? clock : "0:00"}</b>
           </div>
           <div className="bb-bar">
-            <i style={{ width: `${mounted ? frac * 100 : 100}%`,
+            <i style={{ width: `${frac * 100}%`,
               background: left <= 10000 ? "var(--orange)" : "var(--lime)" }} />
           </div>
           <p className="bb-say">
-            {out && thinking ? "You are out. The party fights on without you."
-              : g.phase === "resolved" ? g.note
-              : g.q ? <span dangerouslySetInnerHTML={{ __html: g.q.q }} />
-              : "Preparing the raid…"}
+            {done
+              ? "The raid is over."
+              : showingReveal
+                ? shown.picked === null
+                  ? me.alive
+                    ? "Out of time — the boss strikes."
+                    : "The party fights on without you."
+                  : shown.picked === shown.c
+                    ? `${hero.name} used ${hero.move}.`
+                    : `${hero.name} is hit.`
+                : !me.alive
+                  ? "You are down. The party fights on without you."
+                  : shown.q
+                    ? <span dangerouslySetInnerHTML={{ __html: shown.q }} />
+                    : "Preparing the next question…"}
           </p>
         </div>
 
-        {thinking && g.q && !out ? (
+        {!done && (
           <div className="bb-answers">
-            {g.q.options.map((text, i) => {
-              const cls = !g.showAnswer ? "" : i === g.q!.correct ? " right" : i === g.picked ? " wrong" : "";
+            {shown.a.map((text, i) => {
+              let cls = "bb-opt";
+              if (shown.resolved) {
+                if (i === shown.c) cls += " right";
+                else if (i === shown.picked) cls += " wrong";
+              }
+              const locked = !shown.resolved && shown.picked === i;
               return (
-                <button key={i} className={"bb-opt" + cls} disabled={!thinking} onClick={() => answer(i)}>
+                <button
+                  key={i}
+                  className={cls}
+                  disabled={!canTap}
+                  onClick={() => { void answer(i); }}
+                  style={locked ? { background: "var(--paper)" } : undefined}
+                >
                   <span className="chip">{i + 1}</span>
                   <span className="txt" dangerouslySetInnerHTML={{ __html: text }} />
                 </button>
               );
             })}
+            {shown.a.length === 0 && <div style={{ height: 100 }} />}
           </div>
-        ) : (
-          <div style={{ height: 100 }} />
+        )}
+
+        {error && (
+          <div className="mono" style={{ fontSize: 9.5, color: "var(--red-ink)", textAlign: "center" }}>
+            {error}
+          </div>
         )}
 
         <div className="bb-hint">
-          {out ? "The party is still fighting · you are watching" : "Tap an answer · 3 in a row = critical hit"}
+          {done
+            ? "Party over · back to the lobby for another run"
+            : !me.alive
+              ? "The party is still fighting · you are watching"
+              : me.answered
+                ? "Locked in · waiting for the party"
+                : "Tap an answer · 30 seconds a round"}
         </div>
       </div>
+
+      {!me.alive && !done && (
+        <div className="band bad">
+          <b>You are down — spectating</b>
+          <p>The party fights on without you. {up} of {view.players.length} still standing.</p>
+        </div>
+      )}
     </div>
   );
 }

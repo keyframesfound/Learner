@@ -1,6 +1,22 @@
+import { redirect } from "next/navigation";
+import AuthError from "@/components/AuthError";
 import SignIn from "@/components/SignIn";
+import { viewer } from "@/lib/repo";
 
-export default function Login() {
+type LoginSearchParams = Promise<Record<string, string | string[] | undefined>>;
+
+function first(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+export default async function Login({ searchParams }: { searchParams: LoginSearchParams }) {
+  /* already signed in: send them to the app instead of a second Google round trip */
+  const user = await viewer();
+  if (user) redirect("/");
+
+  const { error } = await searchParams;
+  const code = first(error);
+
   return (
     <div className="login-wrap">
       <div className="login-card">
@@ -12,6 +28,7 @@ export default function Login() {
           One account, one streak, one class.
         </p>
         <SignIn />
+        {code ? <AuthError error={code} /> : null}
         <p className="mono" style={{ fontSize: 9, color: "var(--ink-3)" }}>
           DSE 2027 · ICT and Physics
         </p>
