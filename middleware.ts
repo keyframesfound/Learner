@@ -15,14 +15,13 @@ export function middleware(req: NextRequest) {
 
   /* cheap check: a session cookie, not a database round trip */
   if (!getSessionCookie(req)) {
-    const url = req.nextUrl.clone();
-    url.pathname = BASE + "/login";
-    url.search = "";
-    return NextResponse.redirect(url);
+    /* a relative Location keeps the public prefix intact behind the proxy,
+       and avoids Next re-applying basePath to an absolute URL */
+    return new NextResponse(null, { status: 307, headers: { location: BASE + "/login" } });
   }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/", "/((?!_next/static|_next/image|favicon.ico).*)"],
 };
