@@ -713,7 +713,9 @@ body {
   .bb-boss { width: 210px; right: 7%; top: 12px; }
   .bb-party { left: 5%; right: 5%; bottom: 12px; }
   .bb-plate.boss { top: 14px; left: 14px; width: 320px; max-width: 40%; }
-  .bb-plate.party { bottom: 20px; right: 14px; width: 300px; }
+  .bb-plate.party { bottom: 212px; right: 14px; width: 300px; }
+  .bb-slot .bb-hero { max-width: 78px; margin: 0 auto; }
+  .bb-boss { max-height: 300px; }
   .bb-plate .nm { font-size: 14px; }
   .bb-panel { padding: 14px 22px 18px; }
   .bb-say { font-size: 17px; }

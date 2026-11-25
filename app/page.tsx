@@ -86,7 +86,8 @@ export default async function Learn() {
           </div>
           {(stats.dueToday > 0 || nextLesson) && (
             <Link href={startHref} className="btn"
-              style={{ display: "grid", placeItems: "center", minHeight: 44, textDecoration: "none" }}>
+              style={{ display: "grid", placeItems: "center", minHeight: 44, padding: "0 22px",
+            width: "fit-content", minWidth: 132, textDecoration: "none" }}>
               Start
             </Link>
           )}
