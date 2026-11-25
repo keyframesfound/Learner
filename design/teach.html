@@ -104,6 +104,22 @@
   .fr .i{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-3)}
   .fr.on{background:var(--ink);color:var(--paper);border-left-color:var(--lime);font-weight:700}
   .fr.on .i{color:var(--lime)}
+  .lblrow{display:flex;align-items:center;justify-content:space-between;padding-right:12px}
+  .mini{width:22px;height:22px;border:2px solid var(--ink);border-radius:5px;background:#fff;
+    display:grid;place-items:center;font-family:'JetBrains Mono',monospace;font-size:13px;
+    font-weight:700;line-height:1;cursor:pointer;box-shadow:2px 2px 0 var(--line)}
+  .dots{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);
+    letter-spacing:1px;padding:0 2px 0 6px;margin-left:4px}
+  .addrow{display:flex;align-items:center;gap:7px;margin:8px 10px 0;padding:7px 9px;
+    border:2px dashed var(--ink-3);border-radius:8px;font-size:11.5px;font-weight:700;
+    color:var(--ink-3);cursor:pointer}
+  .addrow b{font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1}
+  .addrow.in{margin-left:32px}
+  .addrow.top{margin-top:4px}
+  .qbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+  .qbar .lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.4px;color:var(--ink-3)}
+  .qbar .sel{width:250px;padding:6px 10px;font-size:12px}
 
   .edit{background:#fff;overflow:auto;padding:18px 22px 22px}
   .crumb{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;
@@ -298,14 +314,14 @@
       <div class="body">
         <div class="panes">
           <div class="tree">
-            <div class="lbl">Chapters</div>
+            <div class="lblrow"><div class="lbl">Chapters</div><button class="mini">+</button></div>
 
         <div class="ch"><span class="i">1</span><span>Opportunities and risks</span><span class="n">12</span></div>
         <div class="ch"><span class="i">2</span><span>Managing rivers and coasts</span><span class="n">10</span></div>
         <div class="ch"><span class="i">3</span><span>Changing industrial location</span><span class="n">8</span></div>
         <div class="ch"><span class="i">4</span><span>Building a sustainable city</span><span class="n">11</span></div>
         <div class="ch"><span class="i">5</span><span>Combating famine</span><span class="n">9</span></div>
-            <div class="ch open" style="margin-top:6px"><span class="i">6</span><span>Weather and climate</span><span class="n">14</span></div>
+            <div class="ch open" style="margin-top:6px"><span class="i">6</span><span>Weather and climate</span><span class="n">14</span><span class="dots">⋯</span></div>
 
         <div class="fr "><span class="i">1</span><span>What the monsoon is</span></div>
         <div class="fr "><span class="i">2</span><span>Pressure gradient force</span></div>
@@ -313,6 +329,8 @@
         <div class="fr "><span class="i">4</span><span>Reading a synoptic chart</span></div>
             <div class="fr"><span class="i">5</span><span>The monsoon trough</span></div>
             <div class="fr"><span class="i">6</span><span>Humidity and dew point</span></div>
+            <div class="addrow in"><b>+</b> New note in Weather and climate</div>
+            <div class="addrow"><b>+</b> New chapter</div>
           </div>
 
           <div class="edit">
@@ -359,11 +377,18 @@
         <span class="div"></span>
         <div class="seg"><a href="#curriculum">Notes</a><a href="#questions" class="on">Questions</a></div>
         <span class="spacer"></span>
-        <span class="autosave">Weather and climate · 14 items</span>
-        <button class="b" style="margin-left:12px">New item</button>
+        <span class="autosave">Saved 2 min ago</span>
       </div>
 
       <div class="body">
+        <div class="qbar">
+          <span class="lbl">Chapter</span>
+          <div class="sel">Weather and climate <i>▾</i></div>
+          <span class="mono dim3">14 questions · 6 notes</span>
+          <span class="spacer"></span>
+          <button class="b solid">+ New question</button>
+        </div>
+
         <div class="qwrap">
           <div class="qlist">
             <div class="bt">
