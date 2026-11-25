@@ -67,7 +67,7 @@ export default async function Learn() {
       <div style={{ padding: "0 16px 4px" }}>
         <div style={{
           background: "var(--ink)", color: "var(--paper)", border: "3px solid var(--ink)",
-          borderRadius: 10, padding: "14px 16px", boxShadow: "5px 5px 0 var(--orange)",
+          borderRadius: 10, padding: "14px 16px 18px", boxShadow: "5px 5px 0 var(--orange)",
         }}>
           <div className="mono" style={{ fontSize: 9.5, letterSpacing: 1, color: "var(--lime)" }}>
             {stats.dueToday > 0 ? `${stats.dueToday} DUE TODAY` : nextLesson ? "NOTHING DUE" : "PATH COMPLETE"}
