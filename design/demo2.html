@@ -304,19 +304,23 @@
     border-top:3px solid var(--ink)}
   #s-boss .plat{position:absolute;border:3px solid var(--ink);border-radius:50%;background:#fff;z-index:1}
   #s-boss .plat.boss{width:204px;aspect-ratio:4/1;right:1%;top:146px}
-  #s-boss .plat.party{width:44%;aspect-ratio:4/1;left:2%;bottom:14px;background:var(--lime)}
+  #s-boss .plat.party{left:2%;right:2%;width:auto;aspect-ratio:10/1;bottom:10px;background:var(--lime)}
 
   #s-boss .actor{position:absolute;z-index:2;transition:transform .22s cubic-bezier(.3,1.6,.5,1)}
   #s-boss .actor svg{display:block;width:100%;height:auto;overflow:visible}
   #s-boss .boss-actor{right:4%;top:14px;width:152px;animation:bb-breathe 2.6s ease-in-out infinite}
-  #s-boss .party{position:absolute;left:3%;bottom:26px;width:52%;display:flex;
-    align-items:flex-end;z-index:2}
-  #s-boss .party .actor{position:relative;flex:1;margin-right:-4%}
-  #s-boss .party .actor:nth-child(2){margin-bottom:-6%;z-index:3}
-  #s-boss .hero.active::before{content:'';position:absolute;top:-16px;left:50%;width:11px;height:11px;
-    margin-left:-5.5px;background:var(--lime);border:2.5px solid var(--ink);transform:rotate(45deg);
-    animation:bb-bob .9s ease-in-out infinite}
-  #s-boss .hero.down{opacity:.35;filter:grayscale(1)}
+  #s-boss .party{position:absolute;left:2%;right:2%;bottom:18px;display:flex;
+    align-items:flex-end;z-index:2;gap:1px}
+  #s-boss .hslot{flex:1;min-width:0;display:grid;justify-items:center;align-content:end;gap:3px}
+  #s-boss .hslot .actor{width:100%;position:relative}
+  #s-boss .hname{font-size:7px;font-weight:700;letter-spacing:.1px;padding:1px 3px;
+    border-radius:3px;white-space:nowrap}
+  #s-boss .hslot.act .hname{background:var(--lime);border:1.5px solid var(--ink)}
+  #s-boss .hslot.down{opacity:.35;filter:grayscale(1)}
+  #s-boss .hlife{display:flex;gap:2px}
+  #s-boss .hlife i{width:9px;height:5px;border:2px solid var(--ink);border-radius:1px;
+    background:var(--lime)}
+  #s-boss .hlife i.off{background:transparent}
   #s-boss .lunge{transform:translate(120%,-45%) rotate(8deg)}
   #s-boss .boss-lunge{transform:translate(-30%,22%) rotate(-6deg)}
   #s-boss .hurt{animation:bb-hurt .45s ease-out}
@@ -326,7 +330,7 @@
     border:3px solid var(--ink);border-radius:6px;padding:7px 9px;box-shadow:4px 4px 0 var(--orange);
     display:grid;gap:4px}
   #s-boss .status.boss-s{top:12px;left:10px}
-  #s-boss .status.party-s{bottom:92px;right:10px;width:44%;box-shadow:4px 4px 0 var(--ink)}
+  #s-boss .status.party-s{bottom:196px;right:8px;width:50%;box-shadow:4px 4px 0 var(--ink)}
   #s-boss .status .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
   #s-boss .status .name{font-weight:700;font-size:12.5px;white-space:nowrap;overflow:hidden;
     text-overflow:ellipsis}
@@ -355,7 +359,13 @@
   #s-boss .dialog{background:#fff;border:3px solid var(--ink);border-radius:6px;
     box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px var(--ink);
     padding:10px 12px;min-height:74px;display:grid;gap:4px;align-content:start}
-  #s-boss .meta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--ink-3)}
+  #s-boss .meta{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--ink-3)}
+  #s-boss .clock{font-size:11px;font-weight:700;color:var(--ink);letter-spacing:.3px;
+    font-variant-numeric:tabular-nums}
+  #s-boss .tbar{height:6px;border:2px solid var(--ink);border-radius:99px;background:var(--paper);
+    overflow:hidden}
+  #s-boss .tbar i{display:block;height:100%;width:100%;background:var(--lime)}
   #s-boss .meta .t{color:var(--blue)}
   #s-boss .say{margin:0;font-size:14.5px;font-weight:700;line-height:1.35}
   #s-boss .say code,#s-boss .opt code{font-family:'JetBrains Mono',monospace;font-weight:700;
@@ -600,18 +610,19 @@
       <button class="copy">Copy</button>
     </div>
 
-    <div class="plabel">Party · 2 of 4 ready</div>
+    <div class="plabel">Party · you + 2 of 4 friends in</div>
 
     <div class="slots">
+      <div class="slot me" style="grid-column:1/-1"><span class="av">You</span><div><b>You</b><i>Host · this is your code to share</i></div></div>
       <div class="slot"><span class="av">KR</span><div><b>Kai</b><i>Ready</i></div></div>
-      <div class="slot me"><span class="av">You</span><div><b>You</b><i>Ready</i></div></div>
-      <div class="slot empty"><span class="av">+</span><div><b>Open</b><i>Invite</i></div></div>
-      <div class="slot empty"><span class="av">+</span><div><b>Open</b><i>Invite</i></div></div>
+      <div class="slot"><span class="av">ML</span><div><b>Mei</b><i>Ready</i></div></div>
+      <div class="slot empty"><span class="av">+</span><div><b>Friend 3</b><i>Invite</i></div></div>
+      <div class="slot empty"><span class="av">+</span><div><b>Friend 4</b><i>Invite</i></div></div>
     </div>
 
     <div class="lobbyfoot">
       <button class="btn" data-go="boss">Start raid</button>
-      <p class="note">Anyone with the code can join until the first item.</p>
+      <p class="note">Friends join with the code above. Five seats, one question each, thirty seconds a round.</p>
     </div>
   </section>
 
@@ -633,14 +644,16 @@
 
       <div class="plat party"></div>
       <div class="party">
-        <div class="actor hero" id="bbHero0"></div>
-        <div class="actor hero" id="bbHero1"></div>
-        <div class="actor hero" id="bbHero2"></div>
+        <div class="hslot act" id="bbSlot0"><span class="hlife"><i></i><i></i><i></i></span><span class="hname">Knight</span><div class="actor"></div></div>
+        <div class="hslot" id="bbSlot1"><span class="hlife"><i></i><i></i><i></i></span><span class="hname">Mage</span><div class="actor"></div></div>
+        <div class="hslot" id="bbSlot2"><span class="hlife"><i></i><i></i><i></i></span><span class="hname">Archer</span><div class="actor"></div></div>
+        <div class="hslot" id="bbSlot3"><span class="hlife"><i></i><i></i><i></i></span><span class="hname">Rogue</span><div class="actor"></div></div>
+        <div class="hslot" id="bbSlot4"><span class="hlife"><i></i><i></i><i></i></span><span class="hname">Cleric</span><div class="actor"></div></div>
       </div>
       <div class="status party-s">
-        <div class="row"><span class="name" id="bbActiveName">Knight</span><span class="lv">Party</span></div>
+        <div class="row"><span class="name">You · Knight</span><span class="lv">4 friends</span></div>
         <div class="hpline"><span class="tag">♥</span><div class="pips" id="bbLives"></div></div>
-        <div class="num" id="bbLivesTxt">4 / 4 lives</div>
+        <div class="num"><span id="bbUp">5</span> of 5 up · <span id="bbLivesTxt">3 / 3 lives</span></div>
       </div>
 
       <div class="flash" id="bbFlash"></div>
@@ -649,7 +662,8 @@
 
     <div class="panel">
       <div class="dialog">
-        <div class="meta" id="bbQmeta"></div>
+        <div class="meta"><span id="bbQmeta"></span><b class="clock" id="bbClock">0:30</b></div>
+        <div class="tbar"><i id="bbTimeBar"></i></div>
         <p class="say" id="bbSay"></p>
       </div>
       <div class="answers" id="bbAnswers"></div>
@@ -795,10 +809,7 @@
   });
 })();
 </script>
-<script>
-(() => {
-  // ---------- Characters (flat SVG, ink outlines) ----------
-  const S0 = 'stroke="#111" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"';
+<script>const S0 = 'stroke="#111" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"';
   const SKIN = '#f3d2b3';
   const legs = `<rect x="20" y="72" width="9" height="16" rx="3" fill="#111"/><rect x="35" y="72" width="9" height="16" rx="3" fill="#111"/>`;
   const eyes = y => `<circle cx="27" cy="${y}" r="2.6" fill="#111"/><circle cx="38" cy="${y}" r="2.6" fill="#111"/>`;
@@ -821,6 +832,22 @@
         <path d="M14 30c0-14 8-22 18-22s18 8 18 22v8H14z" fill="#0F7A35"/>
         <circle cx="32" cy="30" r="12" fill="#fff"/>${eyes(31)}
         <path d="M58 14q16 32 0 64" fill="none"/><path d="M58 14v64" stroke-width="1.5"/>
+      </g></svg>` },
+    { name: 'Rogue', move: 'Twin Fangs', svg: `<svg viewBox="0 -10 72 104"><g ${S0}>${legs}
+        <path d="M10 78l5-34h34l5 34z" fill="#7C4DFF"/>
+        <path d="M12 32c0-17 9-28 20-28s20 11 20 28v7H12z" fill="#7C4DFF"/>
+        <circle cx="32" cy="31" r="12" fill="#fff"/>${eyes(32)}
+        <path d="M22 15l10-14 10 14" fill="#7C4DFF"/>
+        <path d="M60 40v24" stroke-width="6" stroke="#E8E6DC"/><rect x="52" y="62" width="16" height="5" rx="2" fill="#111"/>
+        <path d="M12 40v24" stroke-width="6" stroke="#E8E6DC"/><rect x="4" y="62" width="16" height="5" rx="2" fill="#111"/>
+      </g></svg>` },
+    { name: 'Cleric', move: 'Mend', svg: `<svg viewBox="0 -14 72 110"><g ${S0}>${legs}
+        <path d="M12 78l6-34h28l6 34z" fill="#FFC94A"/>
+        <path d="M32 44v34" stroke-width="2.5"/>
+        <circle cx="32" cy="28" r="14" fill="#fff"/>
+        <path d="M18 20h28" stroke-width="4"/>
+        ${eyes(30)}
+        <path d="M60 6v76"/><circle cx="60" cy="2" r="7" fill="#D4FF3F"/>
       </g></svg>` },
   ];
   // The boss: big drawn caricature — full black mushroom hair with a heavy fringe and stray tufts,
@@ -851,10 +878,7 @@
       <path d="M74 99.2q16 3 32 0l-2 4.5q-14 3-28 0z" fill="#fff" stroke="none"/>
       <circle cx="25" cy="170" r="9" fill="${SKIN}"/><circle cx="155" cy="170" r="9" fill="${SKIN}"/>
     </g></svg>`;
-  HEROES.forEach((h, i) => document.getElementById('bbHero' + i).innerHTML = h.svg);
-  document.getElementById('bbBoss').innerHTML = BOSS_SVG;
-
-  // ---------- Questions: Unit 1 topics ----------
+  
   const BANK = [
     { t:'What a name is', q:'After <code>a = [1, 2]</code> and <code>b = a</code>, how many list objects exist?', a:['One','Two','Zero','Depends on b'], c:0 },
     { t:'What a name is', q:'In Python, a variable name is best described as…', a:['A box holding a value','A label for an object','A fixed memory address','A copy of the value'], c:1 },
@@ -870,146 +894,242 @@
     { t:'Indexing a list', q:'Given <code>xs = [10, 20, 30]</code>, what is <code>xs[1]</code>?', a:['10','20','30','IndexError'], c:1 },
   ];
 
-  // ---------- State ----------
-  const SEG = 6, SEG_HP = 20, LIVES = 4;
-  const $ = id => document.getElementById(id);
-  const shuffle = arr => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; };
-  const wait = ms => new Promise(r => setTimeout(r, ms));
-  const replay = (el, c) => { el.classList.remove(c); void el.offsetWidth; el.classList.add(c); };
-  let S, runId = 0;
+  /* ── five players, one question each, thirty seconds a round ── */
+  const YOU = 0;
+  const PIPS = 10, PIP_HP = 10, LIVES = 3, ROUND_MS = 30000;
 
-  $('bbLives').innerHTML = '<div class="pip"></div>'.repeat(LIVES);
-  $('bbPipsBoss').innerHTML = '<div class="pip"></div>'.repeat(SEG);
+  const $ = function (id) { return document.getElementById(id); };
+  const wait = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  const replay = function (el, c) { el.classList.remove(c); void el.offsetWidth; el.classList.add(c); };
+  const strip = function (h) { return h.replace(/<[^>]+>/g, ""); };
+  const shuffle = function (a) {
+    a = a.slice();
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.random() * (i + 1) | 0; var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  };
 
-  // Typewriter for plain battle messages
-  async function type(text, cls = '') {
-    const id = runId, el = $('bbSay');
-    el.innerHTML = cls ? `<span class="${cls}"></span>` : '';
-    const target = cls ? el.firstChild : el;
-    for (let i = 1; i <= text.length; i++) {
-      if (id !== runId) return;
-      target.textContent = text.slice(0, i);
-      await wait(16);
-    }
+  var S = null, ticker = null, remotes = [];
+
+  HEROES.forEach(function (h, i) {
+    var slot = $("bbSlot" + i);
+    if (!slot) return;
+    slot.querySelector(".actor").innerHTML = h.svg;
+    slot.querySelector(".hname").textContent = h.name;
+  });
+  $("bbBoss").innerHTML = BOSS_SVG;
+  $("bbPipsBoss").innerHTML = '<div class="pip"></div>'.repeat(PIPS);
+  $("bbLives").innerHTML = '<div class="pip"></div>'.repeat(LIVES);
+
+  function sticker(text, bg, side) {
+    var s = document.createElement("div");
+    s.className = "sticker"; s.textContent = text;
+    s.style.background = bg; s.style.color = "#111";
+    if (side === "bbBoss") { s.style.right = "24%"; s.style.top = "22%"; }
+    else { s.style.left = "24%"; s.style.bottom = "34%"; }
+    $("bbArena").appendChild(s);
+    setTimeout(function () { s.remove(); }, 1000);
   }
 
-  async function start() {
-    runId++;
-    S = { boss: SEG, lives: LIVES, turn: 0, streak: 0, round: 1, deck: shuffle(BANK), cur: null, locked: true };
-    HEROES.forEach((_, i) => $('bbHero' + i).classList.remove('down'));
-    $('bbBoss').style.opacity = '1';
-    $('bbBanner').hidden = true;
-    $('bbAnswers').innerHTML = ''; $('bbQmeta').textContent = '';
-    render();
-    await type('Mr Eric Chan blocks the path! Answer right to strike.');
-    await wait(900);
+  function say(text, cls) {
+    $("bbSay").innerHTML = cls ? '<span class="' + cls + '">' + text + "</span>" : text;
+  }
+
+  function paint() {
+    var bp = $("bbPipsBoss").children;
+    for (var i = 0; i < bp.length; i++) bp[i].classList.toggle("gone", i >= S.boss);
+    $("bbBossTxt").textContent = S.boss * PIP_HP + " / " + PIPS * PIP_HP;
+
+    var me = S.party[YOU];
+    var lp = $("bbLives").children;
+    for (var k = 0; k < lp.length; k++) lp[k].classList.toggle("gone", k >= me.lives);
+    $("bbLivesTxt").textContent = me.lives + " / " + LIVES + " lives";
+
+    $("bbRound").textContent = S.round;
+    $("bbStreak").textContent = me.streak;
+    $("bbUp").textContent = S.party.filter(function (p) { return p.lives > 0; }).length;
+
+    S.party.forEach(function (p, i) {
+      var slot = $("bbSlot" + i);
+      slot.classList.toggle("down", p.lives <= 0);
+      slot.classList.toggle("act", i === YOU && p.lives > 0);
+      var hp = slot.querySelectorAll(".hlife i");
+      for (var n = 0; n < hp.length; n++) hp[n].classList.toggle("off", n >= p.lives);
+    });
+  }
+
+  function startClock() {
+    clearInterval(ticker);
+    $("bbClock").textContent = "0:30";
+    $("bbTimeBar").style.width = "100%";
+    ticker = setInterval(function () {
+      var left = Math.max(0, S.deadline - Date.now());
+      $("bbTimeBar").style.width = (100 * left / ROUND_MS) + "%";
+      $("bbTimeBar").style.background = left <= 10000 ? "var(--orange)" : "var(--lime)";
+      $("bbClock").textContent = "0:" + String(Math.ceil(left / 1000)).padStart(2, "0");
+      if (left <= 0) { clearInterval(ticker); resolve(false, "timeout"); }
+    }, 100);
+  }
+
+  /* the other four resolve on their own schedule; that is what parallel looks like */
+  function scheduleRemotes() {
+    remotes.forEach(clearTimeout);
+    remotes = [];
+    S.party.forEach(function (p, i) {
+      if (i === YOU || p.lives <= 0) return;
+      var at = 3000 + Math.random() * (ROUND_MS - 8000);
+      remotes.push(setTimeout(function () { remoteTurn(i); }, at));
+    });
+  }
+
+  function remoteTurn(i) {
+    if (!S || S.locked) return;
+    var p = S.party[i], slot = $("bbSlot" + i), hero = slot.querySelector(".actor");
+    if (Math.random() < 0.7) {
+      p.streak++;
+      var crit = p.streak % 3 === 0, dmg = crit ? 2 : 1;
+      S.boss = Math.max(0, S.boss - dmg);
+      replay($("bbBoss"), "hurt");
+      sticker((crit ? "Crit -" : "-") + dmg * PIP_HP, crit ? "#D4FF3F" : "#fff", "bbBoss");
+      hero.classList.add("lunge");
+      setTimeout(function () { hero.classList.remove("lunge"); }, 420);
+    } else {
+      p.streak = 0;
+      p.lives = Math.max(0, p.lives - 1);
+      replay(hero, "hurt");
+      sticker("-1", "#FF4D1C", "party");
+    }
+    paint();
+    if (S.boss <= 0) end(true);
+  }
+
+  async function resolve(correct, how) {
+    if (!S || S.locked) return;
+    S.locked = true;
+    clearInterval(ticker);
+    remotes.forEach(clearTimeout);
+    remotes = [];
+
+    var slot = $("bbSlot" + YOU), hero = slot.querySelector(".actor"), me = S.party[YOU];
+    var btns = [].slice.call($("bbAnswers").children);
+    $("bbAnswers").classList.add("wait");
+    btns.forEach(function (b) { b.disabled = true; });
+    if (btns[S.cur.c]) btns[S.cur.c].classList.add("right");
+    if (!correct && how !== "timeout" && btns[how]) btns[how].classList.add("wrong");
+
+    if (correct) {
+      me.streak++;
+      var crit = me.streak % 3 === 0, dmg = crit ? 2 : 1;
+      $("bbQmeta").innerHTML = '<span class="t">Correct</span>';
+      say(HEROES[YOU].name + " used " + HEROES[YOU].move + (crit ? " — critical!" : ""), "ok");
+      await wait(180);
+      hero.classList.add("lunge"); await wait(210);
+      replay($("bbBoss"), "hurt");
+      S.boss = Math.max(0, S.boss - dmg);
+      sticker((crit ? "Crit -" : "-") + dmg * PIP_HP, crit ? "#D4FF3F" : "#fff", "bbBoss");
+      paint();
+      await wait(230); hero.classList.remove("lunge");
+    } else {
+      me.streak = 0;
+      me.lives = Math.max(0, me.lives - 1);
+      $("bbQmeta").innerHTML = "Answer: <span class=\"t\">" + strip(S.cur.a[S.cur.c]) + "</span>";
+      say(how === "timeout" ? "Out of time — the boss strikes." : HEROES[YOU].name + " is hit.", "no");
+      await wait(180);
+      $("bbBoss").classList.add("boss-lunge"); await wait(210);
+      replay(hero, "hurt"); replay($("bbArena"), "shake"); replay($("bbFlash"), "on");
+      sticker("-1 life", "#FF4D1C", "party");
+      paint();
+      await wait(230); $("bbBoss").classList.remove("boss-lunge");
+    }
+
+    await wait(1050);
+    if (S.boss <= 0) return end(true);
+    if (me.lives <= 0) return end(false);
+    S.round++;
     next();
   }
-  function render() {
-    [...$('bbLives').children].forEach((p, i) => p.classList.toggle('gone', i >= S.lives));
-    [...$('bbPipsBoss').children].forEach((p, i) => p.classList.toggle('gone', i >= S.boss));
-    $('bbLivesTxt').textContent = `${S.lives} / ${LIVES} lives`;
-    $('bbBossTxt').textContent = `${S.boss * SEG_HP} / ${SEG * SEG_HP}`;
-    $('bbActiveName').textContent = HEROES[S.turn].name;
-    $('bbRound').textContent = S.round; $('bbStreak').textContent = S.streak;
-    HEROES.forEach((_, i) => $('bbHero' + i).classList.toggle('active', i === S.turn && S.lives > 0 && S.boss > 0));
-  }
+
   function next() {
     if (!S.deck.length) S.deck = shuffle(BANK);
-    const raw = S.deck.pop(), order = shuffle([0, 1, 2, 3]);
-    S.cur = { ...raw, a: order.map(i => raw.a[i]), c: order.indexOf(raw.c) };
-    const h = HEROES[S.turn];
-    $('bbQmeta').innerHTML = `<span class="t">${raw.t}</span> · ${h.name} readies ${h.move}`;
-    $('bbSay').innerHTML = raw.q;
-    const box = $('bbAnswers'); box.innerHTML = ''; box.classList.remove('wait');
-    S.cur.a.forEach((txt, i) => {
-      const b = document.createElement('button');
-      b.className = 'opt'; b.id = 'ans' + i; b.type = 'button';
-      b.innerHTML = `<span class="chip">${i + 1}</span><span class="txt">${txt}</span>`;
-      b.onclick = () => answer(i);
+    var raw = S.deck.pop(), order = shuffle([0, 1, 2, 3]);
+    S.cur = { t: raw.t, q: raw.q, a: order.map(function (i) { return raw.a[i]; }), c: order.indexOf(raw.c) };
+
+    $("bbQmeta").innerHTML = '<span class="t">' + raw.t + "</span> · you are " + HEROES[YOU].name;
+    $("bbSay").innerHTML = raw.q;
+
+    var box = $("bbAnswers");
+    box.innerHTML = ""; box.classList.remove("wait");
+    S.cur.a.forEach(function (txt, i) {
+      var b = document.createElement("button");
+      b.className = "opt"; b.type = "button";
+      b.innerHTML = '<span class="chip">' + (i + 1) + '</span><span class="txt">' + txt + "</span>";
+      b.onclick = function () { resolve(i === S.cur.c, i); };
       box.appendChild(b);
     });
+
     S.locked = false;
-    render();
-  }
-  function sticker(text, bg, side) {
-    const s = document.createElement('div'); s.className = 'sticker'; s.textContent = text;
-    s.style.background = bg; s.style.color = '#111';
-    if (side === 'bbBoss') { s.style.right = '30%'; s.style.top = '18%'; } else { s.style.left = '30%'; s.style.bottom = '40%'; }
-    $('bbArena').appendChild(s); setTimeout(() => s.remove(), 1000);
-  }
-
-  async function answer(i) {
-    if (S.locked) return; S.locked = true;
-    const btns = [...$('bbAnswers').children];
-    $('bbAnswers').classList.add('wait');
-    btns.forEach(b => b.disabled = true);
-    btns[S.cur.c].classList.add('right');
-    const hero = $('bbHero' + S.turn), boss = $('bbBoss'), h = HEROES[S.turn];
-
-    if (i === S.cur.c) {
-      S.streak++;
-      const crit = S.streak % 3 === 0, segs = crit ? 2 : 1;
-      $('bbQmeta').innerHTML = '<span class="t">Correct</span>';
-      type(`${h.name} used ${h.move}!${crit ? ' Critical hit!' : ''}`, 'ok');
-      await wait(250);
-      hero.classList.add('lunge'); await wait(220);
-      replay(boss, 'hurt');
-      S.boss = Math.max(0, S.boss - segs);
-      sticker(crit ? `Crit −${segs * SEG_HP}` : `−${SEG_HP}`, crit ? '#D4FF3F' : '#fff', 'bbBoss');
-      render();
-      await wait(240); hero.classList.remove('lunge');
-      S.turn = (S.turn + 1) % HEROES.length;
-    } else {
-      btns[i].classList.add('wrong');
-      S.streak = 0;
-      $('bbQmeta').innerHTML = `Answer: <span class="t">${S.cur.a[S.cur.c].replace(/<[^>]+>/g, '')}</span>`;
-      type(`Mr Eric Chan marks the ${h.name} wrong!`, 'no');
-      await wait(250);
-      boss.classList.add('boss-lunge'); await wait(220);
-      replay(hero, 'hurt'); replay($('bbArena'), 'shake'); replay($('bbFlash'), 'on');
-      S.lives = Math.max(0, S.lives - 1);
-      sticker('−1 life', '#FF4D1C', 'party');
-      render();
-      await wait(240); boss.classList.remove('boss-lunge');
-    }
-
-    await wait(1300);
-    if (S.boss <= 0) return end(true);
-    if (S.lives <= 0) return end(false);
-    S.round++; next();
+    S.deadline = Date.now() + ROUND_MS;
+    paint();
+    startClock();
+    scheduleRemotes();
   }
 
   function end(won) {
-    runId++;
-    HEROES.forEach((_, i) => $('bbHero' + i).classList.toggle('down', !won));
-    $('bbBoss').style.opacity = won ? '.2' : '1';
-    const b = $('bbBanner');
-    b.innerHTML = won
-      ? `<h2>Boss cleared</h2><p>Beat Mr Eric Chan in ${S.round} rounds</p>`
-      : `<h2 style="color:var(--orange)">Party down</h2><p>Lasted ${S.round} rounds · review and retry</p>`;
-    const btn = document.createElement('button'); btn.className = 'bbtn'; btn.id = 'again'; btn.type = 'button';
-    btn.textContent = won ? 'Fight again' : 'Try again';
+    clearInterval(ticker);
+    remotes.forEach(clearTimeout);
+    remotes = [];
+    if (!S) return;
+    S.locked = true;
+
+    var b = $("bbBanner");
+    b.innerHTML = "";
+    var h = document.createElement("h2");
+    h.textContent = won ? "Boss cleared" : "Party down";
+    if (!won) h.style.color = "var(--orange)";
+    var p = document.createElement("p");
+    p.textContent = won
+      ? "Round " + S.round + " · " + S.party.filter(function (x) { return x.lives > 0; }).length + " of 5 still standing"
+      : "Round " + S.round + " · out of lives";
+    var btn = document.createElement("button");
+    btn.className = "bbtn"; btn.type = "button";
+    btn.textContent = won ? "Fight again" : "Try again";
     btn.onclick = start;
-    b.appendChild(btn); b.hidden = false;
-    $('bbAnswers').innerHTML = ''; $('bbQmeta').textContent = '';
-    $('bbSay').textContent = won ? 'Mr Eric Chan is defeated. Unit 1 complete!' : 'Your party is out of lives.';
-    btn.focus();
+    b.appendChild(h); b.appendChild(p); b.appendChild(btn);
+    b.hidden = false;
+
+    $("bbAnswers").innerHTML = "";
+    say(won ? "Mr Eric Chan is down." : "Everyone is down.");
   }
 
-  document.addEventListener('keydown', e => {
-    if (!document.getElementById('s-boss').classList.contains('on')) return;
-    const n = parseInt(e.key, 10);
-    if (n >= 1 && n <= 4 && S && S.cur && !S.locked && $('bbBanner').hidden) answer(n - 1);
+  async function start() {
+    clearInterval(ticker);
+    remotes.forEach(clearTimeout);
+    remotes = [];
+
+    S = {
+      boss: PIPS, round: 1, locked: true, deck: shuffle(BANK),
+      party: HEROES.map(function () { return { lives: LIVES, streak: 0 }; })
+    };
+
+    $("bbBanner").hidden = true;
+    $("bbBoss").style.opacity = "1";
+    $("bbAnswers").innerHTML = "";
+    $("bbQmeta").textContent = "";
+    $("bbClock").textContent = "0:30";
+    $("bbTimeBar").style.width = "100%";
+    paint();
+    say("Mr Eric Chan blocks the path. Answer right to strike.", "");
+    await wait(800);
+    next();
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (!document.getElementById("s-boss").classList.contains("on")) return;
+    var n = parseInt(e.key, 10);
+    if (n >= 1 && n <= 4 && S && S.cur && !S.locked && $("bbBanner").hidden) resolve(n - 1 === S.cur.c, n - 1);
   });
 
   window.startBoss = start;
-})();
-
-if (location.hash) window.go && window.go(location.hash.slice(1));
-addEventListener("hashchange", function () {
-  window.go && window.go(location.hash.slice(1) || "path");
-});
+  if (document.getElementById("s-boss").classList.contains("on")) start();
 </script>
 </body>
 </html>

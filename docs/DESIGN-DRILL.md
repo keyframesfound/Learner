@@ -128,9 +128,9 @@ slots dashed. Start is disabled until two are ready.
 │ └────────────────────────────┘       │
 │                        [ boss ]      │  on his platform, top-right
 │                                      │
-│   [Knight][Mage][Archer]             │  party, bottom-left
-│        ┌ Knight        ┐             │
-│        │ ▮▮▮▮   4 lives│             │  their plate, bottom-right
+│ [Knight][Mage][Archer][Rogue][Cleric]│  party of five, bottom-left
+│        ┌ You · Knight  ┐             │
+│        │ ▮▮▮▼   3 lives│             │  your plate, above them
 ├──────────────────────────────────────┤
 │ Valid identifiers · Knight readies   │
 │ Shield Bash                          │
@@ -144,16 +144,22 @@ slots dashed. Start is disabled until two are ready.
 ```
 
 - **Boss top-right, party bottom-left.** He has the high ground; they are below and
-  to the left of him. Each side's plate sits in the corner opposite its actor, so a
-  plate never covers a face.
-- **Three heroes, not one avatar.** Knight (lime, Shield Bash), Mage (blue, Arcane
-  Bolt), Archer (orange, Piercing Shot). A correct answer passes the turn, so the
-  party takes turns instead of a single character carrying the fight.
-- **Six pips, 120 HP, 20 a pip.** One correct answer removes one. Three in a row is
-  a critical hit and removes two, which is what the streak in the top bar counts.
-- **Lives on the party side, not health.** A wrong answer costs one of four lives;
-  the boss lunges, the arena shakes, the screen flashes orange. A mistake can only
-  cost the party, never the boss's bar.
+  to the left of him. His plate sits in the corner opposite him, so it never covers
+  his face. The party plate floats in the empty band above them, not on top of them.
+- **Five players: you plus four friends.** One host opens the party, gets a code,
+  and the friends join with it. All five are in the fight at once — the party line is
+  five sprites, each with a name and three life pips above their head.
+- **Thirty seconds a round.** Every player gets their own question on the same clock.
+  The bar under the meta line empties; at zero the round resolves as wrong and the
+  boss strikes back. Answer inside the window and your character strikes instead.
+- **One question, four outcomes.** Right: your hero lunges, the boss loses a pip.
+  Wrong or late: the boss lunges, the arena shakes, the screen flashes orange, and
+  you lose one of three lives. Three in a row is still a critical hit and takes two.
+- **The five run in parallel.** You answer your own question; the other four resolve
+  on their own schedule inside the same round, so pips fall between your answers
+  without waiting for each other. Nobody is queued behind anybody.
+- **Ten pips, 100 HP, 10 a pip.** A round of five correct answers is half the bar,
+  which is why a boss lasts two or three rounds rather than one.
 - **The correction replaces the meta line.** `Answer: case-sensitive` appears where
   "Knight readies Shield Bash" was, so the fix lands where the question was read.
 - **Keys 1–4 answer.** The dialog is sized to be read from the back of a room, and
