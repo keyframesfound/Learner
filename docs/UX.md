@@ -139,9 +139,12 @@ subject filter — that belongs to Path. Four bands, top to bottom.
 │ │▤ │ Physics · 5 of 12         │Start│ │
 │ └──┴───────────────────────────┴─────┘ │
 │ QuickBits                            │
-│ ICT           15 notes · 3 read Study│
-│ Physics        9 notes · 2 read Study│
-│ Biology        7 notes · 1 read Study│
+│ ┌──┬───────────────────────────┬─────┐ │
+│ │▤ │ ICT · 15 notes · 3 read   │Study│ │
+│ └──┴───────────────────────────┴─────┘ │
+│ ┌──┬───────────────────────────┬─────┐ │
+│ │▤ │ Physics · 9 notes · 2 read│Study│ │
+│ └──┴───────────────────────────┴─────┘ │
 ├──────────────────────────────────────┤
 │  [Learn]  [Drills]  [Board]  [Me]    │
 └──────────────────────────────────────┘
@@ -166,10 +169,11 @@ syllabus because that is what the exam asks for.
 **QuickBits** is the note stream, and like Drill it is entered per subject, so you
 never browse a shelf of notes from three subjects at once.
 
-The two sections sit on the same screen, so they must not look alike. Drill is cards
-you act on — inset, chipped, shadowed, one button. QuickBits is an index you browse:
-full-bleed, ruled, no chips, no buttons, just `Study ›`. Two stacks of identical
-cards read as one list printed twice, which is what happened the first time.
+Both sections use the same card anatomy on purpose — one visual language, one verb per
+row (`Start` drills the subject, `Study` opens its notes). The accepted cost is that
+with the same subjects in both lists the page reads as one list printed twice; an
+index-style ledger for QuickBits was tried and rejected for looking too quiet beside
+the drill cards.
 
 ### QuickBits
 
