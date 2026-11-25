@@ -188,7 +188,6 @@ with recent as (
   select a.user_id, c.concept, a.correct, a.created_at,
          row_number() over (partition by a.user_id, c.concept order by a.created_at desc) as rn
   from attempts a
-  cross join lateral unnest(a.block_id::text || '') as _dummy(d)
   join blocks b on b.id = a.block_id
   cross join lateral unnest(b.concepts) as c(concept)
   where a.correct is not null
