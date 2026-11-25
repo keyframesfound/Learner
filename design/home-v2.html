@@ -108,6 +108,18 @@
   .badge{position:absolute;top:-7px;right:-7px;min-width:16px;height:16px;padding:0 4px;display:grid;place-items:center;
     background:var(--red-ink);color:#fff;border:2px solid var(--ink);border-radius:999px;
     font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;font-style:normal}
+  /* quickbits reads as an index, not a second stack of cards */
+  .qbl{border-top:3px solid var(--ink);border-bottom:3px solid var(--ink);background:#fff}
+  .qbr{display:flex;align-items:center;gap:13px;padding:14px 18px;border-top:2px solid var(--line);
+    text-decoration:none;color:var(--ink)}
+  .qbr:first-child{border-top:0}
+  .qbr b{flex:1;font-size:14px;font-weight:700;letter-spacing:-.1px}
+  .qbr i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;
+    color:var(--ink-3);white-space:nowrap}
+  .qbr .go{display:inline-flex;align-items:center;gap:4px;font-family:'JetBrains Mono',monospace;
+    font-size:9.5px;font-weight:700;letter-spacing:.1px;white-space:nowrap}
+  .qbr .go svg{width:11px;height:11px}
+  .qbr:active{background:var(--paper)}
 </style>
 </head>
 <body>
@@ -137,40 +149,62 @@
 
       <div class="rowc" style="--dot:#2D5BFF">
         <div class="chip" style="background:#2D5BFF;color:#fff"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
-        <div class="txt"><b>ICT</b><span>9 of 14 chapters · 64%</span></div>
+        <div class="txt"><b>ICT</b><span>9 of 14 chapters</span></div>
         <button class="next">Start</button>
       </div>
 
       <div class="rowc" style="--dot:#7C4DFF">
         <div class="chip" style="background:#7C4DFF;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
-        <div class="txt"><b>Physics</b><span>5 of 12 chapters · 42%</span></div>
+        <div class="txt"><b>Physics</b><span>5 of 12 chapters</span></div>
         <button class="next">Start</button>
       </div>
 
       <div class="rowc" style="--dot:#17A34A">
         <div class="chip" style="background:#17A34A;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
-        <div class="txt"><b>Biology</b><span>4 of 11 chapters · 36%</span></div>
+        <div class="txt"><b>Biology</b><span>4 of 11 chapters</span></div>
+        <button class="next">Start</button>
+      </div>
+
+      <div class="rowc" style="--dot:#8A4B08">
+        <div class="chip" style="background:#8A4B08;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M9.3 3.2h5.4v5.4l5 9.4a2.3 2.3 0 0 1-2 3.4H6.3a2.3 2.3 0 0 1-2-3.4l5-9.4Z"/><path class="o" d="M6.2 15.4h11.6"/></svg></div>
+        <div class="txt"><b>Chemistry</b><span>3 of 13 chapters</span></div>
+        <button class="next">Start</button>
+      </div>
+
+      <div class="rowc" style="--dot:#1467A8">
+        <div class="chip" style="background:#1467A8;color:#fff"><svg viewBox="0 0 24 24"><circle class="s" cx="12" cy="11.6" r="8.2"/><path class="o" d="M12 3.4c3.2 2.6 3.2 13.8 0 16.4M3.8 11.6h16.4"/></svg></div>
+        <div class="txt"><b>Geography</b><span>2 of 10 chapters</span></div>
         <button class="next">Start</button>
       </div>
 
       <div class="sec">QuickBits</div>
 
-      <div class="rowc" style="--dot:#2D5BFF;cursor:pointer">
-        <div class="chip" style="background:#2D5BFF;color:#fff"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
-        <div class="txt"><b>ICT</b><span>15 notes · 3 read</span></div>
-        <button class="next">Study</button>
-      </div>
-
-      <div class="rowc" style="--dot:#7C4DFF;cursor:pointer">
-        <div class="chip" style="background:#7C4DFF;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
-        <div class="txt"><b>Physics</b><span>9 notes · 2 read</span></div>
-        <button class="next">Study</button>
-      </div>
-
-      <div class="rowc" style="--dot:#17A34A;cursor:pointer">
-        <div class="chip" style="background:#17A34A;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
-        <div class="txt"><b>Biology</b><span>7 notes · 1 read</span></div>
-        <button class="next">Study</button>
+      <div class="qbl">
+      <a class="qbr" href="quickbits.html">
+        <b>ICT</b>
+        <i>15 notes · 3 read</i>
+        <span class="go">Study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="qbr" href="quickbits.html">
+        <b>Physics</b>
+        <i>9 notes · 2 read</i>
+        <span class="go">Study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="qbr" href="quickbits.html">
+        <b>Biology</b>
+        <i>7 notes · 1 read</i>
+        <span class="go">Study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="qbr" href="quickbits.html">
+        <b>Chemistry</b>
+        <i>11 notes · 4 read</i>
+        <span class="go">Study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg></span>
+      </a>
+      <a class="qbr" href="quickbits.html">
+        <b>Geography</b>
+        <i>6 notes · 0 read</i>
+        <span class="go">Study<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg></span>
+      </a>
       </div>
 
     </div>
@@ -187,8 +221,8 @@
 <p class="caption">Learner · home · <a href="quickbits.html">QuickBits page →</a></p>
 
 <script>
-  document.querySelectorAll('.scroll .rowc').forEach(function (r) {
-    r.addEventListener('click', function () { location.href = 'quickbits.html'; });
+  document.querySelectorAll('.rowc [data-go]').forEach(function (b) {
+    b.addEventListener('click', function (e) { e.stopPropagation(); location.href = b.dataset.go + '.html'; });
   });
 </script>
 
