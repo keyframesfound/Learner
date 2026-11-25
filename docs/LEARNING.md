@@ -51,10 +51,10 @@ One axis only: **how reliably you can produce it**, with no thinking time.
 
 | Label | Colour | Means | Derived from |
 |---|---|---|---|
-| cold | grey `#6E6C63` | never attempted | no attempts on any item in the lesson |
-| rough | red `#C4271B` | it comes out, with gaps | recent attempts mostly incorrect |
-| smooth | blue `#2D5BFF` | it comes out | correct more often than not, short stability |
-| fluent | dark green `#0F7A35` | it comes out without thinking | long stability, or reached apply and passed |
+| Cold | grey `#6E6C63` | never attempted | no attempts on any item in the lesson |
+| Rough | red `#C4271B` | it comes out, with gaps | recent attempts mostly incorrect |
+| Smooth | blue `#2D5BFF` | it comes out | correct more often than not, short stability |
+| Fluent | dark green `#0F7A35` | it comes out without thinking | long stability, or reached apply and passed |
 
 One axis, phrased as how the answer *comes out*: cold means it doesn't come out at
 all, rough means it arrives with stumbles, smooth means it arrives, fluent means you
