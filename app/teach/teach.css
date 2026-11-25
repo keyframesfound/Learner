@@ -190,7 +190,9 @@ input.fld,select.fld{height:36px}
   border-radius:6px;padding:8px 10px;font-size:12.5px;font-weight:700;background:#FCFBF6}
 .tapp .sel i{font-style:normal;color:var(--ink-3);font-family:'JetBrains Mono',monospace;font-size:10px}
 .tapp select.sel{display:block;width:100%;appearance:none;font-family:inherit;color:var(--ink);
-  padding-right:28px}
+  padding-right:28px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'><path d='M1 1l4.5 4.5L10 1' fill='none' stroke='%23111' stroke-width='2'/></svg>");
+  background-repeat:no-repeat;background-position:right 10px center;background-size:11px 7px}
 .tapp .crow{cursor:pointer}
 .tapp .crow:hover{background:#FBFAF5}
 .tapp .arrow{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);text-align:right}
