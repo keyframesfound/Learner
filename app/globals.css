@@ -65,8 +65,8 @@ body {
   padding: 20px 16px 9px;
 }
 .sec h2 {
-  font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
-  letter-spacing: .8px; text-transform: uppercase; color: var(--ink-2);
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+  letter-spacing: .2px; text-transform: none; color: var(--ink-2);
 }
 .sec span { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; color: var(--ink-3); }
 

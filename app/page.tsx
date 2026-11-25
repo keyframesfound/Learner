@@ -56,9 +56,6 @@ export default async function Learn() {
       <div className="hd">
         <div>
           <h1>Today</h1>
-          <div className="mod" style={{ marginTop: 4 }}>
-            {v.name} · {stats.daysToDse} days to DSE · {stats.covered} of {stats.coverageTotal} items
-          </div>
         </div>
         <span className="streak">
           <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
@@ -67,8 +64,6 @@ export default async function Learn() {
           {stats.streak}
         </span>
       </div>
-
-      <div className="sub" style={{ paddingBottom: 2 }}>Daily mix</div>
       <div style={{ padding: "0 16px 4px" }}>
         <div style={{
           background: "var(--ink)", color: "var(--paper)", border: "3px solid var(--ink)",
@@ -93,8 +88,7 @@ export default async function Learn() {
           )}
         </div>
       </div>
-
-      <div className="sec"><h2>Drill</h2><span>pick up where you left off</span></div>
+      <div className="sec"><h2>Drill</h2></div>
       {modules.length === 0 ? (
         <div style={{ padding: "0 16px" }}>
           <div className="empty">
@@ -122,8 +116,7 @@ export default async function Learn() {
           })}
         </div>
       )}
-
-      <div className="sec"><h2>QuickBits</h2><span>study, don&apos;t drill</span></div>
+      <div className="sec"><h2>QuickBits</h2></div>
       <div className="cards">
         {subjects.slice(0, 3).map((s) => (
           <Link key={s.id} href="/quickbits" className="card">
