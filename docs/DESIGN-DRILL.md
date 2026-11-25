@@ -109,8 +109,10 @@ Hatching means *unavailable*, never *incomplete*.
 
 ## 5. Raid
 
-Live demo: `design/boss.html`. The battle is **full-bleed** — the arena and the
-command panel split the screen between them, with no card or page frame in between.
+Live demo: `design/demo2.html#boss`. The battle is a **screen in the app**, not a
+page: the phone frame and status bar stay, the tab bar is dropped while fighting,
+and the ✕ in the battle header is the only way out. Inside that frame the arena and
+the command panel split the height between them, with no card between them.
 
 ### Lobby
 Party code in a bar of its own, four slots in a 2×2 grid — filled slots solid, empty
