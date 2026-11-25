@@ -120,6 +120,9 @@
   .step .txt{flex:1;min-width:0}
   .step .txt b{display:block;font-size:15px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .step .txt span{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1px;color:var(--ink-3)}
+  /* familiarity: a colour, not a tinted word — 10.5px coloured text fails contrast */
+  .step .txt i.st{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);
+    margin-right:5px;vertical-align:1px}
   .step.done .no{background:var(--lime);border-color:var(--ink)}
   .step.now{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--orange)}
   .step.now .no{background:var(--orange);border-color:var(--orange);color:#fff}
@@ -319,12 +322,12 @@
     <div class="steps">
       <div class="step done">
         <span class="no">01</span>
-        <span class="txt"><b>What a name is</b><span>5 items · steady</span></span>
+        <span class="txt"><b>What a name is</b><span>5 items · <i class="st" style="--c:#2D5BFF"></i>steady</span></span>
         <span>✓</span>
       </div>
       <div class="step done">
         <span class="no">02</span>
-        <span class="txt"><b>Assignment and rebinding</b><span>6 items · automatic</span></span>
+        <span class="txt"><b>Assignment and rebinding</b><span>6 items · <i class="st" style="--c:#17A34A"></i>automatic</span></span>
         <span>✓</span>
       </div>
       <div class="step now" data-go="lesson">

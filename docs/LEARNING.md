@@ -49,12 +49,17 @@ Secondary 4 student does not think "I am at recall", they think "I know this" or
 
 One axis only: **how reliably you can produce it**, with no thinking time.
 
-| Label | Means | Derived from |
-|---|---|---|
-| new | never attempted | no attempts on any item in the lesson |
-| shaky | you get it some of the time | recent attempts mostly incorrect |
-| steady | you get it most times | correct more often than not, short stability |
-| automatic | you don't have to think | long stability, or reached apply and passed |
+| Label | Dot | Means | Derived from |
+|---|---|---|---|
+| new | grey `#8C8A80` | never attempted | no attempts on any item in the lesson |
+| shaky | red `#C4271B` | you get it some of the time | recent attempts mostly incorrect |
+| steady | blue `#2D5BFF` | you get it most times | correct more often than not, short stability |
+| automatic | green `#17A34A` | you don't have to think | long stability, or reached apply and passed |
+
+The colour is a 7px dot before the word, never tinted text: at 10.5px, green or lime
+type on paper drops under 4.5:1 and the label becomes the hardest thing on the row to
+read. Dots stack into a colour column down the left of the list, which is what makes
+the page sortable at a glance.
 
 `automatic` is the top rather than `mastered` on purpose: fluency is retrieval that
 costs nothing, which is a property of the memory, not a grade a teacher gives. The
