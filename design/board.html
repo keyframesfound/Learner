@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — leaderboard directions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6; --ink:#111111; --ink-2:#4A4A45; --ink-3:#8C8A80;
+    --line:#D8D4C6; --lime:#D4FF3F; --orange:#FF4D1C; --blue:#2D5BFF;
+    --gold:#FFC94A; --red-ink:#C4271B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;background:#1A1A18;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    padding:26px 16px;color:var(--ink);
+  }
+  .switcher{display:flex;gap:5px;background:#0E0E0C;padding:5px;border-radius:10px}
+  .switcher button{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.8px;
+    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:9px 14px;
+    border-radius:6px;cursor:pointer;
+  }
+  .switcher button.on{background:var(--lime);color:var(--ink)}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:#6E6E66}
+  .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+
+  .device{
+    position:relative;width:390px;height:844px;background:var(--paper);
+    border:3px solid #000;border-radius:14px;box-shadow:10px 10px 0 rgba(0,0,0,.55);overflow:hidden;
+  }
+  .statusbar{
+    height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    border-bottom:3px solid var(--ink);background:var(--paper);position:relative;z-index:3;
+  }
+  .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+
+  .screen{
+    position:absolute;inset:40px 0 0 0;display:none;flex-direction:column;
+    padding-bottom:96px;overflow:hidden;
+  }
+  .screen.on{display:flex}
+  .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  .hd{padding:16px 18px 12px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .hd h1{font-family:'Archivo Black',sans-serif;font-size:27px;letter-spacing:-.8px;line-height:1}
+  .hd .sub{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.7px;
+    color:var(--ink-3);text-transform:uppercase;margin-top:6px}
+  .stat-pill{
+    border:3px solid var(--ink);border-radius:999px;padding:6px 11px;background:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.6px;
+    white-space:nowrap;box-shadow:3px 3px 0 var(--line);
+  }
+  .stat-pill b{color:var(--ink)}
+  .move{
+    display:inline-flex;align-items:center;gap:4px;background:var(--lime);border:3px solid var(--ink);
+    border-radius:6px;padding:3px 7px;font-family:'JetBrains Mono',monospace;font-size:10px;
+    font-weight:700;letter-spacing:.5px;
+  }
+
+  /* ═══════ A · podium ═══════ */
+  .podium{display:flex;align-items:flex-end;justify-content:center;gap:8px;padding:6px 18px 0}
+  .pod{
+    flex:1;border:3px solid var(--ink);border-radius:10px;background:#fff;
+    display:flex;flex-direction:column;align-items:center;padding:10px 5px 0;
+    box-shadow:5px 5px 0 var(--ink);text-align:center;overflow:hidden;
+  }
+  .pod .num{font-family:'Archivo Black',sans-serif;font-size:25px;line-height:1}
+  .pod .nm{font-size:11.5px;font-weight:700;margin-top:7px;line-height:1.15;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+  .pod .val{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-2);margin-top:2px}
+  .pod.p1{height:142px;background:var(--lime)}
+  .pod.p1 .val{color:var(--ink-2)}
+  .pod.p2{height:112px}
+  .pod.p3{height:96px}
+
+  .mecard{
+    margin:20px 18px 0;border:3px solid var(--ink);border-radius:10px;background:var(--ink);
+    color:var(--paper);box-shadow:5px 5px 0 var(--orange);padding:12px 14px;
+  }
+  .mehead{display:flex;align-items:center;gap:10px}
+  .mehead .rank{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--ink);
+    background:var(--paper);border-radius:4px;padding:2px 6px;
+  }
+  .mehead .who{flex:1;font-size:15px;font-weight:700}
+  .mehead .val{font-family:'Archivo Black',sans-serif;font-size:20px;color:var(--lime)}
+  .track{
+    margin-top:10px;height:12px;border:2px solid var(--paper);border-radius:99px;
+    background:#3A3A36;overflow:hidden;
+  }
+  .track i{display:block;height:100%;background:var(--lime);border-radius:99px}
+  .gap{
+    margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.3px;
+    color:#B9B9AE;
+  }
+  .gap b{color:var(--orange);font-weight:700}
+
+  .rest{padding:16px 18px 0;display:grid;gap:7px}
+  .restrow{
+    display:flex;align-items:center;gap:10px;padding:8px 10px;border:2px solid var(--line);
+    border-radius:8px;background:#fff;
+  }
+  .restrow .r{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);width:18px}
+  .restrow .nm{flex:1;font-size:13px;font-weight:700}
+  .restrow .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}
+
+  /* ═══════ B · lanes ═══════ */
+  .lanes{padding:8px 18px 0;display:grid;gap:9px}
+  .lane{display:flex;align-items:center;gap:9px}
+  .lane .r{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-3);width:14px;text-align:right}
+  .lane .nm{width:84px;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lane .bar{
+    flex:1;height:15px;background:#fff;border:2.5px solid var(--ink);border-radius:4px;overflow:hidden;
+  }
+  .lane .bar i{display:block;height:100%;background:var(--ink)}
+  .lane .v{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;width:20px;text-align:right}
+  .lane.me .nm{color:var(--ink)}
+  .lane.me .bar{border-color:var(--ink);background:var(--ink)}
+  .lane.me .bar i{background:var(--lime)}
+  .lane.me .v{color:var(--ink)}
+  .gapnote{
+    margin:12px 18px 0;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    letter-spacing:.3px;color:var(--ink-2);
+  }
+  .gapnote b{color:var(--orange);font-weight:700}
+  .goalrule{
+    margin:16px 18px 0;border-top:3px dashed var(--ink-3);position:relative;height:1px;
+  }
+  .goaltag{
+    position:absolute;left:0;top:-9px;background:var(--paper);padding-right:8px;
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.8px;color:var(--ink-2);
+    text-transform:uppercase;
+  }
+
+  /* ═══════ C · wall ═══════ */
+  .wall{padding:10px 18px 0;display:grid;grid-template-columns:repeat(6,1fr);gap:7px}
+  .wall i{
+    aspect-ratio:1;border-radius:6px;border:2.5px solid var(--line);background:#fff;
+  }
+  .wall i.on{background:var(--ink);border-color:var(--ink)}
+  .wall i.you{background:var(--lime);border-color:var(--ink);box-shadow:3px 3px 0 var(--orange)}
+  .streakblock{
+    margin:18px 18px 0;border:3px solid var(--ink);border-radius:10px;background:#fff;
+    box-shadow:4px 4px 0 var(--line);padding:12px 14px;
+  }
+  .streakblock .lbl{
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1px;
+    text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;
+  }
+  .streakblock .row{display:flex;align-items:center;gap:5px}
+  .streakblock .row i{flex:1;height:14px;border-radius:3px;border:2.5px solid var(--ink);background:var(--lime)}
+  .streakblock .row i.off{background:#fff;border-color:var(--line)}
+  .streakblock .n{font-family:'Archivo Black',sans-serif;font-size:15px;margin-left:4px}
+
+  .sec{margin:20px 18px 0}
+  .sec h2{
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.2px;
+    text-transform:uppercase;color:var(--ink-3);margin-bottom:8px;
+  }
+  .crow{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:2px solid var(--line)}
+  .crow:last-child{border-bottom:0}
+  .crow .r{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);width:16px}
+  .crow .nm{flex:1;font-size:13.5px;font-weight:700}
+  .crow .d{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700}
+  .crow.me{background:var(--lime);border-radius:6px;padding:8px 8px;border-bottom:0;margin-bottom:4px}
+  .crow.me .r{color:var(--ink-2)}
+
+  /* ═══════ tab bar ═══════ */
+  .tabbar{
+    position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;
+    justify-content:space-between;gap:2px;border-top:3px solid var(--ink);
+    background:var(--paper);padding:10px 38px 14px;
+  }
+  .tab{flex:1;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .pill{
+    display:grid;place-items:center;gap:2px;padding:6px 8px 5px;border:3px solid transparent;
+    border-radius:10px;color:var(--ink-3);min-width:58px;
+  }
+  .pill svg{width:21px;height:21px}
+  .lbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase}
+  .tab.on .pill{background:var(--blue);border-color:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--ink)}
+</style>
+</head>
+<body>
+
+<div class="switcher">
+  <button data-v="a" class="on">A · Podium</button>
+  <button data-v="b">B · Lanes</button>
+  <button data-v="c">C · Wall</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+
+  <!-- ══ A ══ -->
+  <section class="screen on" id="v-a">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <h1>Today</h1>
+          <div class="sub">4B · resets 00:00</div>
+        </div>
+        <span class="stat-pill"><b>14</b>/18 SHOWED UP</span>
+      </div>
+
+      <div class="podium">
+        <div class="pod p2"><span class="num">2</span><span class="nm">Chan Ka Ho</span><span class="val">35</span></div>
+        <div class="pod p1"><span class="num">1</span><span class="nm">Mei Lam</span><span class="val">38</span></div>
+        <div class="pod p3"><span class="num">3</span><span class="nm">Wong Tsz Yan</span><span class="val">31</span></div>
+      </div>
+
+      <div class="mecard">
+        <div class="mehead">
+          <span class="rank">11</span>
+          <span class="who">You</span>
+          <span class="val">22</span>
+        </div>
+        <div class="track"><i style="width:58%"></i></div>
+        <div class="gap">6 items to pass <b>Lam Ho Yin</b></div>
+      </div>
+
+      <div class="rest">
+        <div class="restrow"><span class="r">04</span><span class="nm">Lam Ho Yin</span><span class="v">29</span></div>
+        <div class="restrow"><span class="r">05</span><span class="nm">Ng Sum Yuet</span><span class="v">27</span></div>
+        <div class="restrow"><span class="r">06</span><span class="nm">Ho Wai Ching</span><span class="v">26</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ B ══ -->
+  <section class="screen" id="v-b">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <h1>Today</h1>
+          <div class="sub">4B · resets 00:00</div>
+        </div>
+        <span class="move">↑ 3</span>
+      </div>
+
+      <div class="lanes">
+        <div class="lane"><span class="r">1</span><span class="nm">Mei Lam</span><div class="bar"><i style="width:100%"></i></div><span class="v">38</span></div>
+        <div class="lane"><span class="r">2</span><span class="nm">Chan Ka Ho</span><div class="bar"><i style="width:92%"></i></div><span class="v">35</span></div>
+        <div class="lane"><span class="r">3</span><span class="nm">Wong Tsz Y.</span><div class="bar"><i style="width:82%"></i></div><span class="v">31</span></div>
+        <div class="lane"><span class="r">4</span><span class="nm">Lam Ho Yin</span><div class="bar"><i style="width:76%"></i></div><span class="v">29</span></div>
+        <div class="lane"><span class="r">5</span><span class="nm">Ng Sum Yuet</span><div class="bar"><i style="width:71%"></i></div><span class="v">27</span></div>
+        <div class="lane"><span class="r">6</span><span class="nm">Ho Wai Ching</span><div class="bar"><i style="width:68%"></i></div><span class="v">26</span></div>
+      </div>
+
+      <div class="goalrule"><span class="goaltag">catch-up line · 29</span></div>
+
+      <div class="lanes" style="padding-top:12px">
+        <div class="lane me"><span class="r">11</span><span class="nm">You</span><div class="bar"><i style="width:58%"></i></div><span class="v">22</span></div>
+      </div>
+
+      <p class="gapnote">5 items to pass <b>Ng Sum Yuet</b></p>
+    </div>
+  </section>
+
+  <!-- ══ C ══ -->
+  <section class="screen" id="v-c">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <h1>Today</h1>
+          <div class="sub">4B · resets 00:00</div>
+        </div>
+        <span class="stat-pill"><b>14</b>/18 IN</span>
+      </div>
+
+      <div class="wall">
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="you"></i>
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i class="on"></i>
+        <i class="on"></i><i></i><i class="on"></i><i></i><i class="on"></i><i></i>
+      </div>
+
+      <div class="streakblock">
+        <div class="lbl">Your streak</div>
+        <div class="row">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i class="off"></i><i class="off"></i>
+          <span class="n">6</span>
+        </div>
+      </div>
+
+      <div class="sec">
+        <h2>Most consistent this week</h2>
+        <div class="crow"><span class="r">1</span><span class="nm">Mei Lam</span><span class="d">5/5</span></div>
+        <div class="crow me"><span class="r">2</span><span class="nm">You</span><span class="d">5/5</span></div>
+        <div class="crow"><span class="r">3</span><span class="nm">Chan Ka Ho</span><span class="d">4/5</span></div>
+        <div class="crow"><span class="r">4</span><span class="nm">Wong Tsz Yan</span><span class="d">4/5</span></div>
+        <div class="crow"><span class="r">5</span><span class="nm">Lam Ho Yin</span><span class="d">3/5</span></div>
+      </div>
+
+      <div class="sec">
+        <h2>Items today</h2>
+        <div class="crow"><span class="r">1</span><span class="nm">Mei Lam</span><span class="d">38</span></div>
+        <div class="crow"><span class="r">2</span><span class="nm">Chan Ka Ho</span><span class="d">35</span></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabbar">
+    <button class="tab"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg><span class="lbl">Learn</span></span></button>
+    <button class="tab"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg><span class="lbl">Drills</span></span></button>
+    <button class="tab on"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span class="lbl">Board</span></span></button>
+    <button class="tab"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span class="lbl">Me</span></span></button>
+  </nav>
+</div>
+
+<p class="caption">Learner · leaderboard directions · <a href="demo2.html">main demo</a></p>
+
+<script>
+(function () {
+  var screens = document.querySelectorAll('.screen');
+  var btns = document.querySelectorAll('.switcher button');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      screens.forEach(function (s) { s.classList.toggle('on', s.id === 'v-' + b.dataset.v); });
+      btns.forEach(function (x) { x.classList.toggle('on', x === b); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
