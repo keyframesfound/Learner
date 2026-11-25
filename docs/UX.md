@@ -29,8 +29,9 @@ Colour. Paper, ink, one accent per subject, and lime reserved for success.
     red      #FF3B30      wrong only
 
 Semantic colour is fixed and never borrowed: lime means correct, red means wrong,
-orange means "this is where you are". Subject identity is carried by a 9px dot only,
-so Biology green can coexist with a green tick without either meaning the other.
+orange means "this is where you are". Subject identity lives in a line icon and its
+stroke colour, never in a surface fill, so Biology green can coexist with a green tick
+without either meaning the other.
 
 Type.
 
@@ -77,9 +78,14 @@ it lives inside the lessons that use it and is reachable from the module header.
 tab that only makes sense for one subject does not belong in the global bar.
 
 **Subject switcher.** A horizontal row of pills at the top of Learn, one per enrolled
-subject, each carrying a 9px colour dot. The active pill is ink with white text and
-takes the subject colour as its shadow. Subjects a student does not take are absent
-rather than disabled.
+subject. Each pill carries a 15px line icon drawn in that subject's colour:
+a monitor for ICT, an orbital atom for Physics, a leaf for Biology, a conical flask
+for Chemistry, a meridian globe for Geography. The active pill turns ink, the icon
+flips to paper, and the subject colour moves to the pill's shadow. Subjects a student
+does not take are absent rather than disabled.
+
+Icon rules: 24px viewBox, 2.2px stroke, round caps and joins, no fill, drawn at 15px.
+One geometry, one stroke weight, so five subjects still read as one family.
 
 **Code panel.** Inverted: ink background, paper text, lime keyword, peach numerals,
 line numbers in #5A5A52. Code should look like a terminal, not like a thought
