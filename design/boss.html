@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Learner — boss mockups</title>
+<title>Learner — boss battle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -381,92 +381,71 @@
   .btn{text-transform:none;letter-spacing:0}
   .bscroll{flex:1;overflow-y:auto;scrollbar-width:none}
   .bscroll::-webkit-scrollbar{display:none}
-  .bossart .skin{fill:var(--paper);stroke:var(--ink);stroke-width:3}
-  .bossart .hair{fill:var(--ink);stroke:var(--ink);stroke-width:3;stroke-linejoin:round}
-  .bossart .sh{fill:#fff;stroke:var(--ink);stroke-width:3}
-  .bossart .collar{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
-  .bossart .tie{fill:var(--ink)}
-  .bossart .frames{fill:none;stroke:var(--ink);stroke-width:3}
-  .bossart .eyes{fill:var(--ink)}
-  .bossart .mouth{fill:none;stroke:var(--ink);stroke-width:3;stroke-linecap:round}
-  .hprow{display:flex;align-items:center;gap:9px}
-  .hpbar{flex:1;height:13px;border:3px solid var(--ink);border-radius:999px;background:#fff;
-    overflow:hidden;position:relative}
+
+  .fig{display:block;width:100%;height:100%}
+  .fig .skin{fill:#F2EFE6;stroke:#111;stroke-width:2.6}
+  .fig .hair{fill:#111;stroke:#111;stroke-width:2.6;stroke-linejoin:round}
+  .fig .shirt{fill:#fff;stroke:#111;stroke-width:2.6}
+  .fig .jacket{stroke:#111;stroke-width:2.6}
+  .fig .trouser,.fig .shoe{fill:#111}
+  .fig .collar{fill:none;stroke:#111;stroke-width:2.6;stroke-linecap:round}
+  .fig .tie{fill:#111}
+  .fig .frames{fill:none;stroke:#111;stroke-width:2.2}
+  .fig .eyes{fill:#111}
+  .fig .mouth{fill:none;stroke:#111;stroke-width:2.2;stroke-linecap:round}
+
+  /* ── the stage ─────────────────────────────────────────── */
+  .stage{position:relative;margin:12px 18px 0;height:238px;border:3px solid var(--ink);
+    border-radius:12px;background:#fff;box-shadow:6px 6px 0 var(--ink);overflow:hidden}
+  .sky{position:absolute;inset:0 0 66px 0;
+    background:repeating-linear-gradient(135deg,#FBFAF5 0 9px,#F3F0E4 9px 18px)}
+  .hpwrap{position:absolute;left:12px;right:12px;top:9px;display:flex;align-items:center;gap:8px;z-index:6}
+  .hpbar{flex:1;height:12px;border:3px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden;position:relative}
   .hpbar i{display:block;height:100%;background:var(--orange)}
   .hpbar::after{content:'';position:absolute;inset:0;pointer-events:none;
     background:repeating-linear-gradient(to right,transparent 0 calc(100%/12 - 1px),
       rgba(17,17,17,.22) calc(100%/12 - 1px),rgba(17,17,17,.22) calc(100%/12))}
-  .hpnum{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;color:var(--ink-2);white-space:nowrap}
-  .party{display:flex;justify-content:space-between;gap:6px;margin-top:11px}
-  .pm{display:grid;justify-items:center;gap:2px;flex:1}
-  .pm .av{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;
-    font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
-    background:#fff;color:var(--ink);border:2px solid var(--ink)}
-  .pm.me .av{background:var(--lime)}
-  .pm b{font-size:9.5px;font-weight:700;color:var(--ink)}
-  .pm i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;color:var(--ink-3)}
+  .hpnum{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;color:var(--ink-2);white-space:nowrap}
+  .bossname{position:absolute;left:0;right:0;top:33px;text-align:center;z-index:6;
+    font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.3px;color:var(--ink-2)}
+  .ground{position:absolute;left:0;right:0;top:214px;height:3px;background:var(--ink);z-index:3}
+  .floor{position:absolute;left:0;right:0;top:217px;bottom:0;background:var(--paper);z-index:1}
 
-  .bcard{margin:14px 18px 0;padding:12px;border:3px solid var(--ink);border-radius:12px;background:#fff;
-    box-shadow:6px 6px 0 var(--ink)}
-  .bcard .art{display:grid;place-items:end center;background:var(--paper);border:3px solid var(--ink);
-    border-radius:8px;height:136px;overflow:hidden}
-  .bcard .art svg{width:108px;height:118px}
-  .bcard .nm{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:10px 0 9px}
-  .bcard .nm b{font-family:'Archivo Black',sans-serif;font-size:17px;letter-spacing:-.4px}
-  .bcard .nm i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--ink-3)}
+  .unit{position:absolute;display:flex;flex-direction:column;align-items:center;gap:2px;z-index:4}
+  .unit .nm{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;color:var(--ink-3);white-space:nowrap}
+  .unit .dmg2{font-family:'JetBrains Mono',monospace;font-size:7.5px;font-weight:700;color:var(--orange)}
 
-  .bstage{margin:14px 18px 0;background:var(--ink);border-radius:12px;padding:13px 14px 15px;
-    box-shadow:6px 6px 0 var(--orange)}
-  .bstage .top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
-  .bstage .top b{font-family:'Archivo Black',sans-serif;font-size:17px;letter-spacing:-.4px;color:var(--paper)}
-  .bstage .top i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9px;
-    font-weight:700;color:var(--lime);white-space:nowrap}
-  .bstage .plate{display:grid;place-items:center;margin:10px auto 11px;width:118px;height:112px;
-    background:var(--paper);border-radius:10px;overflow:hidden}
-  .bstage .plate svg{width:100px;height:108px;margin-top:8px}
-  .bstage .hpbar{background:rgba(242,239,230,.14);border-color:var(--paper)}
-  .bstage .hpbar::after{background:repeating-linear-gradient(to right,transparent 0 calc(100%/12 - 1px),
-      rgba(242,239,230,.35) calc(100%/12 - 1px),rgba(242,239,230,.35) calc(100%/12))}
-  .bstage .hpnum{color:var(--paper)}
-  .bstage .party{border-top:2px solid rgba(242,239,230,.25);padding-top:10px}
-  .bstage .pm .av{background:var(--paper);border-color:var(--paper);color:var(--ink)}
-  .bstage .pm.me .av{background:var(--lime)}
-  .bstage .pm b{color:var(--paper)}
-  .bstage .pm i{color:var(--lime)}
+  .u-boss{left:50%;transform:translateX(-50%);top:52px;width:108px}
+  .u-boss .fig{height:162px}
+  .u-boss .nm{display:none}
+  .u-a1{left:12px;top:112px;width:56px}
+  .u-a2{left:62px;top:112px;width:56px}
+  .u-a3{right:12px;top:112px;width:56px}
+  .u-a1 .fig,.u-a2 .fig,.u-a3 .fig{height:86px}
 
-  .bstamp{margin:14px 18px 0;padding:12px 14px 14px;border:3px solid var(--ink);border-radius:12px;
-    background:var(--lime);box-shadow:6px 6px 0 var(--ink)}
-  .bstamp .disc{width:124px;height:124px;margin:0 auto 10px;border:3px solid var(--ink);border-radius:50%;
-    background:var(--lime);overflow:hidden;display:grid;place-items:center}
-  .bstamp .disc svg{width:104px;height:112px;margin-top:12px}
-  .bstamp .disc .skin{fill:var(--lime)}
-  .bstamp .disc .sh{fill:var(--lime)}
-  .bstamp .nm{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:9px}
-  .bstamp .nm b{font-family:'Archivo Black',sans-serif;font-size:17px;letter-spacing:-.4px}
-  .bstamp .nm i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:#3F4A12}
-  .bstamp .hpbar{background:#fff}
-  .bstamp .pm .av{border-color:var(--ink)}
+  .strike{position:absolute;left:50%;top:76px;transform:translateX(-50%) rotate(6deg);
+    width:148px;height:148px;z-index:2}
+  .dmg{position:absolute;right:12px;top:52px;z-index:7;font-family:'JetBrains Mono',monospace;
+    font-size:13px;font-weight:700;background:var(--ink);color:var(--lime);padding:4px 8px;border-radius:5px;
+    transform:rotate(-5deg);box-shadow:3px 3px 0 var(--orange)}
 </style>
 </head>
 <body>
 
 <div class="switcher">
-  <button data-v="a" class="on">1 · Card</button>
-  <button data-v="b">2 · Stage</button>
-  <button data-v="c">3 · Stamp</button>
+  <button data-v="a" class="on">1 · Strike</button>
+  <button data-v="b">2 · Idle</button>
 </div>
 
 <div class="device">
   <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
-  <div class="wrap wrap-a">  <section class="screen"><div class="lbar"><span class="x" data-go="path">✕</span><span class="count">Raid · E2C</span><span class="timer">07:42</span></div><div class="bcard"><div class="art"><svg class="bossart" viewBox="0 0 120 124"><path class="sh" d="M16 124c2-13 12-21 24-24h40c12 3 22 11 24 24z"/><path class="collar" d="M47 92l13 12 13-12"/><path class="tie" d="M56 97l4-4 4 4-3 27h-2z"/><path class="skin" d="M49 76h22v18H49z"/><ellipse class="skin" cx="35" cy="60" rx="5" ry="7"/><ellipse class="skin" cx="85" cy="60" rx="5" ry="7"/><ellipse class="skin" cx="60" cy="55" rx="25" ry="28"/><path class="skin" d="M52 70q8 5 16 0" fill="none"/><path class="hair" d="M35 52c0-19 11-30 25-30s25 11 25 30l-4-8-4 10-5-11-4 11-4-11-4 11-5-11-4 11-4-10z"/><g class="frames"><circle cx="49" cy="59" r="8"/><circle cx="71" cy="59" r="8"/><path d="M57 59h6M41 57l-5 2M79 57l5 2"/></g><g class="eyes"><circle cx="49" cy="59" r="2.1"/><circle cx="71" cy="59" r="2.1"/></g><path class="mouth" d="M53 73q7 6 14 0"/></svg></div><div class="nm"><b>Mr. Cheung</b><i>Boss · level 3</i></div><div class="hprow"><span class="hpbar"><i style="width:68%"></i></span><span class="hpnum">8,100 / 12,000</span></div><div class="party"><span class="pm"><span class="av">KR</span><b>Kai</b><i>2,400</i></span><span class="pm me"><span class="av">You</span><b>You</b><i>1,900</i></span><span class="pm"><span class="av">MC</span><b>Mei</b><i>1,100</i></span><span class="pm"><span class="av">JR</span><b>Jon</b><i>500</i></span></div></div><div class="bscroll"><h1 class="q" style="padding-top:12px">Which line prints<br>the last item?</h1><div class="code"><span class="ln">1</span><span class="n">nums</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
-<span class="ln">2</span><span class="k">print</span>(nums[<span class="n">?</span>])</div><div class="opts"><button class="opt"><span class="letter">A</span>nums[0]</button><button class="opt" style="background:var(--lime)"><span class="letter">B</span>nums[-1]</button><button class="opt"><span class="letter">C</span>nums[3]</button></div></div><div class="band" style="background:var(--lime)"><div class="verdict" style="display:flex">Correct<span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--ink);color:var(--lime);padding:3px 7px;border-radius:4px">−1,000</span></div><p class="why" style="display:block">nums[-1] — negative indexes count back from the end.</p><button class="btn">Continue</button></div>  </section></div>
-  <div class="wrap wrap-b">  <section class="screen"><div class="lbar"><span class="x" data-go="path">✕</span><span class="count">Raid · E2C</span><span class="timer">07:42</span></div><div class="bstage"><div class="top"><b>Mr. Cheung</b><i>Boss · level 3</i></div><div class="plate"><svg class="bossart" viewBox="0 0 120 124"><path class="sh" d="M16 124c2-13 12-21 24-24h40c12 3 22 11 24 24z"/><path class="collar" d="M47 92l13 12 13-12"/><path class="tie" d="M56 97l4-4 4 4-3 27h-2z"/><path class="skin" d="M49 76h22v18H49z"/><ellipse class="skin" cx="35" cy="60" rx="5" ry="7"/><ellipse class="skin" cx="85" cy="60" rx="5" ry="7"/><ellipse class="skin" cx="60" cy="55" rx="25" ry="28"/><path class="skin" d="M52 70q8 5 16 0" fill="none"/><path class="hair" d="M35 52c0-19 11-30 25-30s25 11 25 30l-4-8-4 10-5-11-4 11-4-11-4 11-5-11-4 11-4-10z"/><g class="frames"><circle cx="49" cy="59" r="8"/><circle cx="71" cy="59" r="8"/><path d="M57 59h6M41 57l-5 2M79 57l5 2"/></g><g class="eyes"><circle cx="49" cy="59" r="2.1"/><circle cx="71" cy="59" r="2.1"/></g><path class="mouth" d="M53 73q7 6 14 0"/></svg></div><div class="hprow"><span class="hpbar"><i style="width:68%"></i></span><span class="hpnum">8,100 / 12,000</span></div><div class="party"><span class="pm"><span class="av">KR</span><b>Kai</b><i>2,400</i></span><span class="pm me"><span class="av">You</span><b>You</b><i>1,900</i></span><span class="pm"><span class="av">MC</span><b>Mei</b><i>1,100</i></span><span class="pm"><span class="av">JR</span><b>Jon</b><i>500</i></span></div></div><div class="bscroll"><h1 class="q" style="padding-top:12px">Which line prints<br>the last item?</h1><div class="code"><span class="ln">1</span><span class="n">nums</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
-<span class="ln">2</span><span class="k">print</span>(nums[<span class="n">?</span>])</div><div class="opts"><button class="opt"><span class="letter">A</span>nums[0]</button><button class="opt" style="background:var(--lime)"><span class="letter">B</span>nums[-1]</button><button class="opt"><span class="letter">C</span>nums[3]</button></div></div><div class="band" style="background:var(--lime)"><div class="verdict" style="display:flex">Correct<span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--ink);color:var(--lime);padding:3px 7px;border-radius:4px">−1,000</span></div><p class="why" style="display:block">nums[-1] — negative indexes count back from the end.</p><button class="btn">Continue</button></div>  </section></div>
-  <div class="wrap wrap-c">  <section class="screen"><div class="lbar"><span class="x" data-go="path">✕</span><span class="count">Raid · E2C</span><span class="timer">07:42</span></div><div class="bstamp"><div class="disc"><svg class="bossart" viewBox="0 0 120 124"><path class="sh" d="M16 124c2-13 12-21 24-24h40c12 3 22 11 24 24z"/><path class="collar" d="M47 92l13 12 13-12"/><path class="tie" d="M56 97l4-4 4 4-3 27h-2z"/><path class="skin" d="M49 76h22v18H49z"/><ellipse class="skin" cx="35" cy="60" rx="5" ry="7"/><ellipse class="skin" cx="85" cy="60" rx="5" ry="7"/><ellipse class="skin" cx="60" cy="55" rx="25" ry="28"/><path class="skin" d="M52 70q8 5 16 0" fill="none"/><path class="hair" d="M35 52c0-19 11-30 25-30s25 11 25 30l-4-8-4 10-5-11-4 11-4-11-4 11-5-11-4 11-4-10z"/><g class="frames"><circle cx="49" cy="59" r="8"/><circle cx="71" cy="59" r="8"/><path d="M57 59h6M41 57l-5 2M79 57l5 2"/></g><g class="eyes"><circle cx="49" cy="59" r="2.1"/><circle cx="71" cy="59" r="2.1"/></g><path class="mouth" d="M53 73q7 6 14 0"/></svg></div><div class="nm"><b>Mr. Cheung</b><i>Boss · level 3</i></div><div class="hprow"><span class="hpbar"><i style="width:68%"></i></span><span class="hpnum">8,100 / 12,000</span></div><div class="party"><span class="pm"><span class="av">KR</span><b>Kai</b><i>2,400</i></span><span class="pm me"><span class="av">You</span><b>You</b><i>1,900</i></span><span class="pm"><span class="av">MC</span><b>Mei</b><i>1,100</i></span><span class="pm"><span class="av">JR</span><b>Jon</b><i>500</i></span></div></div><div class="bscroll"><h1 class="q" style="padding-top:12px">Which line prints<br>the last item?</h1><div class="code"><span class="ln">1</span><span class="n">nums</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
-<span class="ln">2</span><span class="k">print</span>(nums[<span class="n">?</span>])</div><div class="opts"><button class="opt"><span class="letter">A</span>nums[0]</button><button class="opt" style="background:var(--lime)"><span class="letter">B</span>nums[-1]</button><button class="opt"><span class="letter">C</span>nums[3]</button></div></div><div class="band" style="background:var(--lime)"><div class="verdict" style="display:flex">Correct<span style="margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--ink);color:var(--lime);padding:3px 7px;border-radius:4px">−1,000</span></div><p class="why" style="display:block">nums[-1] — negative indexes count back from the end.</p><button class="btn">Continue</button></div>  </section></div>
+  <div class="wrap wrap-a">  <section class="screen"><div class="lbar"><span class="x" data-go="path">✕</span><span class="count">Raid · E2C</span><span class="timer">07:42</span></div><div class="stage"><div class="sky"></div><div class="floor"></div><div class="hpwrap"><span class="hpbar"><i style="width:68%"></i></span><span class="hpnum">8,100 / 12,000</span></div><div class="bossname">Mr. Cheung · boss level 3</div><div class="ground"></div><svg class="strike" viewBox="0 0 100 100"><path d="M50 2l9 27 24-14-14 24 27 9-27 9 14 24-24-14-9 27-9-27-24 14 14-24-27-9 27-9-14-24 24 14z" fill="#D4FF3F" stroke="#111" stroke-width="3" stroke-linejoin="round"/></svg><div class="unit u-a1"><span class="nm">Kai · 2,400</span><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M31 94h9v34H31zM44 94h9v34H44z"/><path class="shoe" d="M29 126h13v6H29zM42 126h13v6H42z"/><path class="jacket" style="fill:#2D5BFF" d="M25 54a17 17 0 0 1 34 0v40H25z"/><path class="jacket" style="fill:#2D5BFF" d="M19 56h7v28h-7zM58 56h7v28h-7z"/><circle class="skin" cx="22.5" cy="86" r="4"/><circle class="skin" cx="61.5" cy="86" r="4"/><path class="skin" d="M37 42h10v12H37z"/><ellipse class="skin" cx="42" cy="27" rx="13" ry="14.5"/><path class="hair" d="M29 25c0-10 5-14 13-14s13 4 13 14l-2-3.6-2.4 4.6-2.6-5-2.6 5-2.6-5-2.6 5-2.4-4.6z"/><g class="eyes"><circle cx="37" cy="28" r="1.3"/><circle cx="47" cy="28" r="1.3"/></g><path class="mouth" d="M39 34q3 2.6 6 0"/></svg></span></div><div class="unit u-a2"><span class="nm">Mei</span><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M31 94h9v34H31zM44 94h9v34H44z"/><path class="shoe" d="M29 126h13v6H29zM42 126h13v6H42z"/><path class="jacket" style="fill:#FFC94A" d="M25 54a17 17 0 0 1 34 0v40H25z"/><path class="jacket" style="fill:#FFC94A" d="M19 56h7v28h-7zM58 56h7v28h-7z"/><circle class="skin" cx="22.5" cy="86" r="4"/><circle class="skin" cx="61.5" cy="86" r="4"/><path class="skin" d="M37 42h10v12H37z"/><ellipse class="skin" cx="42" cy="27" rx="13" ry="14.5"/><path class="hair" d="M29 25c0-10 5-14 13-14s13 4 13 14l-2-3.6-2.4 4.6-2.6-5-2.6 5-2.6-5-2.6 5-2.4-4.6z"/><g class="eyes"><circle cx="37" cy="28" r="1.3"/><circle cx="47" cy="28" r="1.3"/></g><path class="mouth" d="M39 34q3 2.6 6 0"/></svg></span></div><div class="unit u-boss"><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M30 92h10v38H30zM44 92h10v38H44z"/><path class="shoe" d="M28 128h14v7H28zM42 128h14v7H42z"/><path class="shirt" d="M23 50a19 19 0 0 1 38 0v44H23z"/><path class="shirt" d="M17 52h8v32h-8zM59 52h8v32h-8z"/><circle class="skin" cx="21" cy="88" r="4.5"/><circle class="skin" cx="63" cy="88" r="4.5"/><path class="collar" d="M33 50l9 8 9-8"/><path class="tie" d="M38 56l4-3 4 3-2 30h-4z"/><path class="skin" d="M36 38h12v14H36z"/><ellipse class="skin" cx="34" cy="26" rx="3.6" ry="5.4"/><ellipse class="skin" cx="50" cy="26" rx="3.6" ry="5.4"/><ellipse class="skin" cx="42" cy="23" rx="15" ry="17"/><path class="hair" d="M27 21c0-11 6-16 15-16s15 5 15 16l-2.6-4.4-2.6 5.4-3-6-3 6-3-6-3 6-3-6-2.6 5.4z"/><g class="frames"><circle cx="36" cy="25" r="5"/><circle cx="48" cy="25" r="5"/><path d="M41 25h2M31 24l-3 1M53 24l3 1"/></g><g class="eyes"><circle cx="36" cy="25" r="1.4"/><circle cx="48" cy="25" r="1.4"/></g><path class="mouth" d="M38 32q4 3.4 8 0"/></svg></span></div><div class="unit u-a3"><span class="nm">You · 1,900</span><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M31 94h9v34H31zM44 94h9v34H44z"/><path class="shoe" d="M29 126h13v6H29zM42 126h13v6H42z"/><path class="jacket" style="fill:#D4FF3F" d="M25 54a17 17 0 0 1 34 0v40H25z"/><path class="jacket" style="fill:#D4FF3F" d="M19 56h7v28h-7zM58 56h7v28h-7z"/><circle class="skin" cx="22.5" cy="86" r="4"/><circle class="skin" cx="61.5" cy="86" r="4"/><path class="skin" d="M37 42h10v12H37z"/><ellipse class="skin" cx="42" cy="27" rx="13" ry="14.5"/><path class="hair" d="M29 25c0-10 5-14 13-14s13 4 13 14l-2-3.6-2.4 4.6-2.6-5-2.6 5-2.6-5-2.6 5-2.4-4.6z"/><g class="eyes"><circle cx="37" cy="28" r="1.3"/><circle cx="47" cy="28" r="1.3"/></g><path class="mouth" d="M39 34q3 2.6 6 0"/></svg></span></div><span class="dmg">−1,000</span></div><div class="bscroll"><h1 class="q" style="padding-top:14px">Which line prints<br>the last item?</h1><div class="code"><span class="ln">1</span><span class="n">nums</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(nums[<span class="n">?</span>])</div><div class="opts"><button class="opt"><span class="letter">A</span>nums[0]</button><button class="opt" style="background:var(--lime)"><span class="letter">B</span>nums[-1]</button><button class="opt"><span class="letter">C</span>nums[3]</button></div></div><div class="band" style="background:var(--lime)"><div class="verdict" style="display:flex">Correct · struck once</div><p class="why" style="display:block">nums[-1] — negative indexes count back from the end.</p><button class="btn">Continue</button></div>  </section></div>
+  <div class="wrap wrap-b">  <section class="screen"><div class="lbar"><span class="x" data-go="path">✕</span><span class="count">Raid · E2C</span><span class="timer">07:42</span></div><div class="stage"><div class="sky"></div><div class="floor"></div><div class="hpwrap"><span class="hpbar"><i style="width:68%"></i></span><span class="hpnum">8,100 / 12,000</span></div><div class="bossname">Mr. Cheung · boss level 3</div><div class="ground"></div><div class="unit u-a1"><span class="nm">Kai · 2,400</span><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M31 94h9v34H31zM44 94h9v34H44z"/><path class="shoe" d="M29 126h13v6H29zM42 126h13v6H42z"/><path class="jacket" style="fill:#2D5BFF" d="M25 54a17 17 0 0 1 34 0v40H25z"/><path class="jacket" style="fill:#2D5BFF" d="M19 56h7v28h-7zM58 56h7v28h-7z"/><circle class="skin" cx="22.5" cy="86" r="4"/><circle class="skin" cx="61.5" cy="86" r="4"/><path class="skin" d="M37 42h10v12H37z"/><ellipse class="skin" cx="42" cy="27" rx="13" ry="14.5"/><path class="hair" d="M29 25c0-10 5-14 13-14s13 4 13 14l-2-3.6-2.4 4.6-2.6-5-2.6 5-2.6-5-2.6 5-2.4-4.6z"/><g class="eyes"><circle cx="37" cy="28" r="1.3"/><circle cx="47" cy="28" r="1.3"/></g><path class="mouth" d="M39 34q3 2.6 6 0"/></svg></span></div><div class="unit u-a2"><span class="nm">Mei</span><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M31 94h9v34H31zM44 94h9v34H44z"/><path class="shoe" d="M29 126h13v6H29zM42 126h13v6H42z"/><path class="jacket" style="fill:#FFC94A" d="M25 54a17 17 0 0 1 34 0v40H25z"/><path class="jacket" style="fill:#FFC94A" d="M19 56h7v28h-7zM58 56h7v28h-7z"/><circle class="skin" cx="22.5" cy="86" r="4"/><circle class="skin" cx="61.5" cy="86" r="4"/><path class="skin" d="M37 42h10v12H37z"/><ellipse class="skin" cx="42" cy="27" rx="13" ry="14.5"/><path class="hair" d="M29 25c0-10 5-14 13-14s13 4 13 14l-2-3.6-2.4 4.6-2.6-5-2.6 5-2.6-5-2.6 5-2.4-4.6z"/><g class="eyes"><circle cx="37" cy="28" r="1.3"/><circle cx="47" cy="28" r="1.3"/></g><path class="mouth" d="M39 34q3 2.6 6 0"/></svg></span></div><div class="unit u-boss"><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M30 92h10v38H30zM44 92h10v38H44z"/><path class="shoe" d="M28 128h14v7H28zM42 128h14v7H42z"/><path class="shirt" d="M23 50a19 19 0 0 1 38 0v44H23z"/><path class="shirt" d="M17 52h8v32h-8zM59 52h8v32h-8z"/><circle class="skin" cx="21" cy="88" r="4.5"/><circle class="skin" cx="63" cy="88" r="4.5"/><path class="collar" d="M33 50l9 8 9-8"/><path class="tie" d="M38 56l4-3 4 3-2 30h-4z"/><path class="skin" d="M36 38h12v14H36z"/><ellipse class="skin" cx="34" cy="26" rx="3.6" ry="5.4"/><ellipse class="skin" cx="50" cy="26" rx="3.6" ry="5.4"/><ellipse class="skin" cx="42" cy="23" rx="15" ry="17"/><path class="hair" d="M27 21c0-11 6-16 15-16s15 5 15 16l-2.6-4.4-2.6 5.4-3-6-3 6-3-6-3 6-3-6-2.6 5.4z"/><g class="frames"><circle cx="36" cy="25" r="5"/><circle cx="48" cy="25" r="5"/><path d="M41 25h2M31 24l-3 1M53 24l3 1"/></g><g class="eyes"><circle cx="36" cy="25" r="1.4"/><circle cx="48" cy="25" r="1.4"/></g><path class="mouth" d="M38 32q4 3.4 8 0"/></svg></span></div><div class="unit u-a3"><span class="nm">You · 1,900</span><span class="fig"><svg class="fig" viewBox="0 0 84 136"><path class="trouser" d="M31 94h9v34H31zM44 94h9v34H44z"/><path class="shoe" d="M29 126h13v6H29zM42 126h13v6H42z"/><path class="jacket" style="fill:#D4FF3F" d="M25 54a17 17 0 0 1 34 0v40H25z"/><path class="jacket" style="fill:#D4FF3F" d="M19 56h7v28h-7zM58 56h7v28h-7z"/><circle class="skin" cx="22.5" cy="86" r="4"/><circle class="skin" cx="61.5" cy="86" r="4"/><path class="skin" d="M37 42h10v12H37z"/><ellipse class="skin" cx="42" cy="27" rx="13" ry="14.5"/><path class="hair" d="M29 25c0-10 5-14 13-14s13 4 13 14l-2-3.6-2.4 4.6-2.6-5-2.6 5-2.6-5-2.6 5-2.4-4.6z"/><g class="eyes"><circle cx="37" cy="28" r="1.3"/><circle cx="47" cy="28" r="1.3"/></g><path class="mouth" d="M39 34q3 2.6 6 0"/></svg></span></div></div><div class="bscroll"><h1 class="q" style="padding-top:14px">Which line prints<br>the last item?</h1><div class="code"><span class="ln">1</span><span class="n">nums</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(nums[<span class="n">?</span>])</div><div class="opts"><button class="opt"><span class="letter">A</span>nums[0]</button><button class="opt" style="background:var(--lime)"><span class="letter">B</span>nums[-1]</button><button class="opt"><span class="letter">C</span>nums[3]</button></div></div><div class="band" style="background:var(--lime)"><div class="verdict" style="display:flex">Correct · struck once</div><p class="why" style="display:block">nums[-1] — negative indexes count back from the end.</p><button class="btn">Continue</button></div>  </section></div>
 </div>
 
-<p class="cap">Learner · raid · the form master</p>
+<p class="cap">Learner · raid · one correct answer, one strike</p>
 
 <script>
 (function () {
