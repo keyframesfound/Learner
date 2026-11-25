@@ -15,6 +15,7 @@ import {
   updateBlock,
   updateLesson,
 } from "@/lib/teach";
+import { createModule, insertNoteBlock } from "./data";
 
 type LessonRecord = {
   id: string;
@@ -52,10 +53,19 @@ async function lessonRecord(lessonId: string): Promise<LessonRecord | null> {
   return (lesson as LessonRecord | null) ?? null;
 }
 
-function revalidate(moduleId: string, lessonId?: string) {
+function revalidate() {
   revalidatePath("/teach/curriculum");
-  revalidatePath(`/teach/curriculum/${moduleId}`);
-  if (lessonId) revalidatePath(`/teach/curriculum/${moduleId}/${lessonId}`);
+  revalidatePath("/teach/questions");
+}
+
+function withParam(path: string, key: string, value: string) {
+  return path + (path.includes("?") ? "&" : "?") + key + "=" + encodeURIComponent(value);
+}
+
+/** only ever send the browser back into the teacher portal */
+function backPath(fd: FormData, fallback: string) {
+  const raw = text(fd, "back");
+  return raw.startsWith("/teach/") ? raw : fallback;
 }
 
 /** the block must belong to a lesson this teacher owns */
@@ -105,6 +115,29 @@ function parseMcq(fd: FormData): McqPayload | null {
   return payload;
 }
 
+/* ── curriculum ────────────────────────────────────────────────────────── */
+
+export async function createModuleAction(formData: FormData) {
+  const v = await viewer();
+  if (!isStaff(v)) redirect("/login");
+  const staff = v as Viewer;
+
+  const name = text(formData, "name");
+  const trackId = text(formData, "trackId");
+  const mode = text(formData, "mode");
+  const copyFrom = mode === "copy" ? text(formData, "copyFrom") || null : null;
+
+  const created = await createModule({ name, trackId, copyFrom });
+  if (!created.ok) {
+    redirect("/teach/new?error=" + encodeURIComponent(created.error));
+  }
+
+  revalidatePath("/teach/curriculum");
+  revalidatePath("/teach/admin");
+  revalidatePath("/teach/new");
+  redirect("/teach/curriculum?c=" + encodeURIComponent(created.id));
+}
+
 /* ── lessons ───────────────────────────────────────────────────────────── */
 
 export async function createLessonAction(formData: FormData) {
@@ -114,6 +147,7 @@ export async function createLessonAction(formData: FormData) {
 
   const moduleId = text(formData, "moduleId");
   if (!moduleId) return;
+  const back = backPath(formData, `/teach/curriculum?c=${moduleId}`);
 
   const created = await createLesson(staff, moduleId, {
     title: text(formData, "title"),
@@ -121,11 +155,11 @@ export async function createLessonAction(formData: FormData) {
     minutes: Math.min(8, Math.max(2, whole(formData, "minutes", 4))),
   });
   if (!created.ok) {
-    redirect("/teach/curriculum/" + moduleId + "?error=" + encodeURIComponent(created.error));
+    redirect(withParam(back, "error", created.error));
   }
 
-  revalidate(moduleId, created.id);
-  redirect(`/teach/curriculum/${moduleId}/${created.id}`);
+  revalidate();
+  redirect(withParam(back, "l", created.id));
 }
 
 export async function updateLessonAction(formData: FormData) {
@@ -140,15 +174,22 @@ export async function updateLessonAction(formData: FormData) {
   if (!lesson) return;
   if (!(await ownLesson(staff, lessonId))) return;
 
+  const patch: { title?: string; summary?: string; minutes?: number; status?: string } = {};
+  if (formData.has("title")) {
+    const title = text(formData, "title");
+    if (title.length >= 3) patch.title = title;
+  }
+  if (formData.has("summary")) patch.summary = text(formData, "summary");
+  if (formData.has("minutes")) {
+    patch.minutes = Math.min(8, Math.max(2, whole(formData, "minutes", 4)));
+  }
   const status = text(formData, "status");
-  await updateLesson(lessonId, {
-    title: text(formData, "title") || undefined,
-    summary: text(formData, "summary"),
-    minutes: Math.min(8, Math.max(2, whole(formData, "minutes", 4))),
-    status: status === "published" || status === "archived" ? status : "draft",
-  });
+  if (status === "published" || status === "draft" || status === "archived") {
+    patch.status = status;
+  }
 
-  revalidate(lesson.module_id, lessonId);
+  await updateLesson(lessonId, patch);
+  revalidate();
 }
 
 export async function deleteLessonAction(formData: FormData) {
@@ -164,8 +205,8 @@ export async function deleteLessonAction(formData: FormData) {
   if (!(await ownLesson(staff, lessonId))) return;
 
   await deleteLesson(lessonId);
-  revalidate(lesson.module_id, lessonId);
-  redirect(`/teach/curriculum/${lesson.module_id}`);
+  revalidate();
+  redirect(`/teach/curriculum?c=${encodeURIComponent(lesson.module_id)}`);
 }
 
 export async function setStatusAction(formData: FormData) {
@@ -183,7 +224,7 @@ export async function setStatusAction(formData: FormData) {
   const status = text(formData, "status") === "published" ? "published" : "draft";
   await updateLesson(lessonId, { status });
 
-  revalidate(lesson.module_id, lessonId);
+  revalidate();
 }
 
 /* ── blocks ────────────────────────────────────────────────────────────── */
@@ -194,15 +235,29 @@ export async function addProseAction(formData: FormData) {
   const staff = v as Viewer;
 
   const lessonId = text(formData, "lessonId");
+  const type = text(formData, "type");
   const md = text(formData, "md");
-  if (!lessonId || !md) return;
+  if (!lessonId) return;
 
   const lesson = await lessonRecord(lessonId);
   if (!lesson) return;
   if (!(await ownLesson(staff, lessonId))) return;
 
-  await addBlock(lessonId, "prose", { md });
-  revalidate(lesson.module_id, lessonId);
+  const back = backPath(formData, `/teach/curriculum?c=${lesson.module_id}&l=${lessonId}`);
+  if (!md) redirect(withParam(back, "error", "Write the block first."));
+
+  if (type === "table") {
+    const lines = md.split("\n").map((line) => line.trim()).filter(Boolean);
+    const piped = lines.length >= 2 && lines.every((line) => line.startsWith("|") && line.endsWith("|"));
+    if (!piped) {
+      redirect(withParam(back, "error", "A table needs two or more rows, each wrapped in | pipes |."));
+    }
+  }
+
+  const kind = type === "callout" ? "callout" : "prose";
+  const id = await insertNoteBlock(lessonId, kind, md);
+  revalidate();
+  redirect(id ? withParam(back, "b", id) : back);
 }
 
 export async function addMcqAction(formData: FormData) {
@@ -218,8 +273,10 @@ export async function addMcqAction(formData: FormData) {
   if (!lesson) return;
   if (!(await ownLesson(staff, lessonId))) return;
 
-  await addBlock(lessonId, "mcq", payload);
-  revalidate(lesson.module_id, lessonId);
+  const back = backPath(formData, `/teach/questions?c=${lesson.module_id}&l=${lessonId}`);
+  const id = await addBlock(lessonId, "mcq", payload);
+  revalidate();
+  redirect(withParam(back, "q", id));
 }
 
 export async function updateBlockAction(formData: FormData) {
@@ -245,7 +302,7 @@ export async function updateBlockAction(formData: FormData) {
     await updateBlock(blockId, { md });
   }
 
-  revalidate(lesson.module_id, lessonId);
+  revalidate();
 }
 
 export async function deleteBlockAction(formData: FormData) {
@@ -262,7 +319,7 @@ export async function deleteBlockAction(formData: FormData) {
   if (!lesson) return;
 
   await deleteBlock(blockId);
-  revalidate(lesson.module_id, lessonId);
+  revalidate();
 }
 
 export async function moveBlockAction(formData: FormData) {
@@ -279,5 +336,5 @@ export async function moveBlockAction(formData: FormData) {
   if (!lesson) return;
 
   await moveBlock(blockId, text(formData, "dir") === "-1" ? -1 : 1);
-  revalidate(lesson.module_id, lessonId);
+  revalidate();
 }
