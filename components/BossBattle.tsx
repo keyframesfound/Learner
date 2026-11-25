@@ -345,7 +345,7 @@ export default function BossBattle({ code }: { code: string }) {
         <div className="vb-status vb-status-party">
           <div className="vb-row">
             <span className="vb-name">You · {hero.name}</span>
-            <span className="vb-level">{seats} seats</span>
+            <span className="vb-level">{seats} {seats === 1 ? "seat" : "seats"}</span>
           </div>
           <div className="vb-hpline">
             <span className="vb-tag">♥</span>
