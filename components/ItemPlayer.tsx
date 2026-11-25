@@ -123,7 +123,8 @@ export default function ItemPlayer({
   };
 
   return (
-    <>
+    <div className="lesson-screen">
+      <>
       <div className="lbar">
         <Link href="/drill" className="linkish" aria-label="Leave lesson">✕</Link>
         <span className="pbar">
@@ -171,6 +172,7 @@ export default function ItemPlayer({
           </button>
         </div>
       )}
-    </>
+      </>
+    </div>
   );
 }
