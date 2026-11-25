@@ -669,7 +669,7 @@
         <p class="say" id="bbSay"></p>
       </div>
       <div class="answers" id="bbAnswers"></div>
-      <div class="hint">Tap an answer · 3 in a row = critical hit</div>
+      <div class="hint" id="bbHint">Tap an answer · 3 in a row = critical hit</div>
     </div>
   </section>
 
@@ -968,7 +968,7 @@
       $("bbTimeBar").style.width = (100 * left / ROUND_MS) + "%";
       $("bbTimeBar").style.background = left <= 10000 ? "var(--orange)" : "var(--lime)";
       $("bbClock").textContent = "0:" + String(Math.ceil(left / 1000)).padStart(2, "0");
-      if (left <= 0) { clearInterval(ticker); resolve(false, "timeout"); }
+      if (left <= 0) { clearInterval(ticker); timeUp(); }
     }, 100);
   }
 
@@ -978,7 +978,7 @@
     remotes = [];
     S.party.forEach(function (p, i) {
       if (i === YOU || p.lives <= 0) return;
-      var at = 3000 + Math.random() * (ROUND_MS - 8000);
+      var at = 2500 + Math.random() * 12000;
       remotes.push(setTimeout(function () { remoteTurn(i); }, at));
     });
   }
@@ -1001,7 +1001,8 @@
       sticker("-1", "#FF4D1C", "party");
     }
     paint();
-    if (S.boss <= 0) end(true);
+    if (S.boss <= 0) return end(true);
+    if (allDown()) return end(false);
   }
 
   async function resolve(correct, how) {
@@ -1044,18 +1045,53 @@
     }
 
     await wait(1050);
+    advance();
+  }
+
+  function allDown() {
+    return S.party.every(function (p) { return p.lives <= 0; });
+  }
+
+  function advance() {
+    S.locked = true;
+    clearInterval(ticker);
+    remotes.forEach(clearTimeout);
+    remotes = [];
+    if (!S) return;
     if (S.boss <= 0) return end(true);
-    if (me.lives <= 0) return end(false);
+    if (allDown()) return end(false);
     S.round++;
     next();
   }
 
+  /* out of lives is a seat on the bench, not the end of the raid */
+  function spectate() {
+    var up = S.party.filter(function (p) { return p.lives > 0; }).length;
+    $("bbQmeta").innerHTML = "Spectating · " + up + " of 5 still up";
+    say("You are out. The party fights on without you.", "");
+    $("bbAnswers").innerHTML = "";
+    $("bbHint").textContent = "The party is still fighting · you are watching";
+    S.locked = false;
+    S.deadline = Date.now() + ROUND_MS;
+    paint();
+    startClock();
+    scheduleRemotes();
+  }
+
+  function timeUp() {
+    if (!S || S.locked) return;
+    if (S.party[YOU].lives <= 0) return advance();
+    resolve(false, "timeout");
+  }
+
   function next() {
+    if (S.party[YOU].lives <= 0) return spectate();
     if (!S.deck.length) S.deck = shuffle(BANK);
     var raw = S.deck.pop(), order = shuffle([0, 1, 2, 3]);
     S.cur = { t: raw.t, q: raw.q, a: order.map(function (i) { return raw.a[i]; }), c: order.indexOf(raw.c) };
 
     $("bbQmeta").innerHTML = '<span class="t">' + raw.t + "</span> · you are " + HEROES[YOU].name;
+    $("bbHint").textContent = "Tap an answer · 3 in a row = critical hit";
     $("bbSay").innerHTML = raw.q;
 
     var box = $("bbAnswers");
