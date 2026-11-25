@@ -29,6 +29,8 @@ const TABS = [
 export default function TabBar({ badge = 0 }: { badge?: number }) {
   const path = usePathname() ?? "/";
   if (path.endsWith("/login")) return null;
+  /* the teacher portal brings its own rail */
+  if (path.startsWith("/teach")) return null;
   const active = (href: string) =>
     href === "/" ? path === "/" : path === href || path.startsWith(href + "/") || (href === "/drill" && path.startsWith("/drill"));
 
