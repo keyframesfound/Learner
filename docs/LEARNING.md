@@ -41,6 +41,22 @@ Rules:
 - Rungs 3-4 are where DSE marks live — Paper 1 Section B and Paper 2 are construct
   tasks. But they are the reward, not the entry point.
 
+### What the student sees
+
+Rungs are how we build the ladder. They are not vocabulary we put on screen — a
+Secondary 4 student does not think "I am at recall", they think "I know this" or
+"I don't". The interface shows familiarity, derived from attempts and stability:
+
+| Label | Means | Derived from |
+|---|---|---|
+| new | never attempted | no attempts on any item in the lesson |
+| shaky | tried, still wrong | recent attempts mostly incorrect |
+| familiar | gets it right on cue | correct more often than not, short stability |
+| solid | gets it right cold | long stability, or reached apply and passed |
+
+The ladder lives in the data and in the item mix. The label lives in the row, one
+word, so the eye can sort a lesson list without reading numbers.
+
 ## 3. The lesson template (productive failure)
 
 Generated failure beats clean explanation. The standard shape of every lesson:
