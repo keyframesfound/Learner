@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — refined</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F5EF;
+    --ink:#17181A;
+    --rule:#DCD7CA;
+    --chalk:#6C6C64;
+    --faint:#9C9C93;
+    --mark:#E8FF6B;
+    --red:#B33225;
+    --blue:#2F4FBF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;background:#E9E7E1;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+    padding:26px 16px;color:var(--ink);
+  }
+  :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+  .switcher{display:flex;gap:18px;padding:4px}
+  .switcher button{
+    font-family:inherit;font-size:13px;font-weight:500;background:none;border:0;
+    color:#8A8A82;padding:6px 2px;cursor:pointer;border-bottom:2px solid transparent;
+  }
+  .switcher button.on{color:var(--ink);font-weight:700;border-bottom-color:var(--ink)}
+  .caption{font-size:11.5px;color:#8A8A82}
+  .caption a{color:#5F5F58;text-decoration:none;border-bottom:1px solid #C6C6BE}
+
+  .device{
+    position:relative;width:390px;height:844px;background:var(--paper);border-radius:28px;
+    box-shadow:0 26px 60px -32px rgba(20,20,26,.45),0 0 0 1px rgba(20,20,26,.10);overflow:hidden;
+  }
+  .statusbar{
+    height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;
+    font-size:12.5px;font-weight:500;color:var(--chalk);
+  }
+  .batt{width:16px;height:8px;border:1.5px solid var(--chalk);border-radius:2px}
+
+  .screen{position:absolute;inset:44px 0 0 0;display:none;flex-direction:column;overflow:hidden}
+  .screen.on{display:flex}
+  .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  /* highlighter: the one motif, used only on things the student did */
+  .mark{
+    background-image:linear-gradient(var(--mark),var(--mark));
+    background-repeat:no-repeat;background-size:100% 9px;
+    background-position:0 calc(100% - 1px);
+  }
+
+  /* ── learn ────────────────────────────────── */
+  .head{padding:14px 20px 0}
+  .head .crumb{font-size:12.5px;color:var(--chalk)}
+  .head h1{font-family:'Archivo Black',sans-serif;font-size:25px;line-height:1.1;
+    letter-spacing:-.4px;margin-top:6px}
+  .progress{display:flex;align-items:center;gap:12px;margin-top:14px}
+  .progress span{font-size:12.5px;color:var(--chalk);white-space:nowrap}
+  .progress .rail{flex:1;height:2px;background:var(--rule);position:relative}
+  .progress .rail b{position:absolute;inset:0 auto 0 0;background:var(--ink)}
+
+  .subjects{display:flex;gap:22px;padding:18px 20px 0;border-bottom:1px solid var(--rule);overflow-x:auto;scrollbar-width:none}
+  .subjects::-webkit-scrollbar{display:none}
+  .subjects button{
+    font-family:inherit;font-size:14px;font-weight:500;color:var(--chalk);background:none;
+    border:0;padding:0 0 11px;white-space:nowrap;cursor:pointer;
+  }
+  .subjects button.on{color:var(--ink);font-weight:700}
+  .subjects button.on span{
+    background-image:linear-gradient(var(--mark),var(--mark));
+    background-repeat:no-repeat;background-size:100% 9px;background-position:0 calc(100% - 1px);
+    padding:0 2px;
+  }
+
+  .lessons{list-style:none;padding:6px 0 0}
+  .lessons li{display:flex;align-items:center;gap:14px;padding:15px 20px;border-bottom:1px solid var(--rule)}
+  .lessons .n{width:16px;font-size:13px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .lessons .txt{flex:1;min-width:0}
+  .lessons .txt b{display:block;font-size:15px;font-weight:500;letter-spacing:-.1px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .lessons .txt span{font-size:12.5px;color:var(--faint)}
+  .lessons .tick{font-size:13px;color:var(--chalk)}
+  .lessons li.now{background:var(--ink);color:var(--paper);border-bottom-color:var(--ink)}
+  .lessons li.now .n,.lessons li.now .txt span{color:#8E8E88}
+  .lessons li.now .txt b{font-weight:700}
+  .lessons li.locked{color:var(--faint)}
+  .lessons li.locked .txt b{font-weight:400}
+
+  /* ── tab bar ──────────────────────────────── */
+  .tabs{
+    flex:0 0 auto;display:flex;border-top:1px solid var(--rule);padding:9px 0 20px;background:var(--paper);
+  }
+  .tabs button{
+    flex:1;display:grid;place-items:center;gap:4px;background:none;border:0;
+    font-family:inherit;font-size:10.5px;font-weight:500;color:var(--faint);cursor:pointer;
+  }
+  .tabs .ic{display:grid;place-items:center;width:46px;height:26px;border-radius:7px;transition:background .15s}
+  .tabs button.on{color:var(--ink)}
+  .tabs button.on .ic{background:rgba(0,0,0,.06);background:color-mix(in srgb,var(--tab) 20%,transparent)}
+  .tabs button.on svg{color:var(--tab)}
+  .tabs svg{width:20px;height:20px}
+
+  /* ── lesson ───────────────────────────────── */
+  .lbar{display:flex;align-items:center;gap:14px;padding:8px 20px 0}
+  .lbar .x{font-size:17px;color:var(--chalk);background:none;border:0;cursor:pointer;line-height:1;padding:2px}
+  .lbar .rail{flex:1;height:2px;background:var(--rule);position:relative}
+  .lbar .rail b{position:absolute;inset:0 auto 0 0;background:var(--ink)}
+  .lbar .count{font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+
+  .body{padding:26px 20px 0}
+  .kicker{font-size:12.5px;color:var(--red);font-weight:500}
+  .q{font-family:'Archivo Black',sans-serif;font-size:28px;line-height:1.14;letter-spacing:-.6px;margin-top:8px}
+
+  .code{
+    margin-top:20px;padding:13px 15px;background:#FCFBF6;border:1px solid var(--rule);border-radius:5px;
+    font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.95;color:#2A2A2E;
+    white-space:pre;overflow-x:auto;
+  }
+  .code .ln{color:#C3C3BA;user-select:none;display:inline-block;width:16px}
+  .code .kw{color:var(--blue)}
+  .code .num{color:#B45309}
+
+  .opts{margin-top:8px}
+  .opt{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;font-family:inherit;
+    font-size:15px;font-weight:500;color:var(--ink);background:none;border:0;
+    border-bottom:1px solid var(--rule);padding:15px 0;cursor:pointer;
+  }
+  .opt .k{width:16px;font-size:12px;color:var(--faint)}
+  .opt .t{flex:1}
+  .opt .res{font-size:13px;opacity:0}
+  .opt.sel .t{
+    background-image:linear-gradient(var(--mark),var(--mark));
+    background-repeat:no-repeat;background-size:100% 10px;background-position:0 calc(100% - 1px);
+  }
+  .opt.good .t{
+    background-image:linear-gradient(var(--mark),var(--mark));
+    background-repeat:no-repeat;background-size:100% 10px;background-position:0 calc(100% - 1px);
+  }
+  .opt.good .res{opacity:1;color:var(--ink)}
+  .opt.bad{color:var(--red)}
+  .opt.bad .k{color:var(--red)}
+  .opt.bad .res{opacity:1;color:var(--red)}
+  .opt:disabled{cursor:default}
+
+  /* ── verdict ──────────────────────────────── */
+  .verdict{margin-top:auto;flex:0 0 auto;padding:16px 20px 26px;border-top:1px solid var(--rule)}
+  .verdict.lit{border-top-color:var(--ink)}
+  .vtext{display:none;font-size:14px;line-height:1.55;color:var(--chalk);margin-bottom:14px}
+  .vtext.show{display:block}
+  .vtext b{color:var(--ink);font-weight:700}
+  .vtext.bad b{color:var(--red)}
+  .cta{
+    width:100%;height:52px;border:0;border-radius:6px;background:var(--ink);color:var(--paper);
+    font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;
+    transition:transform .09s,opacity .15s;
+  }
+  .cta:active{transform:translateY(1px)}
+  .cta[disabled]{background:#E4E1D6;color:#A8A69B;cursor:not-allowed}
+  .cta[disabled]:active{transform:none}
+
+  /* ── board ────────────────────────────────── */
+  .bhead{padding:14px 20px 0}
+  .bhead h1{font-family:'Archivo Black',sans-serif;font-size:25px;letter-spacing:-.4px;line-height:1.1}
+  .bhead p{font-size:12.5px;color:var(--chalk);margin-top:5px}
+
+  .podium{display:flex;align-items:flex-end;gap:2px;padding:22px 20px 0;border-bottom:1px solid var(--ink)}
+  .p{flex:1;display:flex;flex-direction:column;align-items:center;padding:0 2px 11px;text-align:center}
+  .p .num{font-family:'Archivo Black',sans-serif;font-size:26px;line-height:1;color:var(--chalk)}
+  .p .nm{font-size:12px;font-weight:500;margin-top:7px;max-width:100%;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .p .val{font-size:11px;color:var(--faint);margin-top:2px;font-variant-numeric:tabular-nums}
+  .p.p1{padding-bottom:20px}
+  .p.p1 .num{font-size:38px;color:var(--ink)}
+  .p.p1 .nm{font-weight:700}
+  .p.p2 .num,.p.p3 .num{font-size:22px}
+
+  .me{margin:22px 20px 0;background:var(--ink);color:var(--paper);border-radius:7px;padding:14px 16px}
+  .mehead{display:flex;align-items:baseline;gap:10px}
+  .mehead .r{font-size:12px;color:#8E8E88}
+  .mehead .who{flex:1;font-size:15px;font-weight:700}
+  .mehead .v{font-family:'Archivo Black',sans-serif;font-size:20px}
+  .rail{margin-top:11px;height:3px;background:#3A3B3E;border-radius:99px;overflow:hidden}
+  .rail b{display:block;height:100%;background:var(--mark);border-radius:99px}
+  .gap{margin-top:9px;font-size:12px;color:#A9A9A3}
+  .gap b{color:var(--paper)}
+
+  .rest{list-style:none;padding:12px 20px 0}
+  .rest li{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule)}
+  .rest .r{width:16px;font-size:12px;color:var(--faint);font-variant-numeric:tabular-nums}
+  .rest .nm{flex:1;font-size:14px}
+  .rest .v{font-size:12.5px;color:var(--chalk);font-variant-numeric:tabular-nums}
+
+  .foot{padding:16px 20px 0;font-size:12px;line-height:1.55;color:var(--faint)}
+</style>
+</head>
+<body>
+
+<div class="switcher">
+  <button data-go="learn" class="on">Learn</button>
+  <button data-go="lesson">Lesson</button>
+  <button data-go="board">Board</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+
+  <!-- ─── LEARN ─── -->
+  <section class="screen on" id="s-learn">
+    <div class="scroll">
+      <div class="head">
+        <div class="crumb">Information and Communication Technology</div>
+        <h1>Algorithm and Programming</h1>
+        <div class="progress">
+          <span>5 of 14 lessons</span>
+          <div class="rail"><b style="width:36%"></b></div>
+        </div>
+      </div>
+
+      <nav class="subjects">
+        <button class="on"><span>ICT</span></button>
+        <button><span>Physics</span></button>
+        <button><span>Biology</span></button>
+        <button><span>Chemistry</span></button>
+        <button><span>Geography</span></button>
+      </nav>
+
+      <ol class="lessons">
+        <li><span class="n">1</span><div class="txt"><b>What a name is</b><span>5 items</span></div><span class="tick">✓</span></li>
+        <li><span class="n">2</span><div class="txt"><b>Assignment and rebinding</b><span>6 items</span></div><span class="tick">✓</span></li>
+        <li class="now" data-go="lesson"><span class="n">3</span><div class="txt"><b>Valid identifiers</b><span>6 items, about 4 minutes</span></div><span class="tick">→</span></li>
+        <li class="locked"><span class="n">4</span><div class="txt"><b>Types and conversion</b><span>After lesson 3</span></div></li>
+        <li class="locked"><span class="n">5</span><div class="txt"><b>Indexing a list</b><span>Locked</span></div></li>
+      </ol>
+    </div>
+
+    <nav class="tabs">
+      <button class="on" style="--tab:#2F4FBF"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg></span>Learn</button>
+      <button style="--tab:#C2410C"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg></span>Drills</button>
+      <button style="--tab:#6D28D9"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3"/></svg></span>Board</button>
+      <button style="--tab:#0F766E"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="9" r="3.4"/><path d="M5.5 19.5c1.5-3 3.8-4.5 6.5-4.5s5 1.5 6.5 4.5"/></svg></span>Me</button>
+    </nav>
+  </section>
+
+  <!-- ─── LESSON ─── -->
+  <section class="screen" id="s-lesson">
+    <div class="lbar">
+      <button class="x" data-go="learn">✕</button>
+      <div class="rail"><b style="width:66%"></b></div>
+      <span class="count">4 of 6</span>
+    </div>
+
+    <div class="body">
+      <p class="kicker">Hard</p>
+      <h2 class="q">Which name is valid Python?</h2>
+
+      <div class="code"><span class="ln">1</span>items = [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+<span class="ln">2</span><span class="kw">print</span>(items[<span class="num">2</span>])</div>
+
+      <div class="opts">
+        <button class="opt" data-id="a"><span class="k">A</span><span class="t">2cool</span><span class="res">✕</span></button>
+        <button class="opt" data-id="b"><span class="k">B</span><span class="t">cool_2</span><span class="res">✓</span></button>
+        <button class="opt" data-id="c"><span class="k">C</span><span class="t">cool-2</span><span class="res">✕</span></button>
+      </div>
+    </div>
+
+    <div class="verdict" id="verdict">
+      <p class="vtext" id="vtext"></p>
+      <button class="cta" id="cta" disabled>Check</button>
+    </div>
+  </section>
+
+  <!-- ─── BOARD ─── -->
+  <section class="screen" id="s-board">
+    <div class="scroll">
+      <div class="bhead">
+        <h1>Today</h1>
+        <p>Class 4B. 14 of 18 did a session.</p>
+      </div>
+
+      <div class="podium">
+        <div class="p p2"><span class="num">2</span><span class="nm">Chan Ka Ho</span><span class="val">35</span></div>
+        <div class="p p1"><span class="num">1</span><span class="nm">Mei Lam</span><span class="val">38</span></div>
+        <div class="p p3"><span class="num">3</span><span class="nm">Wong Tsz Yan</span><span class="val">31</span></div>
+      </div>
+
+      <div class="me">
+        <div class="mehead">
+          <span class="r">11th</span>
+          <span class="who">You</span>
+          <span class="v">22</span>
+        </div>
+        <div class="rail"><b style="width:58%"></b></div>
+        <div class="gap">6 items to pass <b>Lam Ho Yin</b></div>
+      </div>
+
+      <ol class="rest">
+        <li><span class="r">4</span><span class="nm">Lam Ho Yin</span><span class="v">29</span></li>
+        <li><span class="r">5</span><span class="nm">Ng Sum Yuet</span><span class="v">27</span></li>
+        <li><span class="r">6</span><span class="nm">Ho Wai Ching</span><span class="v">26</span></li>
+      </ol>
+
+      <p class="foot">Ranked by items faced. A wrong answer still counts towards the ranking.</p>
+    </div>
+
+    <nav class="tabs">
+      <button style="--tab:#2F4FBF"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg></span>Learn</button>
+      <button style="--tab:#C2410C"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg></span>Drills</button>
+      <button class="on" style="--tab:#6D28D9"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3"/></svg></span>Board</button>
+      <button style="--tab:#0F766E"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="9" r="3.4"/><path d="M5.5 19.5c1.5-3 3.8-4.5 6.5-4.5s5 1.5 6.5 4.5"/></svg></span>Me</button>
+    </nav>
+  </section>
+</div>
+
+<p class="caption">Learner · refined · <a href="demo2.html">compare with the previous</a></p>
+
+<script>
+(function () {
+  var screens = document.querySelectorAll('.screen');
+  var top = document.querySelectorAll('.switcher button');
+  function go(id) {
+    screens.forEach(function (s) { s.classList.toggle('on', s.id === 's-' + id); });
+    top.forEach(function (t) { t.classList.toggle('on', t.dataset.go === id); });
+    if (id === 'lesson') reset();
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-go]');
+    if (el) go(el.dataset.go);
+  });
+
+  var state = 'idle', picked = null;
+  var opts = document.querySelectorAll('.opt');
+  var cta = document.getElementById('cta');
+  var verdict = document.getElementById('verdict');
+  var vtext = document.getElementById('vtext');
+
+  opts.forEach(function (o) {
+    o.addEventListener('click', function () {
+      if (state !== 'idle') return;
+      opts.forEach(function (x) { x.classList.remove('sel'); });
+      o.classList.add('sel');
+      picked = o.dataset.id;
+      cta.disabled = false;
+    });
+  });
+
+  function reset() {
+    state = 'idle'; picked = null;
+    opts.forEach(function (x) { x.classList.remove('sel', 'good', 'bad'); });
+    cta.disabled = true; cta.textContent = 'Check';
+    verdict.classList.remove('lit');
+    vtext.className = 'vtext'; vtext.innerHTML = '';
+  }
+
+  cta.addEventListener('click', function () {
+    if (state === 'idle') {
+      state = 'answered';
+      var ok = picked === 'b';
+      opts.forEach(function (x) {
+        x.disabled = true;
+        if (x.dataset.id === 'b') { x.classList.add('good'); x.classList.remove('sel'); }
+        if (x.dataset.id === picked && !ok) { x.classList.add('bad'); x.classList.remove('sel'); }
+      });
+      verdict.classList.add('lit');
+      vtext.className = 'vtext show' + (ok ? '' : ' bad');
+      vtext.innerHTML = ok
+        ? '<b>Correct.</b> items[2] is the third element, which is 3.'
+        : '<b>Not quite.</b> The list runs 0, 1, 2, so items[2] is 3.';
+      cta.textContent = 'Continue';
+      return;
+    }
+    reset();
+  });
+})();
+</script>
+</body>
+</html>
