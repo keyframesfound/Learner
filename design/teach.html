@@ -141,6 +141,31 @@
   .efoot .dot{width:7px;height:7px;border-radius:99px;background:var(--lime);
     border:2px solid var(--ink)}
 
+
+  .seg{display:flex;border:3px solid var(--ink);border-radius:8px;overflow:hidden;background:#fff;
+    box-shadow:2px 2px 0 var(--line);margin-left:6px}
+  .seg a{padding:5px 13px;font-size:12px;font-weight:700;text-decoration:none;color:var(--ink-2)}
+  .seg a.on{background:var(--ink);color:var(--paper)}
+  .div{width:3px;height:26px;background:var(--line);margin:0 4px 0 10px}
+
+  .cwrap{flex:1;min-height:0;display:grid;grid-template-columns:1fr 372px;gap:16px}
+  .newc{align-self:start;border:3px solid var(--ink);border-radius:10px;background:#fff;padding:14px;
+    display:flex;flex-direction:column;gap:9px;box-shadow:5px 5px 0 var(--lime)}
+  .newc .lbl{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.7px;color:var(--ink-3)}
+  .newc .fl{font-size:11.5px;font-weight:700;color:var(--ink-2)}
+  .newc .hint{font-size:11px;line-height:1.55;color:var(--ink-3)}
+  .sel{display:flex;align-items:center;justify-content:space-between;border:2px solid var(--line);
+    border-radius:6px;padding:8px 10px;font-size:12.5px;font-weight:700;background:#FCFBF6}
+  .sel i{font-style:normal;color:var(--ink-3);font-family:'JetBrains Mono',monospace;font-size:10px}
+  .crow{cursor:pointer}
+  .crow:hover{background:#FBFAF5}
+  .arrow{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--ink-3);text-align:right}
+  .back{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.4px;
+    text-decoration:none;color:var(--ink-3)}
+  .cchip{display:inline-flex;align-items:center;gap:6px;border:3px solid var(--ink);border-radius:999px;
+    background:var(--lime);padding:3px 10px;font-size:11.5px;font-weight:700}
+
   /* ── questions ────────────────────────────── */
   .qwrap{flex:1;min-height:0;display:grid;grid-template-columns:1fr 424px;gap:16px}
   .qlist{display:flex;flex-direction:column;min-height:0}
@@ -217,9 +242,10 @@
 <body>
 
 <div class="switcher">
-  <a href="#notes">Notes</a>
+  <a href="#curriculum">Curriculum</a>
   <a href="#questions">Questions</a>
-  <a href="#students">Students</a>
+  <a href="#classes">Classes</a>
+  <a href="#class">One class</a>
   <a href="#admin">Admin</a>
 </div>
 
@@ -229,23 +255,19 @@
     <div class="brand"><b>Learner</b><i>Teacher</i></div>
 
     <div class="course">
-      <i>Your course</i>
+      <i>Editing</i>
       <b>F4 Geography</b>
-      <span>32 students · 6 chapters</span>
+      <span>6 chapters · 96 questions</span>
     </div>
 
     <nav class="nav" id="nav">
-      <a href="#notes" data-s="notes" style="--c:var(--lime)">
+      <a href="#curriculum" data-s="curriculum" style="--c:var(--lime)">
         <svg viewBox="0 0 24 24"><path d="M5 4.5h9l5 5v10H5z"/><path d="M14 4.5v5h5M8 14h7M8 17h4"/></svg>
-        Notes <span class="n">14</span>
+        Curriculum <span class="n">6</span>
       </a>
-      <a href="#questions" data-s="questions" style="--c:var(--orange)">
-        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12l2.5 2.5L16 9"/></svg>
-        Questions <span class="n">96</span>
-      </a>
-      <a href="#students" data-s="students" style="--c:var(--blue)">
+      <a href="#classes" data-s="classes" style="--c:var(--blue)">
         <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"/><path d="M3.4 20c1.2-3.2 3.1-4.8 5.6-4.8s4.4 1.6 5.6 4.8"/><path d="M16 6.4a3 3 0 0 1 0 5.6M17.4 15.6c1.7.5 2.9 2 3.6 4.4"/></svg>
-        Students <span class="n">32</span>
+        Classes <span class="n">3</span>
       </a>
       <a href="#admin" data-s="admin" style="--c:var(--gold)">
         <svg viewBox="0 0 24 24"><path d="M4 6.5h9M17 6.5h3M4 12h3M11 12h9M4 17.5h7M15 17.5h5"/><circle cx="15" cy="6.5" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="13" cy="17.5" r="2"/></svg>
@@ -262,13 +284,15 @@
   <div class="main">
 
     <!-- ── notes ───────────────────────────── -->
-    <section class="screen on" id="notes">
+    <section class="screen on" id="curriculum">
       <div class="topstrip">
-        <button class="fchip on">F4 Geography <span class="c">32</span></button>
-        <button class="fchip">F5 Geography <span class="c">28</span></button>
+        <button class="fchip on">F4 Geography <span class="c">2 classes</span></button>
+        <button class="fchip">F5 Geography <span class="c">1 class</span></button>
+        <span class="div"></span>
+        <div class="seg"><a href="#curriculum" class="on">Notes</a><a href="#questions">Questions</a></div>
         <span class="spacer"></span>
         <span class="autosave">Saved 2 min ago</span>
-        <button class="b" style="margin-left:12px">Publish chapter</button>
+        <button class="b" style="margin-left:12px">Publish</button>
       </div>
 
       <div class="body">
@@ -330,8 +354,10 @@
     <!-- ── questions ───────────────────────── -->
     <section class="screen" id="questions">
       <div class="topstrip">
-        <button class="fchip on">F4 Geography <span class="c">32</span></button>
-        <button class="fchip">F5 Geography <span class="c">28</span></button>
+        <button class="fchip on">F4 Geography <span class="c">2 classes</span></button>
+        <button class="fchip">F5 Geography <span class="c">1 class</span></button>
+        <span class="div"></span>
+        <div class="seg"><a href="#curriculum">Notes</a><a href="#questions" class="on">Questions</a></div>
         <span class="spacer"></span>
         <span class="autosave">Weather and climate · 14 items</span>
         <button class="b" style="margin-left:12px">New item</button>
@@ -430,22 +456,80 @@
       </div>
     </section>
 
-    <!-- ── students ────────────────────────── -->
-    <section class="screen" id="students">
+    <!-- ── classes ─────────────────────────── -->
+    <section class="screen" id="classes">
       <div class="topstrip">
-        <button class="fchip on">F4 Geography <span class="c">32</span></button>
-        <button class="fchip">F5 Geography <span class="c">28</span></button>
+        <span class="autosave">3 classes · 95 students</span>
         <span class="spacer"></span>
-        <span class="autosave">sorted by name</span>
-        <button class="b" style="margin-left:12px">Add student</button>
+        <button class="b">New class</button>
+      </div>
+
+      <div class="body">
+        <h1>Classes</h1>
+        <div class="sub">a class is a group of students · the curriculum is chosen when you create it</div>
+
+        <div class="cwrap" style="margin-top:16px">
+          <div>
+            <div class="bt">
+              <div class="r h" style="grid-template-columns:90px 1.4fr 110px 130px 130px 40px">
+                <div>Class</div><div>Curriculum</div><div>Students</div><div>Join code</div><div>Last active</div><div></div>
+              </div>
+              <div class="r crow" style="grid-template-columns:90px 1.4fr 110px 130px 130px 40px">
+                <div class="nm">4B</div><div><span class="cchip">F4 Geography</span></div>
+                <div class="mono">32</div><div class="mono">G7QX2M</div>
+                <div class="mono dim2">today</div><div class="arrow">→</div>
+              </div>
+              <div class="r crow" style="grid-template-columns:90px 1.4fr 110px 130px 130px 40px">
+                <div class="nm">4C</div><div><span class="cchip">F4 Geography</span></div>
+                <div class="mono">30</div><div class="mono">M3TP9D</div>
+                <div class="mono dim2">yesterday</div><div class="arrow">→</div>
+              </div>
+              <div class="r crow" style="grid-template-columns:90px 1.4fr 110px 130px 130px 40px">
+                <div class="nm">5A</div><div><span class="cchip">F5 Geography</span></div>
+                <div class="mono">28</div><div class="mono">B8HVR4</div>
+                <div class="mono dim2">today</div><div class="arrow">→</div>
+              </div>
+            </div>
+            <div class="qfoot"><span>4B and 4C share F4 Geography: editing it changes both</span></div>
+            <div class="note" style="margin-top:14px;max-width:620px;font-size:11.5px;line-height:1.6;color:var(--ink-3)">
+              A class holds students. A curriculum holds notes and questions. Changing a curriculum changes
+              every class sitting it, so a mid-term edit is a decision about two classes at once.
+            </div>
+          </div>
+
+          <div class="newc">
+            <div class="lbl">NEW CLASS</div>
+            <div class="fl">Class name</div>
+            <div class="fld">4D</div>
+            <div class="fl" style="margin-top:2px">Curriculum</div>
+            <div class="sel">F4 Geography <i>▾</i></div>
+            <div class="hint">Content lives in the curriculum, not the class. Two classes on the same curriculum share every note and question.</div>
+            <button class="b solid" style="margin-top:2px">Create class</button>
+            <div class="hint">A join code is generated when the class is created.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── one class ───────────────────────── -->
+    <section class="screen" id="class">
+      <div class="topstrip">
+        <a class="back" href="#classes">← Classes</a>
+        <span class="div"></span>
+        <span class="autosave">32 students · join code G7QX2M</span>
+        <span class="spacer"></span>
+        <button class="b">Add student</button>
         <button class="b" style="margin-left:8px">Import CSV</button>
       </div>
 
       <div class="body">
-        <div class="chead" style="margin-bottom:14px">
+        <div class="chead" style="margin-bottom:12px">
           <div>
-            <h1>F4 Geography <em>· 32 students</em></h1>
-            <div class="sub">you are the only teacher on this course</div>
+            <h1>4B</h1>
+            <div class="sub" style="display:flex;align-items:center;gap:14px;margin-top:9px">
+              <span class="cchip">F4 Geography</span>
+              <a class="rm" href="#curriculum">Open curriculum →</a>
+            </div>
           </div>
           <span class="spacer"></span>
           <div class="joincode"><span>Join code</span><b>G7QX2M</b><button class="b sm">Copy</button></div>
@@ -456,118 +540,118 @@
             <div>Student</div><div>Joined</div><div>Answered</div><div>Last active</div><div></div>
           </div>
 
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Chan Ka-yan</div>
-          <div class="mono dim2">2 Sep</div>
-          <div class="mono">86 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Cheung Ho-yin</div>
-          <div class="mono dim2">2 Sep</div>
-          <div class="mono">41 items</div>
-          <div class="mono hot">9 days</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Chu Hoi-yan</div>
-          <div class="mono dim2">3 Sep</div>
-          <div class="mono">79 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Fung Wai-lam</div>
-          <div class="mono dim2">3 Sep</div>
-          <div class="mono">92 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Ho Man-hei</div>
-          <div class="mono dim2">5 Sep</div>
-          <div class="mono">63 items</div>
-          <div class="mono dim2">yesterday</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Kwok Yat-long</div>
-          <div class="mono dim2">5 Sep</div>
-          <div class="mono">88 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Lam Hoi-ching</div>
-          <div class="mono dim2">8 Sep</div>
-          <div class="mono">52 items</div>
-          <div class="mono hot">8 days</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Lau Hiu-tung</div>
-          <div class="mono dim2">8 Sep</div>
-          <div class="mono">74 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Lee Wing-sze</div>
-          <div class="mono dim2">8 Sep</div>
-          <div class="mono">91 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Mak Cheuk-yiu</div>
-          <div class="mono dim2">11 Sep</div>
-          <div class="mono">84 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Ng Chun-kit</div>
-          <div class="mono dim2">11 Sep</div>
-          <div class="mono">61 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Poon Chi-hang</div>
-          <div class="mono dim2">12 Sep</div>
-          <div class="mono">94 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Sit Ka-woon</div>
-          <div class="mono dim2">12 Sep</div>
-          <div class="mono">81 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">So Tsz-wing</div>
-          <div class="mono dim2">15 Sep</div>
-          <div class="mono">69 items</div>
-          <div class="mono dim2">yesterday</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Tang Sze-ching</div>
-          <div class="mono dim2">15 Sep</div>
-          <div class="mono">76 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
-        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
-          <div class="nm">Tsang Yuen</div>
-          <div class="mono dim2">16 Sep</div>
-          <div class="mono">58 items</div>
-          <div class="mono dim2">today</div>
-          <div><a class="rm" href="#">Remove</a></div>
-        </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Chan Ka-yan</div>
+            <div class="mono dim2">2 Sep</div>
+            <div class="mono">86 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Cheung Ho-yin</div>
+            <div class="mono dim2">2 Sep</div>
+            <div class="mono">41 items</div>
+            <div class="mono hot">9 days</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Chu Hoi-yan</div>
+            <div class="mono dim2">3 Sep</div>
+            <div class="mono">79 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Fung Wai-lam</div>
+            <div class="mono dim2">3 Sep</div>
+            <div class="mono">92 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Ho Man-hei</div>
+            <div class="mono dim2">5 Sep</div>
+            <div class="mono">63 items</div>
+            <div class="mono dim2">yesterday</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Kwok Yat-long</div>
+            <div class="mono dim2">5 Sep</div>
+            <div class="mono">88 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Lam Hoi-ching</div>
+            <div class="mono dim2">8 Sep</div>
+            <div class="mono">52 items</div>
+            <div class="mono hot">8 days</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Lau Hiu-tung</div>
+            <div class="mono dim2">8 Sep</div>
+            <div class="mono">74 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Lee Wing-sze</div>
+            <div class="mono dim2">8 Sep</div>
+            <div class="mono">91 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Mak Cheuk-yiu</div>
+            <div class="mono dim2">11 Sep</div>
+            <div class="mono">84 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Ng Chun-kit</div>
+            <div class="mono dim2">11 Sep</div>
+            <div class="mono">61 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Poon Chi-hang</div>
+            <div class="mono dim2">12 Sep</div>
+            <div class="mono">94 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Sit Ka-woon</div>
+            <div class="mono dim2">12 Sep</div>
+            <div class="mono">81 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">So Tsz-wing</div>
+            <div class="mono dim2">15 Sep</div>
+            <div class="mono">69 items</div>
+            <div class="mono dim2">yesterday</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Tang Sze-ching</div>
+            <div class="mono dim2">15 Sep</div>
+            <div class="mono">76 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
+          <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div class="nm">Tsang Yuen</div>
+            <div class="mono dim2">16 Sep</div>
+            <div class="mono">58 items</div>
+            <div class="mono dim2">today</div>
+            <div><a class="rm" href="#">Remove</a></div>
+          </div>
         </div>
         <div class="qfoot"><span>16 of 32 shown</span><a class="rm" href="#">Show all</a></div>
       </div>
@@ -577,12 +661,12 @@
     <section class="screen" id="admin">
       <div class="body">
         <h1>Admin</h1>
-        <div class="sub">single school install · 3 teachers · 3 courses · 95 students</div>
+        <div class="sub">single school install · 3 teachers · 3 curricula · 3 classes · 95 students</div>
 
-        <div class="qfoot" style="padding:18px 4px 8px"><span>Courses</span><span>join codes are per course</span></div>
+        <div class="qfoot" style="padding:18px 4px 8px"><span>Curricula</span><span>owned by one teacher · shared by any number of classes</span></div>
         <div class="bt">
           <div class="r h" style="grid-template-columns:1.2fr 1fr 100px 100px 110px">
-            <div>Course</div><div>Teacher</div><div>Students</div><div>Chapters</div><div>State</div>
+            <div>Curriculum</div><div>Owner</div><div>Classes</div><div>Chapters</div><div>State</div>
           </div>
 
         <div class="r" style="grid-template-columns:1.2fr 1fr 100px 100px 110px">
@@ -605,7 +689,7 @@
         <div class="qfoot" style="padding:18px 4px 8px"><span>Teachers</span><span>role changes are logged</span></div>
         <div class="bt">
           <div class="r h" style="grid-template-columns:1.2fr 1.8fr 120px 110px">
-            <div>Name</div><div>Email</div><div>Role</div><div>Courses</div>
+            <div>Name</div><div>Email</div><div>Role</div><div>Curricula</div>
           </div>
 
         <div class="r" style="grid-template-columns:1.2fr 1.8fr 120px 110px">
@@ -653,10 +737,11 @@
 </div>
 
 <script>
-  const routes = ["notes", "questions", "students", "admin", "preview"];
-  const navFor = { notes: "notes", questions: "questions", students: "students", admin: "admin", preview: "notes" };
+  const routes = ["curriculum", "questions", "classes", "class", "admin", "preview"];
+  const navFor = { curriculum: "curriculum", questions: "curriculum", classes: "classes",
+                   class: "classes", admin: "admin", preview: "curriculum" };
   function show(id) {
-    if (!routes.includes(id)) id = "notes";
+    if (!routes.includes(id)) id = "curriculum";
     document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
     document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("on", a.dataset.s === navFor[id]));
     document.querySelectorAll(".switcher a").forEach(a =>
@@ -665,7 +750,7 @@
   addEventListener("hashchange", () => show(location.hash.slice(1)));
   document.querySelectorAll('a[href="#preview"], .b').forEach(el => {
     if (el.textContent.trim() === "Preview as student") el.addEventListener("click", () => { location.hash = "preview"; });
-    if (el.textContent.trim() === "Back to the editor") el.addEventListener("click", () => { location.hash = "notes"; });
+    if (el.textContent.trim() === "Back to the editor") el.addEventListener("click", () => { location.hash = "curriculum"; });
   });
   show(location.hash.slice(1));
 </script>
