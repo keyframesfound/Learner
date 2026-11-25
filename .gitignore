@@ -15,3 +15,5 @@ backups/
 .DS_Store
 .vercel
 *.tsbuildinfo
+*.apps.googleusercontent.com.json
+client_secret*.json

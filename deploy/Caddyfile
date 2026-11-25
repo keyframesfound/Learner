@@ -1,4 +1,4 @@
-{$SITE_ADDRESS:localhost} {
+{$SITE_ADDRESS:ai.ssc.edu.hk} {
 	encode zstd gzip
 
 	header {
@@ -10,5 +10,13 @@
 		-Server
 	}
 
-	reverse_proxy app:3000
+	# the app owns /learner and everything under it
+	handle /learner/* {
+		reverse_proxy app:3000
+	}
+
+	# everything else on this host goes to the app root, which redirects
+	handle {
+		redir /learner/ 302
+	}
 }
