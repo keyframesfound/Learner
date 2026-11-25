@@ -35,7 +35,7 @@
     text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:8px 14px;border-radius:6px;cursor:pointer;
   }
   .switcher button.on{background:var(--lime);color:var(--ink)}
-  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:#6E6E66;text-transform:uppercase}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4px;color:#6E6E66}
   .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
 
   .device{
@@ -60,13 +60,15 @@
     padding:12px 18px;border-bottom:3px solid var(--ink);
   }
   .hd .mod{
-    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
-    letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-2);
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;
+    letter-spacing:.1px;color:var(--ink-2);
   }
   .hd .streak{
-    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
-    background:var(--ink);color:var(--lime);padding:4px 8px;border-radius:4px;
+    display:inline-flex;align-items:center;gap:5px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1px;
+    background:var(--lime);color:var(--ink);padding:5px 9px;border-radius:4px;white-space:nowrap;
   }
+  .hd .streak svg{width:12px;height:12px}
 
   /* ── segmented progress ───────────────────── */
   .segs{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;padding:12px 18px}
@@ -119,7 +121,7 @@
   }
   .step .txt{flex:1;min-width:0}
   .step .txt b{display:block;font-size:15px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .step .txt span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.6px;color:var(--ink-3);text-transform:uppercase}
+  .step .txt span{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1px;color:var(--ink-3)}
   .step.done .no{background:var(--lime);border-color:var(--ink)}
   .step.now{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--orange)}
   .step.now .no{background:var(--orange);border-color:var(--orange);color:#fff}
@@ -313,7 +315,7 @@
 
     <div class="hd">
       <span class="mod">ICT · E2C</span>
-      <span class="streak">12 IN A ROW</span>
+      <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12 in a row</span>
     </div>
     <div class="segs">
       <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
@@ -347,17 +349,17 @@
     </div>
 
     <nav class="tabbar">
-      <button class="tab on" data-tab="path" data-go="path">
+      <button class="tab" data-tab="learn" data-go="path">
         <span class="pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg>
           <span class="lbl">Learn</span>
         </span>
       </button>
-      <button class="tab" data-tab="drills">
+      <button class="tab on" data-tab="drills">
         <span class="pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg>
           <span class="lbl">Drills</span>
-          <i class="badge">3</i>
+          <i class="badge">12</i>
         </span>
       </button>
       <button class="tab" data-tab="board" data-go="board">
@@ -436,7 +438,7 @@
     <p class="note">Ranked by <b>items faced</b>. A wrong answer still counts.</p>
 
     <nav class="tabbar">
-      <button class="tab" data-tab="path" data-go="path">
+      <button class="tab" data-tab="learn" data-go="path">
         <span class="pill">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg>
           <span class="lbl">Learn</span>
@@ -465,7 +467,7 @@
   </section>
 </div>
 
-<p class="caption">Learner · variant B · <a href="demo.html">compare with variant A</a></p>
+<p class="caption">Learner · drills · <a href="demo.html">compare with variant A</a></p>
 
 <script>
 (function () {
