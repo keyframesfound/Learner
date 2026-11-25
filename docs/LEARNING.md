@@ -49,17 +49,17 @@ Secondary 4 student does not think "I am at recall", they think "I know this" or
 
 One axis only: **how reliably you can produce it**, with no thinking time.
 
-| Label | Dot | Means | Derived from |
+| Label | Colour | Means | Derived from |
 |---|---|---|---|
-| new | grey `#8C8A80` | never attempted | no attempts on any item in the lesson |
+| new | grey `#6E6C63` | never attempted | no attempts on any item in the lesson |
 | shaky | red `#C4271B` | you get it some of the time | recent attempts mostly incorrect |
 | steady | blue `#2D5BFF` | you get it most times | correct more often than not, short stability |
-| automatic | green `#17A34A` | you don't have to think | long stability, or reached apply and passed |
+| automatic | dark green `#0F7A35` | you don't have to think | long stability, or reached apply and passed |
 
-The colour is a 7px dot before the word, never tinted text: at 10.5px, green or lime
-type on paper drops under 4.5:1 and the label becomes the hardest thing on the row to
-read. Dots stack into a colour column down the left of the list, which is what makes
-the page sortable at a glance.
+The word itself carries the colour, in shades picked to clear 4.5:1 on `#F2EFE6` —
+which is why `automatic` is `#0F7A35` and not the brighter `#17A34A` used for the
+Biology chip. At 10.5px, brand green on paper drops to 3.4:1 and the label becomes the
+hardest thing on the row to read.
 
 `automatic` is the top rather than `mastered` on purpose: fluency is retrieval that
 costs nothing, which is a property of the memory, not a grade a teacher gives. The
