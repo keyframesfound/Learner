@@ -11,6 +11,7 @@ type Props = {
   lessonTitle: string;
   nextSlug?: string;
   nextTitle?: string;
+  lessonNumber?: number;
 };
 
 const btnLink = {
@@ -26,9 +27,11 @@ export default function ItemPlayer({
   lessonTitle,
   nextSlug,
   nextTitle,
+  lessonNumber,
 }: Props) {
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
+  const [checked, setChecked] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [done, setDone] = useState(false);
   const start = useRef(0);
@@ -77,15 +80,21 @@ export default function ItemPlayer({
     );
   }
 
-  const answered = picked !== null;
   const correct = picked === item.answer;
   const last = i === items.length - 1;
+  const pct = Math.round(((i + 1) / items.length) * 100);
+  const step = String(lessonNumber ?? 1).padStart(2, "0");
 
-  const answer = (k: number) => {
-    if (picked !== null) return;
-    const ms = start.current > 0 ? Math.max(0, Math.round(performance.now() - start.current)) : 0;
-    const isCorrect = k === item.answer;
+  const pick = (k: number) => {
+    if (checked) return;
     setPicked(k);
+  };
+
+  const check = () => {
+    if (picked === null || checked) return;
+    const ms = start.current > 0 ? Math.max(0, Math.round(performance.now() - start.current)) : 0;
+    const isCorrect = picked === item.answer;
+    setChecked(true);
     if (isCorrect) setCorrectCount((n) => n + 1);
     void fetch("/learner/api/attempt", {
       method: "POST",
@@ -94,7 +103,7 @@ export default function ItemPlayer({
         blockId: item.id,
         lessonId,
         moduleId,
-        choice: k,
+        choice: picked,
         correct: isCorrect,
         ms,
       }),
@@ -109,17 +118,18 @@ export default function ItemPlayer({
     else {
       setI(i + 1);
       setPicked(null);
+      setChecked(false);
     }
   };
 
   return (
     <>
-      <div className="hd">
+      <div className="lbar">
         <Link href="/drill" className="linkish" aria-label="Leave lesson">✕</Link>
-        <div className="chip-track">
-          {items.map((it, k) => <span key={it.id} className={"tick" + (k <= i ? " on" : "")} />)}
-        </div>
-        <span className="mod">{i + 1} of {items.length}</span>
+        <span className="pbar">
+          <i style={{ width: `${pct}%` }} />
+        </span>
+        <span className="count">{step} · {i + 1} / {items.length}</span>
       </div>
 
       <span className="tag">{item.level}</span>
@@ -134,9 +144,11 @@ export default function ItemPlayer({
 
       <div className="opts">
         {item.options.map((o, k) => {
-          const state = !answered ? "" : k === item.answer ? " good" : k === picked ? " bad" : "";
+          const state = !checked
+            ? k === picked ? " sel" : ""
+            : k === item.answer ? " good" : k === picked ? " bad" : "";
           return (
-            <button key={k} className={"opt" + state} onClick={() => answer(k)}>
+            <button key={k} className={"opt" + state} onClick={() => pick(k)}>
               <span className="letter">{"ABCD"[k]}</span>
               <span style={{ fontFamily: o.code ? "var(--font-mono)" : undefined }}>{o.text}</span>
             </button>
@@ -144,12 +156,18 @@ export default function ItemPlayer({
         })}
       </div>
 
-      {answered && (
+      {checked ? (
         <div className={"band " + (correct ? "ok" : "bad")}>
           <b>{correct ? "Correct" : "Not quite"}</b>
           <p>{correct ? item.why : item.wrongWhy}</p>
           <button className="btn" onClick={next}>
             {last ? "Finish lesson" : "Continue"}
+          </button>
+        </div>
+      ) : (
+        <div className="band">
+          <button className="btn" onClick={check} disabled={picked === null}>
+            Check
           </button>
         </div>
       )}

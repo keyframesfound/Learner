@@ -11,9 +11,11 @@ export default async function ItemPage({ params }: { params: Promise<{ lesson: s
 
   let nextSlug: string | undefined;
   let nextTitle: string | undefined;
+  let lessonNumber: number | undefined;
   if (v) {
     const path = await getPath(v.id, lesson.module_id);
     const idx = path.lessons.findIndex((l) => l.slug === lesson.slug);
+    if (idx >= 0) lessonNumber = idx + 1;
     const next = idx >= 0 ? path.lessons[idx + 1] : undefined;
     if (next) {
       nextSlug = next.slug;
@@ -29,6 +31,7 @@ export default async function ItemPage({ params }: { params: Promise<{ lesson: s
       lessonTitle={lesson.title}
       nextSlug={nextSlug}
       nextTitle={nextTitle}
+      lessonNumber={lessonNumber}
     />
   );
 }

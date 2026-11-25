@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import type { PartyView } from "@/lib/party";
+import { BOSS_SVG } from "@/lib/sprites";
 
 const API = "/learner/api/party";
 const SEATS = 5;
@@ -303,84 +304,103 @@ export default function PartyGate() {
 
   const host = view.host;
   const inLobby = view.status === "lobby";
+  const me = view.players.find((p) => p.you) ?? view.players[0];
+  const others = view.players.filter((p) => p !== me);
   const open = Math.max(0, SEATS - view.players.length);
+  const friendsIn = Math.max(0, view.players.length - 1);
 
   return (
     <>
       <div className="hd">
-        <button className="linkish" onClick={leave} disabled={busy}>✕</button>
-        <span className="mod">Your party</span>
+        <button
+          className="linkish"
+          onClick={leave}
+          disabled={busy}
+          aria-label="Leave party"
+          style={{ fontSize: 18, fontWeight: 700, lineHeight: 1 }}
+        >
+          ✕
+        </button>
+        <span className="mod">Party · E2C</span>
         <span className="mod dim">{view.players.length} of {SEATS}</span>
       </div>
 
-      <div className="lobby-code">
+      <div className="preview">
+        <div dangerouslySetInnerHTML={{ __html: BOSS_SVG }} />
         <div>
-          <div className="mono" style={{ fontSize: 8.5, letterSpacing: ".9px", color: "#9A9A90" }}>
-            SHARE THIS CODE
-          </div>
-          <div className="code-val">{display(view.code)}</div>
+          <h1>Segfault</h1>
+          <span>Level 3 · 12,000 HP</span>
+        </div>
+      </div>
+
+      <div className="codebar">
+        <div>
+          <span className="cl">Party code</span>
+          <span className="cv">{display(view.code)}</span>
         </div>
         <button
-          className="mono"
-          onClick={() => navigator.clipboard?.writeText(display(view.code))}
-          style={{ fontSize: 10, fontWeight: 700, padding: "6px 10px", border: "3px solid var(--ink)",
-            borderRadius: 6, background: "var(--paper)", cursor: "pointer" }}
+          className="copy"
+          onClick={() => { void navigator.clipboard?.writeText(display(view.code)); }}
         >
           Copy
         </button>
       </div>
 
-      <div className="sub" style={{ paddingTop: 18 }}>
-        {inLobby
-          ? `Party · ${view.players.length} of ${SEATS} in`
-          : "The raid is live"}
-      </div>
+      <div className="plabel">Party · {view.players.length} of {SEATS} ready</div>
 
-      <div className="seat-grid">
-        {view.players.map((p, i) => (
-          <div key={`${p.name}-${i}`} className="seat">
-            <span className="av">{p.you ? "You" : initials(p.name)}</span>
-            <span className="txt">
-              <b>{p.name}{p.you ? " · you" : ""}</b>
-              <span>{i === 0 ? "Host" : "Ready"}</span>
-            </span>
+      <div className="slots">
+        {me && (
+          <div className="slot me" style={{ gridColumn: "span 2" }}>
+            <span className="av">YOU</span>
+            <div>
+              <b>{me.name}</b>
+              <i>{host ? "Host · this is your code to share" : "You"}</i>
+            </div>
+          </div>
+        )}
+        {others.map((p, i) => (
+          <div key={`${p.name}-${i}`} className="slot">
+            <span className="av">{initials(p.name)}</span>
+            <div>
+              <b>{p.name}</b>
+              <i>Ready</i>
+            </div>
           </div>
         ))}
         {Array.from({ length: open }, (_, i) => (
-          <div key={`open-${i}`} className="seat open">
+          <div key={`open-${i}`} className="slot empty">
             <span className="av">+</span>
-            <span className="txt"><b>Open seat</b><span>Share the code</span></span>
+            <div>
+              <b>Friend {friendsIn + i + 1}</b>
+              <i>Invite</i>
+            </div>
           </div>
         ))}
       </div>
 
       {error && (
-        <div className="empty" style={{ margin: "14px 16px 0" }}>
+        <div className="empty" style={{ margin: "14px 18px 0" }}>
           <b>{error}</b>
           <p>Try again, or start a fresh party.</p>
         </div>
       )}
 
-      <div className="lobby-foot">
+      <div className="lobbyfoot">
         {!inLobby ? (
           <Link href={`/party/battle?code=${view.code}`} className="btn"
             style={{ display: "grid", placeItems: "center", textDecoration: "none" }}>
             Enter the arena
           </Link>
         ) : host ? (
-          <button className="btn" onClick={start} disabled={busy || view.players.length < 1}>
+          <button className="btn" onClick={start} disabled={busy}>
             Start raid
           </button>
         ) : (
           <button className="btn" disabled>
-            Waiting for host
+            Waiting for the host
           </button>
         )}
-        <p className="mono" style={{ fontSize: 9.5, color: "var(--ink-3)", textAlign: "center", marginTop: 9 }}>
-          {inLobby
-            ? "Five seats, one question each, thirty seconds a round."
-            : "The host has started. Jump back in."}
-        </p>
+        <p className="note">Anyone with the code can join until the first item.</p>
       </div>
     </>
   );
