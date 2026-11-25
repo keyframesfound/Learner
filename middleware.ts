@@ -2,7 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { getSessionCookie } from "better-auth/cookies";
 
 const BASE = "/learner";
-const PUBLIC = ["/login", "/api/auth"];
+const PUBLIC = ["/login", "/api/auth", "/robots.txt", "/manifest.webmanifest", "/icon.svg", "/favicon.ico"];
 
 export function middleware(req: NextRequest) {
   /* local design work needs the screens without a Google round trip */
