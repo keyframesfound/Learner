@@ -47,12 +47,19 @@ Rungs are how we build the ladder. They are not vocabulary we put on screen — 
 Secondary 4 student does not think "I am at recall", they think "I know this" or
 "I don't". The interface shows familiarity, derived from attempts and stability:
 
+One axis only: **how reliably you can produce it**, with no thinking time.
+
 | Label | Means | Derived from |
 |---|---|---|
 | new | never attempted | no attempts on any item in the lesson |
-| shaky | tried, still wrong | recent attempts mostly incorrect |
-| familiar | gets it right on cue | correct more often than not, short stability |
-| solid | gets it right cold | long stability, or reached apply and passed |
+| shaky | you get it some of the time | recent attempts mostly incorrect |
+| steady | you get it most times | correct more often than not, short stability |
+| automatic | you don't have to think | long stability, or reached apply and passed |
+
+`automatic` is the top rather than `mastered` on purpose: fluency is retrieval that
+costs nothing, which is a property of the memory, not a grade a teacher gives. The
+pair `shaky` and `steady` are the same quality at two points, so the four words sort
+themselves without a legend.
 
 The ladder lives in the data and in the item mix. The label lives in the row, one
 word, so the eye can sort a lesson list without reading numbers.
