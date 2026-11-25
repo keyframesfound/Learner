@@ -72,6 +72,15 @@
     box-shadow:2px 2px 0 var(--line)}
   .fchip.on{background:var(--ink);color:var(--paper);box-shadow:2px 2px 0 var(--geo)}
   .fchip .c{font-family:'JetBrains Mono',monospace;font-size:9.5px;opacity:.55}
+  .fchip.add{border-style:dashed;background:transparent;color:var(--ink-3);
+    box-shadow:none;text-decoration:none}
+  .fchip.add:hover{color:var(--ink);border-color:var(--ink)}
+  .radio{display:flex;align-items:center;gap:9px;border:2px solid var(--line);border-radius:7px;
+    padding:8px 10px;font-size:12px;cursor:pointer}
+  .radio u{width:16px;height:16px;flex:0 0 16px;border:2px solid var(--ink);border-radius:99px;
+    display:grid;place-items:center;text-decoration:none}
+  .radio.on{border-color:var(--ink);background:var(--lime);font-weight:700}
+  .radio.on u::after{content:'';width:7px;height:7px;border-radius:99px;background:var(--ink)}
   .spacer{flex:1}
   .autosave{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
     letter-spacing:.4px;color:var(--ink-3)}
@@ -304,6 +313,7 @@
       <div class="topstrip">
         <button class="fchip on">F4 Geography <span class="c">2 classes</span></button>
         <button class="fchip">F5 Geography <span class="c">1 class</span></button>
+        <a class="fchip add" href="#newcur">+ New curriculum</a>
         <span class="div"></span>
         <div class="seg"><a href="#curriculum" class="on">Notes</a><a href="#questions">Questions</a></div>
         <span class="spacer"></span>
@@ -374,6 +384,7 @@
       <div class="topstrip">
         <button class="fchip on">F4 Geography <span class="c">2 classes</span></button>
         <button class="fchip">F5 Geography <span class="c">1 class</span></button>
+        <a class="fchip add" href="#newcur">+ New curriculum</a>
         <span class="div"></span>
         <div class="seg"><a href="#curriculum">Notes</a><a href="#questions" class="on">Questions</a></div>
         <span class="spacer"></span>
@@ -477,6 +488,36 @@
             </div>
             <a class="danger" href="#">Delete item</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── new curriculum ─────────────────── -->
+    <section class="screen" id="newcur">
+      <div class="topstrip">
+        <a class="back" href="#curriculum">← Curriculum</a>
+        <span class="div"></span>
+        <span class="autosave">New curriculum</span>
+      </div>
+
+      <div class="body">
+        <h1>New curriculum</h1>
+        <div class="sub">Name it the way students see it: form, then subject</div>
+
+        <div class="newc" style="max-width:620px;margin-top:18px;align-self:flex-start">
+          <div class="lbl">Curriculum</div>
+          <div class="fl">Name</div>
+          <div class="fld">F4 Biology</div>
+          <div class="fl" style="margin-top:4px">Subject</div>
+          <div class="sel">Biology <i>▾</i></div>
+
+          <div class="fl" style="margin-top:6px">Start from</div>
+          <div class="radio on"><u></u> Start empty</div>
+          <div class="radio"><u></u> Copy the chapter structure from F4 Geography</div>
+
+          <div class="hint">You own this curriculum. It stays invisible to students until you publish a chapter and attach a class to it.</div>
+          <button class="b solid" style="margin-top:2px">Create curriculum</button>
+          <a class="rm" href="#curriculum" style="align-self:flex-start">Cancel</a>
         </div>
       </div>
     </section>
@@ -762,9 +803,9 @@
 </div>
 
 <script>
-  const routes = ["curriculum", "questions", "classes", "class", "admin", "preview"];
-  const navFor = { curriculum: "curriculum", questions: "curriculum", classes: "classes",
-                   class: "classes", admin: "admin", preview: "curriculum" };
+  const routes = ["curriculum", "questions", "newcur", "classes", "class", "admin", "preview"];
+  const navFor = { curriculum: "curriculum", questions: "curriculum", newcur: "curriculum",
+                   classes: "classes", class: "classes", admin: "admin", preview: "curriculum" };
   function show(id) {
     if (!routes.includes(id)) id = "curriculum";
     document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
