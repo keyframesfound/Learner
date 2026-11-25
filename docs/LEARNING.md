@@ -51,13 +51,21 @@ One axis only: **how reliably you can produce it**, with no thinking time.
 
 | Label | Colour | Means | Derived from |
 |---|---|---|---|
-| new | grey `#6E6C63` | never attempted | no attempts on any item in the lesson |
-| shaky | red `#C4271B` | you get it some of the time | recent attempts mostly incorrect |
-| steady | blue `#2D5BFF` | you get it most times | correct more often than not, short stability |
-| automatic | dark green `#0F7A35` | you don't have to think | long stability, or reached apply and passed |
+| cold | grey `#6E6C63` | never attempted | no attempts on any item in the lesson |
+| rough | red `#C4271B` | it comes out, with gaps | recent attempts mostly incorrect |
+| smooth | blue `#2D5BFF` | it comes out | correct more often than not, short stability |
+| fluent | dark green `#0F7A35` | it comes out without thinking | long stability, or reached apply and passed |
+
+One axis, phrased as how the answer *comes out*: cold means it doesn't come out at
+all, rough means it arrives with stumbles, smooth means it arrives, fluent means you
+did not have to reach for it. `fluent` is the same word this document already uses as
+the gate for climbing a rung, so the row label and the rule agree.
+
+Nothing here is `mastered` or `proficient`: those are grades a teacher issues, and a
+student cannot check them. Texture is checkable from the inside.
 
 The word itself carries the colour, in shades picked to clear 4.5:1 on `#F2EFE6` —
-which is why `automatic` is `#0F7A35` and not the brighter `#17A34A` used for the
+which is why `fluent` is `#0F7A35` and not the brighter `#17A34A` used for the
 Biology chip. At 10.5px, brand green on paper drops to 3.4:1 and the label becomes the
 hardest thing on the row to read.
 
