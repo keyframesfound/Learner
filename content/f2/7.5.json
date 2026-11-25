@@ -1,0 +1,122 @@
+{
+  "id": "7.5",
+  "chapter": "Ch 7",
+  "title": "Gas Exchange in Animals",
+  "minutes": 4,
+  "notes": [
+    "Animals take in **oxygen** from the air for **respiration** and release the **carbon dioxide** made in their cells. In humans, gas exchange happens at the **air sacs**, millions of tiny cup-shaped structures in the lungs. Air travels in through the nostrils and nasal cavity, down the trachea, then through the bronchi and bronchioles to the air sacs. Their surfaces are covered with **capillaries**, and their total area is about 80 m².",
+    "At the air sacs, oxygen in the inhaled air passes into the blood in the capillaries, and carbon dioxide passes from the blood into the air sacs to be breathed out. Air is moistened and warmed by the water and blood at the air sacs, so exhaled air holds more **water vapour** and is warmer than inhaled air. Other animals use different structures: fish use **gills**, frogs use lungs and moist skin, and salamanders use external gills and skin.",
+    "Use the percentages to compare the two kinds of air. Inhaled air is about 21% oxygen and 0.04% carbon dioxide; exhaled air is about 16% oxygen and 4% carbon dioxide, while nitrogen stays at 78% in both. So exhaled air has about 100 times more carbon dioxide and roughly 5 percentage points less oxygen. Smoking lowers gas exchange efficiency: **tar** coats the air sac surfaces, carbon monoxide reduces the blood's oxygen-carrying ability, and some chemicals break down air sac walls."
+  ],
+  "table": {
+    "head": [
+      "Gas",
+      "Inhaled air",
+      "Exhaled air"
+    ],
+    "rows": [
+      [
+        "Oxygen",
+        "21%",
+        "16%"
+      ],
+      [
+        "Carbon dioxide",
+        "0.04%",
+        "4%"
+      ],
+      [
+        "Water vapour",
+        "Variable",
+        "Saturated"
+      ]
+    ]
+  },
+  "callout": "Exhaled air is not pure carbon dioxide — it still contains about 16% oxygen, so a candle still burns in it, just for a shorter time.",
+  "questions": [
+    {
+      "prompt": "Where does gas exchange take place in the human body?",
+      "code": [],
+      "options": [
+        {
+          "text": "In the bronchi"
+        },
+        {
+          "text": "At the air sacs"
+        },
+        {
+          "text": "In the trachea"
+        },
+        {
+          "text": "In the diaphragm"
+        }
+      ],
+      "answer": 1,
+      "why": "The air sacs have thin, moist surfaces and are wrapped in capillaries, so gases pass between the air and the blood there.",
+      "wrongWhy": "The bronchi and trachea are only tubes that carry air, and the diaphragm only moves air in and out. Answer: at the air sacs."
+    },
+    {
+      "prompt": "Inhaled air contains 21% oxygen and 0.04% carbon dioxide. Exhaled air contains 16% oxygen and 4% carbon dioxide. Which conclusion do these figures support?",
+      "code": [],
+      "options": [
+        {
+          "text": "Exhaled air contains no oxygen."
+        },
+        {
+          "text": "Nitrogen makes up a smaller share of exhaled air."
+        },
+        {
+          "text": "Exhaled air contains about 100 times more carbon dioxide than inhaled air."
+        },
+        {
+          "text": "Breathing produces oxygen, so exhaled air is richer in oxygen."
+        }
+      ],
+      "answer": 2,
+      "why": "Carbon dioxide rises from 0.04% to 4%, a hundredfold increase, because respiring body cells release it.",
+      "wrongWhy": "Exhaled air still has about 16% oxygen and the same 78% nitrogen, so the oxygen has fallen rather than risen. Answer: about 100 times more carbon dioxide."
+    },
+    {
+      "prompt": "A burning candle is lowered into a jar of inhaled air, then into a jar of exhaled air. It goes out sooner in the exhaled air. What is the best explanation?",
+      "code": [],
+      "options": [
+        {
+          "text": "Exhaled air is warmer, and heat melts the candle faster."
+        },
+        {
+          "text": "Exhaled air contains less oxygen, and oxygen is needed for burning."
+        },
+        {
+          "text": "Exhaled air contains more carbon dioxide, which is the only gas that puts out flames."
+        },
+        {
+          "text": "Water vapour in exhaled air wets the wick so it cannot burn."
+        }
+      ],
+      "answer": 1,
+      "why": "Oxygen supports burning, and exhaled air has only about 16% oxygen against 21% in inhaled air, so the flame runs out of oxygen sooner.",
+      "wrongWhy": "Extra carbon dioxide or water vapour is not what ends the flame — the jar simply uses up its smaller oxygen supply faster. Answer: exhaled air contains less oxygen."
+    },
+    {
+      "prompt": "Tar in cigarette smoke is deposited in the lungs. How does this reduce the efficiency of gas exchange?",
+      "code": [],
+      "options": [
+        {
+          "text": "It covers part of the surface of the air sacs."
+        },
+        {
+          "text": "It makes the air sacs expand and hold more air."
+        },
+        {
+          "text": "It widens the bronchioles so air moves too fast."
+        },
+        {
+          "text": "It carries oxygen away from the blood."
+        }
+      ],
+      "answer": 0,
+      "why": "Tar coats the surface of the air sacs, leaving less area for oxygen and carbon dioxide to pass through.",
+      "wrongWhy": "Tar blocks the exchange surface rather than widening airways, and it is carbon monoxide that reduces the blood's oxygen-carrying ability. Answer: it covers part of the air sac surface."
+    }
+  ]
+}

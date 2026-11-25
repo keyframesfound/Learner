@@ -1,8 +1,9 @@
+import Link from "next/link";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import JoinClass from "@/components/JoinClass";
 import SignOut from "@/components/SignOut";
-import { getModules, getStats, joinClass, myClass, viewer } from "@/lib/repo";
+import { getModules, getStats, isStaff, joinClass, myClass, viewer } from "@/lib/repo";
 
 type JoinState = { error?: string; ok?: boolean; className?: string };
 
@@ -70,6 +71,20 @@ export default async function Me() {
           <div className="mod" style={{ marginTop: 4 }}>{sub}</div>
         </div>
       </div>
+
+      {isStaff(v) && (
+        <div style={{ padding: "16px 16px 0" }}>
+          <Link href="/teach" className="card" style={{ textDecoration: "none" }}>
+            <span className="mk" style={{ background: "var(--ink)", color: "var(--lime)" }}>
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2.2">
+                <path d="M4 6h16M4 12h16M4 18h10" />
+              </svg>
+            </span>
+            <span className="txt"><b>Teaching portal</b><span>classes, curriculum, questions</span></span>
+            <span className="go">Open</span>
+          </Link>
+        </div>
+      )}
 
       <div className="sec"><h2>This week</h2><span>honest numbers only</span></div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 9, padding: "0 16px" }}>

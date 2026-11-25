@@ -1,0 +1,122 @@
+{
+  "id": "8.6",
+  "chapter": "Ch 8",
+  "title": "Household Electricity",
+  "minutes": 4,
+  "notes": [
+    "Appliances at home do not run on cells. They are supplied with **mains electricity**, which reaches them from the power station through power cables and wall sockets. In Hong Kong the **mains voltage** is 220 V, far higher than the few volts of a cell. Every appliance is marked with a **voltage rating**, such as 220 V on a hairdryer, and it may not work or may be damaged if it is connected to a different voltage.",
+    "A Hong Kong plug has three pins: the **live pin**, the **neutral pin** and the longest one, the **earth pin**. The live wire is brown, the neutral wire is blue, and the earth wire is green and yellow. Current is carried to the appliance by the live and neutral wires only. All the sockets in a home form a **domestic circuit** and are connected in parallel, so switching off one appliance does not affect the others and every socket gives the same 220 V.",
+    "Two things make mains electricity dangerous. **Overloading** happens when too many appliances share one socket, so the currents add up and the socket overheats. A **short circuit** happens when the live and neutral wires touch, making a branch of very low resistance and a very large current. A **fuse** has a rating slightly above the normal current; a larger current melts its wire and cuts off the circuit. A **circuit breaker** does the same but can be reset."
+  ],
+  "table": {
+    "head": [
+      "Wire",
+      "Colour",
+      "Job"
+    ],
+    "rows": [
+      [
+        "Earth wire",
+        "Green and yellow",
+        "Connects the metal case to the ground"
+      ],
+      [
+        "Live wire",
+        "Brown",
+        "Carries current from the supply to the appliance"
+      ],
+      [
+        "Neutral wire",
+        "Blue",
+        "Completes the circuit back to the supply"
+      ]
+    ]
+  },
+  "callout": "Fuse questions are marked on the number: a 10 A appliance takes a 13 A fuse, because the rating must sit just above the normal current.",
+  "questions": [
+    {
+      "prompt": "An electric iron draws 10 A when it is working normally. Which fuse should be fitted in its plug?",
+      "code": [],
+      "options": [
+        {
+          "text": "10 A"
+        },
+        {
+          "text": "13 A"
+        },
+        {
+          "text": "3 A"
+        },
+        {
+          "text": "20 A"
+        }
+      ],
+      "answer": 1,
+      "why": "A suitable fuse is rated slightly above the normal current, so 13 A carries 10 A without blowing.",
+      "wrongWhy": "A fuse rated at the normal current or below blows during normal use, and 20 A is too high to protect the iron. Answer: 13 A."
+    },
+    {
+      "prompt": "Why is it dangerous to run a kettle, a heater and a microwave oven from one socket through an extension unit?",
+      "code": [],
+      "options": [
+        {
+          "text": "Each appliance receives a higher voltage, so the plug overheats"
+        },
+        {
+          "text": "The branch currents add up in the socket, so a large current heats the circuit and may start a fire"
+        },
+        {
+          "text": "The appliances become connected in series and stop working"
+        },
+        {
+          "text": "The earth wire carries the extra current safely away"
+        }
+      ],
+      "answer": 1,
+      "why": "Parallel branches add their currents, so one socket carrying three large currents overheats.",
+      "wrongWhy": "The voltage stays at 220 V across parallel branches; it is the sum of the currents that overheats the socket. Answer: the branch currents add up."
+    },
+    {
+      "prompt": "A worn live wire touches the neutral wire, forming a branch of almost zero resistance. Why is this short circuit dangerous?",
+      "code": [],
+      "options": [
+        {
+          "text": "The resistance is very low, so a very large current flows and overheats the circuit"
+        },
+        {
+          "text": "The resistance is very high, so the wires become hot"
+        },
+        {
+          "text": "No current can flow, so the appliance quietly stops"
+        },
+        {
+          "text": "The mains voltage rises well above 220 V"
+        }
+      ],
+      "answer": 0,
+      "why": "Current takes the low-resistance branch, and that large current can damage the circuit or start a fire.",
+      "wrongWhy": "Low resistance lets more current through, not less; the heating comes from that large current. Answer: a very large current flows."
+    },
+    {
+      "prompt": "The live wire inside a washing machine comes loose and touches its metal case. How does the earth wire protect you if you touch the case?",
+      "code": [],
+      "options": [
+        {
+          "text": "It insulates the metal case from the mains supply"
+        },
+        {
+          "text": "It gives the current a path to the ground, so the current flows through it instead of you and blows the fuse"
+        },
+        {
+          "text": "It switches the appliance off as soon as the case becomes live"
+        },
+        {
+          "text": "It keeps the current in the live wire small during normal use"
+        }
+      ],
+      "answer": 1,
+      "why": "The earth wire carries the fault current to the ground, which blows the fuse and disconnects the appliance.",
+      "wrongWhy": "The earth wire neither insulates nor switches; it offers the current a way to the ground that misses your body. Answer: it carries the current to the ground."
+    }
+  ]
+}

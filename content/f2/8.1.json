@@ -1,0 +1,127 @@
+{
+  "id": "8.1",
+  "chapter": "Ch 8",
+  "title": "Simple Circuits",
+  "minutes": 4,
+  "notes": [
+    "An electrical appliance works only when two conditions are met. First, there must be a source of electrical energy, such as a cell, a battery, a generator or a solar panel. Second, the source and the appliance must form a **closed circuit** — a complete loop that leaves one end of the source, passes through the appliance and returns to the other end. A circuit with a gap is an **open circuit**, and the appliance will not work.",
+    "In a closed circuit, energy changes form. Chemical energy stored in the cell is converted to electrical energy, which the circuit transfers to the bulb. The bulb then converts this electrical energy to light energy and thermal energy. A torch is a simple example: its cells, switch, wires and bulb form a closed loop, so the bulb gives out light and heat.",
+    "Materials that let electricity pass through them are **electrical conductors**. Metals, **graphite** (pencil lead) and vinegar conduct electricity. Materials that block electricity are **electrical insulators** — plastics, wood, rubber and distilled water. A **switch** uses both: its conducting parts touch to close the circuit, while the insulating part we press protects us from an electric shock."
+  ],
+  "table": {
+    "head": [
+      "Material",
+      "Conducts?",
+      "Type"
+    ],
+    "rows": [
+      [
+        "Iron nail, aluminium foil",
+        "✓",
+        "Conductor"
+      ],
+      [
+        "Pencil lead (graphite)",
+        "✓",
+        "Conductor"
+      ],
+      [
+        "Vinegar, lemon juice",
+        "✓",
+        "Conductor"
+      ],
+      [
+        "Rubber band, distilled water",
+        "✗",
+        "Insulator"
+      ]
+    ]
+  },
+  "callout": "Exam tip: a bulb lights only when BOTH conditions are met — a source of electrical energy AND a closed loop. If either one is missing, the circuit is open and the bulb stays off.",
+  "questions": [
+    {
+      "prompt": "What two conditions must be met for an electrical appliance to work?",
+      "code": [],
+      "options": [
+        {
+          "text": "A source of electrical energy and a closed circuit"
+        },
+        {
+          "text": "A switch and a bulb"
+        },
+        {
+          "text": "A closed circuit only"
+        },
+        {
+          "text": "A battery and an insulator"
+        }
+      ],
+      "answer": 0,
+      "why": "The source supplies the energy and the closed loop lets it flow through the appliance.",
+      "wrongWhy": "A switch is only a convenient way to open and close a circuit, not a requirement for energy to flow. Answer: a source of electrical energy and a closed circuit."
+    },
+    {
+      "prompt": "In Practical 8.2, four groups of materials were tested. Which group contains only electrical conductors?",
+      "code": [],
+      "options": [
+        {
+          "text": "Distilled water, rubber band, wooden chopstick"
+        },
+        {
+          "text": "Iron nail, pencil lead, vinegar"
+        },
+        {
+          "text": "Rubber band, alcohol, plastic"
+        },
+        {
+          "text": "Distilled water, vinegar, aluminium foil"
+        }
+      ],
+      "answer": 1,
+      "why": "Metals, graphite (pencil lead) and vinegar all let electricity pass through them.",
+      "wrongWhy": "Distilled water, rubber and wood are insulators, so any group containing them is not all conductors. Answer: iron nail, pencil lead and vinegar."
+    },
+    {
+      "prompt": "A torch is switched on, then the switch is slid to the open position. Why does the torch go off?",
+      "code": [],
+      "options": [
+        {
+          "text": "The cell has used up all its chemical energy"
+        },
+        {
+          "text": "The bulb has turned into an electrical insulator"
+        },
+        {
+          "text": "The conducting parts of the switch no longer touch, so the circuit is open"
+        },
+        {
+          "text": "The switch changes electrical energy into light energy"
+        }
+      ],
+      "answer": 2,
+      "why": "An open switch breaks the loop, so electrical energy can no longer be transferred to the bulb.",
+      "wrongWhy": "The cell is unchanged and the bulb is still a conductor — the break is at the switch, which makes the circuit incomplete. Answer: the conducting parts of the switch no longer touch, so the circuit is open."
+    },
+    {
+      "prompt": "In a closed circuit containing a cell and a bulb, what is the correct order of energy changes?",
+      "code": [],
+      "options": [
+        {
+          "text": "Light energy → electrical energy → chemical energy"
+        },
+        {
+          "text": "Electrical energy → chemical energy → light energy"
+        },
+        {
+          "text": "Chemical energy → light energy → electrical energy"
+        },
+        {
+          "text": "Chemical energy → electrical energy → light energy and thermal energy"
+        }
+      ],
+      "answer": 3,
+      "why": "The cell stores chemical energy, the circuit carries electrical energy, and the bulb gives out light and thermal energy.",
+      "wrongWhy": "The bulb does not create electrical energy, so light cannot come before it in the chain. Answer: chemical energy → electrical energy → light energy and thermal energy."
+    }
+  ]
+}

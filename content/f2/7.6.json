@@ -1,0 +1,117 @@
+{
+  "id": "7.6",
+  "chapter": "Ch 7",
+  "title": "Carbon Dioxide Balance in Nature",
+  "minutes": 4,
+  "notes": [
+    "Two processes keep the gases in air steady. In **respiration**, animals and plants take in oxygen from the air and give out carbon dioxide. In **photosynthesis**, green plants take in carbon dioxide and give out oxygen. Each gas given out by one process is used up by the other, so the amounts of oxygen and carbon dioxide in the atmosphere stay almost constant.",
+    "Human activities have disrupted this balance. Since the Industrial Revolution in the late 1700s, people have burnt large amounts of **fossil fuels** in motor cars, power stations and factories, releasing a lot of carbon dioxide. Large areas of forest have also been cleared for timber and land, so less carbon dioxide is absorbed by plants for photosynthesis. For example, the carbon dioxide level was almost constant for 2000 years, but has risen sharply since the 1700s.",
+    "Carbon dioxide is a **greenhouse gas**. It absorbs thermal energy given off by the Earth's surface and re-emits it, keeping the Earth warm enough for life — this is the **greenhouse effect**. Extra carbon dioxide strengthens the effect, so the Earth's average temperature rises; this is **global warming**. Scientists believe this brings **climate change**: melting polar ice, rising sea levels, more heat waves and droughts, and dying corals. **Methane**, released when cattle and sheep digest food, is another greenhouse gas."
+  ],
+  "table": {
+    "head": [
+      "Process",
+      "Gas taken in",
+      "Gas given out"
+    ],
+    "rows": [
+      [
+        "Photosynthesis in plants",
+        "Carbon dioxide",
+        "Oxygen"
+      ],
+      [
+        "Respiration in living things",
+        "Oxygen",
+        "Carbon dioxide"
+      ]
+    ]
+  },
+  "callout": "Exam tip: answer with the chain, not just the words — more carbon dioxide → stronger greenhouse effect → global warming → climate change.",
+  "questions": [
+    {
+      "prompt": "How are the levels of oxygen and carbon dioxide in the atmosphere kept almost constant?",
+      "code": [],
+      "options": [
+        {
+          "text": "Plants release carbon dioxide during photosynthesis and animals take it in during respiration."
+        },
+        {
+          "text": "Living things take in oxygen and give out carbon dioxide in respiration, while plants take in carbon dioxide and give out oxygen in photosynthesis."
+        },
+        {
+          "text": "Carbon dioxide is removed from the air only when fossil fuels are burnt."
+        },
+        {
+          "text": "Oxygen and carbon dioxide stay constant because neither gas ever leaves the atmosphere."
+        }
+      ],
+      "answer": 1,
+      "why": "Respiration and photosynthesis use up each other's waste gas, so the two gases balance.",
+      "wrongWhy": "This swaps the two gases — plants take in carbon dioxide and give out oxygen in photosynthesis. Answer: living things take in oxygen and give out carbon dioxide, while plants do the reverse."
+    },
+    {
+      "prompt": "A graph shows the carbon dioxide level was almost constant from year 0 to 1700, then rose sharply to its highest value by 2020. Which explanation best fits the graph?",
+      "code": [],
+      "options": [
+        {
+          "text": "Living things stopped carrying out respiration after 1700."
+        },
+        {
+          "text": "The greenhouse effect stopped, so carbon dioxide could not escape from the atmosphere."
+        },
+        {
+          "text": "Large amounts of fossil fuels were burnt and forests were cleared, so more carbon dioxide was released and less was taken up by plants."
+        },
+        {
+          "text": "Plants gave out carbon dioxide instead of oxygen once the Industrial Revolution began."
+        }
+      ],
+      "answer": 2,
+      "why": "Burning fossil fuels adds carbon dioxide while clearing forests removes the plants that would absorb it.",
+      "wrongWhy": "The sharp rise comes from human activity, not from plants changing what they do. Answer: more fossil fuels burnt and fewer forests to absorb the carbon dioxide."
+    },
+    {
+      "prompt": "Which statement about greenhouse gases is correct?",
+      "code": [],
+      "options": [
+        {
+          "text": "Greenhouse gases produce thermal energy, which warms the Earth."
+        },
+        {
+          "text": "Greenhouse gases absorb thermal energy and re-emit it, keeping the Earth warmer than it would otherwise be."
+        },
+        {
+          "text": "Greenhouse gases block all sunlight from reaching the Earth."
+        },
+        {
+          "text": "The greenhouse effect only began after the Industrial Revolution."
+        }
+      ],
+      "answer": 1,
+      "why": "Greenhouse gases trap and re-emit thermal energy rather than creating it, and the effect is a natural process.",
+      "wrongWhy": "Greenhouse gases do not make thermal energy — they trap energy that is already there, and the effect is natural. Answer: they absorb and re-emit thermal energy."
+    },
+    {
+      "prompt": "Scientists say global warming may cause climate change. Which outcome is a likely consequence?",
+      "code": [],
+      "options": [
+        {
+          "text": "Average temperatures around the world would fall."
+        },
+        {
+          "text": "Polar bears would gain more ice to live on."
+        },
+        {
+          "text": "Melting ice would raise sea levels and flood low-lying areas."
+        },
+        {
+          "text": "Corals would survive better because the oceans would be cooler."
+        }
+      ],
+      "answer": 2,
+      "why": "Warmer temperatures melt polar ice, and the extra water raises sea levels.",
+      "wrongWhy": "Global warming melts ice rather than adding to it, and the water has to go somewhere. Answer: melting ice raises sea levels and floods low-lying areas."
+    }
+  ]
+}

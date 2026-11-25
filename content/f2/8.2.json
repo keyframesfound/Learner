@@ -1,0 +1,122 @@
+{
+  "id": "8.2",
+  "chapter": "Ch 8",
+  "title": "Electric Current",
+  "minutes": 4,
+  "notes": [
+    "In a **closed circuit**, electric charges flow round without stopping. This flow of electric charges is called an **electric current**, or current for short. The charges leave the positive terminal of the cell, pass through the appliance, and return to the negative terminal. A steady current needs two things: an energy source and a complete path.",
+    "We measure current with an **ammeter**, connected in series in the circuit. Its unit is the **ampere** (A); smaller currents are measured in milliamperes (mA), where 1 mA = 0.001 A. For example, 250 mA is 250 × 0.001 = 0.25 A. The red knob (+) goes to the positive terminal of the cell and the black knob (−) to the negative terminal.",
+    "A current has two useful effects. The **heating effect**: thermal energy is given out when a current flows through a conductor, so a kettle's heating part becomes hot, and the effect grows as the current grows. The **magnetic effect**: a coil of wire carrying a current becomes an **electromagnet** and attracts paper clips. Adding a cell raises the current, which makes the bulb brighter."
+  ],
+  "table": {
+    "head": [
+      "Water flow model",
+      "Circuit"
+    ],
+    "rows": [
+      [
+        "Water pump",
+        "Cell"
+      ],
+      [
+        "Pipe and channel",
+        "Connecting wire"
+      ],
+      [
+        "Water flow",
+        "Current"
+      ],
+      [
+        "Turbine",
+        "Bulb"
+      ]
+    ]
+  },
+  "callout": "For a direction question, say: from the positive terminal of the cell, through the appliance, to the negative terminal. Arrows drawn the other way lose the mark.",
+  "questions": [
+    {
+      "prompt": "What is an electric current?",
+      "code": [],
+      "options": [
+        {
+          "text": "A flow of electric charges round a closed circuit"
+        },
+        {
+          "text": "A flow of electrical energy from a cell"
+        },
+        {
+          "text": "The push a cell gives to the charges in a wire"
+        },
+        {
+          "text": "The number of charges stored inside a cell"
+        }
+      ],
+      "answer": 0,
+      "why": "Current is the flow of electric charges, which needs an energy source and a complete path.",
+      "wrongWhy": "Treating current as a flow of energy or as a push confuses it with energy transfer and with voltage. Answer: a flow of electric charges."
+    },
+    {
+      "prompt": "A current of 250 mA flows through a bulb. What is this current in amperes?",
+      "code": [],
+      "options": [
+        {
+          "text": "0.025 A"
+        },
+        {
+          "text": "0.25 A"
+        },
+        {
+          "text": "2.5 A"
+        },
+        {
+          "text": "250 000 A"
+        }
+      ],
+      "answer": 1,
+      "why": "1 mA = 0.001 A, so 250 mA = 250 × 0.001 A = 0.25 A.",
+      "wrongWhy": "Dividing by 10 000 gives 0.025 A, and multiplying instead of dividing gives 250 000 A; milli means thousandths. Answer: 0.25 A."
+    },
+    {
+      "prompt": "A student adds one more cell, connected the same way, to a circuit with a single bulb. What happens?",
+      "code": [],
+      "options": [
+        {
+          "text": "The current increases and the bulb becomes brighter"
+        },
+        {
+          "text": "The current increases but the bulb stays equally bright"
+        },
+        {
+          "text": "The current stays the same because the bulb has not changed"
+        },
+        {
+          "text": "The current decreases and the bulb becomes dimmer"
+        }
+      ],
+      "answer": 0,
+      "why": "In Practical 8.4, adding cells in the same direction increased the current and the bulb grew brighter.",
+      "wrongWhy": "Cells in the same direction add energy rather than oppose each other, so the current cannot fall or stay fixed. Answer: the current increases and the bulb becomes brighter."
+    },
+    {
+      "prompt": "A coil of insulated copper wire is wound round an iron nail and joined to a cell. When the switch is closed, the coil",
+      "code": [],
+      "options": [
+        {
+          "text": "becomes an electromagnet and attracts paper clips"
+        },
+        {
+          "text": "becomes a permanent magnet that still attracts after the switch is opened"
+        },
+        {
+          "text": "becomes magnetic only if the wire is made of plastic"
+        },
+        {
+          "text": "gets hot but shows no magnetic effect at all"
+        }
+      ],
+      "answer": 0,
+      "why": "A current through a coil of wire produces the magnetic effect, turning the coil into an electromagnet.",
+      "wrongWhy": "The magnetism lasts only while current flows, and the coil must be a conductor such as copper, not plastic. Answer: it becomes an electromagnet and attracts paper clips."
+    }
+  ]
+}

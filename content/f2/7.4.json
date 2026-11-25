@@ -1,0 +1,117 @@
+{
+  "id": "7.4",
+  "chapter": "Ch 7",
+  "title": "Gas Exchange in Plants",
+  "minutes": 4,
+  "notes": [
+    "Green plants make their own food by **photosynthesis**, which uses carbon dioxide and releases oxygen. They also **respire** all the time, using oxygen and releasing carbon dioxide. The gases you can detect around a leaf depend on which process is faster, so the **net gas exchange** is not fixed: it changes with light.",
+    "In bright light both processes run, but photosynthesis is faster. The leaf therefore uses more carbon dioxide than it produces and releases more oxygen than it uses. You see a **net uptake of carbon dioxide** and a **net release of oxygen**. For example, a leaf in hydrogencarbonate indicator turns it from red to purple, because the carbon dioxide level drops below normal.",
+    "In darkness photosynthesis stops but respiration continues. The plant now takes in oxygen and gives out carbon dioxide, so there is a **net release of carbon dioxide** and a **net uptake of oxygen**. The gases move through tiny pores called **stomata** on the leaf surface. Respiration never stops, even in bright light — it is only hidden by the faster photosynthesis."
+  ],
+  "table": {
+    "head": [
+      "Condition",
+      "Carbon dioxide",
+      "Oxygen"
+    ],
+    "rows": [
+      [
+        "Bright light",
+        "Net uptake",
+        "Net release"
+      ],
+      [
+        "Darkness",
+        "Net release",
+        "Net uptake"
+      ]
+    ]
+  },
+  "callout": "Do not write that plants respire only at night — respiration runs all the time; light just lets photosynthesis overtake it.",
+  "questions": [
+    {
+      "prompt": "A green plant is left in bright sunlight. Which row describes its net gas exchange?",
+      "code": [],
+      "options": [
+        {
+          "text": "Net uptake of carbon dioxide and net release of oxygen"
+        },
+        {
+          "text": "Net release of carbon dioxide and net uptake of oxygen"
+        },
+        {
+          "text": "Net uptake of both carbon dioxide and oxygen"
+        },
+        {
+          "text": "No net exchange, because the two processes cancel out"
+        }
+      ],
+      "answer": 0,
+      "why": "Photosynthesis runs faster than respiration in bright light, so the plant takes in more carbon dioxide than it makes and gives out more oxygen than it uses.",
+      "wrongWhy": "Both processes run, but photosynthesis is faster, so they do not cancel out. Answer: net uptake of carbon dioxide and net release of oxygen."
+    },
+    {
+      "prompt": "A leaf is sealed in a tube of hydrogencarbonate indicator that is red at the start. After five hours in bright light the indicator is purple. What does this show?",
+      "code": [],
+      "options": [
+        {
+          "text": "The leaf released carbon dioxide faster than it used it"
+        },
+        {
+          "text": "The leaf used up more carbon dioxide than it released"
+        },
+        {
+          "text": "The leaf stopped respiring in the light"
+        },
+        {
+          "text": "The indicator changed colour because of the light itself"
+        }
+      ],
+      "answer": 1,
+      "why": "Purple means the carbon dioxide level has fallen below normal, so photosynthesis removed more carbon dioxide than respiration added.",
+      "wrongWhy": "Purple marks a fall in carbon dioxide, not a rise, and light alone does not change the indicator. Answer: the leaf used up more carbon dioxide than it released."
+    },
+    {
+      "prompt": "A potted plant is sealed in a clear box overnight in the dark. What happens to the air inside the box?",
+      "code": [],
+      "options": [
+        {
+          "text": "Carbon dioxide falls and oxygen rises"
+        },
+        {
+          "text": "Carbon dioxide rises and oxygen falls"
+        },
+        {
+          "text": "Both gases stay at the same level"
+        },
+        {
+          "text": "Oxygen rises because the plant stops respiring"
+        }
+      ],
+      "answer": 1,
+      "why": "In darkness only respiration occurs, so the plant takes in oxygen and releases carbon dioxide.",
+      "wrongWhy": "The plant does not stop respiring at night — respiration continues without photosynthesis. Answer: carbon dioxide rises and oxygen falls."
+    },
+    {
+      "prompt": "Through which leaf structure do carbon dioxide and oxygen mainly enter and leave?",
+      "code": [],
+      "options": [
+        {
+          "text": "Stomata"
+        },
+        {
+          "text": "Guard cells"
+        },
+        {
+          "text": "The epidermis"
+        },
+        {
+          "text": "Chloroplasts"
+        }
+      ],
+      "answer": 0,
+      "why": "Stomata are the pores on the leaf surface that let carbon dioxide and oxygen move in and out.",
+      "wrongWhy": "Guard cells sit around each stoma and control its opening, but the gases pass through the pore itself. Answer: stomata."
+    }
+  ]
+}

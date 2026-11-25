@@ -1,0 +1,122 @@
+{
+  "id": "8.5",
+  "chapter": "Ch 8",
+  "title": "Series and Parallel Circuits",
+  "minutes": 5,
+  "notes": [
+    "A **series circuit** has only one path for current, so the components are connected one after another. The current is the same at every point: I1 = I2 = I3. The voltage of the cells is shared between the components, so V1 = V2 + V3. If the circuit is broken at any point, current stops and every bulb goes out.",
+    "A **parallel circuit** splits current into more than one **branch**. The current in the main loop equals the sum of the currents in the branches: I3 = I1 + I2. The voltage across each branch is the same, V1 = V2 = V3. If one branch breaks, current still flows in the others, which is why one street lamp can fail while the rest stay lit.",
+    "Branches do not always carry equal currents. A branch with a lower resistance gets a larger current. **Worked example:** a main loop carries 3 A and splits into two branches; if one branch takes 1 A, the other takes 3 A − 1 A = 2 A. Even so, the voltage across each branch stays the same."
+  ],
+  "table": {
+    "head": [
+      "Feature",
+      "Series circuit",
+      "Parallel circuit"
+    ],
+    "rows": [
+      [
+        "Current",
+        "Same at all points",
+        "Main loop = sum of branches"
+      ],
+      [
+        "Voltage",
+        "Sum across components = source",
+        "Same across every branch"
+      ],
+      [
+        "If broken",
+        "Current stops everywhere",
+        "Other branches still work"
+      ]
+    ]
+  },
+  "callout": "Exam tip: count the current paths first — one path means a series circuit, more than one means a parallel circuit.",
+  "questions": [
+    {
+      "prompt": "Two identical bulbs are connected in series with a 3 V battery. What is true about the current through each bulb?",
+      "code": [],
+      "options": [
+        {
+          "text": "It is larger in the bulb nearer the battery"
+        },
+        {
+          "text": "It is the same through both bulbs"
+        },
+        {
+          "text": "It is zero because the bulbs share the voltage"
+        },
+        {
+          "text": "It is halved in the second bulb"
+        }
+      ],
+      "answer": 1,
+      "why": "A series circuit has only one path, so the current is the same at all points.",
+      "wrongWhy": "Thinking current is used up as it passes through components. Answer: it is the same through both bulbs."
+    },
+    {
+      "prompt": "A parallel circuit is connected to a 3 V battery. The voltage across one branch is 3 V. What is the voltage across the other branch?",
+      "code": [],
+      "options": [
+        {
+          "text": "0 V"
+        },
+        {
+          "text": "1.5 V"
+        },
+        {
+          "text": "3 V"
+        },
+        {
+          "text": "6 V"
+        }
+      ],
+      "answer": 2,
+      "why": "In a parallel circuit the voltage across every branch equals the source voltage.",
+      "wrongWhy": "Dividing the voltage between the branches as if they were in series. Answer: 3 V."
+    },
+    {
+      "prompt": "In a parallel circuit the main loop carries 5 A and branch PQ carries 2 A. What current flows in branch RS?",
+      "code": [],
+      "options": [
+        {
+          "text": "2 A"
+        },
+        {
+          "text": "3 A"
+        },
+        {
+          "text": "5 A"
+        },
+        {
+          "text": "7 A"
+        }
+      ],
+      "answer": 1,
+      "why": "The main-loop current equals the sum of the branch currents, so 5 A − 2 A = 3 A.",
+      "wrongWhy": "Assuming branches always carry equal currents. Answer: 3 A."
+    },
+    {
+      "prompt": "Three identical bulbs are connected in parallel. Bulb X is unscrewed and removed. What happens?",
+      "code": [],
+      "options": [
+        {
+          "text": "All the other bulbs go out"
+        },
+        {
+          "text": "The other bulbs stay lit at the same brightness"
+        },
+        {
+          "text": "The other bulbs become dimmer"
+        },
+        {
+          "text": "Current stops flowing in the main loop"
+        }
+      ],
+      "answer": 1,
+      "why": "Breaking one branch leaves the other branches complete, and their voltage is unchanged.",
+      "wrongWhy": "Treating a parallel circuit like a series one, where one break stops everything. Answer: the other bulbs stay lit at the same brightness."
+    }
+  ]
+}

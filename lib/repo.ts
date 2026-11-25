@@ -151,6 +151,31 @@ const LEVEL_LABEL: Record<string, string> = {
   construct: "Hard",
 };
 
+export type NoteBlock =
+  | { type: "p"; text: string }
+  | { type: "table"; head: string[]; rows: string[][] }
+  | { type: "callout"; text: string };
+
+/** "| a | b |" lines become a table; anything else is a paragraph. */
+export function parseNotes(blocks: { kind: string; payload: Record<string, unknown> }[]): NoteBlock[] {
+  const out: NoteBlock[] = [];
+  for (const b of blocks) {
+    const md = String(b.payload?.md ?? "").trim();
+    if (!md) continue;
+    if (b.kind === "callout") { out.push({ type: "callout", text: md }); continue; }
+    const lines = md.split("\n").map((l) => l.trim()).filter(Boolean);
+    if (lines.length >= 2 && lines.every((l) => l.startsWith("|") && l.endsWith("|"))) {
+      const cells = (l: string) => l.slice(1, -1).split("|").map((c) => c.trim());
+      const head = cells(lines[0]!);
+      const rows = lines.slice(1).map(cells).filter((row) => row.length === head.length);
+      out.push({ type: "table", head, rows });
+    } else {
+      out.push({ type: "p", text: md });
+    }
+  }
+  return out;
+}
+
 export async function getLesson(slug: string) {
   const { rows } = await pool.query(
     `select l.id, l.slug, l.title, l.summary, l.minutes, l.module_id, m.code, m.name as module_name
@@ -162,11 +187,12 @@ export async function getLesson(slug: string) {
   const lesson = rows[0];
   if (!lesson) return null;
 
-  const { rows: blocks } = await pool.query(
-    `select id, level, payload from blocks
-      where lesson_id = $1 and kind = 'mcq' order by ord, created_at`,
+  const { rows: allBlocks } = await pool.query(
+    "select id, kind, level, payload from blocks where lesson_id = $1 order by ord, created_at",
     [lesson.id],
   );
+  const blocks = allBlocks.filter((b) => b.kind === "mcq");
+  const notes = parseNotes(allBlocks);
 
   const items: PlayerItem[] = blocks.map((b) => ({
     id: b.id,
@@ -182,7 +208,7 @@ export async function getLesson(slug: string) {
     wrongWhy: b.payload.wrongWhy ?? b.payload.why ?? "",
   }));
 
-  return { lesson, items };
+  return { lesson, items, notes };
 }
 
 export async function recordAnswer(args: {

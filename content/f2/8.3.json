@@ -1,0 +1,122 @@
+{
+  "id": "8.3",
+  "chapter": "Ch 8",
+  "title": "Voltage in Circuits",
+  "minutes": 4,
+  "notes": [
+    "A cell pushes electric charges around a circuit, and its **voltage** tells you how much energy it gives to those charges. The unit is the **volt** (V). You can picture voltage with the water model: a cell works like a pump, and a higher voltage is like a stronger pump that lifts water to a higher level. An AA-cell has a voltage of 1.5 V.",
+    "We measure voltage with a **voltmeter**, whose circuit symbol is V inside a circle. Connect it **across** the cell or bulb, in parallel, never in the same line as the current. The red knob goes to the positive terminal and the black knob to the negative terminal, because reversing them can damage the meter. If the meter has a 5-V knob, use it for readings below 5 V to get a more precise value.",
+    "Cells joined in the same direction add up: three 1.5 V cells give 1.5 + 1.5 + 1.5 = 4.5 V. If one cell is reversed, its voltage is subtracted, so 1.5 − 1.5 + 1.5 = 1.5 V. A higher voltage also makes the current larger, so a bulb glows brighter. In daily life a power bank is about 5 V, while mains electricity in Hong Kong is 220 V."
+  ],
+  "table": {
+    "head": [
+      "Cells connected",
+      "Overall voltage"
+    ],
+    "rows": [
+      [
+        "One 1.5 V cell",
+        "1.5 V"
+      ],
+      [
+        "Two 1.5 V cells, same direction",
+        "1.5 + 1.5 = 3.0 V"
+      ],
+      [
+        "Two 1.5 V cells, opposite directions",
+        "1.5 − 1.5 = 0 V"
+      ],
+      [
+        "Three 1.5 V cells, one reversed",
+        "1.5 − 1.5 + 1.5 = 1.5 V"
+      ]
+    ]
+  },
+  "callout": "Exam tip: add the voltages of cells pointing the same way, subtract any cell that is reversed, then use the total to judge the current.",
+  "questions": [
+    {
+      "prompt": "What does the voltage of a cell tell you?",
+      "code": [],
+      "options": [
+        {
+          "text": "How much chemical energy the cell stores"
+        },
+        {
+          "text": "How fast the electric charges move through the wires"
+        },
+        {
+          "text": "How much energy the cell supplies to the electric charges in the circuit"
+        },
+        {
+          "text": "How long the cell will last before it goes flat"
+        }
+      ],
+      "answer": 2,
+      "why": "Voltage measures the energy supplied to the charges, not the size or lifetime of the cell.",
+      "wrongWhy": "It is easy to confuse voltage with stored chemical energy or with how long a cell lasts, but two 1.5-V cells of different sizes have the same voltage. Answer: how much energy the cell supplies to the electric charges."
+    },
+    {
+      "prompt": "A student connects a voltmeter to measure the voltage of a cell. Which connection is correct?",
+      "code": [],
+      "options": [
+        {
+          "text": "The voltmeter in the same line as the cell, so the current flows through it"
+        },
+        {
+          "text": "Red knob to the positive terminal and black knob to the negative terminal, with the voltmeter across the cell"
+        },
+        {
+          "text": "Red knob to the negative terminal and black knob to the positive terminal, with the voltmeter across the cell"
+        },
+        {
+          "text": "The voltmeter across the switch, with either knob on each side"
+        }
+      ],
+      "answer": 1,
+      "why": "The red (+) knob must meet the positive terminal, and the meter sits across the cell in parallel.",
+      "wrongWhy": "Putting the meter in the current path or swapping the knobs is wrong and can damage it; the red knob belongs on the positive terminal. Answer: red knob to positive, black to negative, across the cell."
+    },
+    {
+      "prompt": "A bulb is lit by one cell. A second identical cell is added in the same direction. What happens?",
+      "code": [],
+      "options": [
+        {
+          "text": "The voltage and the current both increase, so the bulb glows more brightly"
+        },
+        {
+          "text": "The voltage increases but the current stays the same, so the brightness is unchanged"
+        },
+        {
+          "text": "The current increases but the voltage stays the same, so the bulb glows more brightly"
+        },
+        {
+          "text": "The voltage increases but the current decreases, so the bulb glows more dimly"
+        }
+      ],
+      "answer": 0,
+      "why": "Cells in the same direction add their voltages, which raises the current and brightens the bulb.",
+      "wrongWhy": "Voltage and current rise together in a simple circuit, so the brightness cannot stay the same or drop. Answer: both increase and the bulb glows more brightly."
+    },
+    {
+      "prompt": "Two 1.5 V cells are connected in opposite directions. What is the voltage across them?",
+      "code": [],
+      "options": [
+        {
+          "text": "1.5 V"
+        },
+        {
+          "text": "3.0 V"
+        },
+        {
+          "text": "0.75 V"
+        },
+        {
+          "text": "0 V"
+        }
+      ],
+      "answer": 3,
+      "why": "A reversed cell subtracts its voltage, so 1.5 − 1.5 = 0 V.",
+      "wrongWhy": "The voltages are not added when the cells oppose each other; the reversed cell cancels the other. Answer: 0 V."
+    }
+  ]
+}

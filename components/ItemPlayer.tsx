@@ -2,7 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import type { PlayerItem } from "@/lib/repo";
+import type { NoteBlock, PlayerItem } from "@/lib/repo";
+
+/* **term** renders as a bold term, without pulling in a markdown library */
+function inline(text: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) =>
+    part.startsWith("**") && part.endsWith("**")
+      ? <b key={i}>{part.slice(2, -2)}</b>
+      : <span key={i}>{part}</span>,
+  );
+}
 
 type Props = {
   items: PlayerItem[];
@@ -12,6 +22,7 @@ type Props = {
   nextSlug?: string;
   nextTitle?: string;
   lessonNumber?: number;
+  notes?: NoteBlock[];
 };
 
 const btnLink = {
@@ -28,13 +39,16 @@ export default function ItemPlayer({
   nextSlug,
   nextTitle,
   lessonNumber,
+  notes = [],
 }: Props) {
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [checked, setChecked] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
   const [done, setDone] = useState(false);
+  const [reading, setReading] = useState(notes.length > 0);
   const start = useRef(0);
+  const step = String(lessonNumber ?? 1).padStart(2, "0");
 
   useEffect(() => {
     start.current = performance.now();
@@ -89,6 +103,49 @@ export default function ItemPlayer({
     );
   }
 
+  if (reading) {
+    return (
+      <div className="lesson-screen">
+        <div className="lbar">
+          <Link href="/drill" className="linkish" aria-label="Leave lesson">✕</Link>
+          <span className="pbar"><i style={{ width: "0%" }} /></span>
+          <span className="count">{step} · notes</span>
+        </div>
+
+        <div className="notes">
+          <div className="notes-kicker mono">Read first</div>
+          <h1 className="notes-title">{lessonTitle}</h1>
+          {notes.map((n, k) => {
+            if (n.type === "table") {
+              return (
+                <table key={k} className="cmp">
+                  <thead><tr>{n.head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
+                  <tbody>
+                    {n.rows.map((row, ri) => (
+                      <tr key={ri}>{row.map((c, ci) => (ci === 0 ? <th key={ci}>{c}</th> : <td key={ci}>{c}</td>))}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              );
+            }
+            if (n.type === "callout") {
+              return (
+                <div key={k} className="callout"><b>EXAM</b><span>{inline(n.text)}</span></div>
+              );
+            }
+            return <p key={k} className="notes-p">{inline(n.text)}</p>;
+          })}
+        </div>
+
+        <div className="band">
+          <button className="btn" onClick={() => setReading(false)}>
+            {items.length ? `Start questions · ${items.length}` : "Back to the path"}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   const item = items[i];
   if (items.length === 0 || !item) {
     return (
@@ -110,7 +167,6 @@ export default function ItemPlayer({
   const correct = picked === item.answer;
   const last = i === items.length - 1;
   const pct = Math.round(((i + 1) / items.length) * 100);
-  const step = String(lessonNumber ?? 1).padStart(2, "0");
 
   const pick = (k: number) => {
     if (checked) return;

@@ -1,0 +1,127 @@
+{
+  "id": "7.2",
+  "chapter": "Ch 7",
+  "title": "Photosynthesis: Making Plant Food",
+  "minutes": 4,
+  "notes": [
+    "Plants do not need to eat because they make their own food by **photosynthesis**. It happens mainly in the leaves, inside green cell parts called **chloroplasts**. These contain a green pigment, **chlorophyll**, which absorbs light energy. That energy is used to change carbon dioxide from the air and water from the soil into food, which is **glucose**. Oxygen is released as a by-product.",
+    "Photosynthesis is a **chemical change**, because new substances are formed. The raw materials used up, carbon dioxide and water, are called the **reactants**; glucose and oxygen are the **products**. The word equation is: carbon dioxide + water → glucose + oxygen, with light energy and chlorophyll written above the arrow. The chemical equation is 6CO2 + 6H2O → C6H12O6 + 6O2.",
+    "The light energy absorbed by chlorophyll is converted into **chemical energy** stored in food. Some glucose is used at once for energy; the rest is turned into **starch** and stored in the leaf. Glucose is soluble and sweet, while starch is insoluble and not sweet — that is why rice and potato are rich in starch. Plants are **producers** in food chains, and the animals that eat them are **consumers**."
+  ],
+  "table": {
+    "head": [
+      "Substance",
+      "Chemical formula",
+      "Role"
+    ],
+    "rows": [
+      [
+        "Carbon dioxide",
+        "CO2",
+        "Reactant from air"
+      ],
+      [
+        "Water",
+        "H2O",
+        "Reactant from soil"
+      ],
+      [
+        "Glucose",
+        "C6H12O6",
+        "Product (food)"
+      ],
+      [
+        "Oxygen",
+        "O2",
+        "By-product, released into air"
+      ]
+    ]
+  },
+  "callout": "Exam tip: never write that photosynthesis 'makes energy'. Energy cannot be created — light energy is **converted** into chemical energy stored in food.",
+  "questions": [
+    {
+      "prompt": "A destarched plant is left in bright light for four hours. Part of one leaf is wrapped in aluminium foil. After an iodine test, the wrapped part stays brown but the exposed parts turn blue-black. What does this show?",
+      "code": [],
+      "options": [
+        {
+          "text": "Light is necessary for photosynthesis"
+        },
+        {
+          "text": "Chlorophyll is necessary for photosynthesis"
+        },
+        {
+          "text": "Carbon dioxide is necessary for photosynthesis"
+        },
+        {
+          "text": "The plant was not destarched properly"
+        }
+      ],
+      "answer": 0,
+      "why": "Only the part kept in the dark made no starch, so the missing factor is light.",
+      "wrongWhy": "The foil blocks light, not chlorophyll or carbon dioxide, and the brown result on its own shows destarching worked. Answer: light is necessary for photosynthesis."
+    },
+    {
+      "prompt": "Light energy absorbed by chlorophyll is converted into which form of energy during photosynthesis?",
+      "code": [],
+      "options": [
+        {
+          "text": "Heat energy"
+        },
+        {
+          "text": "Chemical energy stored in food"
+        },
+        {
+          "text": "Sound energy"
+        },
+        {
+          "text": "Light energy of a different colour"
+        }
+      ],
+      "answer": 1,
+      "why": "Chlorophyll traps light energy and stores it as chemical energy in glucose.",
+      "wrongWhy": "Light is not simply turned into heat or sound here — it is stored in the food made. Answer: chemical energy."
+    },
+    {
+      "prompt": "In the equation 6CO2 + 6H2O → C6H12O6 + 6O2, why is oxygen described as a by-product?",
+      "code": [],
+      "options": [
+        {
+          "text": "It is used up during the reaction"
+        },
+        {
+          "text": "It is made in the reaction, but the plant's main useful product is glucose"
+        },
+        {
+          "text": "It is not formed at all"
+        },
+        {
+          "text": "It is stored in the leaf as starch"
+        }
+      ],
+      "answer": 1,
+      "why": "Oxygen is produced alongside glucose, which is the food the plant actually needs.",
+      "wrongWhy": "Oxygen is definitely formed and released, not used up or stored as starch. Answer: it is made, but glucose is the main product."
+    },
+    {
+      "prompt": "In the food chain grass → rabbit → fox, which statement is correct?",
+      "code": [],
+      "options": [
+        {
+          "text": "Grass is a consumer and the rabbit is a producer"
+        },
+        {
+          "text": "Grass is a producer, while the rabbit and fox are consumers"
+        },
+        {
+          "text": "The fox is a producer because it is at the top of the chain"
+        },
+        {
+          "text": "All three organisms are producers"
+        }
+      ],
+      "answer": 1,
+      "why": "Plants make their own food, so they are producers; animals that feed on plants or other animals are consumers.",
+      "wrongWhy": "Sitting at the top of a chain does not make an animal a producer — only organisms that make their own food are producers. Answer: grass is the producer."
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "7.1",
+  "chapter": "Ch 7",
+  "title": "Air: Composition and Tests",
+  "minutes": 4,
+  "notes": [
+    "Air is a **mixture** of gases, which means the gases are mixed but not chemically joined together. It is mostly **nitrogen** (78%) and **oxygen** (21%), with small amounts of **carbon dioxide** (0.04%), **noble gases** such as argon, neon and helium (about 0.9%), plus water vapour and other gases. The amount of water vapour changes with the weather, so it is not fixed.",
+    "Because gases look alike, scientists identify them with tests. **Oxygen** relights a glowing splint and supports burning. **Carbon dioxide** turns lime water from colourless to milky and turns hydrogencarbonate indicator from red to yellow. Water turns dry cobalt chloride paper from blue to pink. **Nitrogen** has no simple test; it is unreactive, so we identify it by ruling out the others.",
+    "A worked example: a burning splint is put into a tube of an unknown gas and it burns more brightly. The gas must be **oxygen**, because oxygen supports burning. If the splint went out and the lime water turned milky instead, the gas would be **carbon dioxide**."
+  ],
+  "table": {
+    "head": [
+      "Gas",
+      "Test",
+      "Example use"
+    ],
+    "rows": [
+      [
+        "Oxygen",
+        "Relights a glowing splint",
+        "Welding torch, oxygen bottles"
+      ],
+      [
+        "Carbon dioxide",
+        "Turns lime water milky",
+        "Fire extinguishers, dry ice"
+      ],
+      [
+        "Nitrogen",
+        "No simple test",
+        "Food packaging, liquid nitrogen"
+      ]
+    ]
+  },
+  "callout": "Exam tip: learn the percentages as a set — nitrogen 78%, oxygen 21%, carbon dioxide 0.04%, noble gases about 0.9%. Questions often ask for them in ascending or descending order.",
+  "questions": [
+    {
+      "prompt": "Which option lists the gases in ascending order of their percentage in air?",
+      "code": [],
+      "options": [
+        {
+          "text": "Nitrogen, oxygen, carbon dioxide"
+        },
+        {
+          "text": "Carbon dioxide, oxygen, nitrogen"
+        },
+        {
+          "text": "Oxygen, carbon dioxide, nitrogen"
+        },
+        {
+          "text": "Carbon dioxide, nitrogen, oxygen"
+        }
+      ],
+      "answer": 1,
+      "why": "Carbon dioxide is 0.04%, oxygen 21% and nitrogen 78%, so that is ascending order.",
+      "wrongWhy": "Students often copy the list in the order it appears in the notes instead of by size. Answer: carbon dioxide (0.04%), oxygen (21%), nitrogen (78%)."
+    },
+    {
+      "prompt": "Which statement best explains why air is a mixture?",
+      "code": [],
+      "options": [
+        {
+          "text": "The gases in air are chemically joined together."
+        },
+        {
+          "text": "No new substance is formed when the gases mix."
+        },
+        {
+          "text": "Air is made of only nitrogen and oxygen."
+        },
+        {
+          "text": "Air has a fixed amount of water vapour."
+        }
+      ],
+      "answer": 1,
+      "why": "A mixture forms when substances mix without a new substance being made, and the gases in air are not chemically joined.",
+      "wrongWhy": "Students often think any blend of gases must be a compound, but a compound needs chemical joining. Answer: no new substance is formed."
+    },
+    {
+      "prompt": "A burning splint is put into a test tube of an unknown gas and it burns more brightly. Which gas is in the tube?",
+      "code": [],
+      "options": [
+        {
+          "text": "Carbon dioxide"
+        },
+        {
+          "text": "Water vapour"
+        },
+        {
+          "text": "Nitrogen"
+        },
+        {
+          "text": "Oxygen"
+        }
+      ],
+      "answer": 3,
+      "why": "Oxygen supports burning, so a splint burns more brightly in it.",
+      "wrongWhy": "Students confuse 'burns more brightly' with 'goes out', which is what carbon dioxide would cause. Answer: oxygen."
+    },
+    {
+      "prompt": "Dry ice is solid carbon dioxide. The gas released from it is collected in a test tube and shaken with lime water. What is seen?",
+      "code": [],
+      "options": [
+        {
+          "text": "The lime water turns from colourless to milky."
+        },
+        {
+          "text": "The lime water turns from red to yellow."
+        },
+        {
+          "text": "The lime water stays colourless."
+        },
+        {
+          "text": "The lime water turns from blue to pink."
+        }
+      ],
+      "answer": 0,
+      "why": "Carbon dioxide turns lime water from colourless to milky.",
+      "wrongWhy": "Red to yellow is the hydrogencarbonate indicator result, and blue to pink is the test for water. Answer: colourless to milky."
+    }
+  ]
+}

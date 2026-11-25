@@ -1,0 +1,118 @@
+{
+  "id": "8.4",
+  "chapter": "Ch 8",
+  "title": "Resistance and Resistors",
+  "minutes": 4,
+  "notes": [
+    "**Resistance** measures how difficult it is for a current to pass through a conductor. A good conductor, such as copper, has a low resistance, so charges flow through it easily. The unit of resistance is the **ohm** (Ω), named after the scientist Georg Ohm. In Practical 8.10, a copper wire and a nichrome wire of the same length and thickness were compared: the copper wire had the lower resistance and let a larger current flow, so the bulb was brighter.",
+    "A **resistor** is a circuit component with a certain value of resistance. It has no positive or negative terminal, so its **polarity** does not matter and you can connect it either way round. If the voltage stays the same, a higher resistance gives a smaller current, because the current finds it harder to flow. That is why resistors are built into appliances to keep the current at a safe size. Worked example: in Practical 8.9, replacing a resistor with one of higher resistance made the ammeter reading fall.",
+    "The resistance of a wire depends on its material, length and thickness. For wires of the same material, a longer wire or a thinner wire has a higher resistance. A **rheostat** is a variable resistor whose resistance can be adjusted. In a sliding rheostat, moving the contact so the current passes through a shorter length of resistive wire lowers the resistance, so the current rises and a bulb gets brighter. Worked example: a short, thick USB cable has a lower resistance, so it charges a phone faster."
+  ],
+  "table": {
+    "head": [
+      "Factor",
+      "Effect on resistance"
+    ],
+    "rows": [
+      [
+        "Material",
+        "Copper wire has a lower resistance than nichrome wire of the same length and thickness"
+      ],
+      [
+        "Length",
+        "A longer wire has a higher resistance"
+      ],
+      [
+        "Thickness",
+        "A thinner wire has a higher resistance"
+      ]
+    ]
+  },
+  "callout": "Exam tip: when a bulb dims, follow the chain — a longer or thinner resistive wire gives a higher resistance, a smaller current and a dimmer bulb.",
+  "questions": [
+    {
+      "prompt": "Which statement about resistance is correct?",
+      "code": [],
+      "options": [
+        {
+          "text": "A good conductor has a high resistance."
+        },
+        {
+          "text": "Resistance measures how difficult it is for current to pass through a conductor."
+        },
+        {
+          "text": "Resistance is measured in volts."
+        },
+        {
+          "text": "A resistor must be connected the right way round because it has polarity."
+        }
+      ],
+      "answer": 1,
+      "why": "Resistance measures the opposition of a material to the flow of current.",
+      "wrongWhy": "Good conductors have a low resistance, not a high one, and a resistor has no polarity. Answer: resistance measures how difficult it is for current to flow."
+    },
+    {
+      "prompt": "Two resistors, of 5 Ω and 20 Ω, are connected in turn to the same cell. What happens to the current?",
+      "code": [],
+      "options": [
+        {
+          "text": "The current is larger with the 20 Ω resistor."
+        },
+        {
+          "text": "The current is the same in both cases."
+        },
+        {
+          "text": "The current is larger with the 5 Ω resistor."
+        },
+        {
+          "text": "The current falls to zero with the 20 Ω resistor."
+        }
+      ],
+      "answer": 2,
+      "why": "At a fixed voltage, a higher resistance gives a smaller current.",
+      "wrongWhy": "A higher resistance makes it harder for current to flow, so the smaller resistor gives the larger current. Answer: the current is larger with the 5 Ω resistor."
+    },
+    {
+      "prompt": "In a sliding rheostat, the contact is moved so that the current passes through a shorter length of resistive wire. What happens to the bulb in the circuit?",
+      "code": [],
+      "options": [
+        {
+          "text": "It becomes brighter because the resistance decreases."
+        },
+        {
+          "text": "It becomes dimmer because the resistance increases."
+        },
+        {
+          "text": "Its brightness does not change."
+        },
+        {
+          "text": "It becomes brighter because the resistance increases."
+        }
+      ],
+      "answer": 0,
+      "why": "A shorter length of resistive wire means lower resistance, so a larger current flows and the bulb is brighter.",
+      "wrongWhy": "A longer wire raises resistance and dims the bulb; shortening the wire lowers it. Answer: it becomes brighter because the resistance decreases."
+    },
+    {
+      "prompt": "Four wires have the same length. Which one has the highest resistance?",
+      "code": [],
+      "options": [
+        {
+          "text": "A thick copper wire"
+        },
+        {
+          "text": "A thin copper wire"
+        },
+        {
+          "text": "A thick nichrome wire"
+        },
+        {
+          "text": "A thin nichrome wire"
+        }
+      ],
+      "answer": 3,
+      "why": "Nichrome has a higher resistance than copper, and a thin wire has a higher resistance than a thick one.",
+      "wrongWhy": "Both the material and the thickness matter, so the worst case combines nichrome with a thin wire. Answer: a thin nichrome wire."
+    }
+  ]
+}

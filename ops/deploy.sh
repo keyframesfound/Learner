@@ -12,6 +12,9 @@ if grep -q '^DATABASE_URL=' .env; then
   DBURL=$(grep '^DATABASE_URL=' .env | cut -d= -f2-)
   psql "$DBURL" -q -v ON_ERROR_STOP=1 -f db/migrate-prod.sql || echo "migrate: warning"
   psql "$DBURL" -q -v ON_ERROR_STOP=1 -f db/seed.sql || echo "seed: warning"
+  if [ -f db/seed-f2.sql ]; then
+    psql "$DBURL" -q -v ON_ERROR_STOP=1 -f db/seed-f2.sql || echo "seed-f2: warning"
+  fi
 fi
 
 npm ci --no-audit --no-fund

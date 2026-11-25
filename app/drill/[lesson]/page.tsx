@@ -7,7 +7,7 @@ export default async function ItemPage({ params }: { params: Promise<{ lesson: s
   const [v, data] = await Promise.all([viewer(), getLesson(slug)]);
   if (!data) notFound();
 
-  const { lesson, items } = data;
+  const { lesson, items, notes } = data;
 
   let nextSlug: string | undefined;
   let nextTitle: string | undefined;
@@ -32,6 +32,7 @@ export default async function ItemPage({ params }: { params: Promise<{ lesson: s
       nextSlug={nextSlug}
       nextTitle={nextTitle}
       lessonNumber={lessonNumber}
+      notes={notes}
     />
   );
 }

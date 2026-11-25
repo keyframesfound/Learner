@@ -721,3 +721,17 @@ body {
   .bb-say { font-size: 17px; }
   .bb-opt { min-height: 54px; font-size: 14px; }
 }
+
+/* ── lesson notes ──────────────────────────── */
+.notes { padding: 6px 18px 8px; max-width: 760px; }
+.notes-kicker { font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-3); margin-top: 12px; }
+.notes-title { font-family: var(--font-display); font-size: 30px; letter-spacing: -.9px; line-height: 1.05; margin: 6px 0 14px; }
+.notes-p { font-size: 15px; line-height: 1.65; color: var(--ink-2); margin-bottom: 12px; }
+.notes-p b { color: var(--ink); }
+.notes .cmp { margin: 6px 0 16px; background: #fff; }
+.notes .callout { margin: 4px 0 14px; }
+@media (min-width: 900px) {
+  .notes { padding: 10px 32px 16px; }
+  .notes-title { font-size: 36px; }
+  .notes-p { font-size: 16px; }
+}

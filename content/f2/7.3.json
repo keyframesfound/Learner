@@ -1,0 +1,122 @@
+{
+  "id": "7.3",
+  "chapter": "Ch 7",
+  "title": "Energy from Food",
+  "minutes": 4,
+  "notes": [
+    "Food provides energy for everything our bodies do — running, reading, and even sleeping, when we still need energy to breathe and keep our heart beating. The **energy value** of a food is the amount of energy a certain quantity of it provides. It is shown on **nutrition labels** in **kilocalories (kcal)** or **kilojoules (kJ)**. For example, a snack labelled 100 kcal provides 100 × 4.2 = 420 kJ, because 1 kcal = 4.2 kJ.",
+    "Living things do not burn their food. Instead, food is broken down gradually inside cells by **respiration**. During respiration, some of the chemical energy stored in food (**glucose**) is converted into other useful forms of energy for body activities. **Oxygen** is usually needed, and **carbon dioxide** and **water** are usually produced. Respiration is a series of controlled chemical reactions, so energy is released a little at a time rather than in one hot burst.",
+    "The process is summarised by two equations. The word equation is: food (glucose) + oxygen → carbon dioxide + water. The chemical equation is: C6H12O6 + 6 O2 → 6 CO2 + 6 H2O. Energy is released in the process. Compare this with photosynthesis, which stores energy in food: respiration does the opposite and releases that energy again."
+  ],
+  "table": {
+    "head": [
+      "Feature",
+      "Photosynthesis",
+      "Respiration"
+    ],
+    "rows": [
+      [
+        "Reactants",
+        "Carbon dioxide and water",
+        "Glucose and oxygen"
+      ],
+      [
+        "Products",
+        "Glucose and oxygen",
+        "Carbon dioxide and water"
+      ],
+      [
+        "Energy change",
+        "Light energy to chemical energy in food",
+        "Chemical energy in food to other useful energy"
+      ]
+    ]
+  },
+  "callout": "Exam tip: respiration is not breathing. Breathing only moves air in and out of the body, while respiration is the chemical reaction inside every living cell, plant or animal.",
+  "questions": [
+    {
+      "prompt": "A 50 g serving of food has an energy value of 300 kcal. Using 1 kcal = 4.2 kJ, what is its energy value in kJ?",
+      "code": [],
+      "options": [
+        {
+          "text": "71 kJ"
+        },
+        {
+          "text": "300 kJ"
+        },
+        {
+          "text": "1 260 kJ"
+        },
+        {
+          "text": "630 kJ"
+        }
+      ],
+      "answer": 2,
+      "why": "Multiply the energy in kcal by 4.2, so 300 × 4.2 = 1 260 kJ.",
+      "wrongWhy": "Dividing by 4.2 instead of multiplying gives 71 kJ. Answer: 1 260 kJ."
+    },
+    {
+      "prompt": "Why does respiration release the energy in food gradually, with no flame?",
+      "code": [],
+      "options": [
+        {
+          "text": "Because respiration is a series of controlled chemical reactions inside cells."
+        },
+        {
+          "text": "Because respiration does not really release any energy."
+        },
+        {
+          "text": "Because respiration only happens when food is burnt."
+        },
+        {
+          "text": "Because respiration uses light energy from the Sun."
+        }
+      ],
+      "answer": 0,
+      "why": "Glucose is broken down step by step by controlled reactions in cells, so energy comes out slowly.",
+      "wrongWhy": "Burning releases all the energy at once with a flame, but respiration is controlled inside cells. Answer: it is a series of controlled chemical reactions inside cells."
+    },
+    {
+      "prompt": "Which word equation summarises respiration?",
+      "code": [],
+      "options": [
+        {
+          "text": "carbon dioxide + water → glucose + oxygen"
+        },
+        {
+          "text": "glucose + oxygen → carbon dioxide + water"
+        },
+        {
+          "text": "glucose + carbon dioxide → oxygen + water"
+        },
+        {
+          "text": "glucose → carbon dioxide + water + oxygen"
+        }
+      ],
+      "answer": 1,
+      "why": "Respiration takes in glucose and oxygen and gives out carbon dioxide and water.",
+      "wrongWhy": "The first option is the photosynthesis equation with reactants and products swapped. Answer: glucose + oxygen → carbon dioxide + water."
+    },
+    {
+      "prompt": "In which cells does respiration take place?",
+      "code": [],
+      "options": [
+        {
+          "text": "Only in animal cells"
+        },
+        {
+          "text": "Only in plant cells"
+        },
+        {
+          "text": "Only in cells that receive light"
+        },
+        {
+          "text": "In both plant cells and animal cells"
+        }
+      ],
+      "answer": 3,
+      "why": "Every living cell needs energy, so both plant and animal cells respire.",
+      "wrongWhy": "Light is needed for photosynthesis, not respiration, which happens in all living cells. Answer: in both plant cells and animal cells."
+    }
+  ]
+}
