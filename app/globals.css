@@ -735,3 +735,19 @@ body {
   .notes-title { font-size: 36px; }
   .notes-p { font-size: 16px; }
 }
+
+/* ── nothing may widen the layout viewport ─────────────
+   a fixed-size child used to let iOS Safari shrink-to-fit the whole page,
+   which looks like broken scaling. clip is safer than hidden: it keeps
+   position: sticky working. horizontal scrollers (.subs) still scroll. */
+html, body { max-width: 100%; overflow-x: clip; }
+img, svg, video, canvas { max-width: 100%; }
+.page, .app, .hd, .cards, .rows, .table { min-width: 0; }
+
+@media (max-width: 400px) {
+  .hd h1 { font-size: 24px; }
+  .q { font-size: 24px; }
+  .card, .row { padding: 11px 12px; }
+  .done-title { font-size: 30px; }
+  .notes-title { font-size: 27px; }
+}
