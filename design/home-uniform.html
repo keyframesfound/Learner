@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — home × drills language</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6; --ink:#111; --ink-2:#4A4A45; --ink-3:#8C8A80; --line:#D8D4C6;
+    --lime:#D4FF3F; --orange:#FF4D1C; --blue:#2D5BFF; --violet:#7C4DFF;
+    --green:#17A34A; --gold:#FFC94A; --red-ink:#C4271B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:'Space Grotesk',system-ui,sans-serif;background:#1A1A18;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px;color:var(--ink)}
+  .switcher{display:flex;gap:5px;background:#0E0E0C;padding:5px;border-radius:10px}
+  .switcher button{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.7px;
+    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:9px 13px;border-radius:6px;cursor:pointer}
+  .switcher button.on{background:var(--lime);color:var(--ink)}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.8px;color:#6E6E66}
+  .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+
+  .device{position:relative;width:390px;height:844px;background:var(--paper);
+    border:3px solid #000;border-radius:14px;box-shadow:10px 10px 0 rgba(0,0,0,.55);overflow:hidden}
+  .statusbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border-bottom:3px solid var(--ink)}
+  .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+
+  .screen{position:absolute;inset:40px 0 0 0;display:none;flex-direction:column;padding-bottom:92px;overflow:hidden}
+  .screen.on{display:flex}
+  .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  /* ── shared with drills ───────────────────── */
+  .hd{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 18px 10px}
+  .hd .mod{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1.4px;
+    text-transform:uppercase;color:var(--ink-2)}
+  .hd h1{font-family:'Archivo Black',sans-serif;font-size:26px;letter-spacing:-.6px;line-height:1.05;margin-top:3px}
+  .streak{display:flex;align-items:center;gap:5px;border:3px solid var(--ink);border-radius:999px;padding:4px 9px;
+    background:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;white-space:nowrap}
+  .streak svg{width:12px;height:12px;color:var(--orange)}
+
+  .segs{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;padding:12px 18px 0}
+  .segs i{height:10px;background:var(--paper);border:2px solid var(--ink);border-radius:2px}
+  .segs i.on{background:var(--ink)}
+
+  .rail{height:4px;background:var(--line);position:relative;border-radius:99px}
+  .rail b{position:absolute;inset:0 auto 0 0;background:var(--ink);border-radius:99px}
+
+  /* full-bleed ink band — the drills "current lesson" object */
+  .band{background:var(--ink);color:var(--paper);padding:15px 18px}
+  .band .tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.4px;
+    text-transform:uppercase;color:var(--ink-3);font-weight:700}
+  .band h2{font-family:'Archivo Black',sans-serif;font-size:19px;letter-spacing:-.4px;margin-top:3px;line-height:1.1}
+  .band .meta{font-size:12.5px;color:#B9B9AE;margin-top:3px}
+  .band .row2{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:13px}
+  .band .rail{background:#333;flex:1}
+  .band .rail b{background:var(--lime)}
+
+  .btn{height:40px;padding:0 16px;border:2px solid var(--ink);border-radius:7px;background:var(--lime);
+    color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+
+  /* list rows — same measurement as drills lesson rows */
+  .list{list-style:none}
+  .row{display:flex;align-items:center;gap:13px;padding:14px 18px;border-bottom:1px solid var(--line)}
+  .row .gut{width:16px;text-align:center;font-size:13px;color:var(--ink-3);flex:0 0 16px}
+  .row .dot{width:9px;height:9px;border-radius:50%;background:var(--dot);flex:0 0 9px}
+  .row .txt{flex:1;min-width:0}
+  .row .txt b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.1px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .row .txt span{font-size:12px;color:var(--ink-3)}
+  .row .val{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700;color:var(--ink-2);white-space:nowrap}
+  .row.due .txt b{color:var(--ink)}
+  .row .flag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.7px;text-transform:uppercase;
+    color:var(--red-ink);font-weight:700}
+
+  .next{border:2px solid var(--ink);border-radius:6px;background:var(--lime);padding:6px 10px;
+    font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap}
+  .next:active{transform:translateY(1px)}
+
+  .sec{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--ink-3);padding:18px 18px 2px;font-weight:700}
+
+  .cap{padding:12px 18px 0;font-size:12px;color:var(--ink-2)}
+
+  /* tab bar */
+  .tabbar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;
+    gap:2px;border-top:3px solid var(--ink);background:var(--paper);padding:10px 34px 14px}
+  .tab{flex:1;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .pill{position:relative;display:grid;place-items:center;gap:2px;padding:6px 8px 5px;border:3px solid transparent;
+    border-radius:10px;color:var(--ink-3);min-width:56px}
+  .pill svg{width:20px;height:20px}
+  .lbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase}
+  .tab.on .pill{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+  .tab[data-t="learn"].on .pill{background:var(--lime);color:var(--ink)}
+  .tab[data-t="drills"].on .pill{background:var(--orange);color:#fff}
+  .tab[data-t="board"].on .pill{background:var(--blue);color:#fff}
+  .tab[data-t="me"].on .pill{background:var(--gold);color:var(--ink)}
+  .badge{position:absolute;top:-7px;right:-7px;min-width:16px;height:16px;padding:0 4px;display:grid;place-items:center;
+    background:var(--red-ink);color:#fff;border:2px solid var(--ink);border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;font-style:normal}
+
+  .ic{width:18px;height:18px;flex:0 0 18px;color:var(--dot);display:block}
+  .ic .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .ic .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .ic .l{fill:#6FBF3A;stroke:none}
+</style>
+</head>
+<body>
+
+<div class="switcher">
+  <button data-v="a" class="on">1 · Band</button>
+  <button data-v="b">2 · Meter</button>
+  <button data-v="c">3 · Index</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+
+  <!-- ══════ 1 · BAND ══════ -->
+  <section class="screen on" id="v-a">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <div class="mod">DSE 2027 · 138 days</div>
+          <h1>Today</h1>
+        </div>
+        <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
+      </div>
+
+      <div class="band">
+        <div class="tag">Daily mix</div>
+        <h2>12 items due</h2>
+        <div class="meta">About 6 minutes · mixed across your classes</div>
+        <div class="row2">
+          <div class="rail"><b style="width:25%"></b></div>
+          <button class="btn">Start</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <span class="txt"><b>Revision</b><span>133 of 214 items seen</span></span>
+        <span class="val">62%</span>
+      </div>
+
+      <div class="sec">Classes</div>
+
+      <ul class="list">
+        <li class="row" style="--dot:#2D5BFF">
+          <svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
+          <span class="txt"><b>4B · ICT</b><span>Next: Valid identifiers</span></span>
+          <button class="next">Next</button>
+        </li>
+        <li class="row" style="--dot:#7C4DFF">
+          <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
+          <span class="txt"><b>4B · Physics</b><span>Next: Newton's third law</span></span>
+          <button class="next">Next</button>
+        </li>
+        <li class="row" style="--dot:#17A34A">
+          <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>
+          <span class="txt"><b>4B · Biology</b><span>Next: Monohybrid crosses</span></span>
+          <button class="next">Next</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════ 2 · METER ══════ -->
+  <section class="screen" id="v-b">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <div class="mod">DSE 2027 · Paper 1 in 138 days</div>
+          <h1>Today</h1>
+        </div>
+        <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
+      </div>
+
+      <div class="segs">
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="cap">62% of the syllabus seen · 133 of 214 items</div>
+
+      <div class="band" style="margin-top:16px">
+        <div class="row2" style="margin-top:0">
+          <div>
+            <div class="tag">Today</div>
+            <h2 style="font-size:17px">12 items due</h2>
+            <div class="meta" style="margin-top:2px">Daily mix · 6 min</div>
+          </div>
+          <button class="btn">Start</button>
+        </div>
+      </div>
+
+      <div class="sec">Classes</div>
+
+      <ul class="list">
+        <li class="row" style="--dot:#2D5BFF">
+          <svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
+          <span class="txt"><b>4B · ICT</b><span>Next: Valid identifiers</span></span>
+          <span class="val">5/14</span>
+          <button class="next">Next</button>
+        </li>
+        <li class="row" style="--dot:#7C4DFF">
+          <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
+          <span class="txt"><b>4B · Physics</b><span>Next: Newton's third law</span></span>
+          <span class="val">3/12</span>
+          <button class="next">Next</button>
+        </li>
+        <li class="row" style="--dot:#17A34A">
+          <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>
+          <span class="txt"><b>4B · Biology</b><span>Next: Monohybrid crosses</span></span>
+          <span class="val">2/11</span>
+          <button class="next">Next</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══════ 3 · INDEX ══════ -->
+  <section class="screen" id="v-c">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <div class="mod">DSE 2027 · 138 days</div>
+          <h1>Today</h1>
+        </div>
+        <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
+      </div>
+
+      <div style="padding:2px 18px 4px"><div class="rail"><b style="width:62%"></b></div></div>
+      <div class="cap" style="padding-top:7px">133 of 214 items seen</div>
+
+      <ul class="list" style="margin-top:14px">
+        <li class="band">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="flex:1">
+              <div class="tag">Daily mix</div>
+              <h2 style="font-size:17px">12 items due</h2>
+              <div class="meta" style="margin-top:2px">6 min · across all classes</div>
+            </div>
+            <button class="btn">Start</button>
+          </div>
+        </li>
+
+        <li class="row" style="--dot:#2D5BFF">
+          <span class="gut">3</span>
+          <svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
+          <span class="txt"><b>4B · ICT</b><span>Lesson 3 of 14 · <span style="color:var(--red-ink);font-weight:700">due Thu</span></span></span>
+          <button class="next">Next</button>
+        </li>
+        <li class="row" style="--dot:#7C4DFF">
+          <span class="gut">2</span>
+          <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
+          <span class="txt"><b>4B · Physics</b><span>Lesson 2 of 12 · due Mon</span></span>
+          <button class="next">Next</button>
+        </li>
+        <li class="row" style="--dot:#17A34A">
+          <span class="gut">✓</span>
+          <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>
+          <span class="txt"><b>4B · Biology</b><span>Alleles and dominance · done today</span></span>
+          <button class="next">Next</button>
+        </li>
+        <li class="row" style="--dot:#B45309">
+          <span class="gut">4</span>
+          <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M9.3 3.2h5.4v5.4l5 9.4a2.3 2.3 0 0 1-2 3.4H6.3a2.3 2.3 0 0 1-2-3.4l5-9.4Z"/><path class="o" d="M6.2 15.4h11.6"/></svg>
+          <span class="txt"><b>4B · Chemistry</b><span>Lesson 4 of 15 · due Fri</span></span>
+          <button class="next">Next</button>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <nav class="tabbar">
+    <button class="tab on" data-t="learn"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg><span class="lbl">Learn</span></span></button>
+    <button class="tab" data-t="drills"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg><span class="lbl">Drills</span><i class="badge">12</i></span></button>
+    <button class="tab" data-t="board"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span class="lbl">Board</span></span></button>
+    <button class="tab" data-t="me"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span class="lbl">Me</span></span></button>
+  </nav>
+</div>
+
+<p class="caption">Learner · home in drills language · <a href="demo2.html">drills page</a></p>
+
+<script>
+(function () {
+  var screens = document.querySelectorAll('.screen');
+  var btns = document.querySelectorAll('.switcher button');
+  function show(v) {
+    screens.forEach(function (s) { s.classList.toggle('on', s.id === 'v-' + v); });
+    btns.forEach(function (x) { x.classList.toggle('on', x.dataset.v === v); });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.v); }); });
+  var h = location.hash.replace('#', '');
+  if (h) show(h);
+})();
+</script>
+</body>
+</html>
