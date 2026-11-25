@@ -45,9 +45,6 @@
     padding:5px 9px;border-radius:4px;white-space:nowrap}
   .badgeL svg{width:12px;height:12px}
 
-  .segs{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;padding:12px 18px 16px}
-  .segs i{height:10px;background:var(--paper);border:2px solid var(--ink);border-radius:2px}
-  .segs i.on{background:var(--ink)}
 
   /* ── the row card: drills .step anatomy ───── */
   .rowc{display:flex;align-items:center;gap:12px;padding:12px;margin:0 18px 10px;
@@ -106,7 +103,7 @@
 
 <div class="switcher">
   <button data-v="a" class="on">1 · Band</button>
-  <button data-v="b">2 · Meter</button>
+  <button data-v="b">2 · Coverage</button>
   <button data-v="c">3 · Index</button>
 </div>
 
@@ -122,12 +119,8 @@
         <span class="badgeL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12 in a row</span>
       </div>
 
-      <div class="segs">
-        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
-        <i></i><i></i><i></i><i></i><i></i>
-      </div>
 
-      <div class="rowc now" style="padding:14px">
+      <div class="rowc now" style="margin-top:14px;padding:14px">
         <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
         </div>
@@ -172,12 +165,8 @@
         <span class="badgeL">62%</span>
       </div>
 
-      <div class="segs">
-        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
-        <i></i><i></i><i></i><i></i><i></i>
-      </div>
 
-      <div class="rowc now" style="padding:14px">
+      <div class="rowc now" style="margin-top:14px;padding:14px">
         <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
         </div>
