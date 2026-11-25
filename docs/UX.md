@@ -80,7 +80,7 @@ tab that only makes sense for one subject does not belong in the global bar.
 **Subject switcher.** A horizontal row of pills at the top of Learn, one per enrolled
 subject. Each pill carries a 15px line icon drawn in that subject's colour:
 a monitor for ICT, an orbital atom for Physics, a leaf for Biology, a conical flask
-for Chemistry, a meridian globe for Geography. The active pill turns ink, the icon
+for Chemistry, and a tilted globe with paper-coloured landmasses for Geography. The active pill turns ink, the icon
 flips to paper, and the subject colour moves to the pill's shadow. Subjects a student
 does not take are absent rather than disabled.
 
@@ -88,7 +88,7 @@ Icons are printed stamps, not line art. Three primitives only:
 
     .s   solid shape: subject fill, 2px ink outline, round joins
     .o   ink detail laid on top: 2.2px stroke, no fill
-    .p   cut-out: paper stroke at 2px, which reads as a hole through the fill
+    .l   land: solid paper fill, no stroke, clipped to the globe it sits on
 
 Every icon is drawn at 18px in a 24px viewBox with a 1.5px hard misregistered shadow
 (drop-shadow, zero blur) so it sits in the same physical language as the cards. On the
@@ -97,7 +97,12 @@ the icon survives an inverted background instead of dissolving into it.
 
 Geometry is deliberately blocky and few-parted: three rectangles for the monitor, two
 orbits and a dot for Physics, one shape plus one vein for Biology, one shape plus one
-liquid line for Chemistry, one disc with three cut-outs for Geography.
+liquid line for Chemistry, one disc with three clipped landmasses for Geography.
+
+Geography is a planet, not a ball. A disc carrying a latitude and longitude grid reads
+as a sphere with stripes on it; a disc carrying irregular landmasses on a 14-degree tilt
+reads as the Earth. The land is paper-coloured rather than outlined so it survives at
+18px, and the sea is #0B7285 — ochre made it look like a desert planet.
 
 **Code panel.** Inverted: ink background, paper text, lime keyword, peach numerals,
 line numbers in #5A5A52. Code should look like a terminal, not like a thought

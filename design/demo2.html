@@ -94,12 +94,11 @@
   }
   .sub .ic .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
   .sub .ic .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
-  .sub .ic .p{fill:none;stroke:var(--paper);stroke-width:2;stroke-linecap:round}
+  .sub .ic .l{fill:var(--paper);stroke:none}
   .sub.on{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--dot)}
   .sub.on .ic{filter:none}
   .sub.on .ic .s{stroke:#fff}
   .sub.on .ic .o{stroke:#fff}
-  .sub.on .ic .p{stroke:var(--ink)}
 
   /* ── path steps ───────────────────────────── */
   .steps{
@@ -299,10 +298,18 @@
         <svg class="ic" viewBox="0 0 24 24"><ellipse class="o" cx="12" cy="12" rx="9.8" ry="4.2"/><ellipse class="o" cx="12" cy="12" rx="9.8" ry="4.2" transform="rotate(60 12 12)"/><circle class="s" cx="12" cy="12" r="2.9"/></svg>Physics</button>
       <button class="sub" style="--dot:#17A34A">
         <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
-      <button class="sub" style="--dot:#007C7B">
+      <button class="sub" style="--dot:#8A4B08">
         <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M9.3 3.2h5.4v5.4l5 9.4a2.3 2.3 0 0 1-2 3.4H6.3a2.3 2.3 0 0 1-2-3.4l5-9.4Z"/><path class="o" d="M6.2 15.4h11.6"/></svg>Chemistry</button>
-      <button class="sub" style="--dot:#B45309">
-        <svg class="ic" viewBox="0 0 24 24"><circle class="s" cx="12" cy="12" r="9.4"/><path class="p" d="M2.6 12h18.8"/><path class="p" d="M12 2.6c3.5 3.6 3.5 15.2 0 18.8"/><path class="p" d="M12 2.6c-3.5 3.6-3.5 15.2 0 18.8"/></svg>Geography</button>
+      <button class="sub" style="--dot:#0B7285">
+        <svg class="ic" viewBox="0 0 24 24">
+          <defs><clipPath id="geoClip"><circle cx="12" cy="12" r="9.4"/></clipPath></defs>
+          <circle class="s" cx="12" cy="12" r="9.4"/>
+          <g clip-path="url(#geoClip)" transform="rotate(-14 12 12)">
+            <ellipse class="l" cx="8.6" cy="8.4" rx="4.2" ry="2.6" transform="rotate(-28 8.6 8.4)"/>
+            <ellipse class="l" cx="15.4" cy="13.6" rx="3.2" ry="4.4" transform="rotate(18 15.4 13.6)"/>
+            <ellipse class="l" cx="9.4" cy="17.6" rx="2.4" ry="1.7" transform="rotate(-12 9.4 17.6)"/>
+          </g>
+        </svg>Geography</button>
     </div>
 
     <div class="hd">
