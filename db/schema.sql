@@ -11,7 +11,7 @@ create type lesson_status as enum ('draft', 'published', 'archived');
 create type item_level    as enum ('recognize', 'recall', 'apply', 'construct');
 create type block_kind    as enum ('prose','callout','code','formula','mcq','fill',
                                    'numeric','predict','challenge','structured','repl');
-create type memory_state  as enum ('new', 'learning', 'review', 'relearning');
+create type memory_phase  as enum ('new', 'learning', 'review', 'relearning');
 
 -- ─── identity ─────────────────────────────────────────────────────────────────
 create table users (
@@ -150,7 +150,7 @@ create table memory_state (
   due_at       timestamptz,
   reps         int not null default 0,
   lapses       int not null default 0,
-  state        memory_state not null default 'new',
+  state        memory_phase not null default 'new',
   last_review  timestamptz,
   updated_at   timestamptz not null default now(),
   primary key (user_id, block_id)
