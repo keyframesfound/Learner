@@ -41,22 +41,49 @@ export default function ItemPlayer({
   }, [i]);
 
   if (done) {
+    const pct = items.length ? Math.round((correctCount / items.length) * 100) : 0;
+    const perfect = correctCount === items.length && items.length > 0;
     return (
-      <div className="note" style={{ paddingTop: 40 }}>
-        <h1>Lesson complete</h1>
-        <p>{lessonTitle} · {correctCount} of {items.length} correct.</p>
-        <div style={{ display: "grid", gap: 9, marginTop: 18, maxWidth: 420 }}>
-          <Link href="/drill" className="btn" style={btnLink}>
-            Back to the path
-          </Link>
-          {nextSlug && (
-            <Link href={`/drill/${nextSlug}`} className="btn ghost" style={btnLink}>
-              Next lesson{nextTitle ? `: ${nextTitle}` : ""}
+      <div className="lesson-screen">
+        <div className="done-wrap">
+          <div className={"done-burst" + (perfect ? " perfect" : "")}>
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.6l2.9 5.9 6.5 1-4.7 4.6 1.1 6.5L12 17.5 6.2 20.6l1.1-6.5L2.6 9.5l6.5-1z" />
+            </svg>
+          </div>
+
+          <div className="done-kicker mono">{perfect ? "Flawless" : "Lesson complete"}</div>
+          <h1 className="done-title">{perfect ? "Perfect run." : "Lesson complete."}</h1>
+          <p className="done-sub">{lessonTitle}</p>
+
+          <div className="done-stats">
+            <div className="done-stat">
+              <b>{correctCount}/{items.length}</b>
+              <span>correct</span>
+            </div>
+            <div className="done-stat">
+              <b>{pct}%</b>
+              <span>accuracy</span>
+            </div>
+          </div>
+
+          <div className="done-actions">
+            {nextSlug ? (
+              <Link href={`/drill/${nextSlug}`} className="btn" style={btnLink}>
+                Next lesson{nextTitle ? `: ${nextTitle}` : ""} →
+              </Link>
+            ) : (
+              <Link href="/drill" className="btn" style={btnLink}>
+                Back to the path →
+              </Link>
+            )}
+            <Link href="/drill" className="btn ghost" style={btnLink}>
+              Back to the path
             </Link>
-          )}
-          <Link href="/party" className="btn ghost" style={btnLink}>
-            Party up for the boss
-          </Link>
+            <Link href="/party" className="done-link">
+              Party up for the boss
+            </Link>
+          </div>
         </div>
       </div>
     );

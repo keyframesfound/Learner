@@ -205,7 +205,8 @@ body {
 }
 
 /* ── board ───────────────────────────────────── */
-.podium { display: flex; align-items: flex-end; gap: 7px; padding: 14px 16px 0; }
+.podium { display: flex; align-items: flex-end; justify-content: center; gap: 8px; padding: 14px 18px 0; }
+.podium > .pod { flex: 0 1 220px; }
 .pod {
   flex: 1; border: 3px solid var(--ink); border-radius: 9px; background: #fff;
   display: flex; flex-direction: column; align-items: center; padding: 9px 4px 7px;
@@ -660,13 +661,45 @@ body {
   /* the check button must never be off-screen, however tall the question */
   .lesson-screen { padding-bottom: 150px; }
   .lesson-screen .band {
-    position: fixed; left: 50%; transform: translateX(-50%);
-    bottom: 84px; width: 100%; max-width: 520px; z-index: 26;
-    margin: 0; border: 3px solid var(--ink); border-bottom: 0;
+    position: fixed; left: 0; right: 0; bottom: 84px;
+    width: 100%; max-width: 520px; margin: 0 auto; z-index: 26;
+    border: 3px solid var(--ink); border-bottom: 0;
     border-radius: 10px 10px 0 0; box-shadow: 0 -4px 0 rgba(0,0,0,.06);
-    padding: 12px 18px 14px;
-    background: var(--paper);
+    padding: 12px 18px 14px; background: var(--paper);
+    animation: none;
   }
   .lesson-screen .band p { margin-bottom: 10px; max-height: 28vh; overflow-y: auto; }
   .lesson-screen .tag { margin-top: 12px; }
+}
+
+/* ── lesson complete ───────────────────────── */
+.done-wrap {
+  flex: 1; display: flex; flex-direction: column; align-items: center;
+  text-align: center; padding: 40px 22px 32px; gap: 4px; justify-content: center;
+}
+.done-burst {
+  width: 84px; height: 84px; display: grid; place-items: center; margin-bottom: 10px;
+  border: 3px solid var(--ink); border-radius: 24px; background: var(--lime);
+  box-shadow: 6px 6px 0 var(--ink); animation: pop .32s cubic-bezier(.3,1.6,.5,1) both;
+}
+.done-burst.perfect { background: var(--gold); }
+.done-kicker { font-size: 10px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-3); }
+.done-title { font-family: var(--font-display); font-size: 34px; letter-spacing: -1.2px; line-height: 1.05; margin-top: 4px; }
+.done-sub { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-3); margin-top: 6px; }
+.done-stats { display: flex; gap: 9px; margin: 22px 0 26px; width: 100%; max-width: 340px; }
+.done-stat {
+  flex: 1; border: 3px solid var(--ink); border-radius: 10px; background: #fff;
+  padding: 10px 8px; box-shadow: 4px 4px 0 var(--line);
+}
+.done-stat b { display: block; font-family: var(--font-display); font-size: 24px; letter-spacing: -.8px; }
+.done-stat span { font-family: var(--font-mono); font-size: 9px; letter-spacing: .6px; text-transform: uppercase; color: var(--ink-3); }
+.done-actions { display: grid; gap: 10px; width: 100%; max-width: 380px; }
+.done-link {
+  justify-self: center; margin-top: 6px; font-family: var(--font-mono); font-size: 10.5px;
+  font-weight: 700; letter-spacing: .4px; color: var(--ink-3); text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (min-width: 900px) {
+  .done-wrap { padding-top: 60px; }
+  .done-title { font-size: 42px; }
 }
