@@ -84,8 +84,20 @@ for Chemistry, a meridian globe for Geography. The active pill turns ink, the ic
 flips to paper, and the subject colour moves to the pill's shadow. Subjects a student
 does not take are absent rather than disabled.
 
-Icon rules: 24px viewBox, 2.2px stroke, round caps and joins, no fill, drawn at 15px.
-One geometry, one stroke weight, so five subjects still read as one family.
+Icons are printed stamps, not line art. Three primitives only:
+
+    .s   solid shape: subject fill, 2px ink outline, round joins
+    .o   ink detail laid on top: 2.2px stroke, no fill
+    .p   cut-out: paper stroke at 2px, which reads as a hole through the fill
+
+Every icon is drawn at 18px in a 24px viewBox with a 1.5px hard misregistered shadow
+(drop-shadow, zero blur) so it sits in the same physical language as the cards. On the
+active pill the shadow is dropped, outlines flip to paper, and cut-outs flip to ink, so
+the icon survives an inverted background instead of dissolving into it.
+
+Geometry is deliberately blocky and few-parted: three rectangles for the monitor, two
+orbits and a dot for Physics, one shape plus one vein for Biology, one shape plus one
+liquid line for Chemistry, one disc with three cut-outs for Geography.
 
 **Code panel.** Inverted: ink background, paper text, lime keyword, peach numerals,
 line numbers in #5A5A52. Code should look like a terminal, not like a thought

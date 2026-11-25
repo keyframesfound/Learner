@@ -88,9 +88,18 @@
     box-shadow:3px 3px 0 var(--line);transition:transform .07s,box-shadow .07s;
   }
   .sub:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
-  .sub .ic{width:15px;height:15px;flex:0 0 15px;color:var(--dot);display:block}
+  .sub .ic{
+    width:18px;height:18px;flex:0 0 18px;display:block;color:var(--dot);
+    filter:drop-shadow(1.5px 1.5px 0 rgba(17,17,17,.8));
+  }
+  .sub .ic .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .sub .ic .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .sub .ic .p{fill:none;stroke:var(--paper);stroke-width:2;stroke-linecap:round}
   .sub.on{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--dot)}
-  .sub.on .ic{color:#fff}
+  .sub.on .ic{filter:none}
+  .sub.on .ic .s{stroke:#fff}
+  .sub.on .ic .o{stroke:#fff}
+  .sub.on .ic .p{stroke:var(--ink)}
 
   /* ── path steps ───────────────────────────── */
   .steps{
@@ -285,15 +294,15 @@
   <section class="screen on" id="s-path">
     <div class="subs">
       <button class="sub on" style="--dot:#2D5BFF">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12.5" rx="2"/><path d="M9 20.5h6M12 16.5v4"/></svg>ICT</button>
+        <svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
       <button class="sub" style="--dot:#7C4DFF">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="2.2"/><ellipse cx="12" cy="12" rx="9.5" ry="4"/><ellipse cx="12" cy="12" rx="9.5" ry="4" transform="rotate(60 12 12)"/></svg>Physics</button>
+        <svg class="ic" viewBox="0 0 24 24"><ellipse class="o" cx="12" cy="12" rx="9.8" ry="4.2"/><ellipse class="o" cx="12" cy="12" rx="9.8" ry="4.2" transform="rotate(60 12 12)"/><circle class="s" cx="12" cy="12" r="2.9"/></svg>Physics</button>
       <button class="sub" style="--dot:#17A34A">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 18.5C5.5 11 11 5.5 18.5 5.5c0 7.5-5.5 13-13 13Z"/><path d="M5.5 18.5 13 11"/></svg>Biology</button>
+        <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
       <button class="sub" style="--dot:#007C7B">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v5.5L5.2 17.6A2 2 0 0 0 7 20.5h10a2 2 0 0 0 1.8-2.9L14 8.5V3"/></svg>Chemistry</button>
+        <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M9.3 3.2h5.4v5.4l5 9.4a2.3 2.3 0 0 1-2 3.4H6.3a2.3 2.3 0 0 1-2-3.4l5-9.4Z"/><path class="o" d="M6.2 15.4h11.6"/></svg>Chemistry</button>
       <button class="sub" style="--dot:#B45309">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3.2 3.4 3.2 14.6 0 18M12 3c-3.2 3.4-3.2 14.6 0 18"/></svg>Geography</button>
+        <svg class="ic" viewBox="0 0 24 24"><circle class="s" cx="12" cy="12" r="9.4"/><path class="p" d="M2.6 12h18.8"/><path class="p" d="M12 2.6c3.5 3.6 3.5 15.2 0 18.8"/><path class="p" d="M12 2.6c-3.5 3.6-3.5 15.2 0 18.8"/></svg>Geography</button>
     </div>
 
     <div class="hd">
