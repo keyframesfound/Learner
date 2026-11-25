@@ -34,29 +34,10 @@
   .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
   .scroll::-webkit-scrollbar{display:none}
 
-  /* ── chips: identical to drills ───────────── */
-  .subs{display:flex;gap:8px;padding:12px 24px 16px 18px;overflow-x:auto;overflow-y:hidden;
-    scrollbar-width:none;-webkit-overflow-scrolling:touch}
-  .subs::-webkit-scrollbar{display:none}
-  .sub{flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;
-    border:3px solid var(--ink);background:#fff;font-family:'Space Grotesk',sans-serif;
-    font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;
-    box-shadow:3px 3px 0 var(--line);transition:transform .07s,box-shadow .07s}
-  .sub:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
-  .sub .ic{width:18px;height:18px;flex:0 0 18px;display:block;color:var(--dot);
-    filter:drop-shadow(1.5px 1.5px 0 rgba(17,17,17,.8))}
-  .sub .ic .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
-  .sub .ic .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
-  .sub .ic .l{fill:#6FBF3A;stroke:none}
-  .sub.on{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--dot)}
-  .sub.on .ic{filter:none}
-  .sub.on .ic .s{stroke:#fff}
-  .sub.on .ic .o{stroke:#fff}
-  .sub.on .ic .l{fill:var(--ink)}
 
   /* ── header + meter: identical to drills ──── */
   .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;
-    padding:12px 18px;border-bottom:3px solid var(--ink)}
+    padding:18px;border-bottom:3px solid var(--ink)}
   .hd .mod{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
     letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-2)}
   .badgeL{display:inline-flex;align-items:center;gap:5px;background:var(--lime);color:var(--ink);
@@ -135,12 +116,6 @@
   <!-- ══════ 1 · BAND ══════ -->
   <section class="screen on" id="v-a">
     <div class="scroll">
-      <div class="subs">
-        <button class="sub on" style="--dot:#FF4D1C">All</button>
-        <button class="sub" style="--dot:#2D5BFF"><svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
-        <button class="sub" style="--dot:#7C4DFF"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>Physics</button>
-        <button class="sub" style="--dot:#17A34A"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
-      </div>
 
       <div class="hd">
         <span class="mod">DSE 2027 · 138 days</span>
@@ -191,12 +166,6 @@
   <!-- ══════ 2 · METER ══════ -->
   <section class="screen" id="v-b">
     <div class="scroll">
-      <div class="subs">
-        <button class="sub on" style="--dot:#FF4D1C">All</button>
-        <button class="sub" style="--dot:#2D5BFF"><svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
-        <button class="sub" style="--dot:#7C4DFF"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>Physics</button>
-        <button class="sub" style="--dot:#17A34A"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
-      </div>
 
       <div class="hd">
         <span class="mod">Syllabus · 133 of 214</span>
@@ -247,12 +216,6 @@
   <!-- ══════ 3 · INDEX ══════ -->
   <section class="screen" id="v-c">
     <div class="scroll">
-      <div class="subs">
-        <button class="sub on" style="--dot:#FF4D1C">All</button>
-        <button class="sub" style="--dot:#2D5BFF"><svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
-        <button class="sub" style="--dot:#7C4DFF"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>Physics</button>
-        <button class="sub" style="--dot:#17A34A"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
-      </div>
 
       <div class="hd">
         <span class="mod">DSE 2027 · 138 days</span>
