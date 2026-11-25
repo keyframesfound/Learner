@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — learn homes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6; --ink:#111; --ink-2:#4A4A45; --ink-3:#8C8A80; --line:#D8D4C6;
+    --lime:#D4FF3F; --orange:#FF4D1C; --blue:#2D5BFF; --violet:#7C4DFF;
+    --green:#17A34A; --gold:#FFC94A; --red-ink:#C4271B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:'Space Grotesk',system-ui,sans-serif;background:#1A1A18;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px;color:var(--ink)}
+  .switcher{display:flex;gap:5px;background:#0E0E0C;padding:5px;border-radius:10px}
+  .switcher button{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.7px;
+    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:9px 13px;border-radius:6px;cursor:pointer}
+  .switcher button.on{background:var(--lime);color:var(--ink)}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.8px;color:#6E6E66}
+  .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+
+  .device{position:relative;width:390px;height:844px;background:var(--paper);
+    border:3px solid #000;border-radius:14px;box-shadow:10px 10px 0 rgba(0,0,0,.55);overflow:hidden}
+  .statusbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border-bottom:3px solid var(--ink)}
+  .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+
+  .screen{position:absolute;inset:40px 0 0 0;display:none;flex-direction:column;padding-bottom:92px;overflow:hidden}
+  .screen.on{display:flex}
+  .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  /* shared */
+  .hd{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 18px 10px}
+  .hd .greet{font-size:12.5px;color:var(--ink-3);font-weight:600}
+  .hd h1{font-family:'Archivo Black',sans-serif;font-size:24px;letter-spacing:-.7px;line-height:1.05;margin-top:3px}
+  .streak{display:flex;align-items:center;gap:5px;border:3px solid var(--ink);border-radius:999px;
+    padding:5px 10px;background:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    box-shadow:3px 3px 0 var(--line);white-space:nowrap}
+  .streak svg{width:13px;height:13px;color:var(--orange)}
+
+  .sec{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--ink-3);padding:20px 18px 8px;font-weight:700}
+
+  .bar{height:10px;border:2px solid var(--ink);border-radius:99px;background:#fff;overflow:hidden}
+  .bar b{display:block;height:100%;background:var(--ink);border-radius:99px}
+  .bar.lime b{background:var(--lime)}
+
+  /* loud object */
+  .loud{border:3px solid var(--ink);border-radius:10px;background:var(--ink);color:var(--paper);
+    box-shadow:5px 5px 0 var(--orange);padding:14px 15px}
+  .loud.on-paper{box-shadow:5px 5px 0 var(--lime)}
+  .loud .tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700}
+  .loud h2{font-family:'Archivo Black',sans-serif;font-size:20px;letter-spacing:-.4px;margin-top:4px;line-height:1.1}
+  .loud .meta{font-size:12.5px;color:#B9B9AE;margin-top:4px}
+  .loud .bar{border-color:#4A4A45;background:#2A2A28;margin-top:12px}
+  .loud .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:13px}
+
+  .btn{height:44px;padding:0 18px;border:3px solid var(--ink);border-radius:8px;background:var(--lime);
+    color:var(--ink);font-family:'Space Grotesk',sans-serif;font-size:13.5px;font-weight:700;
+    letter-spacing:.4px;cursor:pointer;box-shadow:4px 4px 0 rgba(0,0,0,.35);white-space:nowrap}
+  .btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 rgba(0,0,0,.35)}
+  .btn.ghost{background:transparent;color:var(--paper);box-shadow:none;border-color:#4A4A45;font-size:13px}
+
+  /* class card */
+  .cls{border:3px solid var(--ink);border-radius:10px;background:#fff;padding:12px 14px;margin:0 18px 10px}
+  .cls .top{display:flex;align-items:center;gap:9px}
+  .cls .ico{width:20px;height:20px;flex:0 0 20px;color:var(--dot)}
+  .cls .ico .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .cls .ico .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .cls .ico .l{fill:#6FBF3A;stroke:none}
+  .cls .name{font-size:13.5px;font-weight:700;flex:1}
+  .cls .due{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.6px;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700}
+  .cls .due.soon{color:var(--red-ink)}
+  .cls .sub{font-size:11.5px;color:var(--ink-3);margin:2px 0 9px}
+  .cls .foot{display:flex;align-items:center;gap:10px}
+  .cls .foot .bar{flex:1;height:8px;border-width:2px}
+  .cls .pct{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;width:34px;text-align:right}
+
+  /* compact rows */
+  .rowline{display:flex;align-items:center;gap:11px;padding:12px 18px;border-bottom:1px solid var(--line)}
+  .rowline:last-child{border-bottom:0}
+  .rowline .nm{flex:1;font-size:14px;font-weight:700}
+  .rowline .sub{font-size:11.5px;color:var(--ink-3);font-weight:500}
+  .rowline .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}
+
+  /* tab bar */
+  .tabbar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;
+    gap:2px;border-top:3px solid var(--ink);background:var(--paper);padding:10px 34px 14px}
+  .tab{flex:1;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .pill{position:relative;display:grid;place-items:center;gap:2px;padding:6px 8px 5px;
+    border:3px solid transparent;border-radius:10px;color:var(--ink-3);min-width:56px}
+  .pill svg{width:20px;height:20px}
+  .lbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase}
+  .tab.on .pill{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+  .tab[data-t="learn"].on .pill{background:var(--lime);color:var(--ink)}
+  .tab[data-t="drills"].on .pill{background:var(--orange);color:#fff}
+  .tab[data-t="board"].on .pill{background:var(--blue);color:#fff}
+  .tab[data-t="me"].on .pill{background:var(--gold);color:var(--ink)}
+  .badge{position:absolute;top:-7px;right:-7px;min-width:17px;height:17px;padding:0 4px;display:grid;place-items:center;
+    background:var(--red-ink);color:#fff;border:2px solid var(--ink);border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;font-style:normal}
+
+  /* variant B extras */
+  .split{display:flex;gap:8px;padding:0 18px}
+  .stat{flex:1;border:3px solid var(--ink);border-radius:10px;background:#fff;padding:10px 11px}
+  .stat .k{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+  .stat .v{font-family:'Archivo Black',sans-serif;font-size:19px;letter-spacing:-.5px;margin-top:2px}
+  .subjrow{padding:0 18px}
+  .subj{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .subj .nm{width:64px;font-size:12px;font-weight:700}
+  .subj .bar{flex:1;height:9px}
+  .subj .pct{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;width:32px;text-align:right}
+
+  /* variant C extras */
+  .strip{margin:0 18px 0;display:flex;align-items:center;gap:10px;padding:10px 13px;border:3px solid var(--ink);
+    border-radius:10px;background:#fff;box-shadow:3px 3px 0 var(--line)}
+  .strip .k{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;
+    color:var(--ink-3);font-weight:700;white-space:nowrap}
+  .strip .bar{flex:1;height:8px;border-width:2px}
+  .strip .v{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:700}
+  .bigcard{border:3px solid var(--ink);border-radius:10px;background:#fff;margin:0 18px 10px;padding:13px 14px}
+  .bigcard .top{display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  .bigcard .ico{width:20px;height:20px;flex:0 0 20px;color:var(--dot)}
+  .bigcard .ico .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .bigcard .ico .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .bigcard .ico .l{fill:#6FBF3A;stroke:none}
+  .bigcard .ttl{font-family:'Archivo Black',sans-serif;font-size:16px;letter-spacing:-.3px;flex:1;line-height:1.1}
+  .bigcard .meta{font-size:11.5px;color:var(--ink-3);margin-bottom:10px}
+  .bigcard .foot{display:flex;align-items:center;gap:10px}
+  .bigcard .foot .bar{flex:1;height:8px;border-width:2px}
+  .bigcard .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;white-space:nowrap}
+  .nextpill{display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:var(--lime);
+    border:2px solid var(--ink);border-radius:6px;padding:4px 8px;font-size:11.5px;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="switcher">
+  <button data-v="a" class="on">A · Today</button>
+  <button data-v="b">B · Revision</button>
+  <button data-v="c">C · Classes</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+
+  <!-- ══════ A · TODAY ══════ -->
+  <section class="screen on" id="v-a">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <div class="greet">Thursday evening</div>
+          <h1>Ryan</h1>
+        </div>
+        <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
+      </div>
+
+      <div class="loud on-paper" style="margin:6px 18px 0">
+        <div class="tag">Today</div>
+        <h2>Daily mix</h2>
+        <div class="meta">12 items due · about 6 minutes</div>
+        <div class="bar lime"><b style="width:25%"></b></div>
+        <div class="row">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#B9B9AE">4 of 16 done</span>
+          <button class="btn">Start</button>
+        </div>
+      </div>
+
+      <div class="sec">Revision</div>
+      <div style="padding:0 18px">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:7px">
+          <span style="font-size:12.5px;color:var(--ink-2)">Across 5 subjects</span>
+          <span style="font-family:'Archivo Black',sans-serif;font-size:19px">31<span style="color:var(--ink-3);font-size:13px">/50 items</span></span>
+        </div>
+        <div class="bar"><b style="width:62%"></b></div>
+      </div>
+
+      <div class="sec">Classes</div>
+      <div class="cls" style="--dot:#2D5BFF">
+        <div class="top">
+          <svg class="ico" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
+          <span class="name">4B · ICT</span>
+          <span class="due soon">Due Thu</span>
+        </div>
+        <div class="sub">E2C Algorithm and Programming</div>
+        <div class="foot"><div class="bar"><b style="width:58%"></b></div><span class="pct">58%</span></div>
+      </div>
+      <div class="cls" style="--dot:#7C4DFF">
+        <div class="top">
+          <svg class="ico" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
+          <span class="name">4B · Physics</span>
+          <span class="due">Due Mon</span>
+        </div>
+        <div class="sub">P2 Force and Motion</div>
+        <div class="foot"><div class="bar"><b style="width:34%"></b></div><span class="pct">34%</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ B · REVISION ══════ -->
+  <section class="screen" id="v-b">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <div class="greet">DSE 2027 · Paper 1 in 138 days</div>
+          <h1>Revision</h1>
+        </div>
+        <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
+      </div>
+
+      <div class="loud on-paper" style="margin:6px 18px 0">
+        <div class="tag">Syllabus seen</div>
+        <div style="display:flex;align-items:flex-end;gap:8px;margin-top:6px">
+          <span style="font-family:'Archivo Black',sans-serif;font-size:42px;line-height:.9">62%</span>
+          <span style="font-size:12px;color:#B9B9AE;padding-bottom:5px">133 of 214 items</span>
+        </div>
+        <div class="bar lime"><b style="width:62%"></b></div>
+        <div class="row" style="margin-top:14px;border-top:2px solid #3A3A36;padding-top:12px">
+          <span style="font-size:12px;color:#B9B9AE">12 items due today</span>
+          <button class="btn">Start</button>
+        </div>
+      </div>
+
+      <div class="sec">By subject</div>
+      <div class="subjrow">
+        <div class="subj"><span class="nm">ICT</span><div class="bar"><b style="width:74%"></b></div><span class="pct">74%</span></div>
+        <div class="subj"><span class="nm">Physics</span><div class="bar"><b style="width:41%"></b></div><span class="pct">41%</span></div>
+        <div class="subj"><span class="nm">Biology</span><div class="bar"><b style="width:52%"></b></div><span class="pct">52%</span></div>
+        <div class="subj"><span class="nm">Chemistry</span><div class="bar"><b style="width:28%"></b></div><span class="pct">28%</span></div>
+        <div class="subj"><span class="nm">Geography</span><div class="bar"><b style="width:35%"></b></div><span class="pct">35%</span></div>
+      </div>
+
+      <div class="sec">Classes</div>
+      <div class="rowline"><span class="nm">4B · ICT</span><span class="v">58%</span></div>
+      <div class="rowline"><span class="nm">4B · Physics</span><span class="v">34%</span></div>
+    </div>
+  </section>
+
+  <!-- ══════ C · CLASSES ══════ -->
+  <section class="screen" id="v-c">
+    <div class="scroll">
+      <div class="hd">
+        <div>
+          <div class="greet">Thursday evening</div>
+          <h1>Ryan</h1>
+        </div>
+        <span class="streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
+      </div>
+
+      <div class="strip">
+        <span class="k">Revision</span>
+        <div class="bar"><b style="width:62%"></b></div>
+        <span class="v">62%</span>
+      </div>
+
+      <div class="loud" style="margin:16px 18px 4px;box-shadow:5px 5px 0 var(--lime)">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+          <div>
+            <h2 style="font-size:17px">12 items due</h2>
+            <div class="meta" style="margin-top:2px">Daily mix · 6 min</div>
+          </div>
+          <button class="btn">Start</button>
+        </div>
+      </div>
+
+      <div class="sec">Classes</div>
+
+      <div class="bigcard" style="--dot:#2D5BFF">
+        <div class="top">
+          <svg class="ico" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
+          <span class="ttl">ICT</span>
+          <span class="due soon" style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--red-ink);font-weight:700">Due Thu</span>
+        </div>
+        <div class="meta">E2C Algorithm and Programming · 4B</div>
+        <div class="foot"><div class="bar"><b style="width:58%"></b></div><span class="n">5 of 14</span></div>
+        <span class="nextpill">Next · Valid identifiers</span>
+      </div>
+
+      <div class="bigcard" style="--dot:#7C4DFF">
+        <div class="top">
+          <svg class="ico" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
+          <span class="ttl">Physics</span>
+          <span class="due" style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-3);font-weight:700">Due Mon</span>
+        </div>
+        <div class="meta">P2 Force and Motion · 4B</div>
+        <div class="foot"><div class="bar"><b style="width:34%"></b></div><span class="n">3 of 12</span></div>
+      </div>
+
+      <div class="bigcard" style="--dot:#17A34A">
+        <div class="top">
+          <svg class="ico" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>
+          <span class="ttl">Biology</span>
+          <span class="due" style="font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.6px;text-transform:uppercase;color:var(--ink-3);font-weight:700">No due date</span>
+        </div>
+        <div class="meta">U4 Genetics · 4B</div>
+        <div class="foot"><div class="bar"><b style="width:19%"></b></div><span class="n">2 of 11</span></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabbar">
+    <button class="tab on" data-t="learn"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg><span class="lbl">Learn</span></span></button>
+    <button class="tab" data-t="drills"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg><span class="lbl">Drills</span><i class="badge">12</i></span></button>
+    <button class="tab" data-t="board"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span class="lbl">Board</span></span></button>
+    <button class="tab" data-t="me"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span class="lbl">Me</span></span></button>
+  </nav>
+</div>
+
+<p class="caption">Learner · learn home · <a href="demo2.html">current build</a></p>
+
+<script>
+(function () {
+  var screens = document.querySelectorAll('.screen');
+  var btns = document.querySelectorAll('.switcher button');
+  function show(v) {
+    screens.forEach(function (s) { s.classList.toggle('on', s.id === 'v-' + v); });
+    btns.forEach(function (x) { x.classList.toggle('on', x.dataset.v === v); });
+  }
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () { show(b.dataset.v); });
+  });
+  var h = location.hash.replace('#', '');
+  if (h) show(h);
+})();
+</script>
+</body>
+</html>
