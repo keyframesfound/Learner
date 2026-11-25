@@ -703,3 +703,19 @@ body {
   .done-wrap { padding-top: 60px; }
   .done-title { font-size: 42px; }
 }
+
+/* ── the raid on a wide screen: a stage, not a stretched phone ─── */
+@media (min-width: 900px) {
+  .bb { max-width: 860px; margin: 0 auto; min-height: auto; }
+  .bb-arena { height: 520px; flex: none; }
+  .bb-plat.boss { width: 300px; right: 5%; top: 176px; }
+  .bb-plat.party { left: 5%; right: 5%; bottom: 10px; }
+  .bb-boss { width: 210px; right: 7%; top: 12px; }
+  .bb-party { left: 5%; right: 5%; bottom: 12px; }
+  .bb-plate.boss { top: 14px; left: 14px; width: 320px; max-width: 40%; }
+  .bb-plate.party { bottom: 20px; right: 14px; width: 300px; }
+  .bb-plate .nm { font-size: 14px; }
+  .bb-panel { padding: 14px 22px 18px; }
+  .bb-say { font-size: 17px; }
+  .bb-opt { min-height: 54px; font-size: 14px; }
+}
