@@ -11,12 +11,13 @@
   :root{
     --paper:#F2EFE6; --ink:#111111; --ink-2:#4A4A45; --ink-3:#8C8A80; --line:#D8D4C6;
     --lime:#D4FF3F; --orange:#FF4D1C; --blue:#2D5BFF; --gold:#FFC94A;
-    --red:#FF3B30; --red-ink:#C4271B;
+    --geo:#1467A8; --red-ink:#C4271B;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Space Grotesk',system-ui,sans-serif;color:var(--ink);
     background:#1A1A18;min-height:100vh;display:flex;flex-direction:column;
     align-items:center;justify-content:center;gap:16px;padding:26px}
+  a{color:inherit}
   .switcher{display:flex;gap:6px;background:#0E0E0C;padding:6px;border-radius:10px}
   .switcher a{font-size:12px;font-weight:700;letter-spacing:.6px;text-decoration:none;
     color:#7A7A72;padding:7px 13px;border-radius:6px}
@@ -29,15 +30,22 @@
   /* ── rail ─────────────────────────────────── */
   .rail{width:236px;flex:0 0 236px;background:#FBFAF5;border-right:3px solid var(--ink);
     display:flex;flex-direction:column;padding:16px 12px}
-  .brand{display:flex;align-items:center;gap:8px;padding:2px 6px 18px}
+  .brand{display:flex;align-items:center;gap:8px;padding:2px 6px 16px}
   .brand b{font-family:'Archivo Black',sans-serif;font-size:21px;letter-spacing:-.7px}
   .brand i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;
     font-weight:700;letter-spacing:.8px;border:2px solid var(--ink-3);color:var(--ink-3);
     padding:1px 4px;border-radius:3px;transform:translateY(-1px)}
+  .course{margin:0 4px 14px;padding:9px 10px;border:3px solid var(--ink);border-radius:8px;
+    background:#fff;box-shadow:3px 3px 0 var(--line)}
+  .course i{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;
+    font-size:8.5px;font-weight:700;letter-spacing:.6px;color:var(--ink-3)}
+  .course b{display:block;font-size:13.5px;margin-top:3px}
+  .course span{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    color:var(--ink-2);margin-top:4px}
   .nav{display:grid;gap:5px}
   .nav a{display:flex;align-items:center;gap:10px;padding:9px 10px;text-decoration:none;
     font-size:13.5px;font-weight:700;color:var(--ink-2);border:3px solid transparent;
-    border-radius:8px;transition:background .1s,color .1s}
+    border-radius:8px}
   .nav a svg{width:18px;height:18px;flex:0 0 18px;stroke:currentColor;fill:none;
     stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .nav a .n{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;
@@ -45,21 +53,12 @@
   .nav a.on{background:var(--c);border-color:var(--ink);color:var(--ink);
     box-shadow:3px 3px 0 var(--ink)}
   .nav a.on .n{color:var(--ink)}
-  .nav a.dim{opacity:.42}
-  .nav a .soon{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:8px;
-    font-weight:700;letter-spacing:.4px;border:2px solid var(--line);border-radius:3px;
-    padding:1px 4px;color:var(--ink-3)}
-
-  .dse{margin-top:auto;border:3px solid var(--ink);border-radius:9px;background:#fff;
-    padding:11px 12px;box-shadow:3px 3px 0 var(--line)}
-  .dse b{display:block;font-family:'Archivo Black',sans-serif;font-size:24px;letter-spacing:-1px;line-height:1}
-  .dse span{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;
-    font-weight:600;letter-spacing:.4px;color:var(--ink-3);margin-top:5px}
-  .who{display:flex;align-items:center;gap:9px;margin-top:10px;padding:8px 6px}
+  .nav a.dim{opacity:.45}
+  .who{display:flex;align-items:center;gap:9px;margin-top:auto;padding:8px 6px}
   .who .av{width:28px;height:28px;border:3px solid var(--ink);border-radius:6px;
-    background:var(--blue);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
-  .who .txt b{display:block;font-size:12.5px}
-  .who .txt span{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-3)}
+    background:var(--geo);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+  .who b{display:block;font-size:12.5px}
+  .who span{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-3)}
 
   /* ── main ─────────────────────────────────── */
   .main{flex:1;min-width:0;position:relative;display:flex;flex-direction:column;overflow:hidden}
@@ -68,138 +67,159 @@
 
   .topstrip{flex:0 0 58px;display:flex;align-items:center;gap:7px;padding:0 20px;
     border-bottom:3px solid var(--ink);background:var(--paper)}
-  .fchip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:3px solid var(--ink);
+  .fchip{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border:3px solid var(--ink);
     border-radius:999px;background:#fff;font-size:11.5px;font-weight:700;cursor:pointer;
     box-shadow:2px 2px 0 var(--line)}
-  .fchip.on{background:var(--ink);color:var(--paper);box-shadow:2px 2px 0 var(--blue)}
+  .fchip.on{background:var(--ink);color:var(--paper);box-shadow:2px 2px 0 var(--geo)}
   .fchip .c{font-family:'JetBrains Mono',monospace;font-size:9.5px;opacity:.55}
   .spacer{flex:1}
-  .today-date{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
-    letter-spacing:.5px;color:var(--ink-3)}
-  .b.solid{background:var(--ink);color:var(--lime)}
-  .b.blue{background:var(--blue);color:#fff}
+  .autosave{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+    letter-spacing:.4px;color:var(--ink-3)}
 
-  .body{padding:18px 24px 20px;overflow:auto;flex:1}
-  h1{font-family:'Archivo Black',sans-serif;font-size:38px;letter-spacing:-1.4px;line-height:1}
-  .sub{margin-top:7px;font-family:'JetBrains Mono',monospace;font-size:10.5px;
-    font-weight:600;letter-spacing:.5px;color:var(--ink-3)}
-  .sec{display:flex;align-items:baseline;justify-content:space-between;margin:20px 0 8px}
-  .sec h2{font-size:14px;font-weight:700;letter-spacing:-.1px}
-  .sec span{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
-    letter-spacing:.5px;color:var(--ink-3)}
+  .body{padding:16px 22px 20px;flex:1;min-height:0;display:flex;flex-direction:column}
+  h1{font-family:'Archivo Black',sans-serif;font-size:32px;letter-spacing:-1.1px;line-height:1}
+  .sub{margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    font-weight:600;letter-spacing:.4px;color:var(--ink-3)}
 
-  /* ── buttons ──────────────────────────────── */
   .b{height:34px;padding:0 13px;border:3px solid var(--ink);border-radius:7px;background:#fff;
     font-family:'Space Grotesk',sans-serif;font-size:12.5px;font-weight:700;color:var(--ink);
     box-shadow:3px 3px 0 var(--ink);cursor:pointer}
-  .b:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .b.solid{background:var(--ink);color:var(--lime)}
+  .b.sm{height:28px;font-size:11px;padding:0 10px;box-shadow:2px 2px 0 var(--ink)}
 
-  /* ── banded table ─────────────────────────── */
-  .bt{border:3px solid var(--ink);border-radius:10px;background:var(--paper);
-    display:grid;gap:2px;overflow:hidden}
-  .r{background:#fff;display:grid;align-items:center;gap:14px;padding:0 16px;
-    min-height:36px;position:relative}
+  /* ── panes ────────────────────────────────── */
+  .panes{flex:1;min-height:0;border:3px solid var(--ink);border-radius:10px;overflow:hidden;
+    display:grid;grid-template-columns:300px 1fr;background:var(--paper);gap:2px}
+  .tree{background:#fff;overflow:auto;padding:6px 0 12px}
+  .tree .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+    letter-spacing:.8px;color:var(--ink-3);padding:10px 14px 8px}
+  .ch{display:flex;align-items:center;gap:10px;padding:8px 14px;font-size:12.5px;
+    font-weight:700;cursor:pointer}
+  .ch .i{font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--ink-3);width:12px}
+  .ch .n{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    font-weight:600;color:var(--ink-3)}
+  .ch.open{background:#FBFAF5}
+  .fr{display:flex;align-items:baseline;gap:9px;padding:7px 14px 7px 36px;font-size:12px;
+    color:var(--ink-2);cursor:pointer;border-left:3px solid transparent}
+  .fr .i{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-3)}
+  .fr.on{background:var(--ink);color:var(--paper);border-left-color:var(--lime);font-weight:700}
+  .fr.on .i{color:var(--lime)}
+
+  .edit{background:#fff;overflow:auto;padding:18px 22px 22px}
+  .crumb{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:600;
+    letter-spacing:.5px;color:var(--ink-3)}
+  .crumb b{color:var(--ink-2)}
+  .etitle{font-family:'Archivo Black',sans-serif;font-size:23px;letter-spacing:-.7px;
+    margin:7px 0 14px}
+
+  .blk{position:relative;border:3px solid transparent;border-radius:9px;padding:10px 12px;
+    margin-bottom:6px}
+  .blk.sel{border-color:var(--ink);box-shadow:4px 4px 0 var(--lime)}
+  .blk .bk{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;
+    font-size:9px;font-weight:700;letter-spacing:.6px;color:var(--ink-3);margin-bottom:8px}
+  .blk .bk .grip{letter-spacing:-1px;color:var(--line);font-size:12px}
+  .fld{border:2px solid var(--line);border-radius:6px;padding:8px 10px;font-size:12.5px;
+    line-height:1.6;background:#FCFBF6;color:var(--ink)}
+  .fld + .fld{margin-top:6px}
+  .tbl{display:grid;grid-template-columns:1fr 1fr;gap:0;border:2px solid var(--line);
+    border-radius:6px;overflow:hidden;font-size:11.5px}
+  .tbl div{padding:6px 9px;border-bottom:2px solid var(--line)}
+  .tbl div:nth-child(odd){background:#F7F5ED;font-weight:700}
+  .tbl div:nth-last-child(-n+2){border-bottom:0}
+  .callout{display:flex;gap:9px;align-items:flex-start;border-left:4px solid var(--geo);
+    background:#EEF3F8;border-radius:0 6px 6px 0;padding:8px 10px;font-size:12px;line-height:1.55}
+  .callout b{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+    letter-spacing:.5px;color:var(--geo);padding-top:2px}
+  .addblk{display:flex;align-items:center;gap:8px;margin-top:8px;padding:10px 12px;
+    border:2px dashed var(--ink-3);border-radius:9px;font-size:12px;font-weight:700;
+    color:var(--ink-3);cursor:pointer}
+
+  .efoot{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:12px;
+    border-top:2px solid var(--line)}
+  .efoot .st{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;
+    font-size:9.5px;font-weight:700;letter-spacing:.4px;color:var(--ink-3)}
+  .efoot .dot{width:7px;height:7px;border-radius:99px;background:var(--lime);
+    border:2px solid var(--ink)}
+
+  /* ── questions ────────────────────────────── */
+  .qwrap{flex:1;min-height:0;display:grid;grid-template-columns:1fr 424px;gap:16px}
+  .qlist{display:flex;flex-direction:column;min-height:0}
+  .bt{border:3px solid var(--ink);border-radius:10px;background:var(--paper);display:grid;gap:2px;
+    overflow:hidden}
+  .r{background:#fff;display:grid;align-items:center;gap:12px;padding:0 14px;min-height:38px}
   .r.h{background:#FBFAF5;min-height:30px;font-family:'JetBrains Mono',monospace;
-    font-size:9.5px;font-weight:700;letter-spacing:.7px;color:var(--ink-3)}
-  .r.flag::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--e)}
-  .r.rt{min-height:70px;padding:10px 16px;grid-template-columns:24px 1fr 124px auto}
-  .mono{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;
+    font-size:9.5px;font-weight:700;letter-spacing:.6px;color:var(--ink-3)}
+  .r.cur{background:var(--ink);color:var(--paper)}
+  .r.cur .mono,.r.cur .lvl{color:#B9B6AB}
+  .r.cur .k{background:var(--paper);color:var(--ink)}
+  .stem{font-size:12.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ans{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .k{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;
+    border:2px solid var(--line);border-radius:4px;padding:1px 5px}
+  .mono{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;
     font-variant-numeric:tabular-nums}
   .dim2{color:var(--ink-2)} .dim3{color:var(--ink-3)}
-  .nm{font-size:13px;font-weight:700}
-
-  .mk{width:24px;height:24px;border-radius:5px;display:grid;place-items:center}
-  .meta{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
-    letter-spacing:.5px;color:var(--ink-3)}
-  .stem{font-size:15px;font-weight:700;letter-spacing:-.2px;margin-top:3px;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .whyrow{display:flex;align-items:center;gap:10px;margin-top:3px}
-  .why{font-size:12px;font-weight:500;color:var(--ink-2)}
-  .more{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
-    color:var(--blue);border-bottom:2px solid var(--blue);padding-bottom:1px}
-  .nums{text-align:right;line-height:1.15}
-  .nums b{display:block;font-family:'JetBrains Mono',monospace;font-size:14px;
-    font-weight:700;font-variant-numeric:tabular-nums}
-  .nums span{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;
-    letter-spacing:.6px;color:var(--ink-3)}
-  .acts{display:flex;gap:7px}
-
-  /* ── stats ────────────────────────────────── */
-  .stats{border:3px solid var(--ink);border-radius:10px;display:grid;
-    grid-template-columns:repeat(4,1fr);gap:2px;background:var(--paper);overflow:hidden}
-  .st{background:#fff;padding:12px 16px}
-  .st b{display:block;font-family:'Archivo Black',sans-serif;font-size:24px;letter-spacing:-1px;line-height:1}
-  .st i{display:block;font-style:normal;font-family:'JetBrains Mono',monospace;font-size:10px;
-    font-weight:600;letter-spacing:.2px;color:var(--ink-3);margin-top:6px}
-  .st span{display:block;font-size:11.5px;color:var(--ink-2);margin-top:3px}
-
-  .du{grid-template-columns:1.7fr 90px 120px 170px;min-height:44px}
-  .du .t{font-size:13px;font-weight:700}
-  .comp{display:flex;align-items:center;gap:9px}
-  .bar{flex:1;height:9px;border:2px solid var(--ink);border-radius:99px;background:var(--paper);overflow:hidden}
-  .bar i{display:block;height:100%;background:var(--lime)}
-
-  /* ── class screen ─────────────────────────── */
-  .chead{padding:18px 24px 0}
-  .chrow{display:flex;align-items:flex-end;gap:16px}
-  .chrow h1{font-size:36px}
-  .chrow h1 em{font-style:normal;color:var(--ink-3);font-weight:400}
-  .joincode{display:flex;align-items:center;gap:8px;border:3px solid var(--ink);
-    border-radius:8px;background:#fff;padding:6px 8px 6px 12px;box-shadow:3px 3px 0 var(--line)}
-  .joincode b{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:2px}
-  .joincode span{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-3);
-    letter-spacing:.5px}
-  .tabs{display:flex;gap:4px;margin-top:16px;border-bottom:3px solid var(--ink);padding-bottom:0}
-  .tab{padding:7px 14px;font-size:12.5px;font-weight:700;color:var(--ink-3);
-    border:3px solid transparent;border-bottom:0;border-radius:8px 8px 0 0;cursor:pointer}
-  .tab.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .bt.roster{grid-template-columns:1fr}
-  .bt.roster > .r{grid-template-columns:minmax(180px,1.5fr) 108px 66px 104px minmax(140px,1fr) 104px}
-  .weak{font-size:12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .low{color:var(--red-ink)}
-  .fl{font-size:11.5px;font-weight:700}
-  .foot{display:flex;align-items:center;justify-content:space-between;padding:11px 4px 0;
+  .hot{color:var(--red-ink)}
+  .nm{font-size:12.5px;font-weight:700}
+  .lvl{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:var(--ink-3)}
+  .qfoot{display:flex;align-items:center;justify-content:space-between;padding:10px 4px 0;
     font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:var(--ink-3)}
-  .foot a{color:var(--ink);border-bottom:2px solid var(--ink);text-decoration:none;font-weight:700}
 
-  /* ── projector ────────────────────────────── */
-  .proj{flex:1;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;
-    padding:34px 56px 28px}
-  .pj-top{display:flex;align-items:center;justify-content:space-between}
-  .pj-main{flex:1;display:flex;flex-direction:column;justify-content:center}
-  .pj-top span{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
-    letter-spacing:1px;color:var(--gold)}
-  .pj-top i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:11px;
-    font-weight:600;letter-spacing:.6px;color:#7B7B72}
-  .proj h2{font-family:'Archivo Black',sans-serif;font-size:46px;line-height:1.1;
-    letter-spacing:-1.6px;margin:0 0 6px;max-width:1080px}
-  .proj p{font-size:15px;color:#A9A9A0;margin-bottom:26px}
-  .pops{display:grid;gap:10px;max-width:1120px}
-  .pop{display:flex;align-items:center;gap:16px;background:var(--paper);color:var(--ink);
-    border-radius:10px;padding:18px 20px;font-size:21px;font-weight:700;
-    font-family:'JetBrains Mono',monospace}
-  .pop u{width:30px;height:30px;flex:0 0 30px;display:grid;place-items:center;background:#fff;
-    border:3px solid var(--ink);border-radius:5px;font-size:13px;font-weight:700;text-decoration:none}
-  .pj-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;
-    border-top:2px solid rgba(242,239,230,.18);padding-top:14px}
-  .pj-foot span{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
-    letter-spacing:.5px;color:#7B7B72}
-  .kbd{display:inline-flex;gap:6px}
-  .kbd b{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
-    border:2px solid #4A4A45;color:#C9C6BB;border-radius:4px;padding:2px 6px}
+  .qed{border:3px solid var(--ink);border-radius:10px;background:#fff;padding:14px;
+    display:flex;flex-direction:column;gap:10px;overflow:auto;box-shadow:5px 5px 0 var(--line)}
+  .qed .hd{display:flex;align-items:center;justify-content:space-between}
+  .qed .hd b{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.6px;color:var(--ink-3)}
+  .oq{display:flex;align-items:center;gap:9px;border:2px solid var(--line);border-radius:7px;
+    padding:7px 9px;font-size:12px}
+  .oq u{width:20px;height:20px;flex:0 0 20px;display:grid;place-items:center;text-decoration:none;
+    border:2px solid var(--ink);border-radius:4px;font-family:'JetBrains Mono',monospace;
+    font-size:10px;font-weight:700}
+  .oq.on{background:var(--lime);border-color:var(--ink);font-weight:700}
+  .oq.on u{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+  .ev{font-size:11px;color:var(--ink-2);line-height:1.5;border-left:4px solid var(--orange);
+    padding-left:9px}
+  .ev b{color:var(--red-ink)}
+  .danger{font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    font-weight:700;letter-spacing:.4px;color:var(--red-ink);text-decoration:none}
 
-  /* ── admin ────────────────────────────────── */
-  .role{font-size:11px;font-weight:700;color:var(--ink-2)}
-  .code{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;letter-spacing:1.6px}
-  .note{margin-top:9px;font-size:11.5px;color:var(--ink-3)}
+  /* ── students ─────────────────────────────── */
+  .chead{display:flex;align-items:flex-end;gap:16px}
+  .chead h1 em{font-style:normal;color:var(--ink-3)}
+  .joincode{display:flex;align-items:center;gap:8px;border:3px solid var(--ink);border-radius:8px;
+    background:#fff;padding:5px 7px 5px 11px;box-shadow:3px 3px 0 var(--line)}
+  .joincode span{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-3);
+    letter-spacing:.4px}
+  .joincode b{font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:2px}
+  .rm{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    color:var(--ink-3);text-decoration:none;border-bottom:2px solid var(--line)}
+  .rm:hover{color:var(--red-ink);border-color:var(--red-ink)}
+
+  /* ── preview ──────────────────────────────── */
+  .prev{position:absolute;inset:0;background:#111;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:14px;padding:30px}
+  .prev .ph{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+    letter-spacing:.6px;color:#7B7B72}
+  .phone{width:360px;height:640px;background:var(--paper);border:3px solid #000;border-radius:14px;
+    overflow:hidden;display:flex;flex-direction:column}
+  .phone .bar{display:flex;align-items:center;gap:8px;padding:11px 14px;
+    border-bottom:3px solid var(--ink);font-family:'JetBrains Mono',monospace;
+    font-size:10px;font-weight:700;color:var(--ink-2)}
+  .phone .bar i{font-style:normal;color:var(--ink-3);margin-left:auto}
+  .phone .in{padding:14px 16px;overflow:auto}
+  .phone h3{font-family:'Archivo Black',sans-serif;font-size:21px;letter-spacing:-.6px;
+    line-height:1.15;margin-bottom:10px}
+  .phone p{font-size:12.5px;line-height:1.65;color:var(--ink-2)}
+  .phone .tbl{margin:10px 0}
+  .phone .callout{font-size:11.5px;margin-top:10px}
 </style>
 </head>
 <body>
 
 <div class="switcher">
-  <a href="#today">Today</a>
-  <a href="#class">Class</a>
-  <a href="#project">Projector</a>
+  <a href="#notes">Notes</a>
+  <a href="#questions">Questions</a>
+  <a href="#students">Students</a>
   <a href="#admin">Admin</a>
 </div>
 
@@ -208,18 +228,24 @@
   <aside class="rail">
     <div class="brand"><b>Learner</b><i>Teacher</i></div>
 
+    <div class="course">
+      <i>Your course</i>
+      <b>F4 Geography</b>
+      <span>32 students · 6 chapters</span>
+    </div>
+
     <nav class="nav" id="nav">
-      <a href="#today" data-s="today" style="--c:var(--lime)">
-        <svg viewBox="0 0 24 24"><path d="M4 12h4M16 12h4M12 4v3M12 17v3"/><circle cx="12" cy="12" r="4.4"/></svg>
-        Today <span class="n">3</span>
+      <a href="#notes" data-s="notes" style="--c:var(--lime)">
+        <svg viewBox="0 0 24 24"><path d="M5 4.5h9l5 5v10H5z"/><path d="M14 4.5v5h5M8 14h7M8 17h4"/></svg>
+        Notes <span class="n">14</span>
       </a>
-      <a href="#class" data-s="class" style="--c:var(--blue)">
-        <svg viewBox="0 0 24 24"><rect x="3.4" y="4" width="7" height="7" rx="1.4"/><rect x="13.6" y="4" width="7" height="7" rx="1.4"/><rect x="3.4" y="13.6" width="7" height="7" rx="1.4"/><rect x="13.6" y="13.6" width="7" height="7" rx="1.4"/></svg>
-        Classes <span class="n">3</span>
+      <a href="#questions" data-s="questions" style="--c:var(--orange)">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12l2.5 2.5L16 9"/></svg>
+        Questions <span class="n">96</span>
       </a>
-      <a href="#" class="dim" title="Not in this demo">
-        <svg viewBox="0 0 24 24"><path d="M12 4 3 8.5 12 13l9-4.5z"/><path d="M3 12.6 12 17l9-4.4"/></svg>
-        Curriculum <span class="soon">later</span>
+      <a href="#students" data-s="students" style="--c:var(--blue)">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="9" r="3.2"/><path d="M3.4 20c1.2-3.2 3.1-4.8 5.6-4.8s4.4 1.6 5.6 4.8"/><path d="M16 6.4a3 3 0 0 1 0 5.6M17.4 15.6c1.7.5 2.9 2 3.6 4.4"/></svg>
+        Students <span class="n">32</span>
       </a>
       <a href="#admin" data-s="admin" style="--c:var(--gold)">
         <svg viewBox="0 0 24 24"><path d="M4 6.5h9M17 6.5h3M4 12h3M11 12h9M4 17.5h7M15 17.5h5"/><circle cx="15" cy="6.5" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="13" cy="17.5" r="2"/></svg>
@@ -227,412 +253,399 @@
       </a>
     </nav>
 
-    <div class="dse">
-      <b>128</b>
-      <span>days to DSE 2027</span>
-    </div>
-
     <div class="who">
       <span class="av">MC</span>
-      <span class="txt"><b>Mr. Cheung</b><span>ICT · 4B, 4C, 5A</span></span>
+      <span><b>Mr. Cheung</b><span>Geography</span></span>
     </div>
   </aside>
 
   <div class="main">
 
-    <!-- ── today ───────────────────────────── -->
-    <section class="screen on" id="today">
+    <!-- ── notes ───────────────────────────── -->
+    <section class="screen on" id="notes">
       <div class="topstrip">
-        <button class="fchip on">All classes <span class="c">88</span></button>
-        <button class="fchip">4B <span class="c">35</span></button>
-        <button class="fchip">4C <span class="c">33</span></button>
-        <button class="fchip">5A <span class="c">20</span></button>
+        <button class="fchip on">F4 Geography <span class="c">32</span></button>
+        <button class="fchip">F5 Geography <span class="c">28</span></button>
         <span class="spacer"></span>
-        <span class="today-date">Tue 25 Nov · period 6</span>
-        <button class="b solid" style="margin-left:12px">New assignment</button>
+        <span class="autosave">Saved 2 min ago</span>
+        <button class="b" style="margin-left:12px">Publish chapter</button>
       </div>
 
       <div class="body">
-        <h1>Today</h1>
-        <div class="sub">3 classes · 88 students · 61 items answered since yesterday</div>
+        <div class="panes">
+          <div class="tree">
+            <div class="lbl">CHAPTERS</div>
 
-        <div class="sec"><h2>Reteach next lesson</h2><span>ranked by students affected · last 14 days</span></div>
-        <div class="bt" style="grid-template-columns:1fr">
-      <div class="r rt" style="--e:var(--red-ink)">
-        <span class="mk" style="background:#2D5BFF"><svg viewBox="0 0 24 24" width="14" height="14" fill="#fff"><rect x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect x="10" y="16.4" width="4" height="2.4"/><rect x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></span>
-        <div class="what">
-          <div class="meta">ICT · E2C · Identifiers</div>
-          <div class="stem">Which name is valid Python?</div>
-          <div class="whyrow"><span class="why">Starts with a digit</span></div>
-        </div>
-        <div class="nums"><b>14 of 18</b><span>wrong</span></div>
-        <div class="acts"><button class="b">Project</button><button class="b solid">Assign</button></div>
-      </div>
-      <div class="r rt" style="--e:var(--orange)">
-        <span class="mk" style="background:#2D5BFF"><svg viewBox="0 0 24 24" width="14" height="14" fill="#fff"><rect x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect x="10" y="16.4" width="4" height="2.4"/><rect x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></span>
-        <div class="what">
-          <div class="meta">ICT · E2C · Loops</div>
-          <div class="stem">How many times does for i in range(5) run?</div>
-          <div class="whyrow"><span class="why">Counts 1 to 5, not 0 to 4</span><span class="more">+2 more on this concept</span></div>
-        </div>
-        <div class="nums"><b>11 of 18</b><span>wrong</span></div>
-        <div class="acts"><button class="b">Project</button><button class="b solid">Assign</button></div>
-      </div>
-      <div class="r rt" style="--e:var(--gold)">
-        <span class="mk" style="background:#2D5BFF"><svg viewBox="0 0 24 24" width="14" height="14" fill="#fff"><rect x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect x="10" y="16.4" width="4" height="2.4"/><rect x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></span>
-        <div class="what">
-          <div class="meta">ICT · E2C · Data representation</div>
-          <div class="stem">Two's complement of -5 in 8 bits</div>
-          <div class="whyrow"><span class="why">Inverts, then forgets the +1</span></div>
-        </div>
-        <div class="nums"><b>9 of 18</b><span>wrong</span></div>
-        <div class="acts"><button class="b">Project</button><button class="b solid">Assign</button></div>
-      </div>
-        </div>
+        <div class="ch"><span class="i">1</span><span>Opportunities and risks</span><span class="n">12</span></div>
+        <div class="ch"><span class="i">2</span><span>Managing rivers and coasts</span><span class="n">10</span></div>
+        <div class="ch"><span class="i">3</span><span>Changing industrial location</span><span class="n">8</span></div>
+        <div class="ch"><span class="i">4</span><span>Building a sustainable city</span><span class="n">11</span></div>
+        <div class="ch"><span class="i">5</span><span>Combating famine</span><span class="n">9</span></div>
+            <div class="ch open" style="margin-top:6px"><span class="i">6</span><span>Weather and climate</span><span class="n">14</span></div>
 
-        <div class="sec"><h2>Class pulse</h2><span>this week</span></div>
-        <div class="stats">
-          <div class="st"><b>68%</b><i>Coverage</i><span>41 of 60 published items</span></div>
-          <div class="st"><b>74</b><i>Active</i><span>of 88 answered this week</span></div>
-          <div class="st"><b>9</b><i>At risk</i><span>no attempt in 7 days</span></div>
-          <div class="st"><b>81%</b><i>Retention, 7 days</i><span>target 90%</span></div>
-        </div>
-
-        <div class="sec"><h2>Needs a word</h2><span>flagged in 4B</span></div>
-        <div class="bt">
-          <div class="r" style="grid-template-columns:1.1fr 150px 1fr 120px">
-            <div class="nm">Cheung Ho-yin</div>
-            <div class="mono dim2">9 days quiet</div>
-            <div class="weak">41% retention · weakest on identifiers</div>
-            <div><button class="b" style="height:28px;font-size:11px">Open 4B</button></div>
+        <div class="fr "><span class="i">1</span><span>What the monsoon is</span></div>
+        <div class="fr "><span class="i">2</span><span>Pressure gradient force</span></div>
+        <div class="fr on"><span class="i">3</span><span>Why Hong Kong is humid in summer</span></div>
+        <div class="fr "><span class="i">4</span><span>Reading a synoptic chart</span></div>
+            <div class="fr"><span class="i">5</span><span>The monsoon trough</span></div>
+            <div class="fr"><span class="i">6</span><span>Humidity and dew point</span></div>
           </div>
-          <div class="r" style="grid-template-columns:1.1fr 150px 1fr 120px">
-            <div class="nm">Lam Hoi-ching</div>
-            <div class="mono dim2">8 days quiet</div>
-            <div class="weak">52% retention · weakest on loops</div>
-            <div><button class="b" style="height:28px;font-size:11px">Open 4B</button></div>
-          </div>
-          <div class="r" style="grid-template-columns:1.1fr 150px 1fr 120px">
-            <div class="nm">Ng Chun-kit</div>
-            <div class="mono dim2">3 lapses</div>
-            <div class="weak">63% retention · two's complement</div>
-            <div><button class="b" style="height:28px;font-size:11px">Open 4B</button></div>
-          </div>
-        </div>
 
-        <div class="sec"><h2>Due</h2><span>next 7 days</span></div>
-        <div class="bt">
-      <div class="r du" style="grid-template-columns:1.7fr 90px 120px 170px">
-        <div class="t">E2C · Valid identifiers</div>
-        <div class="mono dim2">4B</div>
-        <div class="mono dim2">Due tomorrow</div>
-        <div class="comp">
-          <span class="bar"><i style="width:89%"></i></span>
-          <span class="mono">31 of 35</span>
-        </div>
-      </div>
-      <div class="r du" style="grid-template-columns:1.7fr 90px 120px 170px">
-        <div class="t">E2C · Loop traces</div>
-        <div class="mono dim2">4C</div>
-        <div class="mono dim2">Due Thu</div>
-        <div class="comp">
-          <span class="bar"><i style="width:55%"></i></span>
-          <span class="mono">18 of 33</span>
-        </div>
-      </div>
-      <div class="r du" style="grid-template-columns:1.7fr 90px 120px 170px">
-        <div class="t">Mock paper 1 · Section B</div>
-        <div class="mono dim2">4B, 4C</div>
-        <div class="mono dim2">Due 8 Dec</div>
-        <div class="comp">
-          <span class="bar"><i style="width:91%"></i></span>
-          <span class="mono">62 of 68</span>
-        </div>
-      </div>
+          <div class="edit">
+            <div class="crumb">F4 Geography / <b>Weather and climate</b> / fragment 3 of 14</div>
+            <div class="etitle">Why Hong Kong is humid in summer</div>
+
+            <div class="blk sel">
+              <div class="bk"><span class="grip">⋮⋮</span> Note</div>
+              <div class="fld">In summer the south-west monsoon carries warm, moist air from the Indian Ocean and the South China Sea. Because the air is warm it can hold a lot of water vapour, so relative humidity stays above 80% for most of June to August.</div>
+            </div>
+
+            <div class="blk">
+              <div class="bk"><span class="grip">⋮⋮</span> Table — summer against winter</div>
+              <div class="tbl">
+                <div>Summer</div><div>Winter</div>
+                <div>South-west monsoon</div><div>North-east monsoon</div>
+                <div>Maritime, moist</div><div>Continental, dry</div>
+              </div>
+            </div>
+
+            <div class="blk">
+              <div class="bk"><span class="grip">⋮⋮</span> Exam callout</div>
+              <div class="callout"><b>MARKING</b><span>Name the wind direction, not just “moist air”. The mark is for the direction and the source region.</span></div>
+            </div>
+
+            <div class="addblk">+ Add block</div>
+
+            <div class="efoot">
+              <span class="st"><span class="dot"></span> Published · edited 2 min ago</span>
+              <span class="spacer"></span>
+              <button class="b sm">Preview as student</button>
+              <button class="b sm solid">Save</button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ── class ───────────────────────────── -->
-    <section class="screen" id="class">
-      <div class="chead">
-        <div class="chrow">
+    <!-- ── questions ───────────────────────── -->
+    <section class="screen" id="questions">
+      <div class="topstrip">
+        <button class="fchip on">F4 Geography <span class="c">32</span></button>
+        <button class="fchip">F5 Geography <span class="c">28</span></button>
+        <span class="spacer"></span>
+        <span class="autosave">Weather and climate · 14 items</span>
+        <button class="b" style="margin-left:12px">New item</button>
+      </div>
+
+      <div class="body">
+        <div class="qwrap">
+          <div class="qlist">
+            <div class="bt">
+              <div class="r h" style="grid-template-columns:1fr 190px 90px 100px 90px">
+                <div>Question</div><div>Answer</div><div>Wrong</div><div>Level</div><div>Edited</div>
+              </div>
+
+        <div class="r cur" style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">Hong Kong's summer rain comes mainly from</div>
+          <div class="ans"><span class="k">B</span></div>
+          <div class="mono hot">61%</div>
+          <div class="lvl">Core</div>
+          <div class="mono dim3">2 days</div>
+        </div>
+        <div class="r " style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">Two places 40 km apart read 1,004 and 1,020 hPa. The pressure gradient is</div>
+          <div class="ans"><span class="k">0.4 hPa/km</span></div>
+          <div class="mono ">48%</div>
+          <div class="lvl">Core</div>
+          <div class="mono dim3">3 days</div>
+        </div>
+        <div class="r " style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">Which condition does not favour tropical cyclone formation?</div>
+          <div class="ans"><span class="k">Strong shear</span></div>
+          <div class="mono ">54%</div>
+          <div class="lvl">Core</div>
+          <div class="mono dim3">3 days</div>
+        </div>
+        <div class="r " style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">Hong Kong winters are dry because the continental air is</div>
+          <div class="ans"><span class="k">Cold and dry</span></div>
+          <div class="mono ">39%</div>
+          <div class="lvl">Core</div>
+          <div class="mono dim3">5 days</div>
+        </div>
+        <div class="r " style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">In summer the monsoon trough sits</div>
+          <div class="ans"><span class="k">North of the Equator</span></div>
+          <div class="mono hot">57%</div>
+          <div class="lvl">Elective</div>
+          <div class="mono dim3">1 week</div>
+        </div>
+        <div class="r " style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">Orographic rain forms when air</div>
+          <div class="ans"><span class="k">Rises over relief</span></div>
+          <div class="mono ">22%</div>
+          <div class="lvl">Elective</div>
+          <div class="mono dim3">1 week</div>
+        </div>
+        <div class="r " style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">Isobars are close together. The wind is</div>
+          <div class="ans"><span class="k">Strong</span></div>
+          <div class="mono ">31%</div>
+          <div class="lvl">Elective</div>
+          <div class="mono dim3">2 weeks</div>
+        </div>
+        <div class="r " style="grid-template-columns:1fr 190px 90px 100px 90px">
+          <div class="stem">Relative humidity falls by afternoon because</div>
+          <div class="ans"><span class="k">Warm air holds more vapour</span></div>
+          <div class="mono hot">66%</div>
+          <div class="lvl">Elective</div>
+          <div class="mono dim3">2 weeks</div>
+        </div>
+            </div>
+            <div class="qfoot"><span>8 of 14 shown · wrong share is from attempts, last 14 days</span><a class="rm" href="#">Show all</a></div>
+          </div>
+
+          <div class="qed">
+            <div class="hd"><b>EDITING ITEM 1</b><span class="lvl">Core</span></div>
+
+            <div class="fld" style="font-size:13px;font-weight:700;line-height:1.45">Hong Kong's summer rain comes mainly from</div>
+
+            <div class="oq"> <u>A</u> Tropical cyclones </div>
+            <div class="oq on"><u>B</u> The south-west monsoon </div>
+            <div class="oq"><u>C</u> Local convection only </div>
+            <div class="oq"><u>D</u> Cold fronts moving south </div>
+
+            <div class="bk" style="margin:2px 0 0">Why, in one line</div>
+            <div class="fld">The south-west monsoon carries moist maritime air from the Indian Ocean and the South China Sea.</div>
+
+            <div class="ev"><b>61% answered A.</b> Students read “rain in summer” as “typhoon season”. Consider rewording the stem to “the rain that falls on most summer days”.</div>
+
+            <div style="display:flex;gap:8px;margin-top:2px">
+              <button class="b sm">Change answer</button>
+              <button class="b sm solid">Save item</button>
+            </div>
+            <a class="danger" href="#">Delete item</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── students ────────────────────────── -->
+    <section class="screen" id="students">
+      <div class="topstrip">
+        <button class="fchip on">F4 Geography <span class="c">32</span></button>
+        <button class="fchip">F5 Geography <span class="c">28</span></button>
+        <span class="spacer"></span>
+        <span class="autosave">sorted by name</span>
+        <button class="b" style="margin-left:12px">Add student</button>
+        <button class="b" style="margin-left:8px">Import CSV</button>
+      </div>
+
+      <div class="body">
+        <div class="chead" style="margin-bottom:14px">
           <div>
-            <h1>4B <em>· ICT</em></h1>
-            <div class="sub">35 students · 6 of 6 chapters published · sorted by risk</div>
+            <h1>F4 Geography <em>· 32 students</em></h1>
+            <div class="sub">you are the only teacher on this course</div>
           </div>
           <span class="spacer"></span>
-          <div class="joincode">
-            <span>Join code</span><b>K7QX2M</b>
-            <button class="b" style="height:28px;font-size:11px">Copy</button>
+          <div class="joincode"><span>Join code</span><b>G7QX2M</b><button class="b sm">Copy</button></div>
+        </div>
+
+        <div class="bt">
+          <div class="r h" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+            <div>Student</div><div>Joined</div><div>Answered</div><div>Last active</div><div></div>
           </div>
-        </div>
-        <div class="tabs">
-          <div class="tab on">Roster</div>
-          <div class="tab">Assignments</div>
-          <div class="tab">Results</div>
-          <div class="tab">Settings</div>
-        </div>
-      </div>
 
-      <div class="body" style="padding-top:16px">
-        <div class="bt roster">
-          <div class="r h roster">
-            <div>Student</div><div>Last active</div><div>Today</div><div>7-day ret.</div><div>Weakest concept</div><div>Flag</div>
-          </div>
-          
-      <div class="r flag" style="--e:var(--red-ink)">
-        <div class="nm">Cheung Ho-yin</div>
-        <div class="mono dim2">9 days</div>
-        <div class="mono dim3">—</div>
-        <div class="mono low">41%</div>
-        <div class="weak">Identifiers</div>
-        <div><span class="fl" style="color:var(--red-ink)">Inactive</span></div>
-      </div>
-      <div class="r flag" style="--e:var(--red-ink)">
-        <div class="nm">Lam Hoi-ching</div>
-        <div class="mono dim2">8 days</div>
-        <div class="mono dim3">—</div>
-        <div class="mono low">52%</div>
-        <div class="weak">Loops</div>
-        <div><span class="fl" style="color:var(--red-ink)">Inactive</span></div>
-      </div>
-      <div class="r flag" style="--e:var(--orange)">
-        <div class="nm">Ng Chun-kit</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">12</div>
-        <div class="mono low">63%</div>
-        <div class="weak">Two's complement</div>
-        <div><span class="fl" style="color:var(--orange)">Lapsing</span></div>
-      </div>
-      <div class="r flag" style="--e:var(--blue)">
-        <div class="nm">Tsang Yuen</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">6</div>
-        <div class="mono low">58%</div>
-        <div class="weak">Two's complement</div>
-        <div><span class="fl" style="color:var(--blue)">Stuck</span></div>
-      </div>
-      <div class="r flag" style="--e:var(--orange)">
-        <div class="nm">Ho Man-hei</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">9</div>
-        <div class="mono low">61%</div>
-        <div class="weak">Trace tables</div>
-        <div><span class="fl" style="color:var(--orange)">Lapsing</span></div>
-      </div>
-      <div class="r flag" style="--e:var(--blue)">
-        <div class="nm">Yip Ka-ho</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">15</div>
-        <div class="mono low">67%</div>
-        <div class="weak">Identifiers</div>
-        <div><span class="fl" style="color:var(--blue)">Stuck</span></div>
-      </div>
-      <div class="r flag" style="--e:var(--blue)">
-        <div class="nm">So Tsz-wing</div>
-        <div class="mono dim2">yesterday</div>
-        <div class="mono ">4</div>
-        <div class="mono low">69%</div>
-        <div class="weak">Loops</div>
-        <div><span class="fl" style="color:var(--blue)">Stuck</span></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Lau Hiu-tung</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">21</div>
-        <div class="mono ">78%</div>
-        <div class="weak">Trace tables</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Mak Cheuk-yiu</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">27</div>
-        <div class="mono ">84%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Fung Wai-lam</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">30</div>
-        <div class="mono ">88%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Tang Sze-ching</div>
-        <div class="mono dim2">yesterday</div>
-        <div class="mono ">11</div>
-        <div class="mono ">76%</div>
-        <div class="weak">Identifiers</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Kwok Yat-long</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">24</div>
-        <div class="mono ">90%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Chu Hoi-yan</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">19</div>
-        <div class="mono ">86%</div>
-        <div class="weak">Functions</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Poon Chi-hang</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">33</div>
-        <div class="mono ">94%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Sit Ka-woon</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">14</div>
-        <div class="mono ">81%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Chan Ka-yan</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">24</div>
-        <div class="mono ">92%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Wong Tsz-him</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">18</div>
-        <div class="mono ">88%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
-      <div class="r " style="">
-        <div class="nm">Lee Wing-sze</div>
-        <div class="mono dim2">today</div>
-        <div class="mono ">26</div>
-        <div class="mono ">91%</div>
-        <div class="weak">—</div>
-        <div></div>
-      </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Chan Ka-yan</div>
+          <div class="mono dim2">2 Sep</div>
+          <div class="mono">86 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
         </div>
-        <div class="foot"><span>18 of 35 shown · the rest are unflagged</span><a href="#">Show all 35</a></div>
-      </div>
-    </section>
-
-    <!-- ── projector ───────────────────────── -->
-    <section class="screen" id="project">
-      <div class="proj">
-        <div class="pj-top"><span>ICT · E2C · Two's complement</span><i>4 of 6</i></div>
-
-        <div class="pj-main">
-        <h2>Two's complement of &minus;5 in 8 bits</h2>
-        <p>Write the 8-bit pattern before I reveal it.</p>
-
-        <div class="pops">
-          <div class="pop"><u>1</u>1111 1011</div>
-          <div class="pop"><u>2</u>1111 1010</div>
-          <div class="pop"><u>3</u>1000 0101</div>
-          <div class="pop"><u>4</u>0000 0101</div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Cheung Ho-yin</div>
+          <div class="mono dim2">2 Sep</div>
+          <div class="mono">41 items</div>
+          <div class="mono hot">9 days</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Chu Hoi-yan</div>
+          <div class="mono dim2">3 Sep</div>
+          <div class="mono">79 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Fung Wai-lam</div>
+          <div class="mono dim2">3 Sep</div>
+          <div class="mono">92 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Ho Man-hei</div>
+          <div class="mono dim2">5 Sep</div>
+          <div class="mono">63 items</div>
+          <div class="mono dim2">yesterday</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Kwok Yat-long</div>
+          <div class="mono dim2">5 Sep</div>
+          <div class="mono">88 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Lam Hoi-ching</div>
+          <div class="mono dim2">8 Sep</div>
+          <div class="mono">52 items</div>
+          <div class="mono hot">8 days</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Lau Hiu-tung</div>
+          <div class="mono dim2">8 Sep</div>
+          <div class="mono">74 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Lee Wing-sze</div>
+          <div class="mono dim2">8 Sep</div>
+          <div class="mono">91 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Mak Cheuk-yiu</div>
+          <div class="mono dim2">11 Sep</div>
+          <div class="mono">84 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Ng Chun-kit</div>
+          <div class="mono dim2">11 Sep</div>
+          <div class="mono">61 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Poon Chi-hang</div>
+          <div class="mono dim2">12 Sep</div>
+          <div class="mono">94 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Sit Ka-woon</div>
+          <div class="mono dim2">12 Sep</div>
+          <div class="mono">81 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">So Tsz-wing</div>
+          <div class="mono dim2">15 Sep</div>
+          <div class="mono">69 items</div>
+          <div class="mono dim2">yesterday</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Tang Sze-ching</div>
+          <div class="mono dim2">15 Sep</div>
+          <div class="mono">76 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
+        </div>
+        <div class="r" style="grid-template-columns:minmax(200px,1.6fr) 110px 130px 130px 80px">
+          <div class="nm">Tsang Yuen</div>
+          <div class="mono dim2">16 Sep</div>
+          <div class="mono">58 items</div>
+          <div class="mono dim2">today</div>
+          <div><a class="rm" href="#">Remove</a></div>
         </div>
         </div>
-
-        <div class="pj-foot">
-          <span>No names, no timing. This is a teaching aid.</span>
-          <span class="kbd"><b>1–4</b> answer <b>Space</b> reveal <b>Esc</b> exit</span>
-        </div>
+        <div class="qfoot"><span>16 of 32 shown</span><a class="rm" href="#">Show all</a></div>
       </div>
     </section>
 
     <!-- ── admin ───────────────────────────── -->
     <section class="screen" id="admin">
-      <div class="chead">
+      <div class="body">
         <h1>Admin</h1>
-        <div class="sub">single school install · 3 teachers · 3 classes · 88 students</div>
-        <div class="tabs">
-          <div class="tab on">Teachers</div>
-          <div class="tab">Classes</div>
-          <div class="tab">Settings</div>
-          <div class="tab">Backups</div>
-        </div>
-      </div>
+        <div class="sub">single school install · 3 teachers · 3 courses · 95 students</div>
 
-      <div class="body" style="padding-top:16px">
-        <div class="sec" style="margin-top:6px"><h2>Teachers</h2><span>role changes are logged</span></div>
+        <div class="qfoot" style="padding:18px 4px 8px"><span>Courses</span><span>join codes are per course</span></div>
         <div class="bt">
-          <div class="r h" style="grid-template-columns:1.1fr 1.6fr 100px 80px 110px">
-            <div>Name</div><div>Email</div><div>Role</div><div>Classes</div><div>Last active</div>
+          <div class="r h" style="grid-template-columns:1.2fr 1fr 100px 100px 110px">
+            <div>Course</div><div>Teacher</div><div>Students</div><div>Chapters</div><div>State</div>
           </div>
-          
-      <div class="r" style="grid-template-columns:1.1fr 1.6fr 100px 80px 110px">
-        <div class="nm">Mr. Cheung</div>
-        <div class="mono dim2">cheung@school.edu.hk</div>
-        <div class="role">Teacher</div>
-        <div class="mono">3</div>
-        <div class="mono dim2">Today</div>
-      </div>
-      <div class="r" style="grid-template-columns:1.1fr 1.6fr 100px 80px 110px">
-        <div class="nm">Ms. Chow</div>
-        <div class="mono dim2">chow@school.edu.hk</div>
-        <div class="role">Teacher</div>
-        <div class="mono">2</div>
-        <div class="mono dim2">Yesterday</div>
-      </div>
-      <div class="r" style="grid-template-columns:1.1fr 1.6fr 100px 80px 110px">
-        <div class="nm">Mr. Ip</div>
-        <div class="mono dim2">ip@school.edu.hk</div>
-        <div class="role">Teacher</div>
-        <div class="mono">2</div>
-        <div class="mono dim2">4 days ago</div>
-      </div>
-      <div class="r" style="grid-template-columns:1.1fr 1.6fr 100px 80px 110px">
-        <div class="nm">IT Admin</div>
-        <div class="mono dim2">admin@school.edu.hk</div>
-        <div class="role">Admin</div>
-        <div class="mono">—</div>
-        <div class="mono dim2">2 weeks ago</div>
-      </div>
+
+        <div class="r" style="grid-template-columns:1.2fr 1fr 100px 100px 110px">
+          <div class="nm">F4 Geography</div><div class="mono dim2">Mr. Cheung</div>
+          <div class="mono">32</div><div class="mono">6</div>
+          <div class="lvl">Published</div>
+        </div>
+        <div class="r" style="grid-template-columns:1.2fr 1fr 100px 100px 110px">
+          <div class="nm">F5 Geography</div><div class="mono dim2">Mr. Cheung</div>
+          <div class="mono">28</div><div class="mono">6</div>
+          <div class="lvl">Published</div>
+        </div>
+        <div class="r" style="grid-template-columns:1.2fr 1fr 100px 100px 110px">
+          <div class="nm">F4 ICT</div><div class="mono dim2">Mr. Lau</div>
+          <div class="mono">35</div><div class="mono">5</div>
+          <div class="lvl">Draft</div>
+        </div>
         </div>
 
-        <div class="sec"><h2>Classes and join codes</h2><span>regenerate if a code leaks</span></div>
+        <div class="qfoot" style="padding:18px 4px 8px"><span>Teachers</span><span>role changes are logged</span></div>
         <div class="bt">
-          <div class="r h" style="grid-template-columns:70px 1fr 130px 90px 1fr">
-            <div>Class</div><div>Subject</div><div>Join code</div><div>Students</div><div>Owner</div>
+          <div class="r h" style="grid-template-columns:1.2fr 1.8fr 120px 110px">
+            <div>Name</div><div>Email</div><div>Role</div><div>Courses</div>
           </div>
-          
-      <div class="r" style="grid-template-columns:70px 1fr 130px 90px 1fr">
-        <div class="nm">4B</div>
-        <div class="mono dim2">ICT</div>
-        <div class="code">K7QX2M</div>
-        <div class="mono">35</div>
-        <div class="mono dim2">Mr. Cheung</div>
-      </div>
-      <div class="r" style="grid-template-columns:70px 1fr 130px 90px 1fr">
-        <div class="nm">4C</div>
-        <div class="mono dim2">ICT</div>
-        <div class="code">M3TP9D</div>
-        <div class="mono">33</div>
-        <div class="mono dim2">Mr. Cheung</div>
-      </div>
-      <div class="r" style="grid-template-columns:70px 1fr 130px 90px 1fr">
-        <div class="nm">5A</div>
-        <div class="mono dim2">Physics</div>
-        <div class="code">B8HVR4</div>
-        <div class="mono">20</div>
-        <div class="mono dim2">Ms. Chow</div>
-      </div>
+
+        <div class="r" style="grid-template-columns:1.2fr 1.8fr 120px 110px">
+          <div class="nm">Mr. Cheung</div><div class="mono dim2">cheung@school.edu.hk</div>
+          <div class="lvl">Teacher</div><div class="mono">2</div>
         </div>
-        <div class="note">Leaderboard is off for 4C. Retention target is 90% for exam classes, 85% otherwise.</div>
+        <div class="r" style="grid-template-columns:1.2fr 1.8fr 120px 110px">
+          <div class="nm">Mr. Lau</div><div class="mono dim2">lau@school.edu.hk</div>
+          <div class="lvl">Teacher</div><div class="mono">1</div>
+        </div>
+        <div class="r" style="grid-template-columns:1.2fr 1.8fr 120px 110px">
+          <div class="nm">Ms. Ho</div><div class="mono dim2">ho@school.edu.hk</div>
+          <div class="lvl">Teacher</div><div class="mono">1</div>
+        </div>
+        <div class="r" style="grid-template-columns:1.2fr 1.8fr 120px 110px">
+          <div class="nm">IT Admin</div><div class="mono dim2">admin@school.edu.hk</div>
+          <div class="lvl">Admin</div><div class="mono">—</div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── preview ─────────────────────────── -->
+    <section class="screen" id="preview">
+      <div class="prev">
+        <div class="ph">PREVIEW · AS A STUDENT SEES IT</div>
+        <div class="phone">
+          <div class="bar">F4 Geography <i>3 of 14</i></div>
+          <div class="in">
+            <h3>Why Hong Kong is humid in summer</h3>
+            <p>In summer the south-west monsoon carries warm, moist air from the Indian Ocean and the South China Sea. Because the air is warm it can hold a lot of water vapour, so relative humidity stays above 80% for most of June to August.</p>
+            <div class="tbl">
+              <div>Summer</div><div>Winter</div>
+              <div>South-west monsoon</div><div>North-east monsoon</div>
+              <div>Maritime, moist</div><div>Continental, dry</div>
+            </div>
+            <div class="callout"><b>MARKING</b><span>Name the wind direction, not just “moist air”. The mark is for the direction and the source region.</span></div>
+          </div>
+        </div>
+        <button class="b" style="background:#111;color:#F2EFE6;border-color:#F2EFE6;box-shadow:3px 3px 0 #4A4A45">Back to the editor</button>
       </div>
     </section>
 
@@ -640,18 +653,20 @@
 </div>
 
 <script>
-  const routes = ["today", "class", "project", "admin"];
-  const navFor = { today: "today", class: "class", project: "today", admin: "admin" };
-
+  const routes = ["notes", "questions", "students", "admin", "preview"];
+  const navFor = { notes: "notes", questions: "questions", students: "students", admin: "admin", preview: "notes" };
   function show(id) {
-    if (!routes.includes(id)) id = "today";
+    if (!routes.includes(id)) id = "notes";
     document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
-    document.querySelectorAll(".nav a").forEach(a =>
-      a.classList.toggle("on", a.dataset.s === navFor[id]));
+    document.querySelectorAll(".nav a").forEach(a => a.classList.toggle("on", a.dataset.s === navFor[id]));
     document.querySelectorAll(".switcher a").forEach(a =>
       a.classList.toggle("on", a.getAttribute("href") === "#" + id));
   }
   addEventListener("hashchange", () => show(location.hash.slice(1)));
+  document.querySelectorAll('a[href="#preview"], .b').forEach(el => {
+    if (el.textContent.trim() === "Preview as student") el.addEventListener("click", () => { location.hash = "preview"; });
+    if (el.textContent.trim() === "Back to the editor") el.addEventListener("click", () => { location.hash = "notes"; });
+  });
   show(location.hash.slice(1));
 </script>
 </body>
