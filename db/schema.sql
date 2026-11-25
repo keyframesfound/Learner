@@ -17,7 +17,8 @@ create type memory_phase  as enum ('new', 'learning', 'review', 'relearning');
 create table users (
   id            uuid primary key default gen_random_uuid(),
   email         text not null,
-  password_hash text not null,
+  password_hash text not null default '',   -- unused: better-auth owns credentials
+  auth_id       text,                       -- the better-auth user id
   name          text not null,
   role          user_role not null default 'student',
   school        text,
@@ -25,6 +26,7 @@ create table users (
   last_seen_at  timestamptz
 );
 create unique index users_email_key on users (lower(email));
+create unique index users_auth_id_key on users (auth_id);
 
 create table sessions (
   id         text primary key,
@@ -94,6 +96,7 @@ create table classes (
   id         uuid primary key default gen_random_uuid(),
   teacher_id uuid not null references users(id) on delete cascade,
   name       text not null,
+  module_id  text references modules(id) on delete set null,   -- the curriculum it follows
   join_code  text not null unique,
   year       int,
   retention_target numeric(3,2) not null default 0.90,   -- exam mode raises this
@@ -117,6 +120,48 @@ create table assignments (
   due_at       timestamptz,
   published_at timestamptz not null default now(),
   check (num_nonnulls(module_id, lesson_id) = 1)
+);
+
+-- ─── quickbits: what a student has read ─────────────────────────────────────
+create table reads (
+  user_id   uuid not null references users(id) on delete cascade,
+  chapter   text not null,
+  fragment  text not null,
+  read_at   timestamptz not null default now(),
+  primary key (user_id, chapter, fragment)
+);
+
+-- ─── boss raids ──────────────────────────────────────────────────────────────
+create table parties (
+  id            uuid primary key default gen_random_uuid(),
+  code          text not null unique,
+  host_id       uuid not null references users(id) on delete cascade,
+  module_id     text references modules(id) on delete set null,
+  status        text not null default 'lobby' check (status in ('lobby','live','done')),
+  round         int not null default 0,
+  round_started timestamptz,
+  question_ids  text[] not null default '{}',
+  created_at    timestamptz not null default now()
+);
+
+create table party_players (
+  party_id  uuid not null references parties(id) on delete cascade,
+  user_id   uuid not null references users(id) on delete cascade,
+  lives     int not null default 4,
+  score     int not null default 0,
+  joined_at timestamptz not null default now(),
+  primary key (party_id, user_id)
+);
+
+create table party_answers (
+  party_id   uuid not null references parties(id) on delete cascade,
+  round      int not null,
+  user_id    uuid not null references users(id) on delete cascade,
+  choice     int not null,
+  correct    boolean not null,
+  ms         int not null default 0,
+  created_at timestamptz not null default now(),
+  primary key (party_id, round, user_id)
 );
 
 -- ─── attempts: the spine ──────────────────────────────────────────────────────

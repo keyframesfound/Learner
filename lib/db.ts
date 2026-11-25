@@ -5,7 +5,7 @@ import * as schema from "./auth-schema";
 const globalForDb = globalThis as unknown as { __learnerPool?: Pool };
 
 /* constructed lazily: importing this module must not open a socket at build time */
-const pool =
+export const pool =
   globalForDb.__learnerPool ??
   new Pool({
     connectionString: process.env.DATABASE_URL ?? "postgres://learner@localhost:5432/learner",
