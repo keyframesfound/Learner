@@ -130,7 +130,7 @@ slots dashed. Start is disabled until two are ready.
 │                                      │
 │ [Knight][Mage][Archer][Rogue][Cleric]│  party of five, bottom-left
 │        ┌ You · Knight  ┐             │
-│        │ ▮▮▮▼   3 lives│             │  your plate, above them
+│        │ ▮▮▮▮▼  4 lives│             │  your plate, above them
 ├──────────────────────────────────────┤
 │ Valid identifiers · Knight readies   │
 │ Shield Bash                          │
@@ -148,13 +148,13 @@ slots dashed. Start is disabled until two are ready.
   his face. The party plate floats in the empty band above them, not on top of them.
 - **Five players: you plus four friends.** One host opens the party, gets a code,
   and the friends join with it. All five are in the fight at once — the party line is
-  five sprites, each with a name and three life pips above their head.
+  five sprites, each with a name and four life pips above their head.
 - **Thirty seconds a round.** Every player gets their own question on the same clock.
   The bar under the meta line empties; at zero the round resolves as wrong and the
   boss strikes back. Answer inside the window and your character strikes instead.
 - **One question, four outcomes.** Right: your hero lunges, the boss loses a pip.
   Wrong or late: the boss lunges, the arena shakes, the screen flashes orange, and
-  you lose one of three lives. Three in a row is still a critical hit and takes two.
+  you lose one of four lives. Three in a row is still a critical hit and takes two.
 - **The five run in parallel.** You answer your own question; the other four resolve
   on their own schedule inside the same round, so pips fall between your answers
   without waiting for each other. Nobody is queued behind anybody.
