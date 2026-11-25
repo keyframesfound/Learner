@@ -1,195 +1,153 @@
 # UX
 
-Direction: Duolingo's visual language, adapted for code and physics.
+Direction: exam paper, printed in ink, with one electric accent.
 
-Duolingo is the reference because it solved the exact problem this product has —
-getting a teenager to do five minutes of retrieval practice every day without being
-told to. Its design is not decoration; it is the reward loop made visible. So we take
-the whole language: light background, thick outlines, 3D pressable buttons, a winding
-path, a mascot, big stamps on success, and a green continue bar.
+The loop is borrowed from Duolingo because it is correct: one action per screen, an
+immediate verdict, visible progression, and a single large button. Its surface is
+not borrowed, because a green bevel, circular nodes on a curve, a mascot in a speech
+bubble and an outlined PERFECT stamp together read as a clone. Variant B keeps the
+loop and replaces the skin — printed rather than animated.
 
-What we do not take: hearts, XP, and leagues. Those punish wrong answers and rank
-children against each other, which is the opposite of what the learning model needs.
-(Wrong answers are the mechanism. You cannot punish the mechanism.)
+Brilliant's restraint was the other candidate and it is better typography than this,
+but it disappears. A revision tool needs a spine that tells a student where they are
+without them asking.
 
 ## Foundations
 
-Colour. One accent per subject, everything else neutral.
+Colour. Paper, ink, one accent per subject, and lime reserved for success.
 
-    ink        #3C3C3C      primary text
-    ink-muted  #777777      secondary text
-    ink-faint  #AFAFAF      disabled, locked
-    line       #E5E5E5      2px borders everywhere
-    bg         #FFFFFF
-    bg-alt     #F7F7F7      sheet background, input wells
+    paper    #F2EFE6      page
+    ink      #111111      text, borders, primary fill
+    ink-2    #4A4A45
+    ink-3    #8C8A80      locked, muted, meta
+    line     #D8D4C6      rules and rails
+    lime     #D4FF3F      correct, streak, active tab
+    orange   #FF4D1C      current step, drills
+    blue     #2D5BFF      ICT accent, selection
+    teal     #00C2B2      code tab
+    gold     #FFC94A      me tab
+    red      #FF3B30      wrong only
 
-    green      #58CC02      primary action, correct
-    green-dk   #4CAD00      the 4px bottom edge that makes buttons physical
-    green-pale #D7FFB8      correct banner background
-    blue       #1CB0F6      ICT accent, links
-    blue-dk    #1899D6
-    purple     #CE82FF      Physics accent
-    purple-dk  #A568CC
-    gold       #FFC800      streak, legendary nodes
-    gold-dk    #E5A700
-    red        #FF4B4B      wrong answer only - never used for UI chrome
-    red-dk     #EA2B2B
-    red-pale   #FFDFE0
+Two accents never touch. Blue means ICT, orange means "this is where you are".
 
-Type. Nunito 800/900, fallback system-ui. Rounded terminals are doing real work:
-they read as friendly at 15px, which is where the body copy lives. Code is
-JetBrains Mono, 13px, never bold.
+Type.
 
-    40/900  screen titles, stamps
-    24/900  lesson prompt
-    17/800  buttons and answer text
-    15/700  body
-    12/800  uppercase chips, letter-spacing .8px
+    Archivo Black   display, question text, verdicts, numbers that shout
+    Space Grotesk   UI, labels, body
+    JetBrains Mono  code, counters, ranks, anything tabular
 
-Shape. Radius 16 on cards and buttons, 20 on sheets, 999 on chips and nodes.
-Nothing is square and nothing is a subtle 4px radius — that is the difference
-between this and a generic dashboard.
+Question text is 27/1.16 with -.6px tracking. Body is 15. Meta is 12 mono, uppercase,
+1.2px tracking.
 
-Elevation is never a blur. It is a solid offset: box-shadow 0 4px 0 shade, and the
-element translates down 4px on press. That single rule carries most of the feel.
+Shape. 8px radius, 3px solid ink border, and a hard offset shadow — 5px 5px 0 for
+cards, 6px 6px 0 for the device frame. No blur anywhere. Pressing translates the
+element into its own shadow; the shadow never fades.
 
 ## Components
 
-**Button.** Full width by default, 52px tall, 16px radius, uppercase 15/800 label
-with .8px tracking, white text, green fill, 4px darker-green bottom edge. Pressed:
-translateY(4px) and the edge collapses to 0. Disabled: #E5E5E5 fill, #AFAFAF label,
-no edge, no shadow.
+**Step row** (the path). A card, not a circle. Left: a numbered square, 34px, 3px
+border. Middle: title plus a mono meta line. Right: a state glyph. Four states —
+done (lime square, tick), current (inverted: ink fill, paper text, orange shadow),
+locked (hatched background, half-opacity ink, no shadow). Vertical list connected by
+a 3px rail, because a list is scannable and a curve is not.
 
-**Card.** White, 2px #E5E5E5 border, 16px radius, shadow 0 2px 0 #E5E5E5. Selected
-or correct: 2px green border plus green-pale fill.
+**Segmented progress.** Fourteen 10px blocks with 2px ink borders, filled ones solid
+ink. Reads as a mark sheet, not a thermometer.
 
-**Path node.** 72px circle. Four states:
-- locked — #E5E5E5 fill, #AFAFAF icon, no shadow
-- available — subject accent, 6px darker bottom rim, white icon
-- current — accent plus a soft pulsing halo and a bouncing START tag above it
-- complete — accent with a white check, gold star if done with no hints
+**Option row.** Full width, 3px border, 4px offset shadow, letter chip A/B/C in a
+26px square on the left. Selected fills blue with white text. Correct fills lime and
+the letter chip inverts. Wrong fills red and the chip inverts — the letter never
+moves, so the answer is still readable.
 
-Nodes sit on a dashed winding path drawn as SVG, alternating left and centre so the
-eye zig-zags down the screen the way Duolingo does.
+**Verdict band.** Not a sheet, not a stamp. A full-width band that grows from the
+bottom of the screen: lime with ink text on correct, red with white text on wrong.
+It carries the verdict word in Archivo Black, one line of why, and the button. No
+floating badge, no confetti.
 
-**Progress bar.** 16px tall, #E5E5E5 track, rounded ends, green fill with a lighter
-30%-white highlight strip across the top half. Sits at the top of the lesson player
-with the streak counter floating above it.
+**Tab bar.** Five tabs, each with its own accent, in the Duolingo manner but in this
+skin: the active tab is a 3px-bordered pill sitting on the bar with a hard 3px ink
+shadow, tinted with that tab's colour — lime for Path, orange for Drills, blue for
+Board, teal for Code, gold for Me. Inactive tabs are 3px transparent with grey
+strokes, so nothing shifts position when selection moves. Badges are red with an ink
+border, pinned to the pill's top-right.
 
-**Chip.** Small uppercase pill. HARD EXERCISE uses red-pale fill with red text;
-NEW CONCEPT uses purple-pale with purple text.
-
-**Stamp.** PERFECT or NICE! in 40/900, white fill, 4px coloured stroke, rotated -8deg,
-scales in over the answer area and fades after 900 ms. This is the whole reward
-system and it costs nothing.
-
-**Bottom sheet.** White, 20px top radius, 1px top border, 16px padding, safe-area
-inset at the bottom, one full-width button. Every item resolves into this sheet.
-
-**Mascot.** A green sprout character (not an owl). Appears: at the start of a lesson,
-next to an example, when a streak milestone lands, and in the empty states. Never
-between the student and the answer.
+**Code panel.** Inverted: ink background, paper text, lime keyword, peach numerals,
+line numbers in #5A5A52. Code should look like a terminal, not like a thought
+bubble.
 
 ## Screens
 
 ### Path
 
     ┌──────────────────────────────────────┐
-│  🔥 12    💎 340    ⚡ 25             │
-│ ┌──────────────────────────────────┐ │
-│ │ ICT · MODULE E2C                 │ │
-│ │ Algorithm and Programming        │ │
-│ └──────────────────────────────────┘ │
-│              ╭───╮                   │
-│              │ ★ │  done             │
-│           ╭──╯   ╰──╮                │
-│        ╭──╯  ╭───╮  ╰──╮             │
-│        │ ✓   │START│   │             │
-│        ╰─────╯╰───╯╰──╯              │
-│     ╭──╯   ╭───╮   ╰──╮              │
-│     │ 🔒   │ 🔒 │      │              │
-│     ╰──────╯───╯──────╯              │
+│ ICT · E2C            12 IN A ROW     │
 ├──────────────────────────────────────┤
-│  🏠     🏋️     🏆     ⌨️     👤      │
+│ ▮▮▮▮▮▯▯▯▯▯▯▯▯▯                       │
+│ ┌──┬─────────────────────────┬─────┐ │
+│ │01│ What a name is          │  ✓  │ │
+│ └──┴─────────────────────────┴─────┘ │
+│ ┌──┬─────────────────────────┬─────┐ │
+│ │02│ Assignment and rebinding│  ✓  │ │
+│ └──┴─────────────────────────┴─────┘ │
+│ ┏━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━┓ │
+│ ┃03┃ Valid identifiers       ┃  →  ┃ │
+│ ┗━━┻━━━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━┛ │
+│ ┌──┬─────────────────────────┬─────┐ │
+│ │04│ Types and conversion    │  🔒 │ │
+│ └──┴─────────────────────────┴─────┘ │
+├──────────────────────────────────────┤
+│  [Path]  [Drills]  [Board]  ...      │
 └──────────────────────────────────────┘
 
-The path is one module at a time. Lessons are nodes, not a list, because a list
-invites scrolling and a path invites the next step.
-
-Bottom tabs: Path, Drills, Board, Playground, Me.
-
-### Lesson player
+### Lesson
 
     ┌──────────────────────────────────────┐
-│  ✕   ▓▓▓▓▓▓▓▓▓▓▓░░░░░░    12 IN A ROW│
+│  ✕                        03 · 4 / 6 │
+│  ┌ HARD ┐                            │
 │                                      │
-│  ⚠ HARD EXERCISE                     │
+│  Which name is                       │
+│  valid Python?                       │
 │                                      │
-│  Which name is valid?                │
+│  ┌────────────────────────────────┐  │
+│  │ 1  items = [1, 2, 3]           │  │
+│  │ 2  print(items[2])             │  │
+│  └────────────────────────────────┘  │
 │                                      │
-│   (mascot)   ┌────────────────────┐  │
-│              │ items = [1, 2, 3]  │  │
-│              │ print(items[2])    │  │
-│              └────────────────────┘  │
+│  ┌──┐ ┌───────────────────────────┐  │
+│  │A │ │ 2cool                     │  │
+│  └──┘ └───────────────────────────┘  │
+│  ┌──┐ ┌───────────────────────────┐  │
+│  │B │ │ cool_2                    │  │
+│  └──┘ └───────────────────────────┘  │
 │                                      │
-│  ┌──────────┐  ┌──────────┐          │
-│  │  2cool   │  │  cool_2  │          │
-│  └──────────┘  └──────────┘          │
-│  ┌──────────┐                        │
-│  │  cool-2  │                        │
-│  └──────────┘                        │
 ├──────────────────────────────────────┤
-│            [  CHECK  ]               │
+│ CORRECT                              │
+│ cool_2 — starts with a letter.       │
+│ [          CONTINUE                ] │
 └──────────────────────────────────────┘
 
-Wrong answer: the sheet turns red-pale, the chosen card gets a red border and the
-correct one a green border, a one-line explanation appears, and the button reads
-CONTINUE. The explanation is never hidden behind a tap.
-
-### Fill, as a word bank
-
-Duolingo's token bank is a better fit than typing for recall items on a phone. Same
-schema, two renderers: keyboard on desktop, tappable tokens on mobile.
-
-    print(items[ ___ ])
-
-    [ 1 ]  [ 2 ]  [ 3 ]  [ 0 ]
-
-### Drills
-
-Same player, mixed deck, no path. Shows the due count and a "start" node. Interleaved
-across modules by design; the UI shows a module swatch on each item so the switching
-is visible rather than confusing.
+The band appears only after Check. Before that the button is disabled and grey, so
+the screen has exactly one thing to do.
 
 ### Board
 
-Ranks by distinct items faced today. Top three plus your own row. Accuracy is a
-secondary column, never the sort key.
-
-### Builder
-
-Same components, three panes: block list, canvas (the real student renderer), and
-the payload form. Validation appears as red inline text exactly where the student
-would see the item, so the teacher sees the consequence of a bad distractor.
+A table with rules, not cards. Rank column in mono, name, items faced, accuracy.
+The student's own row is lime. The footnote states the rule in one line.
 
 ## Motion
 
-- Button press: 80 ms, translateY 4px, edge collapses.
-- Node complete: the rim pops and a check scales from 0.6 to 1.0 with a slight
-  overshoot, 220 ms.
-- Stamp: scale 0.4 to 1.05 to 1.0, rotate -8deg, 260 ms, then hold 600 ms and fade.
-- Correct answer: sheet slides up 180 ms ease-out.
-- Nothing else animates. A revision tool that moves constantly is exhausting.
+- Press: translate 3px, 80 ms. The shadow does not move.
+- Verdict band: grows from 0 to full height in 160 ms ease-out.
+- Correct row: flips to lime instantly, no scale.
+- Nothing bounces. A revision tool that bounces is exhausting.
 
-## Mobile first
+## Mobile
 
-This is used on a phone in a classroom, so the phone is the primary target and
-desktop is the wide variant, not the reverse. 44px minimum tap targets, bottom sheet
-for all actions, no hover-only affordances, and the Python runner opens as a
-full-height sheet with a floating Run button.
+Phone first. 44px minimum targets, thumb-reachable primary button, no hover-only
+affordances. The code challenge runner opens as a full-height sheet with the Run
+button floating over the editor.
 
 ## Tokens
 
-Written to tailwind config as semantic names — bg, line, ink, green, green-dk,
-blue, purple, gold, red, and their -pale and -dk variants — so no component ever
-hardcodes a hex.
+Defined once as CSS custom properties and consumed semantically: paper, ink, ink-2,
+ink-3, line, lime, orange, blue, teal, gold, red. No component hardcodes a hex.

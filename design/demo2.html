@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — variant B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6;
+    --ink:#111111;
+    --ink-2:#4A4A45;
+    --ink-3:#8C8A80;
+    --line:#D8D4C6;
+    --lime:#D4FF3F;
+    --orange:#FF4D1C;
+    --blue:#2D5BFF;
+    --teal:#00C2B2;
+    --gold:#FFC94A;
+    --red:#FF3B30;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    background:#1A1A18;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:18px;padding:28px 16px;color:var(--ink);
+  }
+  .switcher{display:flex;gap:6px;background:#0E0E0C;padding:6px;border-radius:10px}
+  .switcher button{
+    font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.8px;
+    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:8px 14px;border-radius:6px;cursor:pointer;
+  }
+  .switcher button.on{background:var(--lime);color:var(--ink)}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:#6E6E66;text-transform:uppercase}
+  .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+
+  .device{
+    position:relative;width:390px;height:844px;background:var(--paper);
+    border:3px solid #000;border-radius:14px;
+    box-shadow:10px 10px 0 rgba(0,0,0,.55);
+    overflow:hidden;
+  }
+  .statusbar{
+    height:40px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    border-bottom:3px solid var(--ink);background:var(--paper);
+  }
+  .statusbar .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+
+  .screen{position:absolute;inset:0;padding-top:40px;display:none;flex-direction:column}
+  .screen.on{display:flex}
+
+  /* ── header ───────────────────────────────── */
+  .hd{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 18px;border-bottom:3px solid var(--ink);
+  }
+  .hd .mod{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-2);
+  }
+  .hd .streak{
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+    background:var(--ink);color:var(--lime);padding:4px 8px;border-radius:4px;
+  }
+
+  /* ── segmented progress ───────────────────── */
+  .segs{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;padding:12px 18px}
+  .segs i{height:10px;background:var(--line);border:2px solid var(--ink);border-radius:2px}
+  .segs i.on{background:var(--ink)}
+
+  /* ── path steps ───────────────────────────── */
+  .steps{padding:4px 18px 0;display:grid;gap:10px;overflow:hidden}
+  .step{
+    display:flex;align-items:center;gap:12px;padding:14px;border:3px solid var(--ink);
+    border-radius:8px;background:#fff;box-shadow:5px 5px 0 var(--ink);
+    cursor:pointer;transition:transform .07s,box-shadow .07s;
+  }
+  .step:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+  .step .no{
+    flex:0 0 34px;height:34px;display:grid;place-items:center;border:3px solid var(--ink);
+    border-radius:6px;background:var(--paper);font-family:'JetBrains Mono',monospace;
+    font-size:13px;font-weight:700;
+  }
+  .step .txt{flex:1;min-width:0}
+  .step .txt b{display:block;font-size:15px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .step .txt span{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.6px;color:var(--ink-3);text-transform:uppercase}
+  .step.done .no{background:var(--lime);border-color:var(--ink)}
+  .step.now{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--orange)}
+  .step.now .no{background:var(--orange);border-color:var(--orange);color:#fff}
+  .step.now .txt span{color:#9A9A90}
+  .step.lock{background:repeating-linear-gradient(45deg,#EDEAE0 0 6px,#E4E1D6 6px 12px);box-shadow:5px 5px 0 var(--line);color:var(--ink-3)}
+  .step.lock .no{background:transparent;border-color:var(--ink-3);color:var(--ink-3)}
+
+  /* ── lesson ───────────────────────────────── */
+  .lbar{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:3px solid var(--ink)}
+  .lbar .x{font-size:18px;font-weight:700;line-height:1;cursor:pointer;color:var(--ink)}
+  .lbar .count{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--ink-2);margin-left:auto}
+
+  .tag{
+    align-self:flex-start;margin:14px 18px 0;padding:4px 8px;border:2px solid var(--red);
+    color:var(--red);border-radius:4px;font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;font-weight:700;letter-spacing:1.2px;
+  }
+  .q{font-family:'Archivo Black',sans-serif;font-size:27px;line-height:1.16;letter-spacing:-.6px;padding:10px 18px 16px}
+
+  .code{
+    margin:0 18px 18px;background:var(--ink);border-radius:8px;padding:14px 16px;
+    font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;color:#E8E6DC;
+    border:3px solid var(--ink);box-shadow:5px 5px 0 var(--line);
+  }
+  .code .k{color:var(--lime)}
+  .code .n{color:#FFB199}
+  .code .c{color:#7B7B72}
+  .code .ln{color:#5A5A52;user-select:none;margin-right:12px}
+
+  .opts{display:grid;gap:9px;padding:0 18px}
+  .opt{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;font-family:inherit;
+    background:#fff;border:3px solid var(--ink);border-radius:8px;padding:11px 12px;
+    font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;box-shadow:4px 4px 0 var(--ink);
+    transition:transform .07s,box-shadow .07s,background .1s;
+  }
+  .opt:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+  .opt .letter{
+    flex:0 0 26px;height:26px;display:grid;place-items:center;border:2px solid var(--ink);
+    border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:var(--paper);
+  }
+  .opt.sel{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+  .opt.sel .letter{background:#fff;color:var(--blue);border-color:#fff}
+  .opt.good{background:var(--lime);border-color:var(--ink)}
+  .opt.good .letter{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+  .opt.bad{background:var(--red);border-color:var(--ink);color:#fff}
+  .opt.bad .letter{background:#fff;color:var(--red);border-color:#fff}
+
+  /* ── verdict band ─────────────────────────── */
+  .band{
+    margin-top:auto;border-top:3px solid var(--ink);padding:14px 18px 24px;
+    background:var(--paper);transition:background .12s,color .12s;
+  }
+  .band .verdict{display:none;align-items:center;gap:8px;font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:-.3px;margin-bottom:4px}
+  .band .verdict.show{display:flex}
+  .band .why{display:none;font-size:12.5px;font-weight:500;line-height:1.5;margin-bottom:12px;opacity:.85}
+  .band .why.show{display:block}
+  .band.ok{background:var(--lime)}
+  .band.bad{background:var(--red);color:#fff}
+  .band.bad .why{opacity:.95}
+
+  .btn{
+    width:100%;height:50px;border:3px solid var(--ink);border-radius:8px;
+    background:var(--ink);color:var(--lime);
+    font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.6px;text-transform:uppercase;
+    box-shadow:5px 5px 0 rgba(0,0,0,.35);cursor:pointer;
+    transition:transform .07s,box-shadow .07s,background .12s,color .12s;
+  }
+  .btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 rgba(0,0,0,.35)}
+  .btn[disabled]{background:#DDD9CC;color:#A7A498;border-color:#C9C5B6;box-shadow:5px 5px 0 #C9C5B6;cursor:not-allowed}
+  .btn[disabled]:active{transform:none;box-shadow:5px 5px 0 #C9C5B6}
+  .band.ok .btn{background:var(--ink);color:var(--lime);box-shadow:5px 5px 0 rgba(0,0,0,.35)}
+  .band.bad .btn{background:#fff;color:var(--ink);border-color:var(--ink);box-shadow:5px 5px 0 rgba(0,0,0,.25)}
+
+  /* ── board ────────────────────────────────── */
+  .bhead{padding:14px 18px 10px}
+  .bhead h2{font-family:'Archivo Black',sans-serif;font-size:26px;letter-spacing:-.6px}
+  .bhead p{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.8px;color:var(--ink-3);text-transform:uppercase;margin-top:4px}
+  .table{padding:0 18px;display:grid;gap:0;border:3px solid var(--ink);border-radius:8px;overflow:hidden;background:#fff;box-shadow:5px 5px 0 var(--ink);margin:0 18px}
+  .tr{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:2px solid var(--line)}
+  .tr:last-child{border-bottom:0}
+  .tr.me{background:var(--lime)}
+  .tr .r{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--ink-3);width:20px}
+  .tr .nm{flex:1;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .tr .sc{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-align:right}
+  .tr .pc{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-3);width:38px;text-align:right}
+  .tr.me .pc{color:var(--ink-2)}
+  .note{padding:14px 18px 0;font-size:12.5px;line-height:1.5;color:var(--ink-2)}
+  .note b{background:var(--lime);padding:0 3px;border:1px solid var(--ink);border-radius:3px}
+
+  .tabbar{
+    margin-top:auto;flex:0 0 auto;display:flex;align-items:flex-end;justify-content:space-between;
+    gap:2px;border-top:3px solid var(--ink);background:var(--paper);padding:10px 8px 14px;
+  }
+  .tab{
+    flex:1;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer;
+    font-family:inherit;
+  }
+  .pill{
+    position:relative;display:grid;place-items:center;gap:2px;padding:6px 8px 5px;
+    border:3px solid transparent;border-radius:10px;color:var(--ink-3);min-width:58px;
+    transition:transform .07s,background .12s,color .12s,border-color .12s,box-shadow .12s;
+  }
+  .pill svg{width:21px;height:21px}
+  .lbl{
+    font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;
+    letter-spacing:.9px;text-transform:uppercase;
+  }
+  .tab:active .pill{transform:translateY(2px)}
+  .tab.on .pill{
+    background:var(--lime);border-color:var(--ink);color:var(--ink);box-shadow:3px 3px 0 var(--ink);
+  }
+  .tab.on[data-tab="drills"] .pill{background:var(--orange);color:#fff}
+  .tab.on[data-tab="board"] .pill{background:var(--blue);color:#fff}
+  .tab.on[data-tab="code"] .pill{background:var(--teal);color:var(--ink)}
+  .tab.on[data-tab="me"] .pill{background:var(--gold);color:var(--ink)}
+  .badge{
+    position:absolute;top:-7px;right:-7px;min-width:17px;height:17px;padding:0 4px;
+    display:grid;place-items:center;background:var(--red);color:#fff;border:2px solid var(--ink);
+    border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:8.5px;
+    font-weight:700;font-style:normal;
+  }
+</style>
+</head>
+<body>
+
+<div class="switcher">
+  <button data-go="path" class="on">Path</button>
+  <button data-go="lesson">Lesson</button>
+  <button data-go="board">Board</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+
+  <!-- ───── PATH ───── -->
+  <section class="screen on" id="s-path">
+    <div class="hd">
+      <span class="mod">ICT · E2C</span>
+      <span class="streak">12 IN A ROW</span>
+    </div>
+    <div class="segs">
+      <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="steps">
+      <div class="step done">
+        <span class="no">01</span>
+        <span class="txt"><b>What a name is</b><span>5 items · recall</span></span>
+        <span>✓</span>
+      </div>
+      <div class="step done">
+        <span class="no">02</span>
+        <span class="txt"><b>Assignment and rebinding</b><span>6 items · recall</span></span>
+        <span>✓</span>
+      </div>
+      <div class="step now" data-go="lesson">
+        <span class="no">03</span>
+        <span class="txt"><b>Valid identifiers</b><span>6 items · 4 min</span></span>
+        <span>→</span>
+      </div>
+      <div class="step lock">
+        <span class="no">04</span>
+        <span class="txt"><b>Types and conversion</b><span>locked · finish 03</span></span>
+        <span>🔒</span>
+      </div>
+      <div class="step lock">
+        <span class="no">05</span>
+        <span class="txt"><b>Indexing a list</b><span>locked</span></span>
+        <span>🔒</span>
+      </div>
+    </div>
+
+    <nav class="tabbar">
+      <button class="tab on" data-tab="path" data-go="path">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg>
+          <span class="lbl">Path</span>
+        </span>
+      </button>
+      <button class="tab" data-tab="drills">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg>
+          <span class="lbl">Drills</span>
+          <i class="badge">3</i>
+        </span>
+      </button>
+      <button class="tab" data-tab="board" data-go="board">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg>
+          <span class="lbl">Board</span>
+        </span>
+      </button>
+      <button class="tab" data-tab="code">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="7" width="18" height="11" rx="2.5"/><path d="M7 11h2M7 14h4M15 12h3"/></svg>
+          <span class="lbl">Code</span>
+        </span>
+      </button>
+      <button class="tab" data-tab="me">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg>
+          <span class="lbl">Me</span>
+        </span>
+      </button>
+    </nav>
+  </section>
+
+  <!-- ───── LESSON ───── -->
+  <section class="screen" id="s-lesson">
+    <div class="lbar">
+      <span class="x" data-go="path">✕</span>
+      <span class="count">03 · 4 / 6</span>
+    </div>
+
+    <div class="tag">HARD</div>
+    <h1 class="q">Which name is<br>valid Python?</h1>
+
+    <div class="code"><span class="ln">1</span><span class="n">items</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(<span class="n">items</span>[<span class="n">2</span>])</div>
+
+    <div class="opts">
+      <button class="opt" data-id="a"><span class="letter">A</span>2cool</button>
+      <button class="opt" data-id="b"><span class="letter">B</span>cool_2</button>
+      <button class="opt" data-id="c"><span class="letter">C</span>cool-2</button>
+    </div>
+
+    <div class="band" id="band">
+      <div class="verdict" id="verdict"><span id="verdicttext">CORRECT</span></div>
+      <p class="why" id="why"></p>
+      <button class="btn" id="check" disabled>Check</button>
+    </div>
+  </section>
+
+  <!-- ───── BOARD ───── -->
+  <section class="screen" id="s-board">
+    <div class="bhead">
+      <h2>Today / 4B</h2>
+      <p>Resets 00:00 HKT · 18 students</p>
+    </div>
+
+    <div class="table">
+      <div class="tr"><span class="r">01</span><span class="nm">Mei Lam</span><span class="sc">38</span><span class="pc">92%</span></div>
+      <div class="tr"><span class="r">02</span><span class="nm">Chan Ka Ho</span><span class="sc">35</span><span class="pc">71%</span></div>
+      <div class="tr"><span class="r">03</span><span class="nm">Wong Tsz Yan</span><span class="sc">31</span><span class="pc">84%</span></div>
+      <div class="tr"><span class="r">04</span><span class="nm">Lam Ho Yin</span><span class="sc">29</span><span class="pc">77%</span></div>
+      <div class="tr me"><span class="r">11</span><span class="nm">You</span><span class="sc">22</span><span class="pc">88%</span></div>
+    </div>
+
+    <p class="note">Sorted by <b>items faced</b>, not by score. A wrong answer still counts — that is the point.</p>
+
+    <nav class="tabbar">
+      <button class="tab" data-tab="path" data-go="path">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg>
+          <span class="lbl">Path</span>
+        </span>
+      </button>
+      <button class="tab" data-tab="drills">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg>
+          <span class="lbl">Drills</span>
+          <i class="badge">3</i>
+        </span>
+      </button>
+      <button class="tab on" data-tab="board" data-go="board">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg>
+          <span class="lbl">Board</span>
+        </span>
+      </button>
+      <button class="tab" data-tab="code">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><rect x="3" y="7" width="18" height="11" rx="2.5"/><path d="M7 11h2M7 14h4M15 12h3"/></svg>
+          <span class="lbl">Code</span>
+        </span>
+      </button>
+      <button class="tab" data-tab="me">
+        <span class="pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg>
+          <span class="lbl">Me</span>
+        </span>
+      </button>
+    </nav>
+  </section>
+</div>
+
+<p class="caption">Learner · variant B · <a href="demo.html">compare with variant A</a></p>
+
+<script>
+(function () {
+  var screens = document.querySelectorAll('.screen');
+  var tabs = document.querySelectorAll('.switcher button');
+  var bars = document.querySelectorAll('.tabbar .tab');
+  function go(id) {
+    screens.forEach(function (s) { s.classList.toggle('on', s.id === 's-' + id); });
+    tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.go === id); });
+    bars.forEach(function (b) { b.classList.toggle('on', b.dataset.tab === id); });
+    if (id === 'lesson') reset();
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-go]');
+    if (el) go(el.dataset.go);
+  });
+
+  var state = 'idle', picked = null;
+  var opts = document.querySelectorAll('.opt');
+  var check = document.getElementById('check');
+  var band = document.getElementById('band');
+  var verdict = document.getElementById('verdict');
+  var vtext = document.getElementById('verdicttext');
+  var why = document.getElementById('why');
+
+  opts.forEach(function (o) {
+    o.addEventListener('click', function () {
+      if (state !== 'idle') return;
+      opts.forEach(function (x) { x.classList.remove('sel'); });
+      o.classList.add('sel');
+      picked = o.dataset.id;
+      check.disabled = false;
+    });
+  });
+
+  function reset() {
+    state = 'idle'; picked = null;
+    opts.forEach(function (x) { x.classList.remove('sel', 'good', 'bad'); });
+    band.classList.remove('ok', 'bad');
+    verdict.classList.remove('show');
+    why.classList.remove('show');
+    check.disabled = true;
+    check.textContent = 'Check';
+  }
+
+  check.addEventListener('click', function () {
+    if (state === 'idle') {
+      state = 'answered';
+      var ok = picked === 'b';
+      opts.forEach(function (x) {
+        if (x.dataset.id === 'b') x.classList.add('good');
+        if (x.dataset.id === picked && !ok) { x.classList.add('bad'); x.classList.remove('sel'); }
+      });
+      band.classList.add(ok ? 'ok' : 'bad');
+      vtext.textContent = ok ? 'CORRECT' : 'NOT QUITE';
+      verdict.classList.add('show');
+      why.innerHTML = ok
+        ? 'cool_2 — starts with a letter, underscore allowed.'
+        : 'Names cannot start with a digit. cool-2 parses as a subtraction. Answer: cool_2.';
+      why.classList.add('show');
+      check.textContent = 'Continue';
+      return;
+    }
+    reset();
+  });
+})();
+</script>
+</body>
+</html>

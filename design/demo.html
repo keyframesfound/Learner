@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — design language</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3C3C3C; --ink-muted:#777; --ink-faint:#AFAFAF;
+    --line:#E5E5E5; --bg:#fff; --bg-alt:#F7F7F7;
+    --green:#58CC02; --green-dk:#4CAD00; --green-pale:#D7FFB8;
+    --blue:#1CB0F6; --blue-dk:#1899D6; --blue-pale:#DDF4FF;
+    --purple:#CE82FF; --purple-dk:#A568CC; --purple-pale:#F3E4FF;
+    --gold:#FFC800; --gold-dk:#E5A700; --gold-pale:#FFF4CC;
+    --red:#FF4B4B; --red-dk:#EA2B2B; --red-pale:#FFDFE0;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:'Nunito',ui-rounded,-apple-system,'Segoe UI',sans-serif;
+    background:#EDEFF2;
+    min-height:100vh;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:18px;padding:28px 16px;color:var(--ink);
+  }
+  .caption{font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#8A8F98}
+  .switcher{display:flex;gap:8px;background:#fff;padding:6px;border-radius:999px;box-shadow:0 2px 0 #D8DCE2}
+  .switcher button{
+    font-family:inherit;font-size:13px;font-weight:800;letter-spacing:.4px;
+    border:0;background:transparent;color:var(--ink-muted);padding:9px 16px;border-radius:999px;cursor:pointer;
+  }
+  .switcher button.on{background:#E9F7FF;color:var(--blue-dk)}
+
+  .device{
+    position:relative;width:390px;height:844px;background:var(--bg);
+    border-radius:44px;border:11px solid #16181C;
+    box-shadow:0 30px 60px -20px rgba(20,25,35,.45), 0 0 0 1px rgba(0,0,0,.35);
+    overflow:hidden;
+  }
+  .statusbar{
+    height:44px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 26px;font-size:14px;font-weight:900;color:var(--ink);flex:0 0 auto;
+  }
+  .statusbar .dot{display:flex;gap:5px;align-items:center}
+  .statusbar i{display:block;width:16px;height:9px;border:2px solid var(--ink);border-radius:3px;opacity:.85}
+
+  .screen{position:absolute;inset:0;padding-top:44px;display:none;flex-direction:column;background:var(--bg)}
+  .screen.on{display:flex}
+
+  /* ── top stats ─────────────────────────────── */
+  .stats{display:flex;align-items:center;gap:20px;padding:4px 22px 14px;font-weight:900;font-size:17px}
+  .stat{display:flex;align-items:center;gap:6px}
+  .stat.flame{color:#FF9600}
+  .stat.gem{color:var(--blue)}
+  .stat.bolt{color:var(--purple)}
+
+  /* ── banner ────────────────────────────────── */
+  .banner{
+    margin:0 18px 6px;border-radius:16px;background:var(--blue);
+    box-shadow:0 5px 0 var(--blue-dk);color:#fff;padding:14px 16px;
+  }
+  .banner small{display:block;font-size:12px;font-weight:800;letter-spacing:1px;opacity:.9;margin-bottom:2px}
+  .banner b{font-size:19px;font-weight:900;line-height:1.25}
+
+  /* ── path ──────────────────────────────────── */
+  .pathwrap{position:relative;flex:1;margin:6px 0 0}
+  .pathwrap svg.trail{position:absolute;left:0;top:0}
+  .node{
+    position:absolute;width:72px;height:72px;border-radius:50%;
+    display:grid;place-items:center;color:#fff;
+  }
+  .node svg{width:30px;height:30px}
+  .node.done{background:var(--blue);box-shadow:0 6px 0 var(--blue-dk)}
+  .node.now{background:var(--blue);box-shadow:0 6px 0 var(--blue-dk);cursor:pointer}
+  .node.now::before{
+    content:'';position:absolute;inset:-11px;border-radius:50%;
+    border:4px solid rgba(28,176,246,.35);animation:pulse 2s ease-out infinite;
+  }
+  .node.lock{background:#E5E5E5;box-shadow:0 6px 0 #D2D2D2;color:#B0B0B0}
+  @keyframes pulse{0%{transform:scale(.92);opacity:.9}70%{transform:scale(1.12);opacity:0}100%{opacity:0}}
+  .starttag{
+    position:absolute;left:50%;transform:translateX(-50%);top:-40px;
+    background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:12px;
+    padding:4px 12px;font-size:12px;font-weight:900;letter-spacing:1px;color:var(--blue-dk);
+    animation:bob 1.6s ease-in-out infinite;white-space:nowrap;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-6px)}}
+
+  /* ── tab bar ───────────────────────────────── */
+  .tabbar{
+    flex:0 0 auto;display:flex;justify-content:space-around;align-items:center;
+    height:74px;border-top:2px solid var(--line);background:#fff;padding-bottom:8px;
+  }
+  .tab{display:grid;place-items:center;gap:2px;color:#B8BCC4}
+  .tab.on{color:var(--blue)}
+  .tab span{font-size:9px;font-weight:900;letter-spacing:.6px;text-transform:uppercase}
+
+  /* ── lesson ────────────────────────────────── */
+  .lessonbar{display:flex;align-items:center;gap:12px;padding:2px 18px 12px}
+  .x{font-size:22px;font-weight:900;color:#B8BCC4;line-height:1;cursor:pointer}
+  .streakbar{
+    position:relative;flex:1;height:22px;border-radius:999px;background:var(--line);overflow:hidden;
+  }
+  .streakbar i{position:absolute;inset:0 34% 0 0;background:var(--gold);border-radius:999px}
+  .streakbar i::after{content:'';position:absolute;left:8px;right:8px;top:4px;height:5px;border-radius:999px;background:rgba(255,255,255,.45)}
+  .streakbar b{
+    position:absolute;inset:0;display:grid;place-items:center;
+    font-size:11px;font-weight:900;letter-spacing:1.1px;color:#8A5B00;
+  }
+
+  .chip{
+    align-self:flex-start;margin:0 22px 12px;padding:5px 11px;border-radius:8px;
+    background:var(--red-pale);color:var(--red-dk);
+    font-size:11px;font-weight:900;letter-spacing:1px;display:flex;gap:6px;align-items:center;
+  }
+  .prompt{font-size:24px;font-weight:900;line-height:1.25;padding:0 22px 16px;letter-spacing:-.3px}
+
+  .codeblock{display:flex;gap:10px;align-items:flex-start;padding:0 22px 18px}
+  .mascot{flex:0 0 66px}
+  .codecard{
+    flex:1;position:relative;background:#fff;border:2px solid var(--line);border-bottom-width:4px;
+    border-radius:16px;padding:12px 14px;font-family:'JetBrains Mono',monospace;
+    font-size:13px;line-height:1.75;color:#2E3440;white-space:pre;overflow:auto;
+  }
+  .codecard::before{
+    content:'';position:absolute;left:-9px;top:20px;width:14px;height:14px;background:#fff;
+    border-left:2px solid var(--line);border-bottom:2px solid var(--line);transform:rotate(45deg);
+  }
+  .k{color:#A626A4} .f{color:#4078F2} .n{color:#986801} .s{color:#50A14F}
+
+  .answers{display:grid;gap:10px;padding:0 22px}
+  .answer{
+    display:flex;align-items:center;gap:10px;width:100%;text-align:left;font-family:inherit;
+    background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:16px;
+    padding:13px 16px;font-size:17px;font-weight:800;color:var(--ink);cursor:pointer;
+    transition:transform .07s,border-color .07s,background .07s;
+  }
+  .answer:active{transform:translateY(2px);border-bottom-width:2px}
+  .answer:hover{border-color:#CFCFCF}
+  .answer.sel{border-color:var(--blue);background:var(--blue-pale);color:var(--blue-dk)}
+  .answer.good{border-color:var(--green);background:var(--green-pale);color:#3E8E00}
+  .answer.bad{border-color:var(--red);background:var(--red-pale);color:var(--red-dk)}
+  .answer .mark{width:22px;height:22px;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;font-size:12px;opacity:0}
+  .answer.good .mark,.answer.bad .mark{opacity:1}
+
+  .sheet{
+    margin-top:auto;flex:0 0 auto;background:#fff;border-top:2px solid var(--line);
+    padding:16px 18px 26px;transition:background .15s,border-color .15s;
+  }
+  .sheet.ok{background:var(--green-pale);border-top-color:#AEE87A}
+  .sheet.bad{background:var(--red-pale);border-top-color:#FFC2C4}
+  .verdict{display:none;align-items:center;gap:8px;font-size:20px;font-weight:900;margin-bottom:6px}
+  .verdict.show{display:flex}
+  .sheet.ok .verdict{color:#3E8E00}
+  .sheet.bad .verdict{color:var(--red-dk)}
+  .explain{display:none;font-size:14px;font-weight:700;line-height:1.45;color:#4A4A4A;margin-bottom:14px}
+  .explain.show{display:block}
+  .explain em{font-style:normal;font-weight:900;color:var(--ink)}
+
+  .btn{
+    width:100%;height:52px;border:0;border-radius:16px;background:var(--green);color:#fff;
+    font-family:inherit;font-size:15px;font-weight:800;letter-spacing:.9px;text-transform:uppercase;
+    box-shadow:0 4px 0 var(--green-dk);cursor:pointer;transition:transform .08s,box-shadow .08s,background .12s;
+  }
+  .btn:active{transform:translateY(4px);box-shadow:0 0 0 var(--green-dk)}
+  .btn[disabled]{background:#EAEAEA;color:#B9B9B9;box-shadow:0 4px 0 #DCDCDC;cursor:not-allowed}
+  .btn[disabled]:active{transform:none}
+  .btn.danger{background:var(--red);box-shadow:0 4px 0 var(--red-dk)}
+
+  .stamp{
+    position:absolute;left:50%;top:44%;z-index:5;pointer-events:none;
+    font-size:42px;font-weight:900;letter-spacing:1px;color:#fff;
+    -webkit-text-stroke:5px var(--gold-dk);paint-order:stroke fill;
+    text-shadow:0 4px 0 rgba(0,0,0,.12);
+    transform:translate(-50%,-50%) rotate(-8deg) scale(.4);opacity:0;
+    transition:transform .26s cubic-bezier(.3,1.5,.5,1),opacity .2s;
+  }
+  .stamp.show{opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1)}
+
+  /* ── board ─────────────────────────────────── */
+  .boardhead{padding:4px 22px 14px}
+  .boardhead h2{font-size:24px;font-weight:900}
+  .boardhead p{font-size:13px;font-weight:700;color:var(--ink-muted);margin-top:2px}
+  .rows{padding:0 14px;display:grid;gap:8px}
+  .row{
+    display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:16px;
+    border:2px solid var(--line);border-bottom-width:4px;background:#fff;
+  }
+  .row.me{border-color:var(--blue);background:var(--blue-pale)}
+  .rank{width:26px;font-size:17px;font-weight:900;color:var(--ink-muted);text-align:center}
+  .row:nth-child(1) .rank{color:var(--gold-dk)}
+  .av{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;font-weight:900;color:#fff;font-size:15px;flex:0 0 auto}
+  .who{flex:1;min-width:0}
+  .who b{display:block;font-size:15px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .who span{font-size:12px;font-weight:800;color:var(--ink-muted)}
+  .num{text-align:right;flex:0 0 62px}
+  .num b{display:block;font-size:17px;font-weight:900}
+  .num span{font-size:11px;font-weight:800;color:var(--ink-muted);letter-spacing:.4px}
+  .footnote{padding:16px 22px 0;font-size:12.5px;font-weight:700;line-height:1.5;color:var(--ink-muted)}
+  .footnote b{color:#3E8E00}
+</style>
+</head>
+<body>
+
+<div class="switcher" role="tablist">
+  <button data-go="path" class="on">Path</button>
+  <button data-go="lesson">Lesson</button>
+  <button data-go="board">Board</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="dot"><i></i><i style="width:10px"></i></span></div>
+
+  <!-- ───────── PATH ───────── -->
+  <section class="screen on" id="s-path">
+    <div class="stats">
+      <span class="stat flame">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12
+      </span>
+      <span class="stat gem">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 20 9 12 22 4 9z"/></svg>340
+      </span>
+      <span class="stat bolt">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 1 4 14h6l-1 9 9-13h-6z"/></svg>25
+      </span>
+    </div>
+
+    <div class="banner">
+      <small>ICT · MODULE E2C</small>
+      <b>Algorithm and Programming</b>
+    </div>
+
+    <div class="pathwrap">
+      <svg class="trail" width="390" height="470" viewBox="0 0 390 470" fill="none">
+        <path d="M195 36 C 262 70, 262 96, 252 126 S 200 190, 195 216 S 118 276, 111 306 S 180 366, 195 396"
+              stroke="#E5E5E5" stroke-width="10" stroke-linecap="round" stroke-dasharray="1 20"/>
+      </svg>
+
+      <div class="node done" style="left:159px;top:0">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 6"/></svg>
+      </div>
+
+      <div class="node now" style="left:231px;top:90px" data-go="lesson">
+        <div class="starttag">START</div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l9 7-9 7z" fill="currentColor" stroke="none"/></svg>
+      </div>
+
+      <div class="node lock" style="left:159px;top:180px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      </div>
+
+      <div class="node lock" style="left:87px;top:270px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      </div>
+
+      <div class="node lock" style="left:159px;top:360px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      </div>
+    </div>
+
+    <nav class="tabbar">
+      <div class="tab on"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg><span>Path</span></div>
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9v6M20 9v6M7 7v10M17 7v10M7 12h10"/></svg><span>Drills</span></div>
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span>Board</span></div>
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="3" y="7" width="18" height="11" rx="2.5"/><path d="M7 11h2M7 14h4M15 12h3"/></svg><span>Code</span></div>
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span>Me</span></div>
+    </nav>
+  </section>
+
+  <!-- ───────── LESSON ───────── -->
+  <section class="screen" id="s-lesson">
+    <div class="lessonbar">
+      <span class="x" data-go="path">✕</span>
+      <div class="streakbar"><i></i><b>12 IN A ROW</b></div>
+    </div>
+
+    <div class="chip">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M4 9v6M20 9v6M7 7v10M17 7v10M7 12h10"/></svg>
+      HARD EXERCISE
+    </div>
+
+    <h1 class="prompt">Which name is valid?</h1>
+
+    <div class="codeblock">
+      <svg class="mascot" viewBox="0 0 96 96" aria-hidden="true">
+        <g stroke="#3C3C3C" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M30 42C17 35 7 40 5 49c10 8 23 8 31 2" fill="#58CC02"/>
+          <path d="M66 42c13-7 23-2 25 7-10 8-23 8-31 2" fill="#58CC02"/>
+          <ellipse cx="48" cy="60" rx="25" ry="29" fill="#58CC02"/>
+          <circle cx="40" cy="56" r="6.4" fill="#fff"/>
+          <circle cx="57" cy="56" r="6.4" fill="#fff"/>
+          <circle cx="41" cy="57" r="2.6" fill="#3C3C3C" stroke="none"/>
+          <circle cx="58" cy="57" r="2.6" fill="#3C3C3C" stroke="none"/>
+          <path d="M42 70q7 6 13 0" fill="none"/>
+        </g>
+      </svg>
+      <div class="codecard"><span class="n">items</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="f">print</span>(<span class="n">items</span>[<span class="n">2</span>])</div>
+    </div>
+
+    <div class="answers">
+      <button class="answer" data-id="a">2cool<span class="mark" style="margin-left:auto">✕</span></button>
+      <button class="answer" data-id="b">cool_2<span class="mark" style="margin-left:auto">✓</span></button>
+      <button class="answer" data-id="c">cool-2<span class="mark" style="margin-left:auto">✕</span></button>
+    </div>
+
+    <div class="stamp" id="stamp">PERFECT</div>
+
+    <div class="sheet" id="sheet">
+      <div class="verdict" id="verdict">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 6"/></svg>
+        <span id="verdicttext">AWESOME!</span>
+      </div>
+      <p class="explain" id="explain"></p>
+      <button class="btn" id="check" disabled>Check</button>
+    </div>
+  </section>
+
+  <!-- ───────── BOARD ───────── -->
+  <section class="screen" id="s-board">
+    <div class="boardhead">
+      <h2>Today · 4B</h2>
+      <p>Resets at 00:00 HKT · 18 students</p>
+    </div>
+
+    <div class="rows">
+      <div class="row"><div class="rank">1</div><div class="av" style="background:#FF9600">ML</div>
+        <div class="who"><b>Mei Lam</b><span>92% accuracy</span></div><div class="num"><b>38</b><span>ITEMS</span></div></div>
+      <div class="row"><div class="rank">2</div><div class="av" style="background:#1CB0F6">CH</div>
+        <div class="who"><b>Chan Ka Ho</b><span>71% accuracy</span></div><div class="num"><b>35</b><span>ITEMS</span></div></div>
+      <div class="row"><div class="rank">3</div><div class="av" style="background:#CE82FF">WT</div>
+        <div class="who"><b>Wong Tsz Yan</b><span>84% accuracy</span></div><div class="num"><b>31</b><span>ITEMS</span></div></div>
+      <div class="row me"><div class="rank">11</div><div class="av" style="background:#58CC02">RY</div>
+        <div class="who"><b>You</b><span>88% accuracy · up 3</span></div><div class="num"><b>22</b><span>ITEMS</span></div></div>
+    </div>
+
+    <p class="footnote">Ranked by <b>distinct items faced</b>, not by score. Showing up is what makes you win — a wrong answer still counts.</p>
+
+    <nav class="tabbar" style="margin-top:auto">
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/></svg><span>Path</span></div>
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 9v6M20 9v6M7 7v10M17 7v10M7 12h10"/></svg><span>Drills</span></div>
+      <div class="tab on"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span>Board</span></div>
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><rect x="3" y="7" width="18" height="11" rx="2.5"/><path d="M7 11h2M7 14h4M15 12h3"/></svg><span>Code</span></div>
+      <div class="tab"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span>Me</span></div>
+    </nav>
+  </section>
+</div>
+
+<p class="caption">Learner · design language v1 · 390 × 844</p>
+
+<script>
+(function () {
+  var screens = document.querySelectorAll('.screen');
+  var tabs = document.querySelectorAll('.switcher button');
+  function go(id) {
+    screens.forEach(function (s) { s.classList.toggle('on', s.id === 's-' + id); });
+    tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.go === id); });
+    if (id === 'lesson') reset();
+  }
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-go]');
+    if (el) go(el.dataset.go);
+  });
+
+  var state = 'idle', picked = null;
+  var answers = document.querySelectorAll('.answer');
+  var check = document.getElementById('check');
+  var sheet = document.getElementById('sheet');
+  var verdict = document.getElementById('verdict');
+  var vtext = document.getElementById('verdicttext');
+  var explain = document.getElementById('explain');
+  var stamp = document.getElementById('stamp');
+
+  answers.forEach(function (a) {
+    a.addEventListener('click', function () {
+      if (state !== 'idle') return;
+      answers.forEach(function (x) { x.classList.remove('sel'); });
+      a.classList.add('sel');
+      picked = a.dataset.id;
+      check.disabled = false;
+    });
+  });
+
+  function reset() {
+    state = 'idle'; picked = null;
+    answers.forEach(function (x) { x.classList.remove('sel', 'good', 'bad'); });
+    sheet.classList.remove('ok', 'bad');
+    verdict.classList.remove('show');
+    explain.classList.remove('show');
+    stamp.classList.remove('show');
+    check.disabled = true;
+    check.classList.remove('danger');
+    check.textContent = 'Check';
+  }
+
+  check.addEventListener('click', function () {
+    if (state === 'idle') {
+      state = 'answered';
+      var ok = picked === 'b';
+      answers.forEach(function (x) {
+        if (x.dataset.id === 'b') x.classList.add('good');
+        if (x.dataset.id === picked && !ok) { x.classList.add('bad'); x.classList.remove('sel'); }
+      });
+      sheet.classList.add(ok ? 'ok' : 'bad');
+      vtext.textContent = ok ? 'AWESOME!' : 'NOT QUITE';
+      verdict.classList.add('show');
+      if (ok) {
+        explain.innerHTML = '<em>cool_2</em> starts with a letter, and underscores are allowed.';
+        stamp.classList.add('show');
+      } else {
+        explain.innerHTML = 'Names may not start with a digit, and <em>cool-2</em> reads as a minus expression. The answer is <em>cool_2</em>.';
+        check.classList.add('danger');
+      }
+      explain.classList.add('show');
+      check.textContent = 'Continue';
+      return;
+    }
+    if (state === 'answered') reset();
+  });
+})();
+</script>
+</body>
+</html>
