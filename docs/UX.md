@@ -79,8 +79,8 @@ tab that only makes sense for one subject does not belong in the global bar.
 
 **Subject switcher.** A horizontal row of pills at the top of Learn, one per enrolled
 subject. Each pill carries a 15px line icon drawn in that subject's colour:
-a monitor for ICT, an orbital atom for Physics, a leaf for Biology, a conical flask
-for Chemistry, and a tilted globe with paper-coloured landmasses for Geography. The active pill turns ink, the icon
+a monitor for ICT, a bolt for Physics, a leaf for Biology, a conical flask for
+Chemistry, and a blue globe with green landmasses for Geography. The active pill turns ink, the icon
 flips to paper, and the subject colour moves to the pill's shadow. Subjects a student
 does not take are absent rather than disabled.
 
@@ -88,7 +88,7 @@ Icons are printed stamps, not line art. Three primitives only:
 
     .s   solid shape: subject fill, 2px ink outline, round joins
     .o   ink detail laid on top: 2.2px stroke, no fill
-    .l   land: solid paper fill, no stroke, clipped to the globe it sits on
+    .l   land: solid green fill, no stroke, clipped to the globe it sits on
 
 Every icon is drawn at 18px in a 24px viewBox with a 1.5px hard misregistered shadow
 (drop-shadow, zero blur) so it sits in the same physical language as the cards. On the
@@ -99,10 +99,20 @@ Geometry is deliberately blocky and few-parted: three rectangles for the monitor
 orbits and a dot for Physics, one shape plus one vein for Biology, one shape plus one
 liquid line for Chemistry, one disc with three clipped landmasses for Geography.
 
-Geography is a planet, not a ball. A disc carrying a latitude and longitude grid reads
-as a sphere with stripes on it; a disc carrying irregular landmasses on a 14-degree tilt
-reads as the Earth. The land is paper-coloured rather than outlined so it survives at
-18px, and the sea is #0B7285 — ochre made it look like a desert planet.
+**The icon must survive 18px.** That is the rule that decides geometry, and it is not
+negotiable by aesthetic preference. Three candidates were drawn and rendered before
+choosing:
+
+- an orbital atom for Physics — three strokes crossing inside an 18px box fused into a
+  scribble. Replaced by a bolt, which is one silhouette with no interior detail.
+- a horseshoe magnet — at ribbon width the slot closes and it reads as the letter U.
+- a projectile arc over a ground line — reads as a bridge.
+
+Geography is a planet, not a ball. A disc carrying a latitude/longitude grid reads as a
+sphere with stripes; a disc carrying irregular landmasses reads as the Earth. Land is
+solid green on a blue sea, because blue-plus-green is the Earth code and teal-plus-paper
+is not. Two masses, both clipped by the circle, both large enough to survive at 18px —
+small continents read as specks.
 
 **Code panel.** Inverted: ink background, paper text, lime keyword, peach numerals,
 line numbers in #5A5A52. Code should look like a terminal, not like a thought

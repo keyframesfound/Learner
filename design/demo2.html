@@ -94,7 +94,7 @@
   }
   .sub .ic .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
   .sub .ic .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
-  .sub .ic .l{fill:var(--paper);stroke:none}
+  .sub .ic .l{fill:#6FBF3A;stroke:none}
   .sub.on{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--dot)}
   .sub.on .ic{filter:none}
   .sub.on .ic .s{stroke:#fff}
@@ -295,19 +295,18 @@
       <button class="sub on" style="--dot:#2D5BFF">
         <svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
       <button class="sub" style="--dot:#7C4DFF">
-        <svg class="ic" viewBox="0 0 24 24"><ellipse class="o" cx="12" cy="12" rx="9.8" ry="4.2"/><ellipse class="o" cx="12" cy="12" rx="9.8" ry="4.2" transform="rotate(60 12 12)"/><circle class="s" cx="12" cy="12" r="2.9"/></svg>Physics</button>
+        <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>Physics</button>
       <button class="sub" style="--dot:#17A34A">
         <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
       <button class="sub" style="--dot:#8A4B08">
         <svg class="ic" viewBox="0 0 24 24"><path class="s" d="M9.3 3.2h5.4v5.4l5 9.4a2.3 2.3 0 0 1-2 3.4H6.3a2.3 2.3 0 0 1-2-3.4l5-9.4Z"/><path class="o" d="M6.2 15.4h11.6"/></svg>Chemistry</button>
-      <button class="sub" style="--dot:#0B7285">
+      <button class="sub" style="--dot:#1467A8">
         <svg class="ic" viewBox="0 0 24 24">
           <defs><clipPath id="geoClip"><circle cx="12" cy="12" r="9.4"/></clipPath></defs>
           <circle class="s" cx="12" cy="12" r="9.4"/>
-          <g clip-path="url(#geoClip)" transform="rotate(-14 12 12)">
-            <ellipse class="l" cx="8.6" cy="8.4" rx="4.2" ry="2.6" transform="rotate(-28 8.6 8.4)"/>
-            <ellipse class="l" cx="15.4" cy="13.6" rx="3.2" ry="4.4" transform="rotate(18 15.4 13.6)"/>
-            <ellipse class="l" cx="9.4" cy="17.6" rx="2.4" ry="1.7" transform="rotate(-12 9.4 17.6)"/>
+          <g clip-path="url(#geoClip)">
+            <path class="l" d="M3.4 4.6c3.2-1.4 5.8.2 6 2.2.2 1.8-1.4 2.6-2.2 4-.9 1.5-.8 3.2-2.4 3.6-1.6.4-2.8-1-3-2.8-.2-2 0-5.6 1.6-7z"/>
+            <path class="l" d="M13.6 11.8c2.8-1.4 5.8 0 6.6 2.2.6 1.8-.8 3-2 4-1.3 1-1.8 2.4-3.4 2.4-1.7 0-2.6-1.6-2.4-3.4.2-1.8.2-4.2 1.2-5.2z"/>
           </g>
         </svg>Geography</button>
     </div>
