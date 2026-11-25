@@ -38,11 +38,11 @@
   /* ── header + meter: identical to drills ──── */
   .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;
     padding:18px;border-bottom:3px solid var(--ink)}
-  .hd .mod{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
-    letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-2)}
+  .hd .mod{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;
+    letter-spacing:.2px;color:var(--ink-2)}
   .badgeL{display:inline-flex;align-items:center;gap:5px;background:var(--lime);color:var(--ink);
-    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
-    text-transform:uppercase;padding:5px 9px;border-radius:4px;white-space:nowrap}
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.2px;
+    padding:5px 9px;border-radius:4px;white-space:nowrap}
   .badgeL svg{width:12px;height:12px}
 
   .segs{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;padding:12px 18px 16px}
@@ -62,8 +62,8 @@
   .rowc .txt{flex:1;min-width:0}
   .rowc .txt b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.1px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .rowc .txt span{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
-    letter-spacing:.7px;text-transform:uppercase;color:var(--ink-3);margin-top:2px}
+  .rowc .txt span{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+    letter-spacing:.1px;color:var(--ink-3);margin-top:3px}
   .rowc .num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--ink-2)}
 
   .rowc.now{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--orange)}
@@ -72,8 +72,8 @@
   .rowc.now .num{color:#8E8E88}
 
   .next{border:3px solid var(--ink);border-radius:6px;background:var(--lime);color:var(--ink);
-    padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
-    letter-spacing:.9px;text-transform:uppercase;cursor:pointer;box-shadow:2px 2px 0 var(--ink);white-space:nowrap}
+    padding:7px 11px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:700;
+    letter-spacing:0;cursor:pointer;box-shadow:2px 2px 0 var(--ink);white-space:nowrap}
   .next:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
 
   .start{border:3px solid var(--ink);border-radius:6px;background:var(--lime);color:var(--ink);
@@ -81,8 +81,8 @@
     cursor:pointer;box-shadow:3px 3px 0 rgba(0,0,0,.35);white-space:nowrap}
   .start:active{transform:translate(3px,3px);box-shadow:0 0 0 rgba(0,0,0,.35)}
 
-  .sec{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
-    color:var(--ink-3);padding:16px 18px 8px;font-weight:700}
+  .sec{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.3px;
+    color:var(--ink-3);padding:16px 18px 8px;font-weight:600}
 
   /* tab bar */
   .tabbar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;
@@ -141,7 +141,7 @@
         <div class="chip" style="background:#2D5BFF;color:#fff">
           <svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
         </div>
-        <div class="txt"><b>4B · ICT</b><span>Next · valid identifiers</span></div>
+        <div class="txt"><b>4B · ICT</b><span>Next · Valid identifiers</span></div>
         <button class="next">Next</button>
       </div>
 
@@ -149,7 +149,7 @@
         <div class="chip" style="background:#7C4DFF;color:#fff">
           <svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
         </div>
-        <div class="txt"><b>4B · Physics</b><span>Next · newton's third law</span></div>
+        <div class="txt"><b>4B · Physics</b><span>Next · Newton's third law</span></div>
         <button class="next">Next</button>
       </div>
 
@@ -157,7 +157,7 @@
         <div class="chip" style="background:#17A34A;color:#fff">
           <svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/></svg>
         </div>
-        <div class="txt"><b>4B · Biology</b><span>Next · monohybrid crosses</span></div>
+        <div class="txt"><b>4B · Biology</b><span>Next · Monohybrid crosses</span></div>
         <button class="next">Next</button>
       </div>
     </div>
@@ -191,7 +191,7 @@
         <div class="chip" style="background:#2D5BFF;color:#fff">
           <svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
         </div>
-        <div class="txt"><b>4B · ICT</b><span>5/14 · valid identifiers</span></div>
+        <div class="txt"><b>4B · ICT</b><span>5/14 · Valid identifiers</span></div>
         <button class="next">Next</button>
       </div>
 
@@ -199,7 +199,7 @@
         <div class="chip" style="background:#7C4DFF;color:#fff">
           <svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
         </div>
-        <div class="txt"><b>4B · Physics</b><span>3/12 · newton's third law</span></div>
+        <div class="txt"><b>4B · Physics</b><span>3/12 · Newton's third law</span></div>
         <button class="next">Next</button>
       </div>
 
@@ -207,7 +207,7 @@
         <div class="chip" style="background:#17A34A;color:#fff">
           <svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/></svg>
         </div>
-        <div class="txt"><b>4B · Biology</b><span>2/11 · monohybrid crosses</span></div>
+        <div class="txt"><b>4B · Biology</b><span>2/11 · Monohybrid crosses</span></div>
         <button class="next">Next</button>
       </div>
     </div>
