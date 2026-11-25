@@ -223,9 +223,10 @@ group by 1,2,3;
 -- What the student should do next.
 create view v_due as
 select m.user_id, m.block_id, m.due_at, m.state, m.stability, m.lapses,
-       b.lesson_id, b.module_id, b.kind, b.level
+       b.lesson_id, l.module_id, b.kind, b.level
 from memory_state m
 join blocks b on b.id = m.block_id
+join lessons l on l.id = b.lesson_id
 where m.due_at <= now()
 order by m.due_at asc;
 

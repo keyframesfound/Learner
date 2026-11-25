@@ -1,6 +1,7 @@
 #!/bin/sh
-# One-time: install Postgres if missing, create the learner role + database,
-# apply the schema, point .env at it. Needs root: sudo sh ops/init-db.sh
+# One-time: install Postgres if missing, create the learner role + database, record
+# the connection string in .env, then apply the schema. Needs root:
+#   sudo sh ops/init-db.sh
 set -e
 ENV=/home/developer/learner/.env
 DB_SQL=/home/developer/learner/db/schema.sql
@@ -23,19 +24,27 @@ if ! sudo -u postgres psql -tAc "SELECT 1 FROM pg_database WHERE datname='learne
   sudo -u postgres createdb -O learner learner
 fi
 
-# fresh install: the database holds nothing yet, so drop and rebuild the schema
-PGPASSWORD="$PW" psql -h 127.0.0.1 -U learner -d learner -q \
-  -c 'drop schema if exists public cascade; create schema public;'
-
-PGPASSWORD="$PW" psql -h 127.0.0.1 -U learner -d learner -q -v ON_ERROR_STOP=1 -f "$DB_SQL"
-
+# 1. the connection string first: even if the schema fails, the app can connect
 if grep -q '^DATABASE_URL=' "$ENV"; then
   sed -i "s#^DATABASE_URL=.*#DATABASE_URL=postgres://learner:$PW@127.0.0.1:5432/learner#" "$ENV"
 else
   echo "DATABASE_URL=postgres://learner:$PW@127.0.0.1:5432/learner" >> "$ENV"
 fi
-
 chown developer:developer "$ENV"
 chmod 600 "$ENV"
+echo "1/2 database url written"
 
-echo "postgres ready, schema applied, .env updated"
+# 2. empty database, so rebuild the schema from scratch
+PGPASSWORD="$PW" psql -h 127.0.0.1 -U learner -d learner -q \
+  -c 'drop schema if exists public cascade; create schema public;'
+
+set +e
+PGPASSWORD="$PW" psql -h 127.0.0.1 -U learner -d learner -v ON_ERROR_STOP=1 -f "$DB_SQL"
+RC=$?
+set -e
+if [ "$RC" -ne 0 ]; then
+  echo "2/2 schema failed at the statement above; the connection string is set, fix the SQL and run:"
+  echo "    PGPASSWORD=... psql -h 127.0.0.1 -U learner -d learner -f db/schema.sql"
+  exit 1
+fi
+echo "2/2 schema applied"
