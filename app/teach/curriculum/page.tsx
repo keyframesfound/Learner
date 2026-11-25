@@ -38,7 +38,9 @@ function labelOf(block: BlockRow) {
     return label.length > 60 ? label.slice(0, 57) + "…" : label;
   }
   if (parsed?.type === "callout") return "Exam callout";
+  /* the tree shows prose, not markdown */
   const first = String(block.payload?.md ?? "")
+    .replace(/\*\*/g, "")
     .split("\n")
     .map((line) => line.trim())
     .filter(Boolean)[0] ?? "Note";
