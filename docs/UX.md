@@ -131,16 +131,19 @@ subject filter — that belongs to Path. Four bands, top to bottom.
 │ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ │
 │ ┃ ▤  Daily mix · 12 items      [Start]┃ │   ink band, orange shadow
 │ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ │
-│ Classes                              │
+│ Drill                                │
 │ ┌──┬───────────────────────────┬─────┐ │
-│ │▤ │ 4B · ICT                  │ Next│ │
+│ │▤ │ ICT · 9 of 14 chapters    │Start│ │
 │ └──┴───────────────────────────┴─────┘ │
-│ QuickBits                    12 more │
 │ ┌──┬───────────────────────────┬─────┐ │
-│ │▤ │ print() shows text on …   │     │ │   wraps to two lines
+│ │▤ │ Physics · 5 of 12         │Start│ │
+│ └──┴───────────────────────────┴─────┘ │
+│ QuickBits                   [Study]  │
+│ ┌──┬───────────────────────────┬─────┐ │
+│ │▤ │ Variables and data types  │     │ │   chapter, not a note
 │ └──┴───────────────────────────┴─────┘ │
 ├──────────────────────────────────────┤
-│  [Home]  [Path]  [Board]  [Me]       │
+│  [Learn]  [Drills]  [Board]  [Me]    │
 └──────────────────────────────────────┘
 
 **The header bar** carries three derived numbers, left to right: days to the first
@@ -154,11 +157,35 @@ written paper, syllabus coverage, current streak. None of them is a stored colum
 - *Streak* — consecutive days with at least one graded attempt, in Asia/Hong_Kong.
   The badge is the only lime element on the screen, which is why it reads first.
 
-**QuickBits** is a note stream, not a lesson list: one fact per card, no button, no
-sequence, no completion. Cards wrap to two lines and carry subject · topic in the
-meta, because a fact pulled out of order has no position to lean on. Tapping opens
-the note in place. Nothing here is scheduled — that is what Path is for; QuickBits
-exists so a two-minute gap has something in it.
+**Drill** lists subjects, not classes. Start drills that subject's whole syllabus,
+ordered by what is due, so the row carries progress and nothing else — a "next
+chapter" label would promise a sequence the button does not deliver. Classes still
+exist in the data, because a teacher owns a 4B; the student's home is organised by
+syllabus because that is what the exam asks for.
+
+**QuickBits** is the note stream, browsed by chapter rather than by fact. Home shows
+one chapter per subject as a preview; Study opens the full page.
+
+### QuickBits
+
+One level below home: every chapter that has notes, grouped by subject, with how much
+of each has been read.
+
+    ┌──────────────────────────────────────┐
+│ ‹  QuickBits              31 notes   │
+├──────────────────────────────────────┤
+│ ICT                          15 notes│
+│ ┌──┬───────────────────────────┬─────┐ │
+│ │▤ │ Variables and data types  │  ›  │ │
+│ │  │ 3 of 6 read               │     │ │
+│ └──┴───────────────────────────┴─────┘ │
+├──────────────────────────────────────┤
+│  [Learn]  [Drills]  [Board]  [Me]    │
+└──────────────────────────────────────┘
+
+A row states `3 of 6 read` rather than a count plus a count — one ratio, and it is
+the only one that says whether to open it. Nothing here is scheduled: QuickBits is
+for the two-minute gap, Path is for the plan, and reading a note never touches FSRS.
 
 ### Path
 

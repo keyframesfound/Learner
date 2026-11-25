@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — QuickBits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6; --ink:#111; --ink-2:#4A4A45; --ink-3:#8C8A80; --line:#D8D4C6;
+    --lime:#D4FF3F; --orange:#FF4D1C; --blue:#2D5BFF; --violet:#7C4DFF;
+    --green:#17A34A; --gold:#FFC94A; --red-ink:#C4271B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:'Space Grotesk',system-ui,sans-serif;background:#1A1A18;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px;color:var(--ink)}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.8px;color:#6E6E66}
+  .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+  .caption a:hover{color:var(--lime);border-color:var(--lime)}
+
+  .device{position:relative;width:390px;height:844px;background:var(--paper);
+    border:3px solid #000;border-radius:14px;box-shadow:10px 10px 0 rgba(0,0,0,.55);overflow:hidden}
+  .statusbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border-bottom:3px solid var(--ink)}
+  .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+
+  .screen{position:absolute;inset:40px 0 0 0;display:flex;flex-direction:column;padding-bottom:92px;overflow:hidden}
+  .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+
+  /* ── header + meter: identical to drills ──── */
+  .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    padding:14px 18px;border-bottom:3px solid var(--ink)}
+  .hd .mod{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+    letter-spacing:.1px;color:var(--ink-3);white-space:nowrap}
+  .hd .mod b{font-weight:700;color:var(--ink)}
+  .hd .mod.dim{flex:1;text-align:center;color:var(--ink-3)}
+  .hd .mod.dim b{color:var(--ink)}
+  .badgeL{display:inline-flex;align-items:center;gap:5px;background:var(--lime);color:var(--ink);
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.2px;
+    padding:5px 9px;border-radius:4px;white-space:nowrap}
+  .badgeL svg{width:12px;height:12px}
+
+
+  /* ── the row card: drills .step anatomy ───── */
+  .rowc{display:flex;align-items:center;gap:12px;padding:12px;margin:0 18px 10px;
+    border:3px solid var(--ink);border-radius:8px;background:#fff;
+    box-shadow:5px 5px 0 var(--ink)}
+  .rowc .chip{width:34px;height:34px;flex:0 0 34px;border:3px solid var(--ink);border-radius:6px;
+    display:grid;place-items:center;background:var(--paper);overflow:hidden}
+  .rowc .chip svg{width:19px;height:19px}
+  .rowc .chip .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .rowc .chip .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .rowc .chip .l{fill:#6FBF3A;stroke:none}
+  .rowc .txt{flex:1;min-width:0}
+  .rowc .txt b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.1px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rowc .txt span{display:block;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+    letter-spacing:.1px;color:var(--ink-3);margin-top:3px}
+  .rowc .num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--ink-2)}
+
+  .rowc.now{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--orange)}
+  .rowc.now .chip{background:var(--orange);border-color:var(--orange);color:#fff}
+  .rowc.now .txt span{color:#8E8E88}
+  .rowc.now .num{color:#8E8E88}
+
+  .next{border:3px solid var(--ink);border-radius:6px;background:var(--lime);color:var(--ink);
+    padding:7px 11px;font-family:'Space Grotesk',sans-serif;font-size:11.5px;font-weight:700;
+    letter-spacing:0;cursor:pointer;box-shadow:2px 2px 0 var(--ink);white-space:nowrap}
+  .next:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+
+  .start{border:3px solid var(--ink);border-radius:6px;background:var(--lime);color:var(--ink);
+    padding:10px 16px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
+    cursor:pointer;box-shadow:3px 3px 0 rgba(0,0,0,.35);white-space:nowrap}
+  .start:active{transform:translate(3px,3px);box-shadow:0 0 0 rgba(0,0,0,.35)}
+
+  .sec{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.3px;
+    color:var(--ink-3);padding:16px 18px 8px;font-weight:600}
+  .sec.split{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:10px}
+  .sec.split i{font-style:normal;color:var(--ink-3);font-size:9.5px}
+
+  /* quickbits — a fact, not a lesson: lighter shadow, wraps instead of truncating */
+  .rowc.note{align-items:flex-start;box-shadow:4px 4px 0 var(--ink);padding:11px 12px}
+  .rowc.note .chip{margin-top:1px}
+  .rowc.note .txt b{white-space:normal;overflow:hidden;text-overflow:clip;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    font-size:13px;line-height:1.42;letter-spacing:0;font-weight:500}
+  .rowc.note .txt span{margin-top:5px;font-size:9.5px}
+  .rowc.note .txt code{font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    font-weight:600;letter-spacing:-.2px}
+
+  /* tab bar */
+  .tabbar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;
+    gap:2px;border-top:3px solid var(--ink);background:var(--paper);padding:10px 34px 14px}
+  .tab{flex:1;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .pill{position:relative;display:grid;place-items:center;gap:2px;padding:6px 8px 5px;border:3px solid transparent;
+    border-radius:10px;color:var(--ink-3);min-width:56px}
+  .pill svg{width:20px;height:20px}
+  .lbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase}
+  .tab.on .pill{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+  .tab[data-t="learn"].on .pill{background:var(--lime);color:var(--ink)}
+  .tab[data-t="drills"].on .pill{background:var(--orange);color:#fff}
+  .tab[data-t="board"].on .pill{background:var(--blue);color:#fff}
+  .tab[data-t="me"].on .pill{background:var(--gold);color:var(--ink)}
+  .badge{position:absolute;top:-7px;right:-7px;min-width:16px;height:16px;padding:0 4px;display:grid;place-items:center;
+    background:var(--red-ink);color:#fff;border:2px solid var(--ink);border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;font-style:normal}
+  .ph{display:flex;align-items:center;gap:11px;padding:13px 18px;border-bottom:3px solid var(--ink)}
+  .ph h1{font-family:'Archivo Black',sans-serif;font-size:19px;letter-spacing:-.5px;flex:1}
+  .back{width:32px;height:32px;flex:0 0 32px;display:grid;place-items:center;border:3px solid var(--ink);
+    border-radius:6px;background:#fff;box-shadow:2px 2px 0 var(--ink);cursor:pointer;padding:0}
+  .back:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+  .back svg{width:15px;height:15px}
+  .ph .n{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;color:var(--ink-3);white-space:nowrap}
+  .rowc .chev{width:14px;height:14px;flex:0 0 14px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+
+  <section class="screen">
+    <div class="ph">
+      <button class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5l-7 7 7 7"/></svg></button>
+      <h1>QuickBits</h1>
+      <span class="n">31 notes</span>
+    </div>
+
+    <div class="scroll">
+
+      <div class="sec split"><span>ICT</span><i>15 notes</i></div>
+
+      <div class="rowc" style="--dot:#2D5BFF">
+        <div class="chip" style="background:#2D5BFF;color:#fff"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b>Variables and data types</b><span>3 of 6 read</span></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="rowc" style="--dot:#2D5BFF">
+        <div class="chip" style="background:#2D5BFF;color:#fff"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b>Control flow</b><span>0 of 5 read</span></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="rowc" style="--dot:#2D5BFF">
+        <div class="chip" style="background:#2D5BFF;color:#fff"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b>Functions and scope</b><span>4 of 4 read</span></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="sec split"><span>Physics</span><i>9 notes</i></div>
+
+      <div class="rowc" style="--dot:#7C4DFF">
+        <div class="chip" style="background:#7C4DFF;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
+        <div class="txt"><b>Forces and motion</b><span>2 of 5 read</span></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="rowc" style="--dot:#7C4DFF">
+        <div class="chip" style="background:#7C4DFF;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
+        <div class="txt"><b>Energy and work</b><span>0 of 4 read</span></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="sec split"><span>Biology</span><i>7 notes</i></div>
+
+      <div class="rowc" style="--dot:#17A34A">
+        <div class="chip" style="background:#17A34A;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
+        <div class="txt"><b>Inheritance</b><span>1 of 4 read</span></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="rowc" style="--dot:#17A34A">
+        <div class="chip" style="background:#17A34A;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
+        <div class="txt"><b>Cell division</b><span>0 of 3 read</span></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5l7 7-7 7"/></svg>
+      </div>
+
+    </div>
+  </section>
+
+  <nav class="tabbar">
+    <button class="tab on" data-t="learn"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg><span class="lbl">Learn</span></span></button>
+    <button class="tab" data-t="drills"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg><span class="lbl">Drills</span><i class="badge">12</i></span></button>
+    <button class="tab" data-t="board"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span class="lbl">Board</span></span></button>
+    <button class="tab" data-t="me"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span class="lbl">Me</span></span></button>
+  </nav>
+</div>
+
+<p class="caption">Learner · QuickBits · <a href="home-v2.html">← home</a></p>
+
+</body>
+</html>

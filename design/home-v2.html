@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Learner — home, drills anatomy</title>
+<title>Learner — home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -16,12 +16,9 @@
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   body{font-family:'Space Grotesk',system-ui,sans-serif;background:#1A1A18;min-height:100vh;
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px;color:var(--ink)}
-  .switcher{display:flex;gap:5px;background:#0E0E0C;padding:5px;border-radius:10px}
-  .switcher button{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.7px;
-    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:9px 13px;border-radius:6px;cursor:pointer}
-  .switcher button.on{background:var(--lime);color:var(--ink)}
   .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.8px;color:#6E6E66}
   .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+  .caption a:hover{color:var(--lime);border-color:var(--lime)}
 
   .device{position:relative;width:390px;height:844px;background:var(--paper);
     border:3px solid #000;border-radius:14px;box-shadow:10px 10px 0 rgba(0,0,0,.55);overflow:hidden}
@@ -29,8 +26,7 @@
     font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border-bottom:3px solid var(--ink)}
   .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
 
-  .screen{position:absolute;inset:40px 0 0 0;display:none;flex-direction:column;padding-bottom:92px;overflow:hidden}
-  .screen.on{display:flex}
+  .screen{position:absolute;inset:40px 0 0 0;display:flex;flex-direction:column;padding-bottom:92px;overflow:hidden}
   .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
   .scroll::-webkit-scrollbar{display:none}
 
@@ -83,7 +79,7 @@
 
   .sec{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.3px;
     color:var(--ink-3);padding:16px 18px 8px;font-weight:600}
-  .sec.split{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .sec.split{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:10px}
   .sec.split i{font-style:normal;color:var(--ink-3);font-size:9.5px}
 
   /* quickbits — a fact, not a lesson: lighter shadow, wraps instead of truncating */
@@ -116,17 +112,10 @@
 </head>
 <body>
 
-<div class="switcher">
-  <button data-v="a" class="on">1 · Band</button>
-  <button data-v="b">2 · Coverage</button>
-  <button data-v="c">3 · Index</button>
-</div>
-
 <div class="device">
   <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
 
-  <!-- ══════ 1 · BAND ══════ -->
-  <section class="screen on" id="v-a">
+<section class="screen">
     <div class="scroll">
 
       <div class="hd">
@@ -140,180 +129,51 @@
         <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
         </div>
-        <div class="txt"><b>Daily mix · 12 items</b><span>6 min · across all classes</span></div>
+        <div class="txt"><b>Daily mix · 12 items</b><span>6 min · across all subjects</span></div>
         <button class="start">Start</button>
       </div>
 
-      <div class="sec">Classes</div>
+      <div class="sec">Drill</div>
 
       <div class="rowc" style="--dot:#2D5BFF">
-        <div class="chip" style="background:#2D5BFF;color:#fff">
-          <svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
-        </div>
-        <div class="txt"><b>4B · ICT</b><span>Next · Valid identifiers</span></div>
-        <button class="next">Next</button>
+        <div class="chip" style="background:#2D5BFF;color:#fff"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b>ICT</b><span>9 of 14 chapters · 64%</span></div>
+        <button class="next">Start</button>
       </div>
 
       <div class="rowc" style="--dot:#7C4DFF">
-        <div class="chip" style="background:#7C4DFF;color:#fff">
-          <svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
-        </div>
-        <div class="txt"><b>4B · Physics</b><span>Next · Newton's third law</span></div>
-        <button class="next">Next</button>
+        <div class="chip" style="background:#7C4DFF;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
+        <div class="txt"><b>Physics</b><span>5 of 12 chapters · 42%</span></div>
+        <button class="next">Start</button>
       </div>
 
       <div class="rowc" style="--dot:#17A34A">
-        <div class="chip" style="background:#17A34A;color:#fff">
-          <svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/></svg>
-        </div>
-        <div class="txt"><b>4B · Biology</b><span>Next · Monohybrid crosses</span></div>
-        <button class="next">Next</button>
+        <div class="chip" style="background:#17A34A;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
+        <div class="txt"><b>Biology</b><span>4 of 11 chapters · 36%</span></div>
+        <button class="next">Start</button>
       </div>
-      <div class="sec split"><span>QuickBits</span><i>12 more</i></div>
+
+      <div class="sec split"><span>QuickBits</span><button class="next">Study</button></div>
 
       <div class="rowc note">
         <div class="chip" style="color:#2D5BFF"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
-        <div class="txt"><b><code>print()</code> shows text on screen — it does not hand a value back.</b><span>ICT · Variables</span></div>
+        <div class="txt"><b>Variables and data types</b><span>ICT · 6 notes</span></div>
       </div>
 
       <div class="rowc note">
         <div class="chip" style="color:#7C4DFF"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
-        <div class="txt"><b>Action and reaction act on different bodies, so they never cancel.</b><span>Physics · Forces</span></div>
+        <div class="txt"><b>Forces and motion</b><span>Physics · 5 notes</span></div>
       </div>
 
       <div class="rowc note">
         <div class="chip" style="color:#17A34A"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
-        <div class="txt"><b>A dominant allele masks the recessive one. It does not erase it.</b><span>Biology · Inheritance</span></div>
+        <div class="txt"><b>Inheritance</b><span>Biology · 4 notes</span></div>
       </div>
+
     </div>
   </section>
 
-  <!-- ══════ 2 · METER ══════ -->
-  <section class="screen" id="v-b">
-    <div class="scroll">
-
-      <div class="hd">
-        <span class="mod">DSE 2027 · <b>138 days</b></span>
-        <span class="mod dim">133 of 214 · <b>62%</b></span>
-        <span class="badgeL" title="12 day streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
-      </div>
-
-
-      <div class="rowc now" style="margin-top:14px;padding:14px">
-        <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
-        </div>
-        <div class="txt"><b>Daily mix · 12 items</b><span>6 min · across all classes</span></div>
-        <button class="start">Start</button>
-      </div>
-
-      <div class="sec">Classes</div>
-
-      <div class="rowc" style="--dot:#2D5BFF">
-        <div class="chip" style="background:#2D5BFF;color:#fff">
-          <svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
-        </div>
-        <div class="txt"><b>4B · ICT</b><span>5/14 · Valid identifiers</span></div>
-        <button class="next">Next</button>
-      </div>
-
-      <div class="rowc" style="--dot:#7C4DFF">
-        <div class="chip" style="background:#7C4DFF;color:#fff">
-          <svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
-        </div>
-        <div class="txt"><b>4B · Physics</b><span>3/12 · Newton's third law</span></div>
-        <button class="next">Next</button>
-      </div>
-
-      <div class="rowc" style="--dot:#17A34A">
-        <div class="chip" style="background:#17A34A;color:#fff">
-          <svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/></svg>
-        </div>
-        <div class="txt"><b>4B · Biology</b><span>2/11 · Monohybrid crosses</span></div>
-        <button class="next">Next</button>
-      </div>
-      <div class="sec split"><span>QuickBits</span><i>12 more</i></div>
-
-      <div class="rowc note">
-        <div class="chip" style="color:#2D5BFF"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
-        <div class="txt"><b><code>print()</code> shows text on screen — it does not hand a value back.</b><span>ICT · Variables</span></div>
-      </div>
-
-      <div class="rowc note">
-        <div class="chip" style="color:#7C4DFF"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
-        <div class="txt"><b>Action and reaction act on different bodies, so they never cancel.</b><span>Physics · Forces</span></div>
-      </div>
-
-      <div class="rowc note">
-        <div class="chip" style="color:#17A34A"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
-        <div class="txt"><b>A dominant allele masks the recessive one. It does not erase it.</b><span>Biology · Inheritance</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════ 3 · INDEX ══════ -->
-  <section class="screen" id="v-c">
-    <div class="scroll">
-
-      <div class="hd">
-        <span class="mod">DSE 2027 · <b>138 days</b></span>
-        <span class="mod dim">133 of 214 · <b>62%</b></span>
-        <span class="badgeL" title="12 day streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
-      </div>
-
-      <div class="rowc now" style="margin-top:14px;padding:14px">
-        <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
-        </div>
-        <div class="txt"><b>Daily mix · 12 items</b><span>6 min · across all classes</span></div>
-        <button class="start">Start</button>
-      </div>
-
-      <div class="rowc" style="--dot:#2D5BFF">
-        <div class="chip" style="background:var(--lime);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700">03</div>
-        <div class="txt"><b>4B · ICT</b><span>Valid identifiers · 4 min</span></div>
-        <button class="next">Next</button>
-      </div>
-
-      <div class="rowc" style="--dot:#7C4DFF">
-        <div class="chip" style="background:var(--lime);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700">02</div>
-        <div class="txt"><b>4B · Physics</b><span>Newton's third law · 3 min</span></div>
-        <button class="next">Next</button>
-      </div>
-
-      <div class="rowc" style="--dot:#17A34A">
-        <div class="chip" style="background:var(--lime);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700">01</div>
-        <div class="txt"><b>4B · Biology</b><span>Alleles · done today · 4 min</span></div>
-        <button class="next">Next</button>
-      </div>
-
-      <div class="rowc" style="box-shadow:5px 5px 0 var(--line)">
-        <div class="chip">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 4 3 7-8"/></svg>
-        </div>
-        <div class="txt"><b>Revision</b><span>133 of 214 items seen</span></div>
-        <span class="num" style="font-size:13px">62%</span>
-      </div>
-      <div class="sec split"><span>QuickBits</span><i>12 more</i></div>
-
-      <div class="rowc note">
-        <div class="chip" style="color:#2D5BFF"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
-        <div class="txt"><b><code>print()</code> shows text on screen — it does not hand a value back.</b><span>ICT · Variables</span></div>
-      </div>
-
-      <div class="rowc note">
-        <div class="chip" style="color:#7C4DFF"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
-        <div class="txt"><b>Action and reaction act on different bodies, so they never cancel.</b><span>Physics · Forces</span></div>
-      </div>
-
-      <div class="rowc note">
-        <div class="chip" style="color:#17A34A"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
-        <div class="txt"><b>A dominant allele masks the recessive one. It does not erase it.</b><span>Biology · Inheritance</span></div>
-      </div>
-    </div>
-  </section>
-
-  <nav class="tabbar">
+<nav class="tabbar">
     <button class="tab on" data-t="learn"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg><span class="lbl">Learn</span></span></button>
     <button class="tab" data-t="drills"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg><span class="lbl">Drills</span><i class="badge">12</i></span></button>
     <button class="tab" data-t="board"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span class="lbl">Board</span></span></button>
@@ -321,20 +181,7 @@
   </nav>
 </div>
 
-<p class="caption">Learner · home on drills anatomy · <a href="demo2.html">drills page</a></p>
+<p class="caption">Learner · home · <a href="quickbits.html">QuickBits page →</a></p>
 
-<script>
-(function () {
-  var screens = document.querySelectorAll('.screen');
-  var btns = document.querySelectorAll('.switcher button');
-  function show(v) {
-    screens.forEach(function (s) { s.classList.toggle('on', s.id === 'v-' + v); });
-    btns.forEach(function (x) { x.classList.toggle('on', x.dataset.v === v); });
-  }
-  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.v); }); });
-  var h = location.hash.replace('#', '');
-  if (h) show(h);
-})();
-</script>
 </body>
 </html>
