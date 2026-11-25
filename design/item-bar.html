@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — chapter bar, fill contrast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6;
+    --ink:#111111;
+    --ink-2:#4A4A45;
+    --ink-3:#8C8A80;
+    --line:#D8D4C6;
+    --lime:#D4FF3F;
+    --orange:#FF4D1C;
+    --blue:#2D5BFF;
+    --teal:#00C2B2;
+    --gold:#FFC94A;
+    --red:#FF3B30;
+    --red-ink:#C4271B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    background:#1A1A18;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:18px;padding:28px 16px;color:var(--ink);
+  }
+  .switcher{display:flex;gap:6px;background:#0E0E0C;padding:6px;border-radius:10px}
+  .switcher button{
+    font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.8px;
+    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:8px 14px;border-radius:6px;cursor:pointer;
+  }
+  .switcher button.on{background:var(--lime);color:var(--ink)}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.4px;color:#6E6E66}
+  .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+
+  .device{
+    position:relative;width:390px;height:844px;background:var(--paper);
+    border:3px solid #000;border-radius:14px;
+    box-shadow:10px 10px 0 rgba(0,0,0,.55);
+    overflow:hidden;
+  }
+  .statusbar{
+    height:40px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 18px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;
+    border-bottom:3px solid var(--ink);background:var(--paper);
+  }
+  .statusbar .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+
+  .screen{position:absolute;inset:0;padding-top:40px;display:none;flex-direction:column}
+  .screen.on{display:flex}
+
+  /* ── header ───────────────────────────────── */
+  .hd{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 18px;border-bottom:3px solid var(--ink);
+  }
+  .hd .mod{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;
+    letter-spacing:.1px;color:var(--ink-2);
+  }
+  .hd .mod.dim{flex:1;text-align:center;color:var(--ink-3);font-weight:600}
+  .hd .streak{
+    display:inline-flex;align-items:center;gap:5px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.1px;
+    background:var(--lime);color:var(--ink);padding:5px 9px;border-radius:4px;white-space:nowrap;
+  }
+  .hd .streak svg{width:12px;height:12px}
+
+  /* ── segmented progress ───────────────────── */
+
+  /* ── subject switcher ─────────────────────── */
+  .subs{
+    display:flex;gap:8px;
+    padding:12px 24px 16px 18px;
+    overflow-x:auto;overflow-y:hidden;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .subs::-webkit-scrollbar{display:none}
+  .sub{
+    flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;
+    border:3px solid var(--ink);background:#fff;font-family:'Space Grotesk',sans-serif;
+    font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;
+    box-shadow:3px 3px 0 var(--line);transition:transform .07s,box-shadow .07s;
+  }
+  .sub:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+  .sub .ic{
+    width:18px;height:18px;flex:0 0 18px;display:block;color:var(--dot);
+    filter:drop-shadow(1.5px 1.5px 0 rgba(17,17,17,.8));
+  }
+  .sub .ic .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .sub .ic .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .sub .ic .l{fill:#6FBF3A;stroke:none}
+  .sub.on{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--dot)}
+  .sub.on .ic{filter:none}
+  .sub.on .ic .s{stroke:#fff}
+  .sub.on .ic .o{stroke:#fff}
+
+  /* ── path steps ───────────────────────────── */
+  .steps{
+    padding:4px 26px 14px 18px;display:grid;gap:10px;
+    overflow-y:auto;overflow-x:hidden;scrollbar-width:none;
+  }
+  .steps::-webkit-scrollbar{display:none}
+  .step{
+    display:flex;align-items:center;gap:12px;padding:14px;border:3px solid var(--ink);
+    border-radius:8px;background:#fff;box-shadow:5px 5px 0 var(--ink);
+    cursor:pointer;transition:transform .07s,box-shadow .07s;
+  }
+  .step:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+  .step .no{
+    flex:0 0 34px;height:34px;display:grid;place-items:center;border:3px solid var(--ink);
+    border-radius:6px;background:var(--paper);font-family:'JetBrains Mono',monospace;
+    font-size:13px;font-weight:700;
+  }
+  .step .txt{flex:1;min-width:0}
+  .step .txt b{display:block;font-size:15px;font-weight:700;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .step .txt span{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;letter-spacing:.1px;color:var(--ink-3)}
+  /* familiarity: the word carries the colour, in shades that clear 4.5:1 on paper */
+  .step .txt em.st{font-style:normal;font-weight:700;color:var(--c)}
+  .step.done .no{background:var(--lime);border-color:var(--ink)}
+  .step.now{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--orange)}
+  .step.now .no{background:var(--orange);border-color:var(--orange);color:#fff}
+  .step.now .txt span{color:#9A9A90}
+  .step.lock{background:repeating-linear-gradient(45deg,#EDEAE0 0 6px,#E4E1D6 6px 12px);box-shadow:5px 5px 0 var(--line);color:var(--ink-3)}
+  .step.lock .no{background:transparent;border-color:var(--ink-3);color:var(--ink-3)}
+
+  /* ── lesson ───────────────────────────────── */
+  .lbar{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:3px solid var(--ink)}
+  .lbar .x{font-size:18px;font-weight:700;line-height:1;cursor:pointer;color:var(--ink)}
+  .lbar .count{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--ink-2);margin-left:auto}
+
+  .tag{
+    align-self:flex-start;margin:14px 18px 0;padding:4px 8px;border:2px solid var(--red-ink);
+    color:var(--red-ink);border-radius:4px;font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;font-weight:700;letter-spacing:1.2px;
+  }
+  .q{font-family:'Archivo Black',sans-serif;font-size:27px;line-height:1.16;letter-spacing:-.6px;padding:10px 18px 16px}
+
+  .code{
+    margin:0 18px 18px;background:var(--ink);border-radius:8px;padding:14px 16px;
+    font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;color:#E8E6DC;
+    border:3px solid var(--ink);box-shadow:5px 5px 0 var(--line);
+    white-space:pre;overflow-x:auto;
+  }
+  .code .k{color:var(--lime)}
+  .code .n{color:#FFB199}
+  .code .c{color:#7B7B72}
+  .code .ln{color:#5A5A52;user-select:none;margin-right:12px}
+
+  .opts{display:grid;gap:9px;padding:0 18px}
+  .opt{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;font-family:inherit;
+    background:#fff;border:3px solid var(--ink);border-radius:8px;padding:11px 12px;
+    font-size:15px;font-weight:700;color:var(--ink);cursor:pointer;box-shadow:4px 4px 0 var(--ink);
+    transition:transform .07s,box-shadow .07s,background .1s;
+  }
+  .opt:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+  .opt .letter{
+    flex:0 0 26px;height:26px;display:grid;place-items:center;border:2px solid var(--ink);
+    border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;background:var(--paper);
+  }
+  .opt.sel{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:4px 4px 0 var(--ink)}
+  .opt.sel .letter{background:#fff;color:var(--blue);border-color:#fff}
+  .opt.good{background:var(--lime);border-color:var(--ink);color:var(--ink)}
+  .opt.good .letter{background:var(--ink);color:var(--lime);border-color:var(--ink)}
+  .opt.bad{background:var(--red);border-color:var(--ink);color:#fff}
+  .opt.bad .letter{background:#fff;color:var(--red);border-color:#fff}
+
+  /* ── verdict band ─────────────────────────── */
+  .band{
+    margin-top:auto;border-top:3px solid var(--ink);padding:14px 18px 24px;
+    background:var(--paper);transition:background .12s,color .12s;
+  }
+  .band .verdict{display:none;align-items:center;gap:8px;font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:-.3px;margin-bottom:4px}
+  .band .verdict.show{display:flex}
+  .band .why{display:none;font-size:12.5px;font-weight:500;line-height:1.5;margin-bottom:12px;opacity:.85}
+  .band .why.show{display:block}
+  .band.ok{background:var(--lime)}
+  .band.bad{background:var(--red-ink);color:#fff}
+  .band.bad .why{opacity:.95}
+
+  .btn{
+    width:100%;height:50px;border:3px solid var(--ink);border-radius:8px;
+    background:var(--ink);color:var(--lime);
+    font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.6px;text-transform:uppercase;
+    box-shadow:5px 5px 0 rgba(0,0,0,.35);cursor:pointer;
+    transition:transform .07s,box-shadow .07s,background .12s,color .12s;
+  }
+  .btn:active{transform:translate(4px,4px);box-shadow:1px 1px 0 rgba(0,0,0,.35)}
+  .btn[disabled]{background:#DDD9CC;color:#A7A498;border-color:#C9C5B6;box-shadow:5px 5px 0 #C9C5B6;cursor:not-allowed}
+  .btn[disabled]:active{transform:none;box-shadow:5px 5px 0 #C9C5B6}
+  .band.ok .btn{background:var(--ink);color:var(--lime);box-shadow:5px 5px 0 rgba(0,0,0,.35)}
+  .band.bad .btn{background:#fff;color:var(--ink);border-color:var(--ink);box-shadow:5px 5px 0 rgba(0,0,0,.25)}
+
+  /* ── board ────────────────────────────────── */
+  .bhead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 18px 10px}
+  .bhead h2{font-family:'Archivo Black',sans-serif;font-size:27px;letter-spacing:-.8px;line-height:1}
+  .bhead p{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.7px;color:var(--ink-3);text-transform:uppercase;margin-top:5px;font-weight:600}
+  .showed{
+    border:3px solid var(--ink);border-radius:999px;padding:6px 11px;background:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.6px;
+    white-space:nowrap;box-shadow:3px 3px 0 var(--line);
+  }
+
+  .podium{display:flex;align-items:flex-end;gap:8px;padding:8px 18px 0}
+  .pod{
+    flex:1;border:3px solid var(--ink);border-radius:10px;background:#fff;
+    display:flex;flex-direction:column;align-items:center;padding:10px 4px 0;
+    box-shadow:5px 5px 0 var(--ink);overflow:hidden;
+  }
+  .pod .num{font-family:'Archivo Black',sans-serif;font-size:25px;line-height:1}
+  .pod .nm{font-size:11px;font-weight:700;margin-top:7px;line-height:1.15;max-width:100%;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pod .val{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-2);margin-top:2px}
+  .pod.p1{height:140px;background:var(--lime)}
+  .pod.p2{height:110px}
+  .pod.p3{height:94px}
+
+  .mecard{
+    margin:20px 18px 0;border:3px solid var(--ink);border-radius:10px;background:var(--ink);
+    color:var(--paper);box-shadow:5px 5px 0 var(--orange);padding:12px 14px;
+  }
+  .mehead{display:flex;align-items:center;gap:10px}
+  .mehead .rank{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--ink);
+    background:var(--paper);border-radius:4px;padding:2px 6px;
+  }
+  .mehead .who{flex:1;font-size:15px;font-weight:700}
+  .mehead .val{font-family:'Archivo Black',sans-serif;font-size:20px;color:var(--lime)}
+  .track{margin-top:10px;height:12px;border:2px solid var(--paper);border-radius:99px;background:#3A3A36;overflow:hidden}
+  .track i{display:block;height:100%;background:var(--lime);border-radius:99px}
+  .gap{margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#B9B9AE;letter-spacing:.3px}
+  .gap b{color:var(--orange);font-weight:700}
+
+  .rest{padding:16px 18px 0;display:grid;gap:7px}
+  .restrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;background:#fff}
+  .restrow .r{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);width:18px}
+  .restrow .nm{flex:1;font-size:13px;font-weight:700}
+  .restrow .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}
+
+  .note{padding:14px 18px 0;font-size:12.5px;line-height:1.5;color:var(--ink-2)}
+  .note b{background:var(--lime);padding:0 3px;border:1px solid var(--ink);border-radius:3px}
+
+
+  .tabbar{
+    margin-top:auto;flex:0 0 auto;display:flex;align-items:flex-end;justify-content:space-between;
+    gap:2px;border-top:3px solid var(--ink);background:var(--paper);padding:10px 8px 14px;
+  }
+  .tab{
+    flex:1;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer;
+    font-family:inherit;
+  }
+  .pill{
+    position:relative;display:grid;place-items:center;gap:2px;padding:6px 8px 5px;
+    border:3px solid transparent;border-radius:10px;color:var(--ink-3);min-width:58px;
+    transition:transform .07s,background .12s,color .12s,border-color .12s,box-shadow .12s;
+  }
+  .pill svg{width:21px;height:21px}
+  .lbl{
+    font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;
+    letter-spacing:.9px;text-transform:uppercase;
+  }
+  .tab:active .pill{transform:translateY(2px)}
+  .tab.on .pill{
+    background:var(--lime);border-color:var(--ink);color:var(--ink);box-shadow:3px 3px 0 var(--ink);
+  }
+  .tab.on[data-tab="drills"] .pill{background:var(--orange);color:#fff}
+  .tab.on[data-tab="board"] .pill{background:var(--blue);color:#fff}
+  .tab.on[data-tab="me"] .pill{background:var(--gold);color:var(--ink)}
+  .badge{
+    position:absolute;top:-7px;right:-7px;min-width:17px;height:17px;padding:0 4px;
+    display:grid;place-items:center;background:var(--red-ink);color:#fff;border:2px solid var(--ink);
+    border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:8.5px;
+    font-weight:700;font-style:normal;
+  }
+  body{background:#1A1A18;font-family:'Space Grotesk',system-ui,sans-serif;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px;margin:0}
+  *{box-sizing:border-box}
+  .switcher{display:flex;gap:5px;background:#0E0E0C;padding:5px;border-radius:10px}
+  .switcher button{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.7px;
+    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:9px 13px;border-radius:6px;cursor:pointer}
+  .switcher button.on{background:var(--lime);color:#111}
+  .cap{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.6px;color:#6E6E66}
+  .device{position:relative;width:390px;height:844px;background:var(--paper);border:3px solid #000;
+    border-radius:14px;box-shadow:10px 10px 0 rgba(0,0,0,.55);overflow:hidden}
+  .statusbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border-bottom:3px solid var(--ink)}
+  .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+  .screen{position:absolute;inset:0;padding-top:40px;display:none;flex-direction:column;overflow:hidden}
+  .screen.on{display:flex}
+  .lbar .x{flex:0 0 auto}
+  .btn{text-transform:none;letter-spacing:0}
+  .pbar{flex:1;height:11px;border:3px solid var(--ink);border-radius:999px;background:var(--paper);
+    overflow:hidden;margin:0 2px;position:relative}
+  .pbar i{display:block;height:100%;background:var(--lime)}
+  .pbar.sq{border-radius:2px;display:flex;align-items:center;height:18px}
+  .pbar.sq b{position:absolute;right:7px;font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    font-weight:700;color:var(--ink-3);letter-spacing:.2px;line-height:1}
+  .pbar.notch::after{content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to right,
+      transparent 0 calc(100%/14 - 1.5px), rgba(17,17,17,.28) calc(100%/14 - 1.5px), rgba(17,17,17,.28) calc(100%/14))}
+  .pbar.ink i{background:var(--ink)}
+  .pbar.ink::after{background:repeating-linear-gradient(to right,
+    transparent 0 calc(100%/14 - 1.5px), rgba(242,239,230,.55) calc(100%/14 - 1.5px), rgba(242,239,230,.55) calc(100%/14))}
+  .pbar.key i{background:var(--lime);box-shadow:inset 0 0 0 2px var(--ink)}
+  .pbar.tint{background:#DCD7C4}
+</style>
+</head>
+<body>
+
+<div class="switcher">
+  <button data-v="a" class="on">1 · Lime</button>
+  <button data-v="b">2 · Ink</button>
+  <button data-v="c">3 · Keyline</button>
+  <button data-v="d">4 · Tinted</button>
+  <button data-v="e">5 · Plain</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+  <div class="wrap wrap-a">  <section class="screen">
+    <div class="lbar"><span class="x">✕</span><span class="pbar notch"><i style="width:64%"></i></span><span class="count">03 · 4 / 6</span></div>
+    <div class="tag">Hard</div>
+    <h1 class="q">Which name is<br>valid Python?</h1>
+    <div class="code"><span class="ln">1</span><span class="n">items</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(<span class="n">items</span>[<span class="n">2</span>])</div>
+    <div class="opts">
+      <button class="opt"><span class="letter">A</span>2cool</button>
+      <button class="opt" style="background:var(--lime)"><span class="letter">B</span>cool_2</button>
+      <button class="opt"><span class="letter">C</span>cool-2</button>
+    </div>
+    <div class="band" style="background:var(--lime)">
+      <div class="verdict" style="display:flex">Correct</div>
+      <p class="why" style="display:block">cool_2 — starts with a letter, underscore allowed.</p>
+      <button class="btn">Continue</button>
+    </div>
+  </section></div>
+  <div class="wrap wrap-b">  <section class="screen">
+    <div class="lbar"><span class="x">✕</span><span class="pbar notch ink"><i style="width:64%"></i></span><span class="count">03 · 4 / 6</span></div>
+    <div class="tag">Hard</div>
+    <h1 class="q">Which name is<br>valid Python?</h1>
+    <div class="code"><span class="ln">1</span><span class="n">items</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(<span class="n">items</span>[<span class="n">2</span>])</div>
+    <div class="opts">
+      <button class="opt"><span class="letter">A</span>2cool</button>
+      <button class="opt" style="background:var(--lime)"><span class="letter">B</span>cool_2</button>
+      <button class="opt"><span class="letter">C</span>cool-2</button>
+    </div>
+    <div class="band" style="background:var(--lime)">
+      <div class="verdict" style="display:flex">Correct</div>
+      <p class="why" style="display:block">cool_2 — starts with a letter, underscore allowed.</p>
+      <button class="btn">Continue</button>
+    </div>
+  </section></div>
+  <div class="wrap wrap-c">  <section class="screen">
+    <div class="lbar"><span class="x">✕</span><span class="pbar notch key"><i style="width:64%"></i></span><span class="count">03 · 4 / 6</span></div>
+    <div class="tag">Hard</div>
+    <h1 class="q">Which name is<br>valid Python?</h1>
+    <div class="code"><span class="ln">1</span><span class="n">items</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(<span class="n">items</span>[<span class="n">2</span>])</div>
+    <div class="opts">
+      <button class="opt"><span class="letter">A</span>2cool</button>
+      <button class="opt" style="background:var(--lime)"><span class="letter">B</span>cool_2</button>
+      <button class="opt"><span class="letter">C</span>cool-2</button>
+    </div>
+    <div class="band" style="background:var(--lime)">
+      <div class="verdict" style="display:flex">Correct</div>
+      <p class="why" style="display:block">cool_2 — starts with a letter, underscore allowed.</p>
+      <button class="btn">Continue</button>
+    </div>
+  </section></div>
+  <div class="wrap wrap-d">  <section class="screen">
+    <div class="lbar"><span class="x">✕</span><span class="pbar notch tint"><i style="width:64%"></i></span><span class="count">03 · 4 / 6</span></div>
+    <div class="tag">Hard</div>
+    <h1 class="q">Which name is<br>valid Python?</h1>
+    <div class="code"><span class="ln">1</span><span class="n">items</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(<span class="n">items</span>[<span class="n">2</span>])</div>
+    <div class="opts">
+      <button class="opt"><span class="letter">A</span>2cool</button>
+      <button class="opt" style="background:var(--lime)"><span class="letter">B</span>cool_2</button>
+      <button class="opt"><span class="letter">C</span>cool-2</button>
+    </div>
+    <div class="band" style="background:var(--lime)">
+      <div class="verdict" style="display:flex">Correct</div>
+      <p class="why" style="display:block">cool_2 — starts with a letter, underscore allowed.</p>
+      <button class="btn">Continue</button>
+    </div>
+  </section></div>
+  <div class="wrap wrap-e">  <section class="screen">
+    <div class="lbar"><span class="x">✕</span><span class="pbar sq"><i style="width:64%"></i><b>9 of 14</b></span><span class="count">03 · 4 / 6</span></div>
+    <div class="tag">Hard</div>
+    <h1 class="q">Which name is<br>valid Python?</h1>
+    <div class="code"><span class="ln">1</span><span class="n">items</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
+<span class="ln">2</span><span class="k">print</span>(<span class="n">items</span>[<span class="n">2</span>])</div>
+    <div class="opts">
+      <button class="opt"><span class="letter">A</span>2cool</button>
+      <button class="opt" style="background:var(--lime)"><span class="letter">B</span>cool_2</button>
+      <button class="opt"><span class="letter">C</span>cool-2</button>
+    </div>
+    <div class="band" style="background:var(--lime)">
+      <div class="verdict" style="display:flex">Correct</div>
+      <p class="why" style="display:block">cool_2 — starts with a letter, underscore allowed.</p>
+      <button class="btn">Continue</button>
+    </div>
+  </section></div>
+</div>
+
+<p class="cap">Learner · chapter bar · 9 of 14 lessons</p>
+
+<script>
+(function () {
+  var btns = document.querySelectorAll('.switcher button');
+  var wraps = document.querySelectorAll('.wrap');
+  function show(v) {
+    wraps.forEach(function (w) { w.querySelector('.screen').classList.toggle('on', w.classList.contains('wrap-' + v)); });
+    btns.forEach(function (b) { b.classList.toggle('on', b.dataset.v === v); });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.v); }); });
+  show((location.hash || '#a').slice(1));
+})();
+</script>
+
+</body>
+</html>

@@ -133,6 +133,13 @@
   .lbar{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:3px solid var(--ink)}
   .lbar .x{font-size:18px;font-weight:700;line-height:1;cursor:pointer;color:var(--ink)}
   .lbar .count{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:var(--ink-2);margin-left:auto}
+  /* chapter progress: 14 notches, one per lesson, lime over a paper track */
+  .lbar .pbar{flex:1;height:11px;border:3px solid var(--ink);border-radius:999px;background:var(--paper);
+    overflow:hidden;margin:0 2px;position:relative}
+  .lbar .pbar i{display:block;height:100%;background:var(--lime)}
+  .lbar .pbar::after{content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to right,transparent 0 calc(100%/14 - 1.5px),
+      rgba(17,17,17,.28) calc(100%/14 - 1.5px),rgba(17,17,17,.28) calc(100%/14))}
 
   .tag{
     align-self:flex-start;margin:14px 18px 0;padding:4px 8px;border:2px solid var(--red-ink);
@@ -377,6 +384,7 @@
   <section class="screen" id="s-lesson">
     <div class="lbar">
       <span class="x" data-go="path">✕</span>
+      <span class="pbar"><i style="width:64%"></i></span>
       <span class="count">03 · 4 / 6</span>
     </div>
 
@@ -508,6 +516,9 @@
     check.disabled = true;
     check.textContent = 'Check';
   }
+
+  var deep = location.hash.replace('#', '');
+  if (deep) go(deep);
 
   check.addEventListener('click', function () {
     if (state === 'idle') {
