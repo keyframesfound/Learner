@@ -194,7 +194,7 @@
   .btn{
     width:100%;height:50px;border:3px solid var(--ink);border-radius:8px;
     background:var(--ink);color:var(--lime);
-    font-family:'Archivo Black',sans-serif;font-size:14px;letter-spacing:.6px;text-transform:uppercase;
+    font-family:'Archivo Black',sans-serif;font-size:15px;letter-spacing:0;
     box-shadow:5px 5px 0 rgba(0,0,0,.35);cursor:pointer;
     transition:transform .07s,box-shadow .07s,background .12s,color .12s;
   }
@@ -297,6 +297,61 @@
   .tag.boss{border-color:var(--orange);color:var(--orange)}
   .step.boss{box-shadow:5px 5px 0 var(--orange)}
   .step.boss .no{background:var(--orange);border-color:var(--orange);color:#fff}
+  /* ── boss arena ───────────────────────────────────────── */
+  .arena{margin:14px 18px 0;background:var(--ink);border-radius:12px;padding:14px 14px 16px;
+    box-shadow:6px 6px 0 var(--orange)}
+  .arena .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .arena .name{font-family:'Archivo Black',sans-serif;font-size:18px;letter-spacing:-.4px;color:var(--paper)}
+  .arena .lv{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.6px;color:var(--lime)}
+  .arena .stage{display:grid;place-items:center;padding:8px 0 10px}
+  .arena .stage svg{width:78px;height:78px}
+  .arena .hp{display:flex;align-items:center;gap:9px}
+  .arena .hpbar{flex:1;height:13px;border:2px solid var(--paper);border-radius:999px;
+    background:rgba(242,239,230,.14);overflow:hidden;position:relative}
+  .arena .hpbar i{display:block;height:100%;background:var(--orange)}
+  .arena .hpbar::after{content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(to right,transparent 0 calc(100%/12 - 1px),
+      rgba(242,239,230,.35) calc(100%/12 - 1px),rgba(242,239,230,.35) calc(100%/12))}
+  .arena .hpnum{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    color:var(--paper);white-space:nowrap}
+  .dmg{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    background:var(--ink);color:var(--lime);padding:3px 7px;border-radius:4px}
+  .bscroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .bscroll::-webkit-scrollbar{display:none}
+  /* ── raid party ───────────────────────────────────────── */
+  .party{display:flex;gap:6px;justify-content:space-between;margin-top:13px;
+    border-top:2px solid rgba(242,239,230,.25);padding-top:11px}
+  .pm{display:grid;justify-items:center;gap:3px;flex:1}
+  .pm .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    background:var(--paper);color:var(--ink);border:2px solid var(--paper)}
+  .pm.me .av{background:var(--lime);color:var(--ink)}
+  .pm b{font-size:10px;font-weight:700;color:var(--paper);letter-spacing:0}
+  .pm i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;color:var(--lime)}
+
+  /* ── lobby ────────────────────────────────────────────── */
+  .preview{display:flex;align-items:center;gap:14px;margin:16px 18px 0;padding:12px 14px;
+    border:3px solid var(--ink);border-radius:10px;background:#fff;box-shadow:5px 5px 0 var(--ink)}
+  .preview svg{width:62px;height:62px;flex:0 0 62px}
+  .preview h1{font-family:'Archivo Black',sans-serif;font-size:19px;letter-spacing:-.4px}
+  .preview span{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    font-weight:600;color:var(--ink-3);margin-top:3px}
+  .plabel{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;letter-spacing:.3px;
+    color:var(--ink-2);padding:18px 18px 9px}
+  .slots{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:0 18px}
+  .slot{display:flex;align-items:center;gap:9px;padding:9px 11px;border:3px solid var(--ink);
+    border-radius:8px;background:#fff;box-shadow:4px 4px 0 var(--ink)}
+  .slot .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+    font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    border:2px solid var(--ink);background:var(--paper)}
+  .slot.me .av{background:var(--lime)}
+  .slot b{font-size:12.5px;font-weight:700;display:block;line-height:1.1}
+  .slot i{font-style:normal;font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;color:var(--ink-3)}
+  .slot.empty{border-style:dashed;box-shadow:none;background:transparent;color:var(--ink-3)}
+  .slot.empty .av{border-style:dashed;color:var(--ink-3)}
+  .lobbyfoot{margin-top:auto;padding:14px 18px 20px;border-top:3px solid var(--ink)}
+  .lobbyfoot .note{font-size:11px;line-height:1.4;color:var(--ink-3);margin-top:9px;text-align:center}
 </style>
 </head>
 <body>
@@ -305,6 +360,7 @@
   <button data-go="path" class="on">Path</button>
   <button data-go="lesson">Lesson</button>
   <button data-go="board">Board</button>
+  <button data-go="party">Party</button>
   <button data-go="boss">Boss</button>
 </div>
 
@@ -362,9 +418,9 @@
         <span class="no">05</span>
         <span class="txt"><b>Indexing a list</b><span>Locked</span></span>
       </div>
-      <div class="step boss" data-go="boss">
+      <div class="step boss" data-go="party">
         <span class="no"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3.2l2.6 5.4 6 .9-4.3 4.2 1 6-5.3-2.9-5.3 2.9 1-6L3.4 9.5l6-.9z"/></svg></span>
-        <span class="txt"><b>Boss battle</b><span>12 items · 8 min</span></span>
+        <span class="txt"><b>Boss battle</b><span>Party up · 12 items · 8 min</span></span>
         <span>→</span>
       </div>
     </div>
@@ -425,15 +481,84 @@
     </div>
   </section>
 
+  <section class="screen" id="s-party">
+    <div class="lbar">
+      <span class="x" data-go="path">✕</span>
+      <span class="count">Party · E2C</span>
+      <span class="timer" style="color:var(--ink-3)">K4M-2PX</span>
+    </div>
+
+    <div class="preview">
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M18 34h64v46a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8z" fill="#111"/>
+        <path d="M28 34V22m44 12V22" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="28" cy="18" r="6" fill="#111"/>
+        <circle cx="72" cy="18" r="6" fill="#111"/>
+        <rect x="8" y="48" width="9" height="20" rx="4" fill="#111"/>
+        <rect x="83" y="48" width="9" height="20" rx="4" fill="#111"/>
+        <rect x="33" y="46" width="13" height="15" rx="2" fill="#D4FF3F"/>
+        <rect x="54" y="46" width="13" height="15" rx="2" fill="#D4FF3F"/>
+        <path d="M34 72h32" stroke="#D4FF3F" stroke-width="7" stroke-linecap="square"/>
+      </svg>
+      <div>
+        <h1>Segfault</h1>
+        <span>Boss · level 3 · 12,000 HP</span>
+      </div>
+    </div>
+
+    <div class="plabel">Party · 2 of 4 ready</div>
+
+    <div class="slots">
+      <div class="slot"><span class="av">KR</span><div><b>Kai</b><i>Ready</i></div></div>
+      <div class="slot me"><span class="av">You</span><div><b>You</b><i>Ready</i></div></div>
+      <div class="slot empty"><span class="av">+</span><div><b>Open</b><i>Invite</i></div></div>
+      <div class="slot empty"><span class="av">+</span><div><b>Open</b><i>Invite</i></div></div>
+    </div>
+
+    <div class="lobbyfoot">
+      <button class="btn">Start raid</button>
+      <p class="note">Anyone with the code can join until the first item.</p>
+    </div>
+  </section>
+
   <section class="screen" id="s-boss">
     <div class="lbar">
       <span class="x" data-go="path">✕</span>
-      <span class="hp"><i style="width:66%"></i></span>
+      <span class="count">Raid · E2C</span>
       <span class="timer">07:42</span>
     </div>
 
-    <div class="tag boss">Boss</div>
-    <h1 class="q">Which line prints<br>the last item?</h1>
+    <div class="arena">
+      <div class="top">
+        <span class="name">Segfault</span>
+        <span class="lv">Boss · level 3</span>
+      </div>
+      <div class="stage"><svg viewBox="0 0 100 100" fill="none">
+        <path d="M18 34h64v46a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8z" fill="#D4FF3F"/>
+        <path d="M28 34V22m44 12V22" stroke="#D4FF3F" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="28" cy="18" r="6" fill="#D4FF3F"/>
+        <circle cx="72" cy="18" r="6" fill="#D4FF3F"/>
+        <rect x="8" y="48" width="9" height="20" rx="4" fill="#D4FF3F"/>
+        <rect x="83" y="48" width="9" height="20" rx="4" fill="#D4FF3F"/>
+        <rect x="33" y="46" width="13" height="15" rx="2" fill="#111"/>
+        <rect x="54" y="46" width="13" height="15" rx="2" fill="#111"/>
+        <path d="M34 72h32" stroke="#111" stroke-width="7" stroke-linecap="square"/>
+        <path d="M40 72v6m10-6v6m10-6v6" stroke="#111" stroke-width="3"/>
+      </svg></div>
+      <div class="hp">
+        <span class="hpbar"><i style="width:68%"></i></span>
+        <span class="hpnum">8,100 / 12,000</span>
+      </div>
+      <div class="party">
+        <span class="pm"><span class="av">KR</span><b>Kai</b><i>2,400</i></span>
+        <span class="pm me"><span class="av">You</span><b>You</b><i>1,900</i></span>
+        <span class="pm"><span class="av">MC</span><b>Mei</b><i>1,100</i></span>
+        <span class="pm"><span class="av">JR</span><b>Jon</b><i>500</i></span>
+      </div>
+    </div>
+
+    <div class="bscroll">
+    <h1 class="q" style="padding-top:12px">Which line prints<br>the last item?</h1>
 
     <div class="code"><span class="ln">1</span><span class="n">nums</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
 <span class="ln">2</span><span class="k">print</span>(nums[<span class="n">?</span>])</div>
@@ -443,9 +568,10 @@
       <button class="opt" style="background:var(--lime)"><span class="letter">B</span>nums[-1]</button>
       <button class="opt"><span class="letter">C</span>nums[3]</button>
     </div>
+    </div>
 
     <div class="band" style="background:var(--lime)">
-      <div class="verdict" style="display:flex">Correct</div>
+      <div class="verdict" style="display:flex">Correct<span class="dmg">−1,000</span></div>
       <p class="why" style="display:block">nums[-1] — negative indexes count back from the end.</p>
       <button class="btn">Continue</button>
     </div>
@@ -540,7 +666,7 @@
   function go(id) {
     screens.forEach(function (s) { s.classList.toggle('on', s.id === 's-' + id); });
     tabs.forEach(function (t) { t.classList.toggle('on', t.dataset.go === id); });
-    var tabFor = id === 'boss' ? 'drills' : id;
+    var tabFor = (id === 'boss' || id === 'party') ? 'drills' : id;
     bars.forEach(function (b) { b.classList.toggle('on', b.dataset.tab === tabFor); });
     if (id === 'lesson') reset();
   }
