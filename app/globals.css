@@ -493,6 +493,7 @@ body {
 }
 
 /* ── login ─────────────────────────────────── */
-.login-wrap { flex: 1; display: grid; place-items: center; padding: 32px 20px 56px; }
+/* pinned to the viewport: the page column can be taller than the screen */
+.login-wrap { position: fixed; inset: 0; display: grid; place-items: center; padding: 24px; }
 .login-card { width: 100%; max-width: 380px; display: grid; gap: 14px; justify-items: center; text-align: center; }
 .login-card .btn { margin-top: 4px; }

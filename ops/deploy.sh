@@ -3,7 +3,8 @@
 set -e
 cd /home/developer/learner
 git checkout -- . 2>/dev/null || true
-git pull --ff-only
+git fetch --all -q
+git reset --hard origin/main
 npm ci --no-audit --no-fund
 NEXT_TELEMETRY_DISABLED=1 npm run build
 cp -r .next/static .next/standalone/.next/static
