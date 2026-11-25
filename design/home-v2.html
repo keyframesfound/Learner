@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learner — home, drills anatomy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EFE6; --ink:#111; --ink-2:#4A4A45; --ink-3:#8C8A80; --line:#D8D4C6;
+    --lime:#D4FF3F; --orange:#FF4D1C; --blue:#2D5BFF; --violet:#7C4DFF;
+    --green:#17A34A; --gold:#FFC94A; --red-ink:#C4271B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  body{font-family:'Space Grotesk',system-ui,sans-serif;background:#1A1A18;min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px 16px;color:var(--ink)}
+  .switcher{display:flex;gap:5px;background:#0E0E0C;padding:5px;border-radius:10px}
+  .switcher button{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.7px;
+    text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:9px 13px;border-radius:6px;cursor:pointer}
+  .switcher button.on{background:var(--lime);color:var(--ink)}
+  .caption{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.8px;color:#6E6E66}
+  .caption a{color:#B9B9AE;text-decoration:none;border-bottom:1px solid #3A3A34}
+
+  .device{position:relative;width:390px;height:844px;background:var(--paper);
+    border:3px solid #000;border-radius:14px;box-shadow:10px 10px 0 rgba(0,0,0,.55);overflow:hidden}
+  .statusbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 18px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border-bottom:3px solid var(--ink)}
+  .batt{width:16px;height:8px;border:2px solid var(--ink);border-radius:2px}
+
+  .screen{position:absolute;inset:40px 0 0 0;display:none;flex-direction:column;padding-bottom:92px;overflow:hidden}
+  .screen.on{display:flex}
+  .scroll{flex:1;overflow-y:auto;scrollbar-width:none}
+  .scroll::-webkit-scrollbar{display:none}
+
+  /* ── chips: identical to drills ───────────── */
+  .subs{display:flex;gap:8px;padding:12px 24px 16px 18px;overflow-x:auto;overflow-y:hidden;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .subs::-webkit-scrollbar{display:none}
+  .sub{flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:7px 12px;border-radius:999px;
+    border:3px solid var(--ink);background:#fff;font-family:'Space Grotesk',sans-serif;
+    font-size:12.5px;font-weight:700;color:var(--ink);cursor:pointer;
+    box-shadow:3px 3px 0 var(--line);transition:transform .07s,box-shadow .07s}
+  .sub:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--line)}
+  .sub .ic{width:18px;height:18px;flex:0 0 18px;display:block;color:var(--dot);
+    filter:drop-shadow(1.5px 1.5px 0 rgba(17,17,17,.8))}
+  .sub .ic .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .sub .ic .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .sub .ic .l{fill:#6FBF3A;stroke:none}
+  .sub.on{background:var(--ink);color:#fff;box-shadow:3px 3px 0 var(--dot)}
+  .sub.on .ic{filter:none}
+  .sub.on .ic .s{stroke:#fff}
+  .sub.on .ic .o{stroke:#fff}
+  .sub.on .ic .l{fill:var(--ink)}
+
+  /* ── header + meter: identical to drills ──── */
+  .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:12px 18px;border-bottom:3px solid var(--ink)}
+  .hd .mod{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-2)}
+  .badgeL{display:inline-flex;align-items:center;gap:5px;background:var(--lime);color:var(--ink);
+    font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+    text-transform:uppercase;padding:5px 9px;border-radius:4px;white-space:nowrap}
+  .badgeL svg{width:12px;height:12px}
+
+  .segs{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;padding:12px 18px 16px}
+  .segs i{height:10px;background:var(--paper);border:2px solid var(--ink);border-radius:2px}
+  .segs i.on{background:var(--ink)}
+
+  /* ── the row card: drills .step anatomy ───── */
+  .rowc{display:flex;align-items:center;gap:12px;padding:12px;margin:0 18px 10px;
+    border:3px solid var(--ink);border-radius:8px;background:#fff;
+    box-shadow:5px 5px 0 var(--ink)}
+  .rowc .chip{width:34px;height:34px;flex:0 0 34px;border:3px solid var(--ink);border-radius:6px;
+    display:grid;place-items:center;background:var(--paper);overflow:hidden}
+  .rowc .chip svg{width:19px;height:19px}
+  .rowc .chip .s{fill:currentColor;stroke:var(--ink);stroke-width:2;stroke-linejoin:round}
+  .rowc .chip .o{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round}
+  .rowc .chip .l{fill:#6FBF3A;stroke:none}
+  .rowc .txt{flex:1;min-width:0}
+  .rowc .txt b{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.1px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .rowc .txt span{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.7px;text-transform:uppercase;color:var(--ink-3);margin-top:2px}
+  .rowc .num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--ink-2)}
+
+  .rowc.now{background:var(--ink);color:var(--paper);box-shadow:5px 5px 0 var(--orange)}
+  .rowc.now .chip{background:var(--orange);border-color:var(--orange);color:#fff}
+  .rowc.now .txt span{color:#8E8E88}
+  .rowc.now .num{color:#8E8E88}
+
+  .next{border:3px solid var(--ink);border-radius:6px;background:var(--lime);color:var(--ink);
+    padding:6px 9px;font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.9px;text-transform:uppercase;cursor:pointer;box-shadow:2px 2px 0 var(--ink);white-space:nowrap}
+  .next:active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
+
+  .start{border:3px solid var(--ink);border-radius:6px;background:var(--lime);color:var(--ink);
+    padding:10px 16px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;
+    cursor:pointer;box-shadow:3px 3px 0 rgba(0,0,0,.35);white-space:nowrap}
+  .start:active{transform:translate(3px,3px);box-shadow:0 0 0 rgba(0,0,0,.35)}
+
+  .sec{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--ink-3);padding:16px 18px 8px;font-weight:700}
+
+  /* tab bar */
+  .tabbar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;
+    gap:2px;border-top:3px solid var(--ink);background:var(--paper);padding:10px 34px 14px}
+  .tab{flex:1;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .pill{position:relative;display:grid;place-items:center;gap:2px;padding:6px 8px 5px;border:3px solid transparent;
+    border-radius:10px;color:var(--ink-3);min-width:56px}
+  .pill svg{width:20px;height:20px}
+  .lbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;letter-spacing:.9px;text-transform:uppercase}
+  .tab.on .pill{border-color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+  .tab[data-t="learn"].on .pill{background:var(--lime);color:var(--ink)}
+  .tab[data-t="drills"].on .pill{background:var(--orange);color:#fff}
+  .tab[data-t="board"].on .pill{background:var(--blue);color:#fff}
+  .tab[data-t="me"].on .pill{background:var(--gold);color:var(--ink)}
+  .badge{position:absolute;top:-7px;right:-7px;min-width:16px;height:16px;padding:0 4px;display:grid;place-items:center;
+    background:var(--red-ink);color:#fff;border:2px solid var(--ink);border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;font-style:normal}
+</style>
+</head>
+<body>
+
+<div class="switcher">
+  <button data-v="a" class="on">1 · Band</button>
+  <button data-v="b">2 · Meter</button>
+  <button data-v="c">3 · Index</button>
+</div>
+
+<div class="device">
+  <div class="statusbar"><span>9:41</span><span class="batt"></span></div>
+
+  <!-- ══════ 1 · BAND ══════ -->
+  <section class="screen on" id="v-a">
+    <div class="scroll">
+      <div class="subs">
+        <button class="sub on" style="--dot:#FF4D1C">All</button>
+        <button class="sub" style="--dot:#2D5BFF"><svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
+        <button class="sub" style="--dot:#7C4DFF"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>Physics</button>
+        <button class="sub" style="--dot:#17A34A"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
+      </div>
+
+      <div class="hd">
+        <span class="mod">DSE 2027 · 138 days</span>
+        <span class="badgeL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12 in a row</span>
+      </div>
+
+      <div class="segs">
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
+
+      <div class="rowc now" style="padding:14px">
+        <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
+        </div>
+        <div class="txt"><b>Daily mix · 12 items</b><span>6 min · across all classes</span></div>
+        <button class="start">Start</button>
+      </div>
+
+      <div class="sec">Classes</div>
+
+      <div class="rowc" style="--dot:#2D5BFF">
+        <div class="chip" style="background:#2D5BFF;color:#fff">
+          <svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
+        </div>
+        <div class="txt"><b>4B · ICT</b><span>Next · valid identifiers</span></div>
+        <button class="next">Next</button>
+      </div>
+
+      <div class="rowc" style="--dot:#7C4DFF">
+        <div class="chip" style="background:#7C4DFF;color:#fff">
+          <svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
+        </div>
+        <div class="txt"><b>4B · Physics</b><span>Next · newton's third law</span></div>
+        <button class="next">Next</button>
+      </div>
+
+      <div class="rowc" style="--dot:#17A34A">
+        <div class="chip" style="background:#17A34A;color:#fff">
+          <svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/></svg>
+        </div>
+        <div class="txt"><b>4B · Biology</b><span>Next · monohybrid crosses</span></div>
+        <button class="next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 2 · METER ══════ -->
+  <section class="screen" id="v-b">
+    <div class="scroll">
+      <div class="subs">
+        <button class="sub on" style="--dot:#FF4D1C">All</button>
+        <button class="sub" style="--dot:#2D5BFF"><svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
+        <button class="sub" style="--dot:#7C4DFF"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>Physics</button>
+        <button class="sub" style="--dot:#17A34A"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
+      </div>
+
+      <div class="hd">
+        <span class="mod">Syllabus · 133 of 214</span>
+        <span class="badgeL">62%</span>
+      </div>
+
+      <div class="segs">
+        <i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i>
+        <i></i><i></i><i></i><i></i><i></i>
+      </div>
+
+      <div class="rowc now" style="padding:14px">
+        <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
+        </div>
+        <div class="txt"><b>Daily mix · 12 items</b><span>6 min · across all classes</span></div>
+        <button class="start">Start</button>
+      </div>
+
+      <div class="sec">Classes</div>
+
+      <div class="rowc" style="--dot:#2D5BFF">
+        <div class="chip" style="background:#2D5BFF;color:#fff">
+          <svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>
+        </div>
+        <div class="txt"><b>4B · ICT</b><span>5/14 · valid identifiers</span></div>
+        <button class="next">Next</button>
+      </div>
+
+      <div class="rowc" style="--dot:#7C4DFF">
+        <div class="chip" style="background:#7C4DFF;color:#fff">
+          <svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>
+        </div>
+        <div class="txt"><b>4B · Physics</b><span>3/12 · newton's third law</span></div>
+        <button class="next">Next</button>
+      </div>
+
+      <div class="rowc" style="--dot:#17A34A">
+        <div class="chip" style="background:#17A34A;color:#fff">
+          <svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/></svg>
+        </div>
+        <div class="txt"><b>4B · Biology</b><span>2/11 · monohybrid crosses</span></div>
+        <button class="next">Next</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════ 3 · INDEX ══════ -->
+  <section class="screen" id="v-c">
+    <div class="scroll">
+      <div class="subs">
+        <button class="sub on" style="--dot:#FF4D1C">All</button>
+        <button class="sub" style="--dot:#2D5BFF"><svg class="ic" viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg>ICT</button>
+        <button class="sub" style="--dot:#7C4DFF"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg>Physics</button>
+        <button class="sub" style="--dot:#17A34A"><svg class="ic" viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg>Biology</button>
+      </div>
+
+      <div class="hd">
+        <span class="mod">DSE 2027 · 138 days</span>
+        <span class="badgeL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12 in a row</span>
+      </div>
+
+      <div class="rowc now" style="margin-top:14px;padding:14px">
+        <div class="chip" style="width:38px;height:38px;flex:0 0 38px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5h12M6 12h12M6 19h7"/></svg>
+        </div>
+        <div class="txt"><b>Daily mix · 12 items</b><span>6 min · across all classes</span></div>
+        <button class="start">Start</button>
+      </div>
+
+      <div class="rowc" style="--dot:#2D5BFF">
+        <div class="chip" style="background:var(--lime);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700">03</div>
+        <div class="txt"><b>4B · ICT</b><span>Valid identifiers · 4 min</span></div>
+        <button class="next">Next</button>
+      </div>
+
+      <div class="rowc" style="--dot:#7C4DFF">
+        <div class="chip" style="background:var(--lime);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700">02</div>
+        <div class="txt"><b>4B · Physics</b><span>Newton's third law · 3 min</span></div>
+        <button class="next">Next</button>
+      </div>
+
+      <div class="rowc" style="--dot:#17A34A">
+        <div class="chip" style="background:var(--lime);color:var(--ink);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700">01</div>
+        <div class="txt"><b>4B · Biology</b><span>Alleles · done today · 4 min</span></div>
+        <button class="next">Next</button>
+      </div>
+
+      <div class="rowc" style="box-shadow:5px 5px 0 var(--line)">
+        <div class="chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l5-5 4 3 7-8"/></svg>
+        </div>
+        <div class="txt"><b>Revision</b><span>133 of 214 items seen</span></div>
+        <span class="num" style="font-size:13px">62%</span>
+      </div>
+    </div>
+  </section>
+
+  <nav class="tabbar">
+    <button class="tab on" data-t="learn"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg><span class="lbl">Learn</span></span></button>
+    <button class="tab" data-t="drills"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg><span class="lbl">Drills</span><i class="badge">12</i></span></button>
+    <button class="tab" data-t="board"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span class="lbl">Board</span></span></button>
+    <button class="tab" data-t="me"><span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span class="lbl">Me</span></span></button>
+  </nav>
+</div>
+
+<p class="caption">Learner · home on drills anatomy · <a href="demo2.html">drills page</a></p>
+
+<script>
+(function () {
+  var screens = document.querySelectorAll('.screen');
+  var btns = document.querySelectorAll('.switcher button');
+  function show(v) {
+    screens.forEach(function (s) { s.classList.toggle('on', s.id === 'v-' + v); });
+    btns.forEach(function (x) { x.classList.toggle('on', x.dataset.v === v); });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.v); }); });
+  var h = location.hash.replace('#', '');
+  if (h) show(h);
+})();
+</script>
+</body>
+</html>
