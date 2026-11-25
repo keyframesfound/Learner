@@ -395,9 +395,10 @@ body {
     justify-content: flex-start; gap: 6px; padding: 26px 14px;
     border-top: 0; border-right: 3px solid var(--ink);
   }
-  .tab { flex: none; justify-content: flex-start; }
+  .tab { flex: none; display: flex; justify-content: flex-start; }
   .pill {
-    flex-direction: row; justify-content: flex-start; gap: 11px; width: 100%;
+    display: flex; flex-direction: row; align-items: center;
+    justify-content: flex-start; gap: 11px; width: 100%;
     min-width: 0; padding: 10px 11px;
   }
   .lbl { font-size: 10.5px; letter-spacing: .3px; text-transform: none; }
