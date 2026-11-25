@@ -153,21 +153,24 @@
         <button class="next">Start</button>
       </div>
 
-      <div class="sec split"><span>QuickBits</span><button class="next">Study</button></div>
+      <div class="sec">QuickBits</div>
 
-      <div class="rowc note">
-        <div class="chip" style="color:#2D5BFF"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
-        <div class="txt"><b>Variables and data types</b><span>ICT · 6 notes</span></div>
+      <div class="rowc" style="--dot:#2D5BFF;cursor:pointer">
+        <div class="chip" style="background:#2D5BFF;color:#fff"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b>ICT</b><span>15 notes · 3 read</span></div>
+        <button class="next">Study</button>
       </div>
 
-      <div class="rowc note">
-        <div class="chip" style="color:#7C4DFF"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
-        <div class="txt"><b>Forces and motion</b><span>Physics · 5 notes</span></div>
+      <div class="rowc" style="--dot:#7C4DFF;cursor:pointer">
+        <div class="chip" style="background:#7C4DFF;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
+        <div class="txt"><b>Physics</b><span>9 notes · 2 read</span></div>
+        <button class="next">Study</button>
       </div>
 
-      <div class="rowc note">
-        <div class="chip" style="color:#17A34A"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
-        <div class="txt"><b>Inheritance</b><span>Biology · 4 notes</span></div>
+      <div class="rowc" style="--dot:#17A34A;cursor:pointer">
+        <div class="chip" style="background:#17A34A;color:#fff"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
+        <div class="txt"><b>Biology</b><span>7 notes · 1 read</span></div>
+        <button class="next">Study</button>
       </div>
 
     </div>
@@ -182,6 +185,12 @@
 </div>
 
 <p class="caption">Learner · home · <a href="quickbits.html">QuickBits page →</a></p>
+
+<script>
+  document.querySelectorAll('.scroll .rowc').forEach(function (r) {
+    r.addEventListener('click', function () { location.href = 'quickbits.html'; });
+  });
+</script>
 
 </body>
 </html>

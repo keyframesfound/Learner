@@ -138,9 +138,9 @@ subject filter — that belongs to Path. Four bands, top to bottom.
 │ ┌──┬───────────────────────────┬─────┐ │
 │ │▤ │ Physics · 5 of 12         │Start│ │
 │ └──┴───────────────────────────┴─────┘ │
-│ QuickBits                   [Study]  │
+│ QuickBits                            │
 │ ┌──┬───────────────────────────┬─────┐ │
-│ │▤ │ Variables and data types  │     │ │   chapter, not a note
+│ │▤ │ ICT · 15 notes · 3 read   │Study│ │
 │ └──┴───────────────────────────┴─────┘ │
 ├──────────────────────────────────────┤
 │  [Learn]  [Drills]  [Board]  [Me]    │
@@ -163,29 +163,41 @@ chapter" label would promise a sequence the button does not deliver. Classes sti
 exist in the data, because a teacher owns a 4B; the student's home is organised by
 syllabus because that is what the exam asks for.
 
-**QuickBits** is the note stream, browsed by chapter rather than by fact. Home shows
-one chapter per subject as a preview; Study opens the full page.
+**QuickBits** is the note stream, and like Drill it is entered per subject, so you
+never browse a shelf of notes from three subjects at once.
 
 ### QuickBits
 
-One level below home: every chapter that has notes, grouped by subject, with how much
-of each has been read.
+Three levels, each one screen, each scoped to the subject you came in through.
 
-    ┌──────────────────────────────────────┐
-│ ‹  QuickBits              31 notes   │
-├──────────────────────────────────────┤
-│ ICT                          15 notes│
-│ ┌──┬───────────────────────────┬─────┐ │
-│ │▤ │ Variables and data types  │  ›  │ │
-│ │  │ 3 of 6 read               │     │ │
-│ └──┴───────────────────────────┴─────┘ │
-├──────────────────────────────────────┤
+    ┌──────────────────────────────────────┐        ┌──────────────────────────────────────┐
+│ ‹  ICT · QuickBits        30 notes   │        │ ‹  ICT · Computer hardware 3 of 6    │
+├──────────────────────────────────────┤        ├──────────────────────────────────────┤
+│ ┌──┬───────────────────────────┬─────┐ │        │ ┌──┬───────────────────────────┬─────┐ │
+│ │01│ Variables and data types  │  ›  │ │        │ │01│ DDR4 vs DDR5 memory       │  ›  │ │
+│ │  │ 3 of 6 read               │     │ │        │ └──┴───────────────────────────┴─────┘ │
+│ └──┴───────────────────────────┴─────┘ │        │ ┌──┬───────────────────────────┬─────┐ │
+│ ┌──┬───────────────────────────┬─────┐ │        │ │02│ CPU vs GPU                │  ✓  │ │
+│ │04│ Computer hardware         │  ›  │ │        │ └──┴───────────────────────────┴─────┘ │
+│ │  │ 3 of 6 read               │     │ │        ├──────────────────────────────────────┤
+│ └──┴───────────────────────────┴─────┘ │        │  [Learn]  [Drills]  [Board]  [Me]    │
+├──────────────────────────────────────┤        └──────────────────────────────────────┘
 │  [Learn]  [Drills]  [Board]  [Me]    │
 └──────────────────────────────────────┘
 
-A row states `3 of 6 read` rather than a count plus a count — one ratio, and it is
-the only one that says whether to open it. Nothing here is scheduled: QuickBits is
-for the two-minute gap, Path is for the plan, and reading a note never touches FSRS.
+The third level is the note itself: one concept on one screen — `DDR4 vs DDR5
+memory`, `CPU vs GPU`, "one variable and what a name means". Title in Archivo
+Black, two or three short paragraphs, at most one comparison table or exam callout,
+then `Mark as read` and the next fragment.
+
+Rules that keep the level useful:
+
+- A fragment answers **one** question. `DDR4 vs DDR5` is a fragment; "memory" is
+  a chapter; "computer hardware" is the module above it.
+- Nothing is scheduled. Reading never touches FSRS — Path owns scheduling, QuickBits
+  owns the two-minute gap between lessons.
+- Chapter rows state `3 of 6 read` rather than a count plus a count: one ratio, and
+  it is the only number that says whether to open it.
 
 ### Path
 
