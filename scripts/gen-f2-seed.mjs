@@ -42,7 +42,10 @@ files.forEach((file, idx) => {
   }
   if (j.table?.head?.length) {
     const line = (cells) => "| " + cells.join(" | ") + " |";
-    const md = [line(j.table.head), ...(j.table.rows || []).map(line)].join("\n");
+    /* a markdown table needs its header separator, or every renderer eats the
+       first body row as the divider and shifts the columns */
+    const div = "| " + j.table.head.map(() => "---").join(" | ") + " |";
+    const md = [line(j.table.head), div, ...(j.table.rows || []).map(line)].join("\n");
     blocks.push({ kind: "prose", level: null, ord: ord++, payload: JSON.stringify({ md }) });
   }
   if (j.callout) {

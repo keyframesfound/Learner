@@ -167,7 +167,9 @@ export function parseNotes(blocks: { kind: string; payload: Record<string, unkno
     if (lines.length >= 2 && lines.every((l) => l.startsWith("|") && l.endsWith("|"))) {
       const cells = (l: string) => l.slice(1, -1).split("|").map((c) => c.trim());
       const head = cells(lines[0]!);
-      const rows = lines.slice(1).map(cells).filter((row) => row.length === head.length);
+      /* |---|---| is the markdown header divider, not a data row */
+      const isDivider = (row: string[]) => row.length > 0 && row.every((c) => /^:?-{3,}:?$/.test(c));
+      const rows = lines.slice(1).map(cells).filter((row) => row.length === head.length && !isDivider(row));
       out.push({ type: "table", head, rows });
     } else {
       out.push({ type: "p", text: md });

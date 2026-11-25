@@ -34,7 +34,7 @@ function labelOf(block: BlockRow) {
   const parsed = parseNotes([block])[0];
   if (parsed?.type === "table") {
     const head = parsed.head.filter(Boolean);
-    const label = head.length > 0 ? `Table — ${head.join(" against ")}` : "Table";
+    const label = head.length > 0 ? `Table — ${head.join(" · ")}` : "Table";
     return label.length > 60 ? label.slice(0, 57) + "…" : label;
   }
   if (parsed?.type === "callout") return "Exam callout";

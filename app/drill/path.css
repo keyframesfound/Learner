@@ -40,7 +40,7 @@
 
 /* ── drill rows ────────────────────────────────────────── */
 .v-path .rows{
-  display:grid; gap:10px; padding:0 24px; min-width:0;
+  display:grid; grid-template-columns:minmax(0, 1fr); gap:10px; padding:0 24px; min-width:0;
 }
 .v-path .rows > *{ animation:none; }        /* the plate carries no per-row entrance */
 

@@ -19,24 +19,34 @@ type Props = {
   href: string;
 };
 
+/* the notes are written in a little markdown: **bold** is the only inline mark */
+function inline(s: string) {
+  return s.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.length > 4 && part.startsWith("**") && part.endsWith("**")
+      ? <b key={i}>{part.slice(2, -2)}</b>
+      : part,
+  );
+}
+const plain = (s: string) => s.replace(/\*\*/g, "");
+
 function View({ view }: { view: BlockView }) {
   if (view.kind === "table") {
     const cells = [...view.head, ...view.rows.flat()];
     return (
-      <div className="tbl">
-        {cells.map((cell, i) => <div key={i}>{cell}</div>)}
+      <div className="tbl" style={{ gridTemplateColumns: `repeat(${Math.max(1, view.head.length)}, minmax(0, 1fr))` }}>
+        {cells.map((cell, i) => <div key={i}>{plain(cell)}</div>)}
       </div>
     );
   }
   if (view.kind === "callout") {
-    return <div className="callout"><b>Marking</b><span>{view.text}</span></div>;
+    return <div className="callout"><b>Marking</b><span>{inline(view.text)}</span></div>;
   }
-  return <div className="fld">{view.text}</div>;
+  return <div className="fld">{inline(view.text)}</div>;
 }
 
 export default function NoteBlock({ lessonId, blockId, kind, md, label, view, selected, href }: Props) {
   const heading = (
-    <div className="bk"><span className="grip">⋮⋮</span>{label}</div>
+    <div className="bk"><span className="grip">⋮⋮</span>{plain(label)}</div>
   );
 
   if (!selected) {
