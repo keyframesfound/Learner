@@ -65,7 +65,7 @@ export default function Learn() {
       <div className="sec"><h2>QuickBits</h2><span>one concept a screen</span></div>
       <div className="cards">
         {subjects.slice(0, 3).map((s) => (
-          <Link key={s.id} href="/drill" className="card">
+          <Link key={s.id} href="/quickbits" className="card">
             <Mark colour={s.colour} d={s.d} />
             <span className="txt">
               <b>{s.name}</b>

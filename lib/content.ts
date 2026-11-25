@@ -104,3 +104,95 @@ export const board = [
   { rank: 5, name: "Yip Ka-ho", items: 22 },
   { rank: 6, name: "So Tsz-wing", items: 18 },
 ];
+
+
+/* ── quickbits ───────────────────────────────────────────── */
+export type Chapter = { id: string; no: number; title: string; fragments: number; read: number };
+
+export const chapters: Chapter[] = [
+  { id: "hardware", no: 1, title: "Computer hardware", fragments: 6, read: 6 },
+  { id: "numbers", no: 2, title: "Number systems", fragments: 5, read: 5 },
+  { id: "programming", no: 3, title: "Programming basics", fragments: 7, read: 3 },
+  { id: "databases", no: 4, title: "Databases", fragments: 5, read: 0 },
+  { id: "networks", no: 5, title: "Networks", fragments: 6, read: 0 },
+  { id: "security", no: 6, title: "Data security", fragments: 4, read: 0 },
+];
+
+export type Fragment = { id: string; no: number; title: string; read: boolean };
+
+export const fragments: Fragment[] = [
+  { id: "cpu", no: 1, title: "The CPU and its parts", read: true },
+  { id: "ram-rom", no: 2, title: "RAM against ROM", read: true },
+  { id: "cache", no: 3, title: "Why cache exists", read: true },
+  { id: "ddr", no: 4, title: "DDR4 vs DDR5 memory", read: true },
+  { id: "storage", no: 5, title: "SSDs and hard disks", read: false },
+  { id: "ports", no: 6, title: "Ports and buses", read: false },
+];
+
+export const concept = {
+  title: "DDR4 vs DDR5 memory",
+  crumb: "Computer hardware",
+  body: [
+    "Both are SDRAM: they lose what they hold when the power goes. The difference is how much they move per clock and how they manage voltage.",
+    "DDR5 doubles the burst length, so one access returns twice the data. It also splits the module into two 32-bit channels, which is why a single stick behaves like two smaller ones.",
+  ],
+  table: {
+    head: ["DDR4", "DDR5"],
+    rows: [
+      ["Burst length", "8", "16"],
+      ["Module voltage", "1.2 V", "1.1 V"],
+      ["Channel split", "one 64-bit", "two 32-bit"],
+      ["Typical speed", "3200 MT/s", "5600 MT/s"],
+    ],
+  },
+  callout: "Name the generation from the burst length, not the speed. Marks are awarded for the number, not “faster”.",
+};
+
+/* ── three items per lesson, so the player has somewhere to go ── */
+export type Item = {
+  level: string;
+  prompt: string;
+  code?: string;
+  options: { text: string; code?: boolean }[];
+  answer: number;
+  why: string;
+  wrongWhy: string;
+};
+
+export const lessonItems: Item[] = [
+  {
+    level: "Hard",
+    prompt: "Which name is valid Python?",
+    code: "items = [1, 2, 3]",
+    options: [{ text: "2cool" }, { text: "cool_2", code: true }, { text: "cool-2" }, { text: "class" }],
+    answer: 1,
+    why: "cool_2 — starts with a letter, and underscores are allowed.",
+    wrongWhy: "Names cannot start with a digit, and cool-2 parses as a subtraction. Answer: cool_2.",
+  },
+  {
+    level: "Core",
+    prompt: "Why is for = 3 an error?",
+    options: [
+      { text: "Names need four letters or more" },
+      { text: "for is a keyword", code: true },
+      { text: "Numbers need quotes" },
+      { text: "It is missing a colon" },
+    ],
+    answer: 1,
+    why: "for is reserved by the language, so it can never be a name.",
+    wrongWhy: "Length and colons are not the issue: for is one of Python's keywords. Answer: a keyword.",
+  },
+  {
+    level: "Core",
+    prompt: "Are Score and score the same name?",
+    options: [
+      { text: "Yes, case is ignored" },
+      { text: "No, Python is case-sensitive", code: true },
+      { text: "Only inside functions" },
+      { text: "Only for numbers" },
+    ],
+    answer: 1,
+    why: "Case matters: Score and score are two different names.",
+    wrongWhy: "Python is case-sensitive everywhere, not just in functions. Answer: two different names.",
+  },
+];

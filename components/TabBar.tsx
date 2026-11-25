@@ -13,7 +13,7 @@ const TABS = [
     icon: <><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8" /></>,
   },
   {
-    tab: "boss", href: "/party/battle", label: "Boss",
+    tab: "boss", href: "/party", label: "Boss",
     icon: <path d="M12 3.2l2.6 5.4 6 .9-4.3 4.2 1 6-5.3-2.9-5.3 2.9 1-6L3.4 9.5l6-.9z" />,
   },
   {

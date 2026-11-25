@@ -17,7 +17,7 @@ export default function Me() {
       </div>
 
       <div className="sec"><h2>This week</h2><span>honest numbers only</span></div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 9, padding: "0 16px" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 9, padding: "0 16px" }}>
         {stats.map(([k, v]) => (
           <div key={k} style={{ border: "3px solid var(--ink)", borderRadius: 9, background: "#fff",
             padding: "11px 12px", boxShadow: "4px 4px 0 var(--line)" }}>

@@ -25,7 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <div className="app">{children}</div>
+        <div className="app"><main className="page">{children}</main></div>
         <TabBar />
       </body>
     </html>
