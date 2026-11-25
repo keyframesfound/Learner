@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { subjects } from "@/lib/content";
-import { getModules, getPath, getStats, viewer } from "@/lib/repo";
+import { getModules, getPath, getStats, myClass, viewer } from "@/lib/repo";
+import "./home.css";
 
 type ModuleRow = {
   id: string;
@@ -12,124 +13,284 @@ type ModuleRow = {
   lessons: number;
 };
 
+type ClassRow = {
+  id: string;
+  name: string;
+  module_code: string | null;
+  module_name: string | null;
+};
+
+type Progress = { done: number; total: number };
+
 const FALLBACK_ACCENT = "#2D5BFF";
 
-function Mark({ colour, d }: { colour: string; d?: string }) {
-  return (
-    <span className="mk" style={{ background: colour }}>
-      <svg viewBox="0 0 24 24" width="17" height="17" fill="#fff" stroke="none">
-        {d ? <path d={d} /> : <circle cx="12" cy="12" r="4" />}
+/** "Thursday evening" in the school's timezone. */
+function greeting(now: Date) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Hong_Kong",
+    weekday: "long",
+    hour: "numeric",
+    hourCycle: "h23",
+  }).formatToParts(now);
+  const pick = (type: string) => parts.find((p) => p.type === type)?.value ?? "";
+  const hour = Number(pick("hour"));
+  const part = hour < 5 ? "night" : hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
+  return `${pick("weekday")} ${part}`;
+}
+
+function colourFor(track: string, accent: string | null) {
+  return subjects.find((s) => s.id === track)?.colour ?? accent ?? FALLBACK_ACCENT;
+}
+
+/** Lesson items answered correctly, against the items that exist. */
+function itemProgress(path: { lessons: { items: number; done: number }[] }): Progress {
+  let done = 0;
+  let total = 0;
+  for (const lesson of path.lessons) {
+    done += lesson.done;
+    total += lesson.items;
+  }
+  return { done, total };
+}
+
+function Glyph({ track, colour }: { track: string | null; colour: string }) {
+  const style = { color: colour };
+  if (track === "physics") {
+    return (
+      <svg className="vh-ico" viewBox="0 0 24 24" style={style} aria-hidden="true">
+        <path className="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z" />
       </svg>
-    </span>
+    );
+  }
+  if (track === "biology") {
+    return (
+      <svg className="vh-ico" viewBox="0 0 24 24" style={style} aria-hidden="true">
+        <path className="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z" />
+        <path className="o" d="M5.2 18.8 13.4 10.6" />
+      </svg>
+    );
+  }
+  if (track === "ict") {
+    return (
+      <svg className="vh-ico" viewBox="0 0 24 24" style={style} aria-hidden="true">
+        <rect className="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6" />
+        <rect className="s" x="10" y="16.4" width="4" height="2.4" />
+        <rect className="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1" />
+      </svg>
+    );
+  }
+  return (
+    <svg className="vh-ico" viewBox="0 0 24 24" style={style} aria-hidden="true">
+      <circle className="s" cx="12" cy="12" r="5" />
+    </svg>
+  );
+}
+
+function ClsCard({
+  href,
+  track,
+  colour,
+  title,
+  sub,
+  progress,
+}: {
+  href: string;
+  track: string | null;
+  colour: string;
+  title: string;
+  sub?: string;
+  progress: Progress;
+}) {
+  const pct = progress.total > 0 ? Math.round((progress.done / progress.total) * 100) : 0;
+  const width = `${Math.min(100, Math.max(0, pct))}%`;
+  return (
+    <Link href={href} className="vh-cls">
+      <span className="vh-cls-top">
+        <Glyph track={track} colour={colour} />
+        <span className="vh-cls-name">{title}</span>
+      </span>
+      {sub ? <span className="vh-cls-sub">{sub}</span> : null}
+      {progress.total > 0 ? (
+        <span className="vh-cls-foot">
+          <span className="vh-bar">
+            <i style={{ width }} />
+          </span>
+          <span className="vh-pct">{pct}%</span>
+        </span>
+      ) : null}
+    </Link>
   );
 }
 
 export default async function Learn() {
+  const greet = greeting(new Date());
   const v = await viewer();
+
   if (!v) {
     return (
-      <>
-        <div className="hd">
-          <h1>Today</h1>
-        </div>
-        <div style={{ padding: "0 16px" }}>
-          <div className="empty">
-            <b>Sign in to see today</b>
-            <p>Your daily mix, streak and progress appear here.</p>
+      <div className="v-home">
+        <header className="vh-head">
+          <div>
+            <div className="vh-greet">{greet}</div>
+            <h1 className="vh-name">Learner</h1>
           </div>
+        </header>
+        <div className="vh-empty">
+          <b>Sign in to see today</b>
+          <p>Your due items, streak and progress appear here.</p>
         </div>
-      </>
+      </div>
     );
   }
 
-  const [stats, rows] = await Promise.all([getStats(v.id), getModules()]);
+  const [stats, rows, clsRow] = await Promise.all([getStats(v.id), getModules(), myClass(v.id)]);
   const modules = rows as ModuleRow[];
+  const cls = clsRow as ClassRow | null;
   const paths = await Promise.all(modules.map((m) => getPath(v.id, m.id)));
-  const progress = new Map(
-    paths.map((p) => [p.module?.id ?? "", { done: p.done, total: p.total }]),
-  );
-  const nextLesson = paths.flatMap((p) => p.lessons).find((l) => l.state === "now") ?? null;
-  const startHref = nextLesson ? `/drill/${nextLesson.slug}` : "/drill";
+
+  const byModule = new Map<string, (typeof paths)[number]>();
+  for (const p of paths) if (p.module) byModule.set(p.module.id, p);
+
+  const classModule = cls?.module_code
+    ? modules.find((m) => m.code === cls.module_code) ?? null
+    : null;
+  const classPath = classModule ? byModule.get(classModule.id) : undefined;
+  const classProgress = classPath ? itemProgress(classPath) : { done: 0, total: 0 };
+
+  /* real curriculum pacing: minutes ÷ items, used to size "about n minutes" */
+  let courseItems = 0;
+  let courseMinutes = 0;
+  for (const p of paths) {
+    for (const lesson of p.lessons) {
+      courseItems += lesson.items;
+      courseMinutes += lesson.minutes;
+    }
+  }
+  const pace = courseItems > 0 ? courseMinutes / courseItems : 0;
+  const due = stats.dueToday;
+  const estMinutes = due > 0 && pace > 0 ? Math.max(1, Math.round(due * pace)) : 0;
+
+  const coverPct =
+    stats.coverageTotal > 0 ? Math.round((stats.covered / stats.coverageTotal) * 100) : 0;
+
+  const tracks = new Map<string, { name: string; progress: Progress }>();
+  for (const p of paths) {
+    if (!p.module) continue;
+    const entry = tracks.get(p.module.track) ?? {
+      name: p.module.track_name,
+      progress: { done: 0, total: 0 },
+    };
+    const mine = itemProgress(p);
+    entry.progress.done += mine.done;
+    entry.progress.total += mine.total;
+    tracks.set(p.module.track, entry);
+  }
+  const segments = [...tracks.entries()].filter(([, t]) => t.progress.total > 0);
+  const revDone = segments.reduce((n, [, t]) => n + t.progress.done, 0);
+  const revTotal = segments.reduce((n, [, t]) => n + t.progress.total, 0);
 
   return (
-    <>
-      <div className="hd">
+    <div className="v-home">
+      <header className="vh-head">
         <div>
-          <h1>Today</h1>
+          <div className="vh-greet">{greet}</div>
+          <h1 className="vh-name">{v.name}</h1>
         </div>
-        <span className="streak">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-            <path d="M12 2.6c3.4 4 6.2 6.6 6.2 10.4a6.2 6.2 0 0 1-12.4 0c0-2.2 1.2-4 3-6.2.4 1.8 1.4 2.8 2.4 3.2-.4-2.6.2-5 .8-7.4z" />
+        <span className="vh-streak">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z" />
           </svg>
           {stats.streak}
         </span>
-      </div>
-      <div style={{ padding: "0 16px 4px" }}>
-        <div style={{
-          background: "var(--ink)", color: "var(--paper)", border: "3px solid var(--ink)",
-          borderRadius: 10, padding: "14px 16px 18px", boxShadow: "5px 5px 0 var(--orange)",
-        }}>
-          <div className="mono" style={{ fontSize: 9.5, letterSpacing: 1, color: "var(--lime)" }}>
-            {stats.dueToday > 0 ? `${stats.dueToday} DUE TODAY` : nextLesson ? "NOTHING DUE" : "PATH COMPLETE"}
-          </div>
-          <div style={{ fontSize: 19, fontWeight: 700, margin: "6px 0 10px" }}>
-            {stats.dueToday > 0
-              ? `${stats.dueToday} ${stats.dueToday === 1 ? "item is" : "items are"} about to slip`
-              : nextLesson
-                ? "Nothing due. Start the next lesson."
-                : "You are done for today"}
-          </div>
-          {(stats.dueToday > 0 || nextLesson) && (
-            <Link href={startHref} className="btn"
-              style={{ display: "grid", placeItems: "center", minHeight: 44, padding: "0 22px",
-            width: "fit-content", minWidth: 132, textDecoration: "none" }}>
-              Start
-            </Link>
-          )}
+      </header>
+
+      <section className="vh-hero">
+        <div className="vh-tag">Today</div>
+        <h2>
+          {due} {due === 1 ? "item" : "items"} due
+          {estMinutes > 0 ? ` · about ${estMinutes} ${estMinutes === 1 ? "minute" : "minutes"}` : ""}
+        </h2>
+        <div
+          className="vh-bar"
+          role="progressbar"
+          aria-valuenow={coverPct}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Items covered"
+        >
+          <i style={{ width: `${Math.min(100, Math.max(0, coverPct))}%` }} />
         </div>
-      </div>
-      <div className="sec"><h2>Drill</h2></div>
-      {modules.length === 0 ? (
-        <div style={{ padding: "0 16px" }}>
-          <div className="empty">
-            <b>No curriculum yet</b>
-            <p>A teacher can publish the first module.</p>
-          </div>
+        <div className="vh-hero-foot">
+          <span className="vh-done">
+            {stats.covered} of {stats.coverageTotal} done
+          </span>
+          <Link href="/drill" className="vh-start">
+            Start
+          </Link>
         </div>
+      </section>
+
+      {revTotal > 0 ? (
+        <>
+          <div className="vh-label">Revision</div>
+          <div className="vh-rev">
+            <div className="vh-rev-row">
+              <span>
+                Across {segments.length} {segments.length === 1 ? "subject" : "subjects"}
+              </span>
+              <span className="vh-rev-count">
+                <b>{revDone}</b>
+                <i>/{revTotal} items</i>
+              </span>
+            </div>
+            <div className="vh-seg" aria-hidden="true">
+              {segments.map(([id, t]) => {
+                const pct =
+                  t.progress.total > 0
+                    ? Math.round((t.progress.done / t.progress.total) * 100)
+                    : 0;
+                return (
+                  <span key={id}>
+                    <i style={{ width: `${Math.min(100, Math.max(0, pct))}%` }} />
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </>
+      ) : null}
+
+      <div className="vh-label">Classes</div>
+      {cls ? (
+        <ClsCard
+          href={classModule ? `/drill?m=${encodeURIComponent(classModule.id)}` : "/drill"}
+          track={classModule?.track ?? null}
+          colour={classModule ? colourFor(classModule.track, classModule.accent) : FALLBACK_ACCENT}
+          title={classModule ? `${cls.name} · ${classModule.track_name}` : cls.name}
+          sub={cls.module_name ?? undefined}
+          progress={classProgress}
+        />
+      ) : modules.length > 0 ? (
+        modules.map((m) => {
+          const p = byModule.get(m.id);
+          return (
+            <ClsCard
+              key={m.id}
+              href={`/drill?m=${encodeURIComponent(m.id)}`}
+              track={m.track}
+              colour={colourFor(m.track, m.accent)}
+              title={m.name}
+              sub={`${m.lessons} ${m.lessons === 1 ? "lesson" : "lessons"}`}
+              progress={p ? itemProgress(p) : { done: 0, total: 0 }}
+            />
+          );
+        })
       ) : (
-        <div className="cards">
-          {modules.map((m) => {
-            const icon = subjects.find((s) => s.id === m.track);
-            const p = progress.get(m.id);
-            const done = p?.done ?? 0;
-            const total = p?.total ?? m.lessons;
-            return (
-              <Link key={m.id} href={`/drill?m=${encodeURIComponent(m.id)}`} className="card">
-                <Mark colour={icon?.colour ?? m.accent ?? FALLBACK_ACCENT} d={icon?.d} />
-                <span className="txt">
-                  <b>{m.name}</b>
-                  <span>{done} of {total} lessons</span>
-                </span>
-                <span className="go">{total > 0 && done >= total ? "Review" : "Start"}</span>
-              </Link>
-            );
-          })}
+        <div className="vh-empty">
+          <b>No curriculum yet</b>
+          <p>A teacher can publish the first module.</p>
         </div>
       )}
-      <div className="sec"><h2>QuickBits</h2></div>
-      <div className="cards">
-        {subjects.slice(0, 3).map((s) => (
-          <Link key={s.id} href="/quickbits" className="card">
-            <Mark colour={s.colour} d={s.d} />
-            <span className="txt">
-              <b>{s.name}</b>
-              <span>one concept a screen</span>
-            </span>
-            <span className="go">Study</span>
-          </Link>
-        ))}
-      </div>
-      <div style={{ height: 24 }} />
-    </>
+    </div>
   );
 }

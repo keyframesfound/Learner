@@ -8,6 +8,7 @@ import { ROBOT_SVG } from "@/lib/sprites";
 
 const API = "/learner/api/party";
 const SEATS = 5;
+const FRIEND_SEATS = SEATS - 1;
 
 function cleanCode(raw: string) {
   return raw.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6);
@@ -306,30 +307,22 @@ export default function PartyGate() {
   const inLobby = view.status === "lobby";
   const me = view.players.find((p) => p.you) ?? view.players[0];
   const others = view.players.filter((p) => p !== me);
-  const open = Math.max(0, SEATS - view.players.length);
+  const open = Math.max(0, FRIEND_SEATS - (view.players.length - 1));
   const friendsIn = Math.max(0, view.players.length - 1);
 
   return (
-    <>
-      <div className="hd">
-        <button
-          className="linkish"
-          onClick={leave}
-          disabled={busy}
-          aria-label="Leave party"
-          style={{ fontSize: 18, fontWeight: 700, lineHeight: 1 }}
-        >
-          ✕
-        </button>
-        <span className="mod">Party · E2C</span>
-        <span className="mod dim">{view.players.length} of {SEATS}</span>
+    <div className="v-party">
+      <div className="lbar">
+        <button className="x" onClick={leave} disabled={busy} aria-label="Leave party">✕</button>
+        <span className="count">Party · {display(view.code)}</span>
+        <span className="timer">{friendsIn} of {FRIEND_SEATS}</span>
       </div>
 
       <div className="preview">
         <div dangerouslySetInnerHTML={{ __html: ROBOT_SVG }} />
         <div>
           <h1>Segfault</h1>
-          <span>Level 3 · 12,000 HP</span>
+          <span>Boss · level 3 · 12,000 HP</span>
         </div>
       </div>
 
@@ -340,17 +333,17 @@ export default function PartyGate() {
         </div>
         <button
           className="copy"
-          onClick={() => { void navigator.clipboard?.writeText(display(view.code)); }}
+          onClick={() => { void navigator.clipboard?.writeText(display(view.code)).catch(() => undefined); }}
         >
           Copy
         </button>
       </div>
 
-      <div className="plabel">Party · {view.players.length} of {SEATS} ready</div>
+      <div className="plabel">Party · you + {friendsIn} of {FRIEND_SEATS} friends in</div>
 
       <div className="slots">
         {me && (
-          <div className="slot me" style={{ gridColumn: "span 2" }}>
+          <div className="slot me">
             <span className="av">YOU</span>
             <div>
               <b>{me.name}</b>
@@ -379,7 +372,7 @@ export default function PartyGate() {
       </div>
 
       {error && (
-        <div className="empty" style={{ margin: "14px 18px 0" }}>
+        <div className="empty">
           <b>{error}</b>
           <p>Try again, or start a fresh party.</p>
         </div>
@@ -387,8 +380,7 @@ export default function PartyGate() {
 
       <div className="lobbyfoot">
         {!inLobby ? (
-          <Link href={`/party/battle?code=${view.code}`} className="btn"
-            style={{ display: "grid", placeItems: "center", textDecoration: "none" }}>
+          <Link href={`/party/battle?code=${view.code}`} className="btn">
             Enter the arena
           </Link>
         ) : host ? (
@@ -400,8 +392,10 @@ export default function PartyGate() {
             Waiting for the host
           </button>
         )}
-        <p className="note">Anyone with the code can join until the first item.</p>
+        <p className="note">
+          Friends join with the code above. Five seats, one question each, thirty seconds a round.
+        </p>
       </div>
-    </>
+    </div>
   );
 }

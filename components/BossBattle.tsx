@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { HEROES, BOSS_SVG } from "@/lib/sprites";
+import { HEROES, ROBOT_SVG } from "@/lib/sprites";
 import type { PartyView } from "@/lib/party";
+import "@/app/party/boss.css";
 
 const API = "/learner/api/party";
 const LIVES = 4;
@@ -21,14 +22,19 @@ type Reveal = {
   choice: number | null;
 };
 
-type Sticker = { id: number; text: string; side: "boss" | "party" } | null;
+type Sticker = { id: number; text: string; side: "boss" | "party"; at: number };
+type Hero = (typeof HEROES)[number];
 
 function display(code: string) {
   return code.length === 6 ? `${code.slice(0, 3)}-${code.slice(3)}` : code;
 }
 
-function heroAt(i: number) {
+function heroAt(i: number): Hero {
   return HEROES[i % HEROES.length] ?? HEROES[0]!;
+}
+
+function firstName(name: string) {
+  return name.trim().split(/\s+/)[0] || name;
 }
 
 export default function BossBattle({ code }: { code: string }) {
@@ -38,14 +44,61 @@ export default function BossBattle({ code }: { code: string }) {
   const [now, setNow] = useState(() => Date.now());
   const [skew, setSkew] = useState(0);
   const [reveal, setReveal] = useState<Reveal | null>(null);
+  const [revealLost, setRevealLost] = useState<string[]>([]);
   const [revealUntil, setRevealUntil] = useState(0);
   const [hits, setHits] = useState<Record<number, number>>({});
-  const [bossSeq, setBossSeq] = useState(0);
-  const [sticker, setSticker] = useState<Sticker>(null);
+  const [bossHit, setBossHit] = useState(0);
+  const [lastHit, setLastHit] = useState(0);
+  const [stickers, setStickers] = useState<Sticker[]>([]);
   const [pending, setPending] = useState<number | null>(null);
 
   const before = useRef<PartyView | null>(null);
   const lastReveal = useRef(0);
+  const seq = useRef(0);
+
+  const pushSticker = useCallback((text: string, side: Sticker["side"]) => {
+    const at = Date.now();
+    const id = seq.current++;
+    setStickers((list) => [...list.filter((s) => at - s.at < 1100), { id, text, side, at }]);
+  }, []);
+
+  /**
+   * Read the strike off two consecutive views: the boss loses a pip for every
+   * correct answer the party banked, and every player whose lives fell took a hit.
+   */
+  const applyDelta = useCallback(
+    (previous: PartyView, next: PartyView) => {
+      const lost: string[] = [];
+      if (previous.status === "lobby" || next.status === "lobby") return lost;
+
+      const hurt: number[] = [];
+      next.players.forEach((player, i) => {
+        const old = previous.players[i];
+        if (old && player.lives < old.lives) {
+          hurt.push(i);
+          lost.push(player.name);
+        }
+      });
+      if (hurt.length > 0) {
+        setHits((h) => {
+          const copy = { ...h };
+          for (const i of hurt) copy[i] = (copy[i] ?? 0) + 1;
+          return copy;
+        });
+        setLastHit(Date.now());
+        pushSticker("-1 life", "party");
+      }
+
+      const oldScore = previous.players.reduce((n, p) => n + p.score, 0);
+      const newScore = next.players.reduce((n, p) => n + p.score, 0);
+      if (newScore > oldScore) {
+        setBossHit((s) => s + 1);
+        pushSticker(`-${(newScore - oldScore) * PIP_HP}`, "boss");
+      }
+      return lost;
+    },
+    [pushSticker],
+  );
 
   const poll = useCallback(async () => {
     try {
@@ -65,30 +118,11 @@ export default function BossBattle({ code }: { code: string }) {
         /* a reload mid-raid should not replay an old answer */
         lastReveal.current = next.previous?.round ?? 0;
       } else {
-        if (previous.status !== "lobby" && next.status !== "lobby") {
-          const hurtIdx: number[] = [];
-          next.players.forEach((player, i) => {
-            const old = previous.players.find((p) => p.name === player.name && p.you === player.you);
-            if (old && player.lives < old.lives) hurtIdx.push(i);
-          });
-          if (hurtIdx.length > 0) {
-            setHits((h) => {
-              const copy = { ...h };
-              for (const i of hurtIdx) copy[i] = (copy[i] ?? 0) + 1;
-              return copy;
-            });
-            setSticker({ id: Date.now(), text: "-1 life", side: "party" });
-          }
-          const oldScore = previous.players.reduce((n, p) => n + p.score, 0);
-          const newScore = next.players.reduce((n, p) => n + p.score, 0);
-          if (newScore > oldScore) {
-            setBossSeq((s) => s + 1);
-            setSticker({ id: Date.now() + 1, text: `-${(newScore - oldScore) * PIP_HP}`, side: "boss" });
-          }
-        }
+        const lost = applyDelta(previous, next);
         if (next.previous && next.previous.round > lastReveal.current) {
           lastReveal.current = next.previous.round;
           setReveal(next.previous);
+          setRevealLost(lost);
           setRevealUntil(Date.now() + REVEAL_MS);
         }
       }
@@ -96,7 +130,7 @@ export default function BossBattle({ code }: { code: string }) {
     } catch {
       /* a dropped poll: keep the last known state and try again in a second */
     }
-  }, [code]);
+  }, [code, applyDelta]);
 
   /* the poll is the only source of truth; no local game simulation */
   useEffect(() => {
@@ -110,12 +144,6 @@ export default function BossBattle({ code }: { code: string }) {
     const id = setInterval(() => setNow(Date.now()), 200);
     return () => clearInterval(id);
   }, []);
-
-  useEffect(() => {
-    if (!sticker) return;
-    const id = setTimeout(() => setSticker(null), 1100);
-    return () => clearTimeout(id);
-  }, [sticker]);
 
   const answer = useCallback(
     async (choice: number) => {
@@ -136,11 +164,14 @@ export default function BossBattle({ code }: { code: string }) {
           void poll();
           return;
         }
+        const lost = applyDelta(view, data);
         if (data.previous && data.previous.round > lastReveal.current) {
           lastReveal.current = data.previous.round;
           setReveal(data.previous);
+          setRevealLost(lost);
           setRevealUntil(Date.now() + REVEAL_MS);
         }
+        before.current = data;
         setView(data);
       } catch {
         setError("Could not send that answer.");
@@ -149,7 +180,7 @@ export default function BossBattle({ code }: { code: string }) {
         setPending(null);
       }
     },
-    [view, pending, poll],
+    [view, pending, poll, applyDelta],
   );
 
   if (fatal) {
@@ -160,16 +191,15 @@ export default function BossBattle({ code }: { code: string }) {
           ? { title: "You are not in this party", body: "This code belongs to a raid you have not joined." }
           : { title: "That code does not exist", body: "Check the six characters the host read out." };
     return (
-      <div className="bb">
-        <div className="bb-top">
-          <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
+      <div className="v-boss">
+        <div className="vb-top">
+          <Link href="/party" className="vb-x" aria-label="Back to parties">✕</Link>
           <span>Boss battle</span>
         </div>
-        <div className="empty" style={{ margin: 24 }}>
+        <div className="vb-note">
           <b>{copy.title}</b>
           <p>{copy.body}</p>
-          <Link href={fatal === "signed-out" ? "/login" : "/party"} className="btn"
-            style={{ display: "grid", placeItems: "center", textDecoration: "none", marginTop: 14 }}>
+          <Link href={fatal === "signed-out" ? "/login" : "/party"} className="vb-cta">
             {fatal === "signed-out" ? "Sign in" : "Back to parties"}
           </Link>
         </div>
@@ -179,12 +209,12 @@ export default function BossBattle({ code }: { code: string }) {
 
   if (!view) {
     return (
-      <div className="bb">
-        <div className="bb-top">
-          <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
+      <div className="v-boss">
+        <div className="vb-top">
+          <Link href="/party" className="vb-x" aria-label="Back to parties">✕</Link>
           <span>Boss battle · {display(code)}</span>
         </div>
-        <div className="empty" style={{ margin: 24 }}>
+        <div className="vb-note">
           <b>Loading the raid…</b>
           <p>Joining party {display(code)}.</p>
         </div>
@@ -194,260 +224,266 @@ export default function BossBattle({ code }: { code: string }) {
 
   if (view.status === "lobby") {
     return (
-      <div className="bb">
-        <div className="bb-top">
-          <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
+      <div className="v-boss">
+        <div className="vb-top">
+          <Link href="/party" className="vb-x" aria-label="Back to parties">✕</Link>
           <span>Boss battle · lobby</span>
         </div>
-        <div className="empty" style={{ margin: 24 }}>
+        <div className="vb-note">
           <b>The host has not started yet</b>
           <p>
             Party {display(view.code)} · {view.players.length} of 5 in. Keep this screen open — the raid
             begins on the host&apos;s word.
           </p>
         </div>
-        <div className="seat-grid" style={{ paddingTop: 4 }}>
+        <div className="vb-seats">
           {view.players.map((p, i) => (
-            <div key={`${p.name}-${i}`} className="seat">
-              <span className="av">{p.you ? "You" : p.name.slice(0, 2).toUpperCase()}</span>
-              <span className="txt"><b>{p.name}</b><span>{i === 0 ? "Host" : "Ready"}</span></span>
+            <div key={`${p.name}-${i}`} className={"vb-seat" + (p.you ? " is-you" : "")}>
+              <span className="vb-av">{p.you ? "YOU" : p.name.trim().slice(0, 2).toUpperCase()}</span>
+              <div>
+                <b>{p.name}</b>
+                <i>{p.you ? "You" : "Ready"}</i>
+              </div>
             </div>
           ))}
         </div>
-        <div style={{ height: 20 }} />
       </div>
     );
   }
 
-  const myIndex = Math.max(0, view.players.findIndex((p) => p.you));
-  const hero = heroAt(myIndex);
+  const seats = view.players.length;
+  const meIndex = Math.max(0, view.players.findIndex((p) => p.you));
+  const hero = heroAt(meIndex);
   const me = view.you;
   const up = view.players.filter((p) => p.alive).length;
+  const survivors = up;
+  const done = view.status === "done";
+
   const totalCorrect = view.players.reduce((n, p) => n + p.score, 0);
   const bossHp = Math.max(0, BOSS_HP - totalCorrect * PIP_HP);
   const bossPips = Math.ceil(bossHp / PIP_HP);
-  const survivors = view.players.filter((p) => p.alive).length;
-  const done = view.status === "done";
 
   const serverNow = now + skew;
   const endsAt = view.roundEndsAt ? Date.parse(view.roundEndsAt) : 0;
   const live = view.status === "live" && endsAt > 0;
   const left = live ? Math.max(0, endsAt - serverNow) : 0;
-  const frac = live ? Math.min(1, left / ROUND_MS) : 1;
+  const frac = live ? Math.min(1, left / ROUND_MS) : 0;
   const clock = `0:${String(Math.ceil(left / 1000)).padStart(2, "0")}`;
 
-  const showingReveal = !!reveal && now < revealUntil && !done;
-  const shown = showingReveal
-    ? {
-        q: reveal!.q,
-        a: reveal!.a,
-        c: reveal!.c,
-        picked: reveal!.choice,
-        resolved: true,
-      }
-    : {
-        q: view.question?.q ?? "",
-        a: view.question?.a ?? [],
-        c: undefined as number | undefined,
-        picked: pending ?? me.choice,
-        resolved: false,
-      };
-  const canTap = !showingReveal && !done && me.alive && !me.answered && pending === null && !!view.question;
+  const settled = !done && reveal && now < revealUntil ? reveal : null;
+  const options = settled ? settled.a : view.question?.a ?? [];
+  const chosen = settled ? settled.choice : pending ?? me.choice;
+  const promptMarkup = settled ? settled.q : view.question?.q ?? "";
+  const canTap =
+    !settled && !done && me.alive && !me.answered && pending === null && !!view.question;
+
+  const title = survivors === 0 ? "Party down" : bossHp === 0 ? "Boss cleared" : "Raid over";
 
   return (
-    <div className="bb">
-      <div className="bb-top">
-        <Link href="/party" style={{ textDecoration: "none", color: "inherit", fontSize: 14 }}>✕</Link>
-        <span>Boss battle · Round {view.round} of {view.total} · {me.score} correct</span>
+    <div className="v-boss">
+      <div className="vb-top">
+        <Link href="/party" className="vb-x" aria-label="Leave the raid">✕</Link>
+        <span>
+          Boss battle · Round <b>{view.round}</b> · <b>{me.score}</b> correct
+        </span>
       </div>
 
-      <div className="bb-arena">
-        <div className="bb-plate boss">
-          <div className="row"><span className="nm">Mr Eric Chan</span><span className="lv">Unit 1 boss</span></div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 8.5, fontWeight: 700,
-              background: "var(--ink)", color: "var(--lime)", padding: "1px 4px", borderRadius: 2 }}>HP</span>
-            <span className="pips">
-              {Array.from({ length: PIPS }, (_, i) => (
-                <i key={i} className={"pip" + (i >= bossPips ? " off" : "")} />
-              ))}
-            </span>
+      <div className={"vb-arena" + (now - lastHit < 400 ? " vb-shake" : "")}>
+        <div className="vb-status vb-status-boss">
+          <div className="vb-row">
+            <span className="vb-name">Segfault</span>
+            <span className="vb-level">Unit 1 boss</span>
           </div>
-          <div className="num">{bossHp} / {BOSS_HP}</div>
+          <div className="vb-hpline">
+            <div className="vb-pips">
+              {Array.from({ length: PIPS }, (_, i) => (
+                <i key={i} className={"vb-pip" + (i >= bossPips ? " is-gone" : "")} />
+              ))}
+            </div>
+          </div>
+          <div className="vb-num">HP {bossHp} / {BOSS_HP}</div>
         </div>
 
-        <div className="bb-plat boss" />
-        <div className="bb-boss">
-          <div key={bossSeq} className={bossSeq ? "hurt" : ""}
-            dangerouslySetInnerHTML={{ __html: BOSS_SVG }} />
+        <div className="vb-plat vb-plat-boss" />
+        <div className="vb-actor vb-boss-actor">
+          <div
+            key={bossHit}
+            className={"vb-art" + (bossHit > 0 ? " vb-hurt" : "")}
+            dangerouslySetInnerHTML={{ __html: ROBOT_SVG }}
+          />
         </div>
 
-        <div className="bb-plat party" />
-        <div className="bb-party">
-          {Array.from({ length: 5 }, (_, i) => {
-            const p = view.players[i];
-            const down = !p || !p.alive;
+        <div className="vb-plat vb-plat-party" />
+        <div className="vb-party">
+          {view.players.map((p, i) => {
+            const heroI = heroAt(i);
+            const hit = hits[i] ?? 0;
             return (
-              <div key={i} className={"bb-slot" + (down ? " down" : "")}>
-                {p?.you && <span className="you">You</span>}
-                {p && down && (
-                  <span className="you" style={{ background: "var(--ink)", color: "#fff" }}>Down</span>
-                )}
-                <span className="hp">
+              <div
+                key={`${p.name}-${i}`}
+                className={"vb-slot" + (p.alive ? "" : " is-down") + (p.you && p.alive ? " is-you" : "")}
+              >
+                {p.you && <span className="vb-hyou">YOU</span>}
+                <span className="vb-hlife">
                   {Array.from({ length: LIVES }, (_, k) => (
-                    <i key={k} className={k >= (p?.lives ?? 0) ? "off" : ""} />
+                    <i key={k} className={k >= p.lives ? "is-off" : undefined} />
                   ))}
                 </span>
-                <span className="name">{p ? p.name.split(" ")[0] : "Open"}</span>
-                <div key={`${i}-${hits[i] ?? 0}`} className={"bb-hero" + ((hits[i] ?? 0) > 0 ? " hurt" : "")}
-                  dangerouslySetInnerHTML={{ __html: heroAt(i).svg }} />
+                <span className="vb-hname">{firstName(p.name)}</span>
+                <div className="vb-actor">
+                  <div
+                    key={`${i}-${hit}`}
+                    className={"vb-art" + (hit > 0 ? " vb-hurt" : "")}
+                    dangerouslySetInnerHTML={{ __html: heroI.svg }}
+                  />
+                </div>
               </div>
             );
           })}
         </div>
 
-        <div className="bb-plate party">
-          <div className="row">
-            <span className="nm">You · {hero.name}</span>
-            <span className="lv">{up} of {view.players.length} up</span>
+        <div className="vb-status vb-status-party">
+          <div className="vb-row">
+            <span className="vb-name">You · {hero.name}</span>
+            <span className="vb-level">{seats} seats</span>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <span style={{ fontFamily: "var(--font-mono)", fontSize: 8.5, fontWeight: 700,
-              background: "var(--ink)", color: "var(--lime)", padding: "1px 4px", borderRadius: 2 }}>♥</span>
-            <span className="pips">
+          <div className="vb-hpline">
+            <span className="vb-tag">♥</span>
+            <div className="vb-pips">
               {Array.from({ length: LIVES }, (_, i) => (
-                <i key={i} className={"pip" + (i >= me.lives ? " off" : "")} />
+                <i key={i} className={"vb-pip" + (i >= me.lives ? " is-gone" : "")} />
               ))}
-            </span>
+            </div>
           </div>
-          <div className="num">
-            {up} of {view.players.length} up · {me.lives} / {LIVES} lives
+          <div className="vb-num">
+            {up} of {seats} up · {me.lives} / {LIVES} lives
           </div>
         </div>
 
-        {sticker && (
-          <span key={sticker.id} className="bb-sticker"
-            style={{
-              background: sticker.side === "boss" ? "#fff" : "var(--orange)",
-              ...(sticker.side === "boss"
-                ? { right: "24%", top: "22%" }
-                : { left: "24%", bottom: "34%" }),
-            }}>
-            {sticker.text}
-          </span>
-        )}
+        {stickers
+          .filter((s) => now - s.at < 1100)
+          .map((s) => (
+            <span
+              key={s.id}
+              className={"vb-sticker " + (s.side === "boss" ? "vb-sticker-boss" : "vb-sticker-party")}
+            >
+              {s.text}
+            </span>
+          ))}
+
+        {now - lastHit < 350 && <div key={lastHit} className="vb-flash" />}
 
         {done && (
-          <div className="bb-banner">
-            <h2 style={survivors === 0 ? { color: "var(--orange)" } : undefined}>
-              {survivors > 0 ? "Boss cleared" : "Party down"}
-            </h2>
-            <p>Round {view.round} of {view.total} · {survivors} of {view.players.length} survivors</p>
-            <div className="table" style={{ width: "100%", maxWidth: 360, textAlign: "left" }}>
-              {view.players.map((p, i) => (
-                <div key={`${p.name}-${i}`} className="tr">
-                  <span>{p.name}{p.you ? " · you" : ""}</span>
-                  <span className="mono">
-                    {p.score} correct · {p.alive ? `${p.lives} lives` : "down"}
-                  </span>
-                </div>
-              ))}
-            </div>
-            <Link href="/party" className="bb-btn" style={{ textDecoration: "none" }}>
-              Back to the lobby
-            </Link>
+          <div className={"vb-banner" + (survivors === 0 ? " is-down" : "")}>
+            <h2>{title}</h2>
+            <p>
+              Round {view.round} of {view.total} · {survivors} of {seats} still standing
+            </p>
+            <Link href="/party" className="vb-btn">Back to the lobby</Link>
           </div>
         )}
       </div>
 
-      <div className="bb-panel">
-        <div className="bb-dialog">
-          <div className="bb-meta">
+      <div className="vb-panel">
+        <div className="vb-dialog">
+          <div className="vb-meta">
             <span>
-              {showingReveal ? (
-                shown.picked !== null && shown.picked === shown.c
-                  ? <b style={{ color: "var(--blue)" }}>Correct</b>
-                  : <span>Answer: <b style={{ color: "var(--blue)" }}>{shown.a[shown.c ?? 0] ?? ""}</b></span>
+              {settled ? (
+                settled.choice === null ? (
+                  <span>Round {settled.round} settled</span>
+                ) : settled.choice === settled.c ? (
+                  <b className="vb-t">Correct</b>
+                ) : (
+                  <b className="vb-miss">Not quite</b>
+                )
               ) : !me.alive ? (
-                <span>Spectating · {up} of {view.players.length} still up</span>
+                <span>Spectating · {up} of {seats} still up</span>
               ) : (
-                <span><b style={{ color: "var(--blue)" }}>Round {view.round} of {view.total}</b> · you are {hero.name}</span>
+                <span>
+                  <b className="vb-t">Round {view.round} of {view.total}</b> · you are {hero.name}
+                </span>
               )}
             </span>
-            <b className="bb-clock">{live ? clock : "0:00"}</b>
+            <b className="vb-clock">{clock}</b>
           </div>
-          <div className="bb-bar">
-            <i style={{ width: `${frac * 100}%`,
-              background: left <= 10000 ? "var(--orange)" : "var(--lime)" }} />
+          <div className="vb-tbar">
+            <i
+              style={{
+                width: `${frac * 100}%`,
+                background: live && left <= 10000 ? "var(--orange)" : "var(--lime)",
+              }}
+            />
           </div>
-          <p className="bb-say">
-            {done
-              ? "The raid is over."
-              : showingReveal
-                ? shown.picked === null
-                  ? me.alive
-                    ? "Out of time — the boss strikes."
-                    : "The party fights on without you."
-                  : shown.picked === shown.c
-                    ? `${hero.name} used ${hero.move}.`
-                    : `${hero.name} is hit.`
-                : !me.alive
-                  ? "You are down. The party fights on without you."
-                  : shown.q
-                    ? <span dangerouslySetInnerHTML={{ __html: shown.q }} />
-                    : "Preparing the next question…"}
-          </p>
+          {promptMarkup ? (
+            <p className="vb-prompt" dangerouslySetInnerHTML={{ __html: promptMarkup }} />
+          ) : (
+            <p className="vb-say">{done ? "The raid is over." : "Preparing the next question…"}</p>
+          )}
+          {settled && (
+            <p className="vb-result">
+              Answer:{" "}
+              <b dangerouslySetInnerHTML={{ __html: settled.a[settled.c] ?? "" }} />
+              {revealLost.length > 0
+                ? ` · ${revealLost.join(", ")} lost a life`
+                : " · nobody lost a life"}
+            </p>
+          )}
         </div>
 
-        {!done && (
-          <div className="bb-answers">
-            {shown.a.map((text, i) => {
-              let cls = "bb-opt";
-              if (shown.resolved) {
-                if (i === shown.c) cls += " right";
-                else if (i === shown.picked) cls += " wrong";
-              }
-              const locked = !shown.resolved && shown.picked === i;
-              return (
-                <button
-                  key={i}
-                  className={cls}
-                  disabled={!canTap}
-                  onClick={() => { void answer(i); }}
-                  style={locked ? { background: "var(--paper)" } : undefined}
-                >
-                  <span className="chip">{i + 1}</span>
-                  <span className="txt" dangerouslySetInnerHTML={{ __html: text }} />
-                </button>
-              );
-            })}
-            {shown.a.length === 0 && <div style={{ height: 100 }} />}
+        {done ? null : me.alive ? (
+          options.length > 0 ? (
+            <div className={"vb-answers" + (settled ? " is-waiting" : "")}>
+              {options.map((text, i) => {
+                let cls = "vb-answer";
+                if (settled) {
+                  if (i === settled.c) cls += " is-right";
+                  else if (i === settled.choice) cls += " is-wrong";
+                } else if (chosen === i) {
+                  cls += " is-picked";
+                }
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    className={cls}
+                    disabled={!canTap}
+                    onClick={() => { void answer(i); }}
+                  >
+                    <span className="vb-letter">{"ABCD".charAt(i)}</span>
+                    <span className="vb-txt" dangerouslySetInnerHTML={{ __html: text }} />
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="vb-spectate">
+              <b>Waiting…</b>
+              <span>The next question is on its way.</span>
+            </div>
+          )
+        ) : (
+          <div className="vb-spectate">
+            <b>You are out</b>
+            <span>
+              The party fights on without you · {up} of {seats} still up
+            </span>
           </div>
         )}
 
-        {error && (
-          <div className="mono" style={{ fontSize: 9.5, color: "var(--red-ink)", textAlign: "center" }}>
-            {error}
-          </div>
-        )}
+        {error && <div className="vb-hint is-err">{error}</div>}
 
-        <div className="bb-hint">
+        <div className="vb-hint">
           {done
             ? "Party over · back to the lobby for another run"
             : !me.alive
               ? "The party is still fighting · you are watching"
-              : me.answered
-                ? "Locked in · waiting for the party"
-                : "Tap an answer · 30 seconds a round"}
+              : settled
+                ? "Settling the round…"
+                : me.answered
+                  ? "Locked in · waiting for the party"
+                  : "Tap an answer · 30 seconds a round"}
         </div>
       </div>
-
-      {!me.alive && !done && (
-        <div className="band bad">
-          <b>You are down — spectating</b>
-          <p>The party fights on without you. {up} of {view.players.length} still standing.</p>
-        </div>
-      )}
     </div>
   );
 }

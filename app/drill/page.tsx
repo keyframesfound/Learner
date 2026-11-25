@@ -2,11 +2,15 @@ import Link from "next/link";
 import SubjectChips from "@/components/SubjectChips";
 import { subjects } from "@/lib/content";
 import { getModules, getPath, getStats, viewer } from "@/lib/repo";
+import "./path.css";
 
 type ModuleRow = {
   id: string; code: string; name: string; track: string;
   track_name: string; accent: string | null; lessons: number;
 };
+
+/* five seats, one question each — the party raid's own shape (PartyGate) */
+const PARTY_SEATS = 5;
 
 export default async function Path({
   searchParams,
@@ -18,7 +22,7 @@ export default async function Path({
 
   if (!v) {
     return (
-      <>
+      <div className="v-path">
         <SubjectChips activeTrack="ict" />
         <div style={{ padding: "0 18px" }}>
           <div className="empty">
@@ -26,7 +30,7 @@ export default async function Path({
             <p>Your path appears here once you are signed in.</p>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
@@ -42,7 +46,7 @@ export default async function Path({
   if (t && !picked) {
     const subject = subjects.find((s) => s.id === t);
     return (
-      <>
+      <div className="v-path">
         <SubjectChips activeTrack={t} />
         <div style={{ padding: "18px" }}>
           <div className="empty">
@@ -54,13 +58,13 @@ export default async function Path({
             </Link>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   if (!mod) {
     return (
-      <>
+      <div className="v-path">
         <SubjectChips activeTrack="ict" />
         <div style={{ padding: "18px" }}>
           <div className="empty">
@@ -68,20 +72,20 @@ export default async function Path({
             <p>No curriculum has been published yet.</p>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div className="v-path">
       <SubjectChips activeTrack={mod.track} />
 
       <div className="hd">
         <span className="mod">{mod.track_name} · {mod.code}</span>
         <span className="mod dim">{path.done} of {path.total} done</span>
         <span className="streak">
-          <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-            <path d="M12 2.6c3.4 4 6.2 6.6 6.2 10.4a6.2 6.2 0 0 1-12.4 0c0-2.2 1.2-4 3-6.2.4 1.8 1.4 2.8 2.4 3.2-.4-2.6.2-5 .8-7.4z" />
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true">
+            <path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z" />
           </svg>
           {stats.streak} in a row
         </span>
@@ -100,13 +104,17 @@ export default async function Path({
             const no = String(idx + 1).padStart(2, "0");
             const meta = `${l.items} ${l.items === 1 ? "item" : "items"} · ${l.minutes} min`;
             if (l.state === "lock") {
-              const prev = idx > 0 ? String(idx).padStart(2, "0") : null;
+              /* only the first locked row names the lesson that opens it */
+              const prev = idx > 0 ? path.lessons[idx - 1] : undefined;
+              const hint = prev?.state === "now"
+                ? `Locked · finish ${String(idx).padStart(2, "0")}`
+                : "Locked";
               return (
                 <div key={l.id} className="row lock">
                   <span className="no">{no}</span>
                   <span className="txt">
                     <b>{l.title}</b>
-                    <span>{prev ? `Locked · finish ${prev}` : "Locked"}</span>
+                    <span>{hint}</span>
                   </span>
                 </div>
               );
@@ -118,19 +126,26 @@ export default async function Path({
                   <b>{l.title}</b>
                   <span>{meta}</span>
                 </span>
-                <span className="mono" style={{ fontSize: 13 }}>{l.state === "done" ? "✓" : "→"}</span>
+                <span className="end" aria-hidden="true">{l.state === "done" ? "✓" : "→"}</span>
               </Link>
             );
           })}
 
           <Link href="/party" className="row boss">
-            <span className="no">★</span>
-            <span className="txt"><b>Boss battle</b><span>Party up · 30s a question</span></span>
-            <span className="mono" style={{ fontSize: 13 }}>→</span>
+            <span className="no">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 3.2l2.6 5.4 6 .9-4.3 4.2 1 6-5.3-2.9-5.3 2.9 1-6L3.4 9.5l6-.9z" />
+              </svg>
+            </span>
+            <span className="txt">
+              <b>Boss battle</b>
+              <span>Party up · {PARTY_SEATS} items · 8 min</span>
+            </span>
+            <span className="end" aria-hidden="true">→</span>
           </Link>
         </div>
       )}
-      <div style={{ height: 24 }} />
-    </>
+      <div style={{ height: 28 }} />
+    </div>
   );
 }

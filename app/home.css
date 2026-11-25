@@ -1,0 +1,322 @@
+/* Learner home — ported from design/learn-home.html #v-a.
+   Every selector is scoped to .v-home so the plate cannot leak into other screens. */
+
+.v-home {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── header ───────────────────────────────────────────── */
+.v-home .vh-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 18px 10px;
+}
+.v-home .vh-greet {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .4px;
+  color: var(--ink-3);
+}
+.v-home .vh-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -.7px;
+  line-height: 1.05;
+  margin-top: 3px;
+}
+.v-home .vh-streak {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: none;
+  padding: 5px 10px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--line);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.v-home .vh-streak svg {
+  width: 13px;
+  height: 13px;
+  color: var(--orange);
+}
+
+/* ── hero ─────────────────────────────────────────────── */
+.v-home .vh-hero {
+  margin: 6px 18px 0;
+  padding: 14px 15px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 5px 5px 0 var(--lime);
+}
+.v-home .vh-tag {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+.v-home .vh-hero h2 {
+  margin-top: 5px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: -.4px;
+  line-height: 1.12;
+}
+.v-home .vh-hero-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 13px;
+}
+.v-home .vh-done {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #B9B9AE;
+}
+
+/* solid lime start button, ink text, hard offset shadow */
+.v-home .vh-start {
+  display: inline-grid;
+  place-items: center;
+  height: 44px;
+  padding: 0 18px;
+  background: var(--lime);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, .45);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform .09s ease, box-shadow .09s ease;
+}
+.v-home .vh-start:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, .45);
+}
+
+/* ── progress bars ────────────────────────────────────── */
+.v-home .vh-bar {
+  display: block;
+  height: 10px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.v-home .vh-bar i {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+  border-radius: 99px;
+  transition: width .25s ease;
+}
+.v-home .vh-hero .vh-bar {
+  margin-top: 12px;
+  border-color: #4A4A45;
+  background: #2A2A28;
+}
+.v-home .vh-hero .vh-bar i {
+  background: var(--lime);
+}
+
+/* ── section label ────────────────────────────────────── */
+.v-home .vh-label {
+  padding: 20px 18px 8px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  color: var(--ink-3);
+}
+
+/* ── revision ─────────────────────────────────────────── */
+.v-home .vh-rev {
+  padding: 0 18px;
+}
+.v-home .vh-rev-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+}
+.v-home .vh-rev-row > span:first-child {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+.v-home .vh-rev-count {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 400;
+  letter-spacing: -.4px;
+  line-height: 1;
+}
+.v-home .vh-rev-count b {
+  font-weight: 400;
+}
+.v-home .vh-rev-count i {
+  font-style: normal;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.v-home .vh-seg {
+  display: flex;
+  height: 10px;
+  background: #fff;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.v-home .vh-seg > span {
+  flex: 1 1 0;
+  min-width: 0;
+}
+.v-home .vh-seg > span + span {
+  border-left: 2px solid var(--ink);
+}
+.v-home .vh-seg i {
+  display: block;
+  height: 100%;
+  background: var(--ink);
+}
+
+/* ── class / module card ──────────────────────────────── */
+.v-home .vh-cls {
+  display: block;
+  margin: 0 18px 10px;
+  padding: 12px 14px;
+  background: #fff;
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform .09s ease;
+}
+.v-home .vh-cls:active {
+  transform: translate(2px, 2px);
+}
+.v-home .vh-cls-top {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.v-home .vh-ico {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+.v-home .vh-ico .s {
+  fill: currentColor;
+  stroke: var(--ink);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.v-home .vh-ico .o {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.v-home .vh-cls-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 1.15;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.v-home .vh-cls-sub {
+  display: block;
+  margin: 2px 0 9px;
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+.v-home .vh-cls-top + .vh-cls-foot {
+  margin-top: 9px;
+}
+.v-home .vh-cls-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.v-home .vh-cls-foot .vh-bar {
+  flex: 1;
+  height: 8px;
+}
+.v-home .vh-pct {
+  width: 34px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* ── signed-out ───────────────────────────────────────── */
+.v-home .vh-empty {
+  margin: 8px 18px 0;
+  padding: 26px 18px;
+  border: 3px dashed var(--line);
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ink-3);
+}
+.v-home .vh-empty b {
+  display: block;
+  margin-bottom: 6px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink);
+}
+.v-home .vh-empty p {
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+@media (min-width: 900px) {
+  .v-home {
+    padding-bottom: 32px;
+  }
+}
+
+@media (max-width: 359px) {
+  .v-home .vh-name {
+    font-size: 21px;
+  }
+  .v-home .vh-hero h2 {
+    font-size: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-home .vh-bar i,
+  .v-home .vh-start,
+  .v-home .vh-cls {
+    transition: none;
+  }
+  .v-home .vh-start:active,
+  .v-home .vh-cls:active {
+    transform: none;
+  }
+}

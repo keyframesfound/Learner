@@ -1,0 +1,504 @@
+/* Boss battle — ported from design/demo2.html #s-boss.
+   Every selector is scoped to .v-boss and every class carries a vb- prefix so
+   neither this file nor the global stylesheet can reach across screens. */
+
+.v-boss {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100dvh - 84px);
+  color: var(--ink);
+}
+
+/* ── top strip ─────────────────────────────── */
+.v-boss .vb-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 16px;
+  border-bottom: 3px solid var(--ink);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.v-boss .vb-top b { font-variant-numeric: tabular-nums; }
+.v-boss .vb-x { font-size: 15px; line-height: 1; cursor: pointer; color: inherit; text-decoration: none; }
+
+/* ── stage ─────────────────────────────────── */
+.v-boss .vb-arena {
+  position: relative;
+  flex: 1;
+  min-height: 420px;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 10px, rgba(17, 17, 17, .05) 10px 12px) 0 100% / 100% 48% no-repeat,
+    var(--paper);
+}
+.v-boss .vb-arena::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 52%;
+  border-top: 3px solid var(--ink);
+}
+.v-boss .vb-plat {
+  position: absolute;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: #fff;
+  z-index: 1;
+}
+.v-boss .vb-plat-boss { width: 204px; aspect-ratio: 4 / 1; right: 1%; top: 146px; }
+.v-boss .vb-plat-party { left: 2%; right: 2%; width: auto; aspect-ratio: 10 / 1; bottom: 10px; background: var(--lime); }
+
+.v-boss .vb-actor { position: absolute; z-index: 2; transition: transform .22s cubic-bezier(.3, 1.6, .5, 1); }
+.v-boss .vb-actor svg { display: block; width: 100%; height: auto; overflow: visible; }
+.v-boss .vb-boss-actor { right: 4%; top: 14px; width: 152px; animation: vb-breathe 2.6s ease-in-out infinite; }
+.v-boss .vb-boss-actor .vb-art { display: block; }
+
+/* the party lineup: one slot per player */
+.v-boss .vb-party {
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  bottom: 18px;
+  display: flex;
+  align-items: flex-end;
+  z-index: 2;
+  gap: 1px;
+}
+.v-boss .vb-slot {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  justify-items: center;
+  align-content: end;
+  gap: 3px;
+}
+.v-boss .vb-slot .vb-actor { position: relative; width: 100%; max-width: 86px; }
+.v-boss .vb-slot .vb-art { display: block; }
+.v-boss .vb-hname {
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .1px;
+  padding: 1px 3px;
+  border-radius: 3px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.v-boss .vb-hyou {
+  font-size: 6.5px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  line-height: 1;
+  background: var(--red-ink);
+  color: #fff;
+  border-radius: 2px;
+  padding: 1.5px 3px;
+}
+.v-boss .vb-hlife { display: flex; gap: 2px; }
+.v-boss .vb-hlife i {
+  width: 9px;
+  height: 5px;
+  border: 2px solid var(--ink);
+  border-radius: 1px;
+  background: var(--lime);
+}
+/* a spent life is hollow and red */
+.v-boss .vb-hlife i.is-off { background: transparent; border-color: var(--red-ink); }
+/* a downed player keeps their row; only the sprite greys out */
+.v-boss .vb-slot.is-down .vb-actor { opacity: .35; filter: grayscale(1); }
+
+/* ── status plates ─────────────────────────── */
+.v-boss .vb-status {
+  position: absolute;
+  z-index: 4;
+  width: 56%;
+  max-width: 216px;
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  padding: 7px 9px;
+  box-shadow: 4px 4px 0 var(--orange);
+  display: grid;
+  gap: 4px;
+}
+.v-boss .vb-status-boss { top: 12px; left: 10px; }
+.v-boss .vb-status-party { bottom: 138px; right: 8px; width: 50%; box-shadow: 4px 4px 0 var(--ink); }
+.v-boss .vb-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.v-boss .vb-name {
+  font-weight: 700;
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.v-boss .vb-level {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.v-boss .vb-hpline { display: flex; align-items: center; gap: 6px; }
+.v-boss .vb-tag {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  background: var(--ink);
+  color: var(--lime);
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+.v-boss .vb-pips { flex: 1; display: flex; gap: 3px; }
+.v-boss .vb-pip {
+  flex: 1;
+  height: 10px;
+  border: 2.5px solid var(--ink);
+  border-radius: 2px;
+  transition: background .25s;
+}
+.v-boss .vb-status-boss .vb-pip { background: var(--orange); }
+.v-boss .vb-status-party .vb-pip { background: var(--lime); }
+.v-boss .vb-pip.is-gone {
+  background: transparent !important;
+  background-image: repeating-linear-gradient(135deg, transparent 0 3px, rgba(17, 17, 17, .18) 3px 5px) !important;
+}
+.v-boss .vb-num {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── strike feedback ───────────────────────── */
+.v-boss .vb-art.vb-hurt { animation: vb-hurt .45s ease-out; }
+.v-boss .vb-sticker {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 3px 7px;
+  border: 3px solid var(--ink);
+  border-radius: 4px;
+  color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  animation: vb-stick 1s cubic-bezier(.3, 1.6, .5, 1) forwards;
+}
+.v-boss .vb-sticker-boss { right: 24%; top: 22%; background: #fff; }
+.v-boss .vb-sticker-party { left: 24%; bottom: 34%; background: var(--orange); }
+.v-boss .vb-flash {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  background: var(--orange);
+  opacity: 0;
+  pointer-events: none;
+  animation: vb-flash .35s ease-out;
+}
+.v-boss .vb-shake { animation: vb-shake .35s ease-out; }
+
+/* ── question panel ────────────────────────── */
+.v-boss .vb-panel {
+  border-top: 3px solid var(--ink);
+  background: var(--paper);
+  padding: 10px 14px 12px;
+  display: grid;
+  gap: 8px;
+}
+.v-boss .vb-dialog {
+  background: #fff;
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 5px var(--ink);
+  padding: 10px 12px;
+  min-height: 74px;
+  display: grid;
+  gap: 6px;
+  align-content: start;
+}
+.v-boss .vb-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.v-boss .vb-meta .vb-t { color: var(--blue); }
+.v-boss .vb-meta .vb-miss { color: var(--orange); }
+.v-boss .vb-clock {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: .3px;
+  font-variant-numeric: tabular-nums;
+}
+.v-boss .vb-tbar {
+  height: 6px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  background: var(--paper);
+  overflow: hidden;
+}
+.v-boss .vb-tbar i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--lime);
+  transition: width .1s linear, background .2s;
+}
+.v-boss .vb-prompt {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.14;
+  letter-spacing: -.6px;
+}
+.v-boss .vb-say { margin: 0; font-size: 14.5px; font-weight: 700; line-height: 1.35; }
+.v-boss .vb-prompt code,
+.v-boss .vb-say code,
+.v-boss .vb-answer code,
+.v-boss .vb-result code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: .86em;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  padding: 0 4px;
+}
+.v-boss .vb-result {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+.v-boss .vb-result b { color: var(--ink); }
+
+/* ── answer cards, borrowed from the item screen ───────── */
+.v-boss .vb-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.v-boss .vb-answer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  min-height: 50px;
+  padding: 9px 10px;
+  text-align: left;
+  background: #fff;
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform .12s, box-shadow .12s, background .15s, opacity .2s;
+}
+.v-boss .vb-answer .vb-letter {
+  flex: 0 0 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  background: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+}
+.v-boss .vb-answer .vb-txt { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.v-boss .vb-answer:disabled { cursor: default; }
+.v-boss .vb-answer:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.v-boss .vb-answer.is-picked { background: var(--blue); border-color: var(--blue); color: #fff; }
+.v-boss .vb-answer.is-picked .vb-letter { background: #fff; color: var(--blue); border-color: #fff; }
+.v-boss .vb-answer.is-right { background: var(--lime); border-color: var(--ink); color: var(--ink); }
+.v-boss .vb-answer.is-right .vb-letter { background: var(--ink); color: var(--lime); border-color: var(--ink); }
+.v-boss .vb-answer.is-wrong { background: var(--red); border-color: var(--ink); color: #fff; }
+.v-boss .vb-answer.is-wrong .vb-letter { background: #fff; color: var(--red); border-color: #fff; }
+.v-boss .vb-answers.is-waiting .vb-answer:not(.is-right):not(.is-wrong) { opacity: .35; }
+
+/* a downed viewer gets a line instead of controls */
+.v-boss .vb-spectate {
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px;
+  border: 3px dashed var(--ink);
+  border-radius: 8px;
+  background: #fff;
+}
+.v-boss .vb-spectate b {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: -.3px;
+  color: var(--red-ink);
+}
+.v-boss .vb-spectate span {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+}
+.v-boss .vb-hint {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 600;
+  color: var(--ink-3);
+  text-align: center;
+}
+.v-boss .vb-hint.is-err { color: var(--red-ink); }
+
+/* ── end banner ────────────────────────────── */
+.v-boss .vb-banner {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+  padding: 16px;
+  text-align: center;
+  background: rgba(242, 239, 230, .94);
+}
+.v-boss .vb-banner h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 29px;
+  letter-spacing: -.9px;
+  line-height: 1;
+}
+.v-boss .vb-banner p {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--ink-3);
+}
+.v-boss .vb-btn {
+  display: inline-grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 13px;
+  background: var(--orange);
+  color: var(--ink);
+  border: 3px solid var(--ink);
+  border-radius: 6px;
+  padding: 10px 22px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  text-decoration: none;
+}
+.v-boss .vb-banner.is-down h2 { color: var(--orange); }
+
+/* ── loading, lobby, dead-end states ───────── */
+.v-boss .vb-note {
+  margin: 16px;
+  padding: 16px;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.v-boss .vb-note b { font-family: var(--font-display); font-size: 18px; letter-spacing: -.4px; }
+.v-boss .vb-note p { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: var(--ink-2); }
+.v-boss .vb-cta {
+  display: grid;
+  place-items: center;
+  margin-top: 14px;
+  min-height: 46px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--lime);
+  font-family: var(--font-display);
+  font-size: 13px;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, .3);
+}
+.v-boss .vb-seats { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; padding: 0 16px 16px; }
+.v-boss .vb-seat {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 11px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.v-boss .vb-seat .vb-av {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+}
+.v-boss .vb-seat.is-you .vb-av { background: var(--lime); }
+.v-boss .vb-seat b { font-size: 12.5px; font-weight: 700; display: block; line-height: 1.1; }
+.v-boss .vb-seat i {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--ink-3);
+}
+
+/* ── motion ────────────────────────────────── */
+@keyframes vb-breathe { 50% { transform: translateY(-5px); } }
+@keyframes vb-hurt {
+  20% { transform: translateX(-8px) rotate(-4deg); filter: brightness(1.6); }
+  45% { transform: translateX(7px) rotate(3deg); }
+  70% { transform: translateX(-3px); }
+}
+@keyframes vb-shake {
+  25% { transform: translate(-6px, 3px); }
+  50% { transform: translate(5px, -3px); }
+  75% { transform: translate(-2px, 1px); }
+}
+@keyframes vb-stick {
+  0% { transform: scale(.3) rotate(-12deg); opacity: 0; }
+  25% { transform: scale(1.1) rotate(-6deg); opacity: 1; }
+  75% { transform: scale(1) rotate(-6deg) translateY(-10px); opacity: 1; }
+  100% { transform: scale(1) rotate(-6deg) translateY(-22px); opacity: 0; }
+}
+@keyframes vb-flash { 30% { opacity: .25; } }
+
+@media (max-height: 720px) {
+  .v-boss .vb-arena { min-height: 368px; }
+  .v-boss .vb-boss-actor { width: 128px; }
+  .v-boss .vb-plat-boss { width: 176px; top: 124px; }
+  .v-boss .vb-status-party { bottom: 126px; }
+  .v-boss .vb-slot .vb-actor { max-width: 72px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-boss .vb-boss-actor,
+  .v-boss .vb-art.vb-hurt,
+  .v-boss .vb-shake,
+  .v-boss .vb-sticker,
+  .v-boss .vb-flash { animation: none !important; }
+  .v-boss .vb-tbar i,
+  .v-boss .vb-pip,
+  .v-boss .vb-actor,
+  .v-boss .vb-answer { transition: none !important; }
+}

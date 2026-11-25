@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import type { NoteBlock, PlayerItem } from "@/lib/repo";
+import "../app/drill/item.css";
 
 /* **term** renders as a bold term, without pulling in a markdown library */
 function inline(text: string) {
@@ -11,6 +13,26 @@ function inline(text: string) {
     part.startsWith("**") && part.endsWith("**")
       ? <b key={i}>{part.slice(2, -2)}</b>
       : <span key={i}>{part}</span>,
+  );
+}
+
+/* a light touch of syntax colour for code lines: keywords, numbers, strings */
+const KEYWORD =
+  /^(?:print|def|return|if|elif|else|for|while|in|not|and|or|import|from|class|True|False|None|range|len|int|str|float|list|dict|set|tuple|is|with|as|try|except|pass|lambda)$/;
+const TOKEN = /(#[^\n]*|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\b\d+(?:\.\d+)?\b|\b[A-Za-z_]\w*\b)/g;
+
+function codeLine(line: string, k: number) {
+  return (
+    <span key={k} className="v-line">
+      <span className="v-ln">{k + 1}</span>
+      {line.split(TOKEN).filter((s) => s !== "").map((s, j) => {
+        if (s.startsWith("#")) return <span key={j} className="v-c">{s}</span>;
+        if (s.startsWith('"') || s.startsWith("'")) return <span key={j} className="v-s">{s}</span>;
+        if (/^\d/.test(s)) return <span key={j} className="v-n">{s}</span>;
+        if (KEYWORD.test(s)) return <span key={j} className="v-k">{s}</span>;
+        return <span key={j}>{s}</span>;
+      })}
+    </span>
   );
 }
 
@@ -24,12 +46,6 @@ type Props = {
   lessonNumber?: number;
   notes?: NoteBlock[];
 };
-
-const btnLink = {
-  display: "grid",
-  placeItems: "center",
-  textDecoration: "none",
-} as const;
 
 export default function ItemPlayer({
   items,
@@ -54,49 +70,69 @@ export default function ItemPlayer({
     start.current = performance.now();
   }, [i]);
 
+  const topBar = (at: number) => (
+    <div className="v-top">
+      <Link href="/drill" className="v-x" aria-label="Leave lesson">✕</Link>
+      <span
+        className="v-prog"
+        role="progressbar"
+        aria-label="Question progress"
+        aria-valuemin={0}
+        aria-valuemax={Math.max(items.length, 1)}
+        aria-valuenow={at}
+        style={{ "--ticks": Math.max(items.length, 1) } as CSSProperties}
+      >
+        <i style={{ width: `${items.length ? (at / items.length) * 100 : 0}%` }} />
+      </span>
+      <span className="v-count">{step} · {at} / {items.length}</span>
+    </div>
+  );
+
   if (done) {
     const pct = items.length ? Math.round((correctCount / items.length) * 100) : 0;
     const perfect = correctCount === items.length && items.length > 0;
     return (
-      <div className="lesson-screen">
-        <div className="done-wrap">
-          <div className={"done-burst" + (perfect ? " perfect" : "")}>
-            <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true">
-              <path d="M12 2.6l2.9 5.9 6.5 1-4.7 4.6 1.1 6.5L12 17.5 6.2 20.6l1.1-6.5L2.6 9.5l6.5-1z" />
-            </svg>
-          </div>
-
-          <div className="done-kicker mono">{perfect ? "Flawless" : "Lesson complete"}</div>
-          <h1 className="done-title">{perfect ? "Perfect run." : "Lesson complete."}</h1>
-          <p className="done-sub">{lessonTitle}</p>
-
-          <div className="done-stats">
-            <div className="done-stat">
-              <b>{correctCount}/{items.length}</b>
-              <span>correct</span>
+      <div className="v-item">
+        <div className="v-scroll v-center">
+          <div className="v-done">
+            <div className={"v-burst" + (perfect ? " perfect" : "")}>
+              <svg viewBox="0 0 24 24" width="34" height="34" fill="currentColor" aria-hidden="true">
+                <path d="M12 2.6l2.9 5.9 6.5 1-4.7 4.6 1.1 6.5L12 17.5 6.2 20.6l1.1-6.5L2.6 9.5l6.5-1z" />
+              </svg>
             </div>
-            <div className="done-stat">
-              <b>{pct}%</b>
-              <span>accuracy</span>
-            </div>
-          </div>
 
-          <div className="done-actions">
-            {nextSlug ? (
-              <Link href={`/drill/${nextSlug}`} className="btn" style={btnLink}>
-                Next lesson{nextTitle ? `: ${nextTitle}` : ""} →
+            <div className="v-kicker">{perfect ? "Flawless" : "Lesson complete"}</div>
+            <h1 className="v-done-title">{perfect ? "Perfect run." : "Lesson complete."}</h1>
+            <p className="v-done-sub">{lessonTitle}</p>
+
+            <div className="v-stats">
+              <div className="v-stat">
+                <b>{correctCount}/{items.length}</b>
+                <span>correct</span>
+              </div>
+              <div className="v-stat">
+                <b>{pct}%</b>
+                <span>accuracy</span>
+              </div>
+            </div>
+
+            <div className="v-actions">
+              {nextSlug ? (
+                <>
+                  <Link href={`/drill/${nextSlug}`} className="v-btn">
+                    Next lesson{nextTitle ? `: ${nextTitle}` : ""} →
+                  </Link>
+                  <Link href="/drill" className="v-btn v-btn-ghost">
+                    Back to the path
+                  </Link>
+                </>
+              ) : (
+                <Link href="/drill" className="v-btn">Back to the path →</Link>
+              )}
+              <Link href="/party" className="v-done-link">
+                Party up for the boss
               </Link>
-            ) : (
-              <Link href="/drill" className="btn" style={btnLink}>
-                Back to the path →
-              </Link>
-            )}
-            <Link href="/drill" className="btn ghost" style={btnLink}>
-              Back to the path
-            </Link>
-            <Link href="/party" className="done-link">
-              Party up for the boss
-            </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -105,42 +141,50 @@ export default function ItemPlayer({
 
   if (reading) {
     return (
-      <div className="lesson-screen">
-        <div className="lbar">
-          <Link href="/drill" className="linkish" aria-label="Leave lesson">✕</Link>
-          <span className="pbar"><i style={{ width: "0%" }} /></span>
-          <span className="count">{step} · notes</span>
-        </div>
+      <div className="v-item">
+        {topBar(0)}
 
-        <div className="notes">
-          <div className="notes-kicker mono">Read first</div>
-          <h1 className="notes-title">{lessonTitle}</h1>
-          {notes.map((n, k) => {
-            if (n.type === "table") {
-              return (
-                <table key={k} className="cmp">
-                  <thead><tr>{n.head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
-                  <tbody>
-                    {n.rows.map((row, ri) => (
-                      <tr key={ri}>{row.map((c, ci) => (ci === 0 ? <th key={ci}>{c}</th> : <td key={ci}>{c}</td>))}</tr>
-                    ))}
-                  </tbody>
-                </table>
-              );
-            }
-            if (n.type === "callout") {
-              return (
-                <div key={k} className="callout"><b>EXAM</b><span>{inline(n.text)}</span></div>
-              );
-            }
-            return <p key={k} className="notes-p">{inline(n.text)}</p>;
-          })}
-        </div>
+        <div className="v-scroll">
+          <div className="v-notes">
+            <div className="v-kicker">Read first</div>
+            <h1 className="v-ntitle">{lessonTitle}</h1>
+            {notes.map((n, k) => {
+              if (n.type === "table") {
+                return (
+                  <div key={k} className="v-tablewrap">
+                    <table className="v-cmp">
+                      <thead>
+                        <tr>{n.head.map((h, hi) => <th key={hi}>{h}</th>)}</tr>
+                      </thead>
+                      <tbody>
+                        {n.rows.map((row, ri) => (
+                          <tr key={ri}>
+                            {row.map((c, ci) =>
+                              ci === 0 ? <th key={ci}>{c}</th> : <td key={ci}>{c}</td>,
+                            )}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                );
+              }
+              if (n.type === "callout") {
+                return (
+                  <div key={k} className="v-callout"><b>EXAM</b><span>{inline(n.text)}</span></div>
+                );
+              }
+              return <p key={k} className="v-p">{inline(n.text)}</p>;
+            })}
 
-        <div className="band">
-          <button className="btn" onClick={() => setReading(false)}>
-            {items.length ? `Start questions · ${items.length}` : "Back to the path"}
-          </button>
+            {items.length ? (
+              <button className="v-btn v-cta" onClick={() => setReading(false)}>
+                Start questions · {items.length}
+              </button>
+            ) : (
+              <Link href="/drill" className="v-btn v-cta">Back to the path</Link>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -149,16 +193,17 @@ export default function ItemPlayer({
   const item = items[i];
   if (items.length === 0 || !item) {
     return (
-      <div className="note" style={{ paddingTop: 40 }}>
-        <h1>{lessonTitle}</h1>
-        <div className="empty">
-          <b>Nothing to answer</b>
-          <p>This lesson has no questions yet.</p>
-        </div>
-        <div style={{ display: "grid", gap: 9, marginTop: 18, maxWidth: 420 }}>
-          <Link href="/drill" className="btn" style={btnLink}>
-            Back to the path
-          </Link>
+      <div className="v-item">
+        {topBar(0)}
+        <div className="v-scroll">
+          <div className="v-notes">
+            <h1 className="v-ntitle">{lessonTitle}</h1>
+            <div className="v-empty">
+              <b>Nothing to answer</b>
+              <p>This lesson has no questions yet.</p>
+              <Link href="/drill" className="v-btn">Back to the path</Link>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -166,7 +211,6 @@ export default function ItemPlayer({
 
   const correct = picked === item.answer;
   const last = i === items.length - 1;
-  const pct = Math.round(((i + 1) / items.length) * 100);
 
   const pick = (k: number) => {
     if (checked) return;
@@ -206,56 +250,53 @@ export default function ItemPlayer({
   };
 
   return (
-    <div className="lesson-screen">
-      <>
-      <div className="lbar">
-        <Link href="/drill" className="linkish" aria-label="Leave lesson">✕</Link>
-        <span className="pbar">
-          <i style={{ width: `${pct}%` }} />
-        </span>
-        <span className="count">{step} · {i + 1} / {items.length}</span>
-      </div>
+    <div className="v-item">
+      {topBar(i + 1)}
 
-      <span className="tag">{item.level}</span>
-      <h2 className="q">{item.prompt}</h2>
-      {item.code && (
-        <div className="code">
-          {item.code.map((line, k) => (
-            <span key={k}><span className="ln">{k + 1}</span>{line}</span>
-          ))}
+      <div className="v-scroll">
+        <span className="v-tag">{item.level}</span>
+        <h2 className="v-q">{item.prompt}</h2>
+        {item.code && <div className="v-code">{item.code.map(codeLine)}</div>}
+
+        <div className="v-opts">
+          {item.options.map((o, k) => {
+            const state = !checked
+              ? k === picked ? " sel" : ""
+              : k === item.answer ? " good" : k === picked ? " bad" : "";
+            return (
+              <button
+                key={k}
+                type="button"
+                className={"v-opt" + state}
+                aria-pressed={k === picked}
+                disabled={checked}
+                onClick={() => pick(k)}
+              >
+                <span className="v-letter">{"ABCD"[k]}</span>
+                <span className={o.code ? "v-codetext" : undefined}>{o.text}</span>
+              </button>
+            );
+          })}
         </div>
-      )}
-
-      <div className="opts">
-        {item.options.map((o, k) => {
-          const state = !checked
-            ? k === picked ? " sel" : ""
-            : k === item.answer ? " good" : k === picked ? " bad" : "";
-          return (
-            <button key={k} className={"opt" + state} onClick={() => pick(k)}>
-              <span className="letter">{"ABCD"[k]}</span>
-              <span style={{ fontFamily: o.code ? "var(--font-mono)" : undefined }}>{o.text}</span>
-            </button>
-          );
-        })}
       </div>
 
-      {checked ? (
-        <div className={"band " + (correct ? "ok" : "bad")}>
-          <b>{correct ? "Correct" : "Not quite"}</b>
-          <p>{correct ? item.why : item.wrongWhy}</p>
-          <button className="btn" onClick={next}>
+      <div className={"v-band" + (checked ? (correct ? " ok" : " bad") : "")}>
+        {checked && (
+          <>
+            <b className="v-verdict">{correct ? "Correct" : "Not quite"}</b>
+            <p className="v-why">{correct ? item.why : item.wrongWhy}</p>
+          </>
+        )}
+        {checked ? (
+          <button className="v-btn" onClick={next}>
             {last ? "Finish lesson" : "Continue"}
           </button>
-        </div>
-      ) : (
-        <div className="band">
-          <button className="btn" onClick={check} disabled={picked === null}>
+        ) : (
+          <button className="v-btn" onClick={check} disabled={picked === null}>
             Check
           </button>
-        </div>
-      )}
-      </>
+        )}
+      </div>
     </div>
   );
 }
