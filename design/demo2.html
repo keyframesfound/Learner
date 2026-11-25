@@ -134,6 +134,7 @@
     margin:0 18px 18px;background:var(--ink);border-radius:8px;padding:14px 16px;
     font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.8;color:#E8E6DC;
     border:3px solid var(--ink);box-shadow:5px 5px 0 var(--line);
+    white-space:pre;overflow-x:auto;
   }
   .code .k{color:var(--lime)}
   .code .n{color:#FFB199}
@@ -154,7 +155,7 @@
   }
   .opt.sel{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:4px 4px 0 var(--ink)}
   .opt.sel .letter{background:#fff;color:var(--blue);border-color:#fff}
-  .opt.good{background:var(--lime);border-color:var(--ink)}
+  .opt.good{background:var(--lime);border-color:var(--ink);color:var(--ink)}
   .opt.good .letter{background:var(--ink);color:var(--lime);border-color:var(--ink)}
   .opt.bad{background:var(--red);border-color:var(--ink);color:#fff}
   .opt.bad .letter{background:#fff;color:var(--red);border-color:#fff}
@@ -443,7 +444,7 @@
       state = 'answered';
       var ok = picked === 'b';
       opts.forEach(function (x) {
-        if (x.dataset.id === 'b') x.classList.add('good');
+        if (x.dataset.id === 'b') { x.classList.add('good'); x.classList.remove('sel'); }
         if (x.dataset.id === picked && !ok) { x.classList.add('bad'); x.classList.remove('sel'); }
       });
       band.classList.add(ok ? 'ok' : 'bad');
