@@ -109,41 +109,57 @@ Hatching means *unavailable*, never *incomplete*.
 
 ## 5. Raid
 
-Three screens, one flow. The arena is **full-bleed** — no card, no border, the stage
-runs to all four screen edges and the question sheet's top border is the ground line.
+Live demo: `design/boss.html`. The battle is **full-bleed** — the arena and the
+command panel split the screen between them, with no card or page frame in between.
 
 ### Lobby
-Boss preview card, party code in a bar of its own (`21px lime on ink, Copy button`),
-four slots in a 2×2 grid — filled slots solid, empty slots dashed. Start is disabled
-until two are ready.
+Party code in a bar of its own, four slots in a 2×2 grid — filled slots solid, empty
+slots dashed. Start is disabled until two are ready.
 
 ### Battle
 ```
 ┌──────────────────────────────────────┐
-│ ✕        Raid · E2C          07:42   │
-│        ┌ Mr. Cheung  Lv 3 ┐          │  enemy plate, floating
-│        │ ▮▮▮▮▮▮▮▮▯▯▯▯     │          │
-│        └──────────────────┘          │
-│             [ boss ]                 │  40×52 grid, 3× scale
-│          ╱  burst  ╲                 │
-│   ┌ Kai ┐  ┌ Mei ┐  ┌ You ┐  ┌ Jon ┐ │  party, back view
-│   │ ▮▮▯▯│  │ ▮▮▮│  │ ▮▮▮▮│  │ ▮▮▮│  │  own plate per member
+│ ← Drill   Boss battle · Round 1 · 0  │  exit, round, streak
+├──────────────────────────────────────┤
+│ ┌ Mr Eric Chan   Unit 1 boss ┐       │
+│ │ HP ▮▮▮▮▮▮     120 / 120    │       │  his plate, top-left
+│ └────────────────────────────┘       │
+│                        [ boss ]      │  on his platform, top-right
+│                                      │
+│   [Knight][Mage][Archer]             │  party, bottom-left
+│        ┌ Knight        ┐             │
+│        │ ▮▮▮▮   4 lives│             │  their plate, bottom-right
+├──────────────────────────────────────┤
+│ Valid identifiers · Knight readies   │
+│ Shield Bash                          │
+│ Are Score and score the same name?   │
+│ ┌───────────────┬───────────────┐    │
+│ │ 1 No, case-…  │ 2 Only in…    │    │
+│ ├───────────────┼───────────────┤    │
+│ │ 3 Only for…   │ 4 Yes, case…  │    │
+│ └───────────────┴───────────────┘    │
 └──────────────────────────────────────┘
 ```
 
-- **Boss dominates.** Roughly 2× party height, standing on a platform, above them.
-- **Party is in back view.** No faces — the camera is behind them. That single
-  choice is what makes the composition read as *us against him*.
-- **Every member carries a nameplate**: name in Silkscreen 6.5px, six pips. Without
-  per-member plates it reads as a queue, not a raid.
-- **One answer = one strike.** Twelve items × 1,000 HP = the bar. The arithmetic is
-  shown, not implied.
-- **The strike** is a flat lime burst behind the boss plus an arc from the party.
-  The burst never covers the sprite; if it hides who you hit, it has failed.
+- **Boss top-right, party bottom-left.** He has the high ground; they are below and
+  to the left of him. Each side's plate sits in the corner opposite its actor, so a
+  plate never covers a face.
+- **Three heroes, not one avatar.** Knight (lime, Shield Bash), Mage (blue, Arcane
+  Bolt), Archer (orange, Piercing Shot). A correct answer passes the turn, so the
+  party takes turns instead of a single character carrying the fight.
+- **Six pips, 120 HP, 20 a pip.** One correct answer removes one. Three in a row is
+  a critical hit and removes two, which is what the streak in the top bar counts.
+- **Lives on the party side, not health.** A wrong answer costs one of four lives;
+  the boss lunges, the arena shakes, the screen flashes orange. A mistake can only
+  cost the party, never the boss's bar.
+- **The correction replaces the meta line.** `Answer: case-sensitive` appears where
+  "Knight readies Shield Bash" was, so the fix lands where the question was read.
+- **Keys 1–4 answer.** The dialog is sized to be read from the back of a room, and
+  the options are a 2×2 grid for the same reason.
 
 ### Result
-Boss lies rotated on his platform, bars empty, sheet becomes a result card:
-course cleared, damage dealt, your share, accuracy, party size. One button out.
+A banner over the arena — `Boss cleared` or `Party down`, rounds taken, one button
+back into the fight. No score, no share card.
 
 ## 6. Familiarity labels
 
@@ -199,5 +215,5 @@ Nothing eases for longer than 260ms. Anything slower reads as lag on a school ph
 
 - Chapter bar: continuous or notched, unresolved in the build.
 - Raid victory: no animation between the last hit and the result sheet.
-- Party sprites: Mei's bun and Jon's long hair are legible on inspection, not at a
-  glance. Bolder silhouettes would fix it.
+- Raid copy still names the boss Mr Eric Chan while the teacher surface uses
+  Mr. Cheung. One name, or a reason for two.

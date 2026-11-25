@@ -30,6 +30,10 @@
     gap:18px;padding:28px 16px;color:var(--ink);
   }
   .switcher{display:flex;gap:6px;background:#0E0E0C;padding:6px;border-radius:10px}
+  .switcher a{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.8px;text-transform:uppercase;text-decoration:none;color:#7A7A72;
+    padding:8px 14px;border-radius:6px}
+  .switcher a:hover{color:#D4FF3F}
   .switcher button{
     font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.8px;
     text-transform:uppercase;border:0;background:transparent;color:#7A7A72;padding:8px 14px;border-radius:6px;cursor:pointer;
@@ -372,7 +376,7 @@
   <button data-go="lesson">Lesson</button>
   <button data-go="board">Board</button>
   <button data-go="party">Party</button>
-  <button data-go="boss">Boss</button>
+  <a class="jump" href="boss.html">Boss</a>
 </div>
 
 <div class="device">
@@ -535,80 +539,9 @@
     </div>
 
     <div class="lobbyfoot">
-      <button class="btn">Start raid</button>
+      <button class="btn" onclick="location.href='boss.html'">Start raid</button>
       <p class="note">Anyone with the code can join until the first item.</p>
     </div>
-  </section>
-
-  <section class="screen" id="s-boss">
-    <div class="lbar">
-      <span class="x" data-go="path">✕</span>
-      <span class="count">Raid · E2C</span>
-      <span class="timer">07:42</span>
-    </div>
-
-    <div class="arena">
-      <div class="top">
-        <span class="name">Segfault</span>
-        <span class="lv">Boss · level 3</span>
-      </div>
-      <div class="stage"><svg viewBox="0 0 100 100" fill="none">
-        <path d="M18 34h64v46a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8z" fill="#D4FF3F"/>
-        <path d="M28 34V22m44 12V22" stroke="#D4FF3F" stroke-width="5" stroke-linecap="round"/>
-        <circle cx="28" cy="18" r="6" fill="#D4FF3F"/>
-        <circle cx="72" cy="18" r="6" fill="#D4FF3F"/>
-        <rect x="8" y="48" width="9" height="20" rx="4" fill="#D4FF3F"/>
-        <rect x="83" y="48" width="9" height="20" rx="4" fill="#D4FF3F"/>
-        <rect x="33" y="46" width="13" height="15" rx="2" fill="#111"/>
-        <rect x="54" y="46" width="13" height="15" rx="2" fill="#111"/>
-        <path d="M34 72h32" stroke="#111" stroke-width="7" stroke-linecap="square"/>
-        <path d="M40 72v6m10-6v6m10-6v6" stroke="#111" stroke-width="3"/>
-      </svg></div>
-      <div class="hp">
-        <span class="hpbar"><i style="width:68%"></i></span>
-        <span class="hpnum">8,100 / 12,000</span>
-      </div>
-      <div class="party">
-        <span class="pm"><span class="av">KR</span><b>Kai</b><i>2,400</i></span>
-        <span class="pm me"><span class="av">You</span><b>You</b><i>1,900</i></span>
-        <span class="pm"><span class="av">MC</span><b>Mei</b><i>1,100</i></span>
-        <span class="pm"><span class="av">JR</span><b>Jon</b><i>500</i></span>
-      </div>
-    </div>
-
-    <div class="bscroll">
-    <h1 class="q" style="padding-top:12px">Which line prints<br>the last item?</h1>
-
-    <div class="code"><span class="ln">1</span><span class="n">nums</span> = [<span class="n">1</span>, <span class="n">2</span>, <span class="n">3</span>]
-<span class="ln">2</span><span class="k">print</span>(nums[<span class="n">?</span>])</div>
-
-    <div class="opts">
-      <button class="opt"><span class="letter">A</span>nums[0]</button>
-      <button class="opt" style="background:var(--lime)"><span class="letter">B</span>nums[-1]</button>
-      <button class="opt"><span class="letter">C</span>nums[3]</button>
-    </div>
-    </div>
-
-    <div class="band" style="background:var(--lime)">
-      <div class="verdict" style="display:flex">Correct<span class="dmg">−1,000</span></div>
-      <p class="why" style="display:block">nums[-1] — negative indexes count back from the end.</p>
-      <button class="btn">Continue</button>
-    </div>
-
-    <nav class="tabbar">
-      <button class="tab" data-tab="learn" data-go="path">
-        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v9H4z"/></svg><span class="lbl">Learn</span></span>
-      </button>
-      <button class="tab on" data-tab="drills">
-        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 9v6M19 9v6M8 7v10M16 7v10M8 12h8"/></svg><span class="lbl">Drills</span><i class="badge">12</i></span>
-      </button>
-      <button class="tab" data-tab="board" data-go="board">
-        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 5H5v2a3 3 0 0 0 3 3M16 5h3v2a3 3 0 0 1-3 3M10 17h4l-1 3h-2z"/></svg><span class="lbl">Board</span></span>
-      </button>
-      <button class="tab" data-tab="me">
-        <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="9" r="3.6"/><path d="M5 20c1.6-3.4 4-5 7-5s5.4 1.6 7 5"/></svg><span class="lbl">Me</span></span>
-      </button>
-    </nav>
   </section>
 
   <!-- ───── BOARD ───── -->
