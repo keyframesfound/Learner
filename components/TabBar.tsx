@@ -28,6 +28,7 @@ const TABS = [
 
 export default function TabBar() {
   const path = usePathname() ?? "/";
+  if (path.endsWith("/login")) return null;
   const active = (href: string) =>
     href === "/" ? path === "/" : path === href || path.startsWith(href + "/") || (href === "/drill" && path.startsWith("/drill"));
 

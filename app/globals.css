@@ -491,3 +491,8 @@ body {
     transition-duration: .01ms !important;
   }
 }
+
+/* ── login ─────────────────────────────────── */
+.login-wrap { flex: 1; display: grid; place-items: center; padding: 32px 20px 56px; }
+.login-card { width: 100%; max-width: 380px; display: grid; gap: 14px; justify-items: center; text-align: center; }
+.login-card .btn { margin-top: 4px; }
