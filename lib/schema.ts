@@ -328,6 +328,32 @@ export const attemptInput = z.object({
 
 export type AttemptInput = z.infer<typeof attemptInput>;
 
+/* ── profile ────────────────────────────────────────────────── */
+
+/**
+ * Captured once at onboarding, after Google SSO. `dseYear` is the only input
+ * the home header needs — the exam date is derived, never stored, so a
+ * correction to the HKEAA timetable needs no migration.
+ *
+ * The streak is likewise derived (consecutive days with at least one graded
+ * attempt), not a column anybody writes to.
+ */
+export const profile = z.object({
+  userId: uuid,
+  displayName: z.string().min(1).max(40),
+  dseYear: z.number().int().min(2026).max(2035),
+});
+
+export type Profile = z.infer<typeof profile>;
+
+/** First written paper of a sitting; override from the HKEAA timetable. */
+export const dseStart = (year: number, month = 4, day = 8): Date =>
+  new Date(Date.UTC(year, month - 1, day));
+
+/** Whole days to that paper, floored at zero. */
+export const daysToDse = (dseYear: number, now: Date = new Date()): number =>
+  Math.max(0, Math.floor((dseStart(dseYear).getTime() - now.getTime()) / 86_400_000));
+
 export type Grade = {
   correct: boolean | null;
   awarded: number;

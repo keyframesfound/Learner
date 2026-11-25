@@ -120,6 +120,46 @@ bubble.
 
 ## Screens
 
+### Home
+
+The landing screen after onboarding. Cross-subject by definition, so it carries no
+subject filter — that belongs to Path. Four bands, top to bottom.
+
+    ┌──────────────────────────────────────┐
+│ DSE 2027 · 138 days  133 of 214 · 62% [♨ 12] │
+├──────────────────────────────────────┤
+│ ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ │
+│ ┃ ▤  Daily mix · 12 items      [Start]┃ │   ink band, orange shadow
+│ ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛ │
+│ Classes                              │
+│ ┌──┬───────────────────────────┬─────┐ │
+│ │▤ │ 4B · ICT                  │ Next│ │
+│ └──┴───────────────────────────┴─────┘ │
+│ QuickBits                    12 more │
+│ ┌──┬───────────────────────────┬─────┐ │
+│ │▤ │ print() shows text on …   │     │ │   wraps to two lines
+│ └──┴───────────────────────────┴─────┘ │
+├──────────────────────────────────────┤
+│  [Home]  [Path]  [Board]  [Me]       │
+└──────────────────────────────────────┘
+
+**The header bar** carries three derived numbers, left to right: days to the first
+written paper, syllabus coverage, current streak. None of them is a stored column.
+
+- *Countdown* — `profile.dseYear`, captured once at onboarding after Google SSO
+  ("which sitting are you in?"). The date comes from `dseStart(year)`; correct the
+  constant when HKEAA publishes the timetable. Never edit rows.
+- *Coverage* — items with at least one correct attempt, over items in the student's
+  tracks. Cheap enough to compute on render; if it gets slow, materialise nightly.
+- *Streak* — consecutive days with at least one graded attempt, in Asia/Hong_Kong.
+  The badge is the only lime element on the screen, which is why it reads first.
+
+**QuickBits** is a note stream, not a lesson list: one fact per card, no button, no
+sequence, no completion. Cards wrap to two lines and carry subject · topic in the
+meta, because a fact pulled out of order has no position to lean on. Tapping opens
+the note in place. Nothing here is scheduled — that is what Path is for; QuickBits
+exists so a two-minute gap has something in it.
+
 ### Path
 
     ┌──────────────────────────────────────┐

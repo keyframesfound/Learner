@@ -36,10 +36,13 @@
 
 
   /* ── header + meter: identical to drills ──── */
-  .hd{display:flex;align-items:center;justify-content:space-between;gap:10px;
-    padding:18px;border-bottom:3px solid var(--ink)}
-  .hd .mod{font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:600;
-    letter-spacing:.2px;color:var(--ink-2)}
+  .hd{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    padding:14px 18px;border-bottom:3px solid var(--ink)}
+  .hd .mod{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+    letter-spacing:.1px;color:var(--ink-3);white-space:nowrap}
+  .hd .mod b{font-weight:700;color:var(--ink)}
+  .hd .mod.dim{flex:1;text-align:center;color:var(--ink-3)}
+  .hd .mod.dim b{color:var(--ink)}
   .badgeL{display:inline-flex;align-items:center;gap:5px;background:var(--lime);color:var(--ink);
     font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.2px;
     padding:5px 9px;border-radius:4px;white-space:nowrap}
@@ -80,6 +83,18 @@
 
   .sec{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.3px;
     color:var(--ink-3);padding:16px 18px 8px;font-weight:600}
+  .sec.split{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .sec.split i{font-style:normal;color:var(--ink-3);font-size:9.5px}
+
+  /* quickbits — a fact, not a lesson: lighter shadow, wraps instead of truncating */
+  .rowc.note{align-items:flex-start;box-shadow:4px 4px 0 var(--ink);padding:11px 12px}
+  .rowc.note .chip{margin-top:1px}
+  .rowc.note .txt b{white-space:normal;overflow:hidden;text-overflow:clip;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;
+    font-size:13px;line-height:1.42;letter-spacing:0;font-weight:500}
+  .rowc.note .txt span{margin-top:5px;font-size:9.5px}
+  .rowc.note .txt code{font-family:'JetBrains Mono',monospace;font-size:11.5px;
+    font-weight:600;letter-spacing:-.2px}
 
   /* tab bar */
   .tabbar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;
@@ -115,8 +130,9 @@
     <div class="scroll">
 
       <div class="hd">
-        <span class="mod">DSE 2027 · 138 days</span>
-        <span class="badgeL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12 in a row</span>
+        <span class="mod">DSE 2027 · <b>138 days</b></span>
+        <span class="mod dim">133 of 214 · <b>62%</b></span>
+        <span class="badgeL" title="12 day streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
       </div>
 
 
@@ -153,6 +169,22 @@
         <div class="txt"><b>4B · Biology</b><span>Next · Monohybrid crosses</span></div>
         <button class="next">Next</button>
       </div>
+      <div class="sec split"><span>QuickBits</span><i>12 more</i></div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#2D5BFF"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b><code>print()</code> shows text on screen — it does not hand a value back.</b><span>ICT · Variables</span></div>
+      </div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#7C4DFF"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
+        <div class="txt"><b>Action and reaction act on different bodies, so they never cancel.</b><span>Physics · Forces</span></div>
+      </div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#17A34A"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
+        <div class="txt"><b>A dominant allele masks the recessive one. It does not erase it.</b><span>Biology · Inheritance</span></div>
+      </div>
     </div>
   </section>
 
@@ -161,8 +193,9 @@
     <div class="scroll">
 
       <div class="hd">
-        <span class="mod">Syllabus · 133 of 214</span>
-        <span class="badgeL">62%</span>
+        <span class="mod">DSE 2027 · <b>138 days</b></span>
+        <span class="mod dim">133 of 214 · <b>62%</b></span>
+        <span class="badgeL" title="12 day streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
       </div>
 
 
@@ -199,6 +232,22 @@
         <div class="txt"><b>4B · Biology</b><span>2/11 · Monohybrid crosses</span></div>
         <button class="next">Next</button>
       </div>
+      <div class="sec split"><span>QuickBits</span><i>12 more</i></div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#2D5BFF"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b><code>print()</code> shows text on screen — it does not hand a value back.</b><span>ICT · Variables</span></div>
+      </div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#7C4DFF"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
+        <div class="txt"><b>Action and reaction act on different bodies, so they never cancel.</b><span>Physics · Forces</span></div>
+      </div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#17A34A"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
+        <div class="txt"><b>A dominant allele masks the recessive one. It does not erase it.</b><span>Biology · Inheritance</span></div>
+      </div>
     </div>
   </section>
 
@@ -207,8 +256,9 @@
     <div class="scroll">
 
       <div class="hd">
-        <span class="mod">DSE 2027 · 138 days</span>
-        <span class="badgeL"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12 in a row</span>
+        <span class="mod">DSE 2027 · <b>138 days</b></span>
+        <span class="mod dim">133 of 214 · <b>62%</b></span>
+        <span class="badgeL" title="12 day streak"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 4 5 6 5 11a5 5 0 1 1-10 0c0-3 2-5 3-7 1 2 2 3 4 4 0-3-1-5-2-8z"/></svg>12</span>
       </div>
 
       <div class="rowc now" style="margin-top:14px;padding:14px">
@@ -243,6 +293,22 @@
         </div>
         <div class="txt"><b>Revision</b><span>133 of 214 items seen</span></div>
         <span class="num" style="font-size:13px">62%</span>
+      </div>
+      <div class="sec split"><span>QuickBits</span><i>12 more</i></div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#2D5BFF"><svg viewBox="0 0 24 24"><rect class="s" x="2.6" y="4" width="18.8" height="12.4" rx="1.6"/><rect class="s" x="10" y="16.4" width="4" height="2.4"/><rect class="s" x="6.6" y="18.8" width="10.8" height="2.2" rx="1"/></svg></div>
+        <div class="txt"><b><code>print()</code> shows text on screen — it does not hand a value back.</b><span>ICT · Variables</span></div>
+      </div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#7C4DFF"><svg viewBox="0 0 24 24"><path class="s" d="M13.6 2.4 5.2 13.6h4.9L9.2 21.6 18.8 9.9h-5.3z"/></svg></div>
+        <div class="txt"><b>Action and reaction act on different bodies, so they never cancel.</b><span>Physics · Forces</span></div>
+      </div>
+
+      <div class="rowc note">
+        <div class="chip" style="color:#17A34A"><svg viewBox="0 0 24 24"><path class="s" d="M4.7 19.3C4.7 10.6 10.6 4.7 19.3 4.7c0 8.7-5.9 14.6-14.6 14.6Z"/><path class="o" d="M5.2 18.8 13.4 10.6"/></svg></div>
+        <div class="txt"><b>A dominant allele masks the recessive one. It does not erase it.</b><span>Biology · Inheritance</span></div>
       </div>
     </div>
   </section>
