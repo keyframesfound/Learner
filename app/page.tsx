@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { profile, subjects } from "@/lib/content";
+import { currentUser, firstName } from "@/lib/session";
 
 function Mark({ colour, d }: { colour: string; d: string }) {
   return (
@@ -11,14 +12,16 @@ function Mark({ colour, d }: { colour: string; d: string }) {
   );
 }
 
-export default function Learn() {
+export default async function Learn() {
+  const user = await currentUser();
+  const name = firstName(user?.name ?? "", "there");
   return (
     <>
       <div className="hd">
         <div>
           <h1>Today</h1>
           <div className="mod" style={{ marginTop: 4 }}>
-            {profile.daysToDse} days to DSE · {profile.coverage} of {profile.coverageTotal} topics
+            Hi {name} · {profile.daysToDse} days to DSE · {profile.coverage} of {profile.coverageTotal} topics
           </div>
         </div>
         <span className="streak">

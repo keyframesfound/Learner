@@ -48,7 +48,13 @@ export default function ItemPlayer({ lesson }: { lesson: string }) {
 
       <span className="tag">{item.level}</span>
       <h2 className="q">{item.prompt}</h2>
-      {item.code && <div className="code">{item.code}</div>}
+      {item.code && (
+        <div className="code">
+          {item.code.map((line, k) => (
+            <span key={k}><span className="ln">{k + 1}</span>{line}</span>
+          ))}
+        </div>
+      )}
 
       <div className="opts">
         {item.options.map((o, k) => {

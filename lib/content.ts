@@ -47,20 +47,6 @@ export const lessons: Lesson[] = [
 
 export type Option = { text: string; code?: boolean };
 
-export const item = {
-  level: "Hard",
-  prompt: "Which name is valid Python?",
-  code: "items = [1, 2, 3]",
-  options: [
-    { text: "2cool" },
-    { text: "cool_2", code: true },
-    { text: "cool-2" },
-    { text: "class" },
-  ],
-  answer: 1,
-  why: "cool_2 — starts with a letter, and underscores are allowed.",
-  wrongWhy: "Names cannot start with a digit, and cool-2 parses as a subtraction. Answer: cool_2.",
-};
 
 export type BattleQuestion = {
   topic: string;
@@ -152,7 +138,7 @@ export const concept = {
 export type Item = {
   level: string;
   prompt: string;
-  code?: string;
+  code?: string[];
   options: { text: string; code?: boolean }[];
   answer: number;
   why: string;
@@ -163,7 +149,7 @@ export const lessonItems: Item[] = [
   {
     level: "Hard",
     prompt: "Which name is valid Python?",
-    code: "items = [1, 2, 3]",
+    code: ["items = [1, 2, 3]", "print(items[2])"],
     options: [{ text: "2cool" }, { text: "cool_2", code: true }, { text: "cool-2" }, { text: "class" }],
     answer: 1,
     why: "cool_2 — starts with a letter, and underscores are allowed.",

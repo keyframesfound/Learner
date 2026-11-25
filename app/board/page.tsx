@@ -1,6 +1,9 @@
 import { board } from "@/lib/content";
+import { currentUser, firstName } from "@/lib/session";
 
-export default function Board() {
+export default async function Board() {
+  const user = await currentUser();
+  const me = firstName(user?.name ?? "", "you");
   const [first, second, third, ...rest] = board;
   return (
     <>
@@ -23,7 +26,7 @@ export default function Board() {
         {rest.map((r) => (
           <div key={r.rank} className="row" style={{ boxShadow: "3px 3px 0 var(--line)" }}>
             <span className="no" style={{ flex: "0 0 26px", height: 26, borderRadius: 5 }}>{r.rank}</span>
-            <span className="txt"><b>{r.name}</b></span>
+            <span className="txt"><b>{r.name.includes("you") ? `${me} (you)` : r.name}</b></span>
             <span className="mono">{r.items}</span>
           </div>
         ))}

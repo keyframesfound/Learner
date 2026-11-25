@@ -1,6 +1,9 @@
 import { profile, subjects } from "@/lib/content";
+import { currentUser, firstName } from "@/lib/session";
 
-export default function Me() {
+export default async function Me() {
+  const user = await currentUser();
+  const name = firstName(user?.name ?? "", profile.name);
   const stats = [
     ["Streak", profile.streak + " days"],
     ["Items today", String(profile.itemsToday)],
@@ -11,8 +14,8 @@ export default function Me() {
     <>
       <div className="hd">
         <div>
-          <h1>{profile.name}</h1>
-          <div className="mod" style={{ marginTop: 4 }}>{profile.form} · ICT</div>
+          <h1>{name}</h1>
+          <div className="mod" style={{ marginTop: 4 }}>{profile.form} · ICT {user ? "· signed in with Google" : ""}</div>
         </div>
       </div>
 
