@@ -15,9 +15,13 @@ export function middleware(req: NextRequest) {
 
   /* cheap check: a session cookie, not a database round trip */
   if (!getSessionCookie(req)) {
-    /* a relative Location keeps the public prefix intact behind the proxy,
-       and avoids Next re-applying basePath to an absolute URL */
-    return new NextResponse(null, { status: 307, headers: { location: BASE + "/login" } });
+    /* plain Response: NextResponse.redirect re-applies basePath, and a relative
+       Location is rejected when the URL is parsed. Apache forwards the host. */
+    const proto = req.headers.get("x-forwarded-proto") ?? "https";
+    const host =
+      req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? req.nextUrl.host;
+    const location = proto + "://" + host + BASE + "/login";
+    return new Response(null, { status: 307, headers: { location } });
   }
   return NextResponse.next();
 }
