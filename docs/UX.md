@@ -141,8 +141,15 @@ the screen has exactly one thing to do.
 
 ### Board
 
-A table with rules, not cards. Rank column in mono, name, items faced, accuracy.
-The student's own row is lime. The footnote states the rule in one line.
+A podium, not a table. The top three stand on blocks of real height, first place in
+lime, with the number set in Archivo Black. Below it, the student's own card is
+inverted to ink with an orange shadow — orange already means "you are here" — and
+carries a bar plus the line "6 items to pass Lam Ho Yin". That line is the point of
+the page: a rank is a verdict, a gap is a task.
+
+Only the top three and the student appear. A full list tells the bottom half of a
+class that they are the bottom half, which is the opposite of what the leaderboard is
+for. The header pill reads "14/18 showed up" — the honest measure of a class.
 
 ## Motion
 

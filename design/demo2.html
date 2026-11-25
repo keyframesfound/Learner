@@ -188,20 +188,54 @@
   .band.bad .btn{background:#fff;color:var(--ink);border-color:var(--ink);box-shadow:5px 5px 0 rgba(0,0,0,.25)}
 
   /* ── board ────────────────────────────────── */
-  .bhead{padding:14px 18px 10px}
-  .bhead h2{font-family:'Archivo Black',sans-serif;font-size:26px;letter-spacing:-.6px}
-  .bhead p{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.8px;color:var(--ink-3);text-transform:uppercase;margin-top:4px}
-  .table{padding:0 18px;display:grid;gap:0;border:3px solid var(--ink);border-radius:8px;overflow:hidden;background:#fff;box-shadow:5px 5px 0 var(--ink);margin:0 18px}
-  .tr{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:2px solid var(--line)}
-  .tr:last-child{border-bottom:0}
-  .tr.me{background:var(--lime)}
-  .tr .r{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--ink-3);width:20px}
-  .tr .nm{flex:1;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .tr .sc{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;text-align:right}
-  .tr .pc{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-3);width:38px;text-align:right}
-  .tr.me .pc{color:var(--ink-2)}
+  .bhead{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 18px 10px}
+  .bhead h2{font-family:'Archivo Black',sans-serif;font-size:27px;letter-spacing:-.8px;line-height:1}
+  .bhead p{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.7px;color:var(--ink-3);text-transform:uppercase;margin-top:5px;font-weight:600}
+  .showed{
+    border:3px solid var(--ink);border-radius:999px;padding:6px 11px;background:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.6px;
+    white-space:nowrap;box-shadow:3px 3px 0 var(--line);
+  }
+
+  .podium{display:flex;align-items:flex-end;gap:8px;padding:8px 18px 0}
+  .pod{
+    flex:1;border:3px solid var(--ink);border-radius:10px;background:#fff;
+    display:flex;flex-direction:column;align-items:center;padding:10px 4px 0;
+    box-shadow:5px 5px 0 var(--ink);overflow:hidden;
+  }
+  .pod .num{font-family:'Archivo Black',sans-serif;font-size:25px;line-height:1}
+  .pod .nm{font-size:11px;font-weight:700;margin-top:7px;line-height:1.15;max-width:100%;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pod .val{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-2);margin-top:2px}
+  .pod.p1{height:140px;background:var(--lime)}
+  .pod.p2{height:110px}
+  .pod.p3{height:94px}
+
+  .mecard{
+    margin:20px 18px 0;border:3px solid var(--ink);border-radius:10px;background:var(--ink);
+    color:var(--paper);box-shadow:5px 5px 0 var(--orange);padding:12px 14px;
+  }
+  .mehead{display:flex;align-items:center;gap:10px}
+  .mehead .rank{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--ink);
+    background:var(--paper);border-radius:4px;padding:2px 6px;
+  }
+  .mehead .who{flex:1;font-size:15px;font-weight:700}
+  .mehead .val{font-family:'Archivo Black',sans-serif;font-size:20px;color:var(--lime)}
+  .track{margin-top:10px;height:12px;border:2px solid var(--paper);border-radius:99px;background:#3A3A36;overflow:hidden}
+  .track i{display:block;height:100%;background:var(--lime);border-radius:99px}
+  .gap{margin-top:9px;font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#B9B9AE;letter-spacing:.3px}
+  .gap b{color:var(--orange);font-weight:700}
+
+  .rest{padding:16px 18px 0;display:grid;gap:7px}
+  .restrow{display:flex;align-items:center;gap:10px;padding:8px 10px;border:2px solid var(--line);border-radius:8px;background:#fff}
+  .restrow .r{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);width:18px}
+  .restrow .nm{flex:1;font-size:13px;font-weight:700}
+  .restrow .v{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700}
+
   .note{padding:14px 18px 0;font-size:12.5px;line-height:1.5;color:var(--ink-2)}
   .note b{background:var(--lime);padding:0 3px;border:1px solid var(--ink);border-radius:3px}
+
 
   .tabbar{
     margin-top:auto;flex:0 0 auto;display:flex;align-items:flex-end;justify-content:space-between;
@@ -348,21 +382,38 @@
   </section>
 
   <!-- ───── BOARD ───── -->
-  <section class="screen" id="s-board">
+    <section class="screen" id="s-board">
     <div class="bhead">
-      <h2>Today / 4B</h2>
-      <p>Resets 00:00 HKT · 18 students</p>
+      <div>
+        <h2>Today</h2>
+        <p>4B · resets 00:00 HKT</p>
+      </div>
+      <span class="showed"><b>14</b>/18 SHOWED UP</span>
     </div>
 
-    <div class="table">
-      <div class="tr"><span class="r">01</span><span class="nm">Mei Lam</span><span class="sc">38</span><span class="pc">92%</span></div>
-      <div class="tr"><span class="r">02</span><span class="nm">Chan Ka Ho</span><span class="sc">35</span><span class="pc">71%</span></div>
-      <div class="tr"><span class="r">03</span><span class="nm">Wong Tsz Yan</span><span class="sc">31</span><span class="pc">84%</span></div>
-      <div class="tr"><span class="r">04</span><span class="nm">Lam Ho Yin</span><span class="sc">29</span><span class="pc">77%</span></div>
-      <div class="tr me"><span class="r">11</span><span class="nm">You</span><span class="sc">22</span><span class="pc">88%</span></div>
+    <div class="podium">
+      <div class="pod p2"><span class="num">2</span><span class="nm">Chan Ka Ho</span><span class="val">35</span></div>
+      <div class="pod p1"><span class="num">1</span><span class="nm">Mei Lam</span><span class="val">38</span></div>
+      <div class="pod p3"><span class="num">3</span><span class="nm">Wong Tsz Yan</span><span class="val">31</span></div>
     </div>
 
-    <p class="note">Sorted by <b>items faced</b>, not by score. A wrong answer still counts — that is the point.</p>
+    <div class="mecard">
+      <div class="mehead">
+        <span class="rank">11</span>
+        <span class="who">You</span>
+        <span class="val">22</span>
+      </div>
+      <div class="track"><i style="width:58%"></i></div>
+      <div class="gap">6 items to pass <b>Lam Ho Yin</b></div>
+    </div>
+
+    <div class="rest">
+      <div class="restrow"><span class="r">04</span><span class="nm">Lam Ho Yin</span><span class="v">29</span></div>
+      <div class="restrow"><span class="r">05</span><span class="nm">Ng Sum Yuet</span><span class="v">27</span></div>
+      <div class="restrow"><span class="r">06</span><span class="nm">Ho Wai Ching</span><span class="v">26</span></div>
+    </div>
+
+    <p class="note">Ranked by <b>items faced</b>. A wrong answer still counts.</p>
 
     <nav class="tabbar">
       <button class="tab" data-tab="path" data-go="path">
