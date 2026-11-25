@@ -62,6 +62,24 @@ Elective part (schools typically teach one):
 | E3 | Astronomy and Space Science |
 | E4 | Medical Physics |
 
+## Subjects beyond ICT and Physics
+
+Nothing in the tree is specialised to two subjects. A track is any DSE elective, and a
+module is any unit from that subject's C&A Guide. The platform ships with the tree for
+whichever subjects a school teaches, seeded from content/: the current DSE elective
+set includes Biology, Chemistry, Physics, Geography, Economics, Business Accounting
+and Financial Management, History, Chinese History, Visual Arts, Physical Education,
+Design and Applied Technology, and ICT.
+
+Track ids are two to four lowercase letters (ict, phy, bio, che, geo, eco, bafs, hist).
+Module ids are track-prefixed (bio.u3, geo.f1). Adding a subject is a seed file, not a
+code change — which is the test of whether this mapping is general or just ICT-shaped.
+
+Only two things are subject-specific: which runner a block offers (python, html, sql)
+and whether numeric answers need units. Everything else — items, rungs, spacing,
+mastery, coverage — is identical across subjects, which is why Geography gets spaced
+repetition on the day it is seeded rather than after a rewrite.
+
 ## How the mapping earns its keep
 
 **Mock paper generation.** Paper 1 Section A is 40 MCQs drawn from C1–C5. The

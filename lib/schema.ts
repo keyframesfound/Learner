@@ -17,7 +17,8 @@ const uuid = z.string().regex(
 
 const concept = z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'kebab-case concept id');
 
-export const trackId = z.enum(['ict', 'phy']);
+// Two-letter subject ids: ict, phy, bio, che, geo, eco, bafs, hist, ...
+export const trackId = z.string().regex(/^[a-z]{2,4}$/, 'track id: 2-4 lowercase letters');
 export const lang = z.enum(['python', 'html', 'css', 'js', 'sql', 'text']);
 export const level = z.enum(['recognize', 'recall', 'apply', 'construct']);
 
@@ -265,7 +266,7 @@ export function validateBlock(b: Block): BlockIssue[] {
 
 export const lesson = z
   .object({
-    moduleId: z.string().regex(/^(ict|phy)\.[a-z0-9]+$/),
+    moduleId: z.string().regex(/^[a-z]{2,4}\.[a-z0-9]+$/, 'module id like ict.e2c'),
     slug: concept,
     title: z.string().min(3).max(80),
     summary: z.string().max(200).default(''),

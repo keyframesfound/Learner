@@ -1,6 +1,7 @@
 # Learner
 
-An interactive DSE learning platform for **ICT** and **Physics**.
+An interactive DSE learning platform. Ships with **ICT** and **Physics**, and any
+other elective is a seed file rather than a code change.
 
 Notes → inline checks → live code runners → teacher analytics. Built around the
 HKEAA assessment structure rather than around a language list, so a mock paper is

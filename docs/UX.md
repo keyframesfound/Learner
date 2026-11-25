@@ -28,7 +28,9 @@ Colour. Paper, ink, one accent per subject, and lime reserved for success.
     gold     #FFC94A      me tab
     red      #FF3B30      wrong only
 
-Two accents never touch. Blue means ICT, orange means "this is where you are".
+Semantic colour is fixed and never borrowed: lime means correct, red means wrong,
+orange means "this is where you are". Subject identity is carried by a 9px dot only,
+so Biology green can coexist with a green tick without either meaning the other.
 
 Type.
 
@@ -64,12 +66,20 @@ bottom of the screen: lime with ink text on correct, red with white text on wron
 It carries the verdict word in Archivo Black, one line of why, and the button. No
 floating badge, no confetti.
 
-**Tab bar.** Five tabs, each with its own accent, in the Duolingo manner but in this
-skin: the active tab is a 3px-bordered pill sitting on the bar with a hard 3px ink
-shadow, tinted with that tab's colour — lime for Path, orange for Drills, blue for
-Board, teal for Code, gold for Me. Inactive tabs are 3px transparent with grey
-strokes, so nothing shifts position when selection moves. Badges are red with an ink
-border, pinned to the pill's top-right.
+**Tab bar.** Four tabs: Learn, Drills, Board, Me. Each owns an accent — lime,
+orange, blue, gold — in the Duolingo manner but in this skin: the active tab is a
+3px-bordered pill sitting on the bar with a hard 3px ink shadow, tinted with its own
+colour. Inactive tabs keep a transparent 3px border, so nothing shifts when selection
+moves. Badges are red with an ink border, pinned to the pill's top-right.
+
+There is no Code tab. A code playground is an ICT destination, not an app-wide one;
+it lives inside the lessons that use it and is reachable from the module header. Any
+tab that only makes sense for one subject does not belong in the global bar.
+
+**Subject switcher.** A horizontal row of pills at the top of Learn, one per enrolled
+subject, each carrying a 9px colour dot. The active pill is ink with white text and
+takes the subject colour as its shadow. Subjects a student does not take are absent
+rather than disabled.
 
 **Code panel.** Inverted: ink background, paper text, lime keyword, peach numerals,
 line numbers in #5A5A52. Code should look like a terminal, not like a thought

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Interactive DSE learning platform for ICT and Physics",
+  "description": "Interactive DSE learning platform — micro-items, spaced repetition, in-browser code runners",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
