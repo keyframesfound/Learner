@@ -1,11 +1,14 @@
 #!/bin/sh
-# Pull, migrate, rebuild, restart. Run as developer; no root needed.
+# Pull, publish what is local, migrate, rebuild, restart. Run as developer; no root needed.
 set -e
 export PATH=/usr/lib/postgresql/16/bin:$PATH
 cd /home/developer/learner
-git checkout -- . 2>/dev/null || true
+
+# Anything running-but-uncommitted belongs in the repo before this pulls over it.
+ops/publish.sh "pre-deploy local changes" || echo "publish: warning (continuing)"
+
 git fetch --all -q
-git reset --hard origin/main
+git merge --ff-only origin/main
 
 # schema + seed are idempotent; a failure here must not take the app down
 if grep -q '^DATABASE_URL=' .env; then

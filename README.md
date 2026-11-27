@@ -49,6 +49,22 @@ PostgreSQL 16 · Drizzle · Better Auth · Caddy · Docker Compose · Vercel-opt
     make deploy     # caddy + app + postgres on one box
     make dump       # nightly pg_dump, 7-day rotation
 
+## Deploy on ai.ssc.edu.hk (the live box)
+
+The live tree is `/home/developer/learner`, served by `learner.service` on
+127.0.0.1:3000 and mounted at https://ai.ssc.edu.hk/learner (Apache proxy).
+
+**The server tree is the source of truth** — what runs is what is in that working
+directory. So a change is only finished once it is committed and pushed:
+
+    ops/publish.sh "what changed"    # commit + push if dirty, no-op when clean
+    ops/deploy.sh                    # publish, pull, migrate, build, restart
+
+`ops/publish.sh` also runs from cron every 10 minutes, so uncommitted edits on the
+box reach GitHub on their own (log: `/home/developer/learner-publish.log`).
+`ops/deploy.sh` publishes before it pulls, so it can never silently discard local
+work — it used to `git reset --hard`.
+
 ## Licence
 
 MIT

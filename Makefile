@@ -1,6 +1,6 @@
 SHELL := /bin/sh
 
-.PHONY: up down build logs psql migrate dump restore seed export deploy
+.PHONY: up down build logs psql migrate dump restore seed export deploy publish
 
 up:
 	docker compose up -d --build
@@ -35,3 +35,6 @@ restore:
 deploy:
 	git pull --ff-only
 	docker compose up -d --build app
+
+publish:
+	ops/publish.sh "make publish"
