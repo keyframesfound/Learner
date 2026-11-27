@@ -1,0 +1,202 @@
+{
+ "section": "7.4",
+ "title": "Gas exchange in plants",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "Through which structure does a leaf take in carbon dioxide?",
+   "options": [
+    "Stomata",
+    "Root hairs",
+    "Xylem",
+    "Cuticle"
+   ],
+   "answer": 0,
+   "why": "Gas exchange in plants mainly happens through stomata on the leaf.",
+   "quote": "Gas exchange in plants is mainly carried out through the stomata.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "What gas do green plants use during respiration?",
+   "options": [
+    "Carbon dioxide",
+    "Nitrogen",
+    "Oxygen",
+    "Hydrogen"
+   ],
+   "answer": 2,
+   "why": "Plants use oxygen and release energy in respiration.",
+   "quote": "During respiration, they use oxygen and produce carbon dioxide.",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "Under light conditions, what is the net result for carbon dioxide?",
+   "options": [
+    "Net release",
+    "No net change",
+    "Net synthesis",
+    "Net uptake"
+   ],
+   "answer": 3,
+   "why": "Photosynthesis outpaces respiration, so plants take in more carbon dioxide.",
+   "quote": "As a result, there is a net uptake of carbon dioxide.",
+   "level": "apply"
+  },
+  {
+   "no": 4,
+   "prompt": "Under dark conditions, what gas shows net uptake?",
+   "options": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Nitrogen",
+    "Methane"
+   ],
+   "answer": 1,
+   "why": "In darkness only respiration occurs, so plants take up oxygen.",
+   "quote": "Therefore, there is a net release of carbon dioxide and a net uptake of oxygen.",
+   "level": "recall"
+  },
+  {
+   "no": 5,
+   "prompt": "Under light conditions, what do green plants carry out?",
+   "options": [
+    "Photosynthesis only",
+    "Respiration only",
+    "Photosynthesis and respiration",
+    "Neither process"
+   ],
+   "answer": 2,
+   "why": "Both photosynthesis and respiration occur under light.",
+   "quote": "Under light conditions: Plants carry out both photosynthesis and respiration.",
+   "level": "recall"
+  },
+  {
+   "no": 6,
+   "prompt": "Under light, how does the rate of photosynthesis compare with respiration?",
+   "options": [
+    "Lower than respiration",
+    "Higher than respiration",
+    "Exactly equal",
+    "Zero"
+   ],
+   "answer": 1,
+   "why": "Photosynthesis runs faster under light conditions.",
+   "quote": "The rate of photosynthesis is higher than the rate of respiration.",
+   "level": "recall"
+  },
+  {
+   "no": 7,
+   "prompt": "Under light conditions, what gas is released net by the plant?",
+   "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Water vapour",
+    "Methane"
+   ],
+   "answer": 0,
+   "why": "Plants release more oxygen from photosynthesis than they use.",
+   "quote": "As a result, there is a net release of oxygen.",
+   "level": "apply"
+  },
+  {
+   "no": 8,
+   "prompt": "What do stomata allow gases like carbon dioxide and oxygen to do?",
+   "options": [
+    "Be stored in the leaf",
+    "Be released as heat",
+    "Pass through the xylem",
+    "Move into or out of the leaves"
+   ],
+   "answer": 3,
+   "why": "Stomata let gases enter and leave the leaf.",
+   "quote": "They allow gases like carbon dioxide and oxygen to move into or out of the leaves",
+   "level": "recognize"
+  },
+  {
+   "no": 9,
+   "prompt": "What does the net gas exchange in plants depend on?",
+   "options": [
+    "The relative rates of photosynthesis and respiration",
+    "Only the light intensity",
+    "Only leaf size",
+    "Soil temperature"
+   ],
+   "answer": 0,
+   "why": "Net gas exchange depends on the balance of the two rates.",
+   "quote": "The net gas exchange in plants depends on the relative rates of photosynthesis and respiration.",
+   "level": "recall"
+  },
+  {
+   "no": 10,
+   "prompt": "When does respiration occur in green plants?",
+   "options": [
+    "Only under light",
+    "All the time",
+    "Only at night",
+    "Only in dark conditions"
+   ],
+   "answer": 1,
+   "why": "Respiration happens continuously, in light and dark.",
+   "quote": "Respiration occurs all the time in green plants.",
+   "level": "recall"
+  },
+  {
+   "no": 11,
+   "prompt": "Which colour does hydrogencarbonate indicator show at higher than normal carbon dioxide levels?",
+   "options": [
+    "red",
+    "blue",
+    "yellow",
+    "purple"
+   ],
+   "answer": 2,
+   "why": "Higher-than-normal carbon dioxide makes the indicator yellow.",
+   "quote": "Hydrogencarbonate indicator shows different colours at different levels of carbon dioxide.",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "What can the data logger with an oxygen sensor measure?",
+   "options": [
+    "sunlight intensity",
+    "wind speed",
+    "changes in oxygen content",
+    "air pressure"
+   ],
+   "answer": 2,
+   "why": "The data logger with an oxygen sensor measures oxygen content around the leaves.",
+   "quote": "The data logger with an oxygen sensor can measure and record the changes in oxygen content",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Approximately what percentage of carbon dioxide is in normal air?",
+   "options": [
+    "4%",
+    "0.9%",
+    "0.04%",
+    "21%"
+   ],
+   "answer": 2,
+   "why": "Normal air contains about 0.04% carbon dioxide.",
+   "quote": "normal level in air (about 0.04%)",
+   "level": "recall"
+  },
+  {
+   "no": 20,
+   "prompt": "What gas do green plants use during photosynthesis?",
+   "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Water",
+    "Nitrogen"
+   ],
+   "answer": 1,
+   "why": "Plants use carbon dioxide during photosynthesis.",
+   "quote": "During photosynthesis, they use carbon dioxide and produce oxygen.",
+   "level": "recall"
+  }
+ ]
+}

@@ -1,0 +1,286 @@
+{
+ "section": "7.1",
+ "title": "Air",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "Which gas makes up about 78% of clean air?",
+   "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Nitrogen",
+    "Argon"
+   ],
+   "answer": 2,
+   "why": "Air mainly contains nitrogen (78%).",
+   "quote": "Air is a mixture of gases. It contains nitrogen (78%), oxygen (21%), carbon dioxide (0.04%), noble gases (about 0.9%), water vapour and other gases.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "Which gas makes up about 21% of air?",
+   "options": [
+    "Oxygen",
+    "Nitrogen",
+    "Carbon dioxide",
+    "Noble gases"
+   ],
+   "answer": 0,
+   "why": "Air contains oxygen (21%).",
+   "quote": "Air is a mixture of gases. It contains nitrogen (78%), oxygen (21%), carbon dioxide (0.04%), noble gases (about 0.9%), water vapour and other gases.",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "What percentage of air is carbon dioxide?",
+   "options": [
+    "0.9%",
+    "21%",
+    "78%",
+    "0.04%"
+   ],
+   "answer": 3,
+   "why": "Carbon dioxide makes up 0.04% of air.",
+   "quote": "carbon dioxide (0.04%)",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "What happens to a glowing splint in oxygen?",
+   "options": [
+    "Goes out",
+    "Relights",
+    "Stays the same",
+    "Burns colder"
+   ],
+   "answer": 1,
+   "why": "Oxygen relights a glowing splint.",
+   "quote": "It relights a glowing splint.",
+   "level": "recall"
+  },
+  {
+   "no": 5,
+   "prompt": "What does carbon dioxide turn lime water into?",
+   "options": [
+    "Green",
+    "Colourless",
+    "Milky",
+    "Blue"
+   ],
+   "answer": 2,
+   "why": "Carbon dioxide turns lime water from colourless to milky.",
+   "quote": "It turns lime water from colourless to milky.",
+   "level": "recall"
+  },
+  {
+   "no": 6,
+   "prompt": "What does water do to dry cobalt chloride paper?",
+   "options": [
+    "Turns it blue",
+    "Turns it red",
+    "Rots the paper",
+    "Turns it pink"
+   ],
+   "answer": 3,
+   "why": "Water turns dry cobalt chloride paper from blue to pink.",
+   "quote": "It turns dry cobalt chloride paper from blue to pink.",
+   "level": "recall"
+  },
+  {
+   "no": 7,
+   "prompt": "How is nitrogen best described?",
+   "options": [
+    "Unreactive",
+    "Very reactive",
+    "Very dense",
+    "Flammable"
+   ],
+   "answer": 0,
+   "why": "Nitrogen is unreactive.",
+   "quote": "Nitrogen is unreactive.",
+   "level": "recognize"
+  },
+  {
+   "no": 8,
+   "prompt": "Which property of oxygen makes it useful for welding metals?",
+   "options": [
+    "Does not support burning",
+    "Is very dense",
+    "Supports burning",
+    "Is unreactive"
+   ],
+   "answer": 2,
+   "why": "Oxygen supports burning, giving a very hot flame for cutting and welding metals.",
+   "quote": "Oxygen supports burning.",
+   "level": "apply"
+  },
+  {
+   "no": 9,
+   "prompt": "At what temperature does dry ice change directly to gas?",
+   "options": [
+    "–196 °C",
+    "–78 °C",
+    "0 °C",
+    "100 °C"
+   ],
+   "answer": 1,
+   "why": "Dry ice changes from solid to gas directly at –78 °C.",
+   "quote": "It changes to gas directly at –78 °C (i.e. without going through the liquid state).",
+   "level": "recall"
+  },
+  {
+   "no": 10,
+   "prompt": "Which best describes a mixture?",
+   "options": [
+    "Substances chemically joined together",
+    "A single substance",
+    "A compound",
+    "Substances mixed, no new substance"
+   ],
+   "answer": 3,
+   "why": "A mixture forms when substances mix without making a new substance.",
+   "quote": "A mixture is formed when two or more substances mix with each other without the formation of a new substance.",
+   "level": "recognize"
+  },
+  {
+   "no": 11,
+   "prompt": "What percentage of clean air is noble gases?",
+   "options": [
+    "0.9%",
+    "0.04%",
+    "21%",
+    "78%"
+   ],
+   "answer": 0,
+   "why": "Noble gases make up about 0.9% of air.",
+   "quote": "noble gases (about 0.9%)",
+   "level": "recall"
+  },
+  {
+   "no": 12,
+   "prompt": "What is nitrogen's boiling point?",
+   "options": [
+    "–78 °C",
+    "0 °C",
+    "–196 °C",
+    "100 °C"
+   ],
+   "answer": 2,
+   "why": "Nitrogen has a very low boiling point of –196 °C.",
+   "quote": "Nitrogen has a very low boiling point (–196 °C).",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "Which gas does not support burning?",
+   "options": [
+    "Nitrogen",
+    "Carbon dioxide",
+    "Oxygen",
+    "Air"
+   ],
+   "answer": 1,
+   "why": "Carbon dioxide does not support burning.",
+   "quote": "Carbon dioxide does not support burning.",
+   "level": "recognize"
+  },
+  {
+   "no": 14,
+   "prompt": "Why do helium-filled balloons float in air?",
+   "options": [
+    "Helium is very unreactive",
+    "Helium is heavier than air",
+    "Helium supports burning",
+    "Helium is less dense than air"
+   ],
+   "answer": 3,
+   "why": "Helium is less dense than air, so helium balloons float.",
+   "quote": "As helium is less dense than air, helium-filled balloons float in air.",
+   "level": "apply"
+  },
+  {
+   "no": 15,
+   "prompt": "Which gases are used to fill neon signs?",
+   "options": [
+    "Neon and argon",
+    "Oxygen and nitrogen",
+    "Helium and argon",
+    "Carbon dioxide and neon"
+   ],
+   "answer": 0,
+   "why": "Argon and neon are used to fill neon signs.",
+   "quote": "Argon and neon are used to fill neon signs.",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "Why is nitrogen used in food packets?",
+   "options": [
+    "To keep the food cold",
+    "Replace air to keep food longer",
+    "To make the food taste sweeter",
+    "To prevent drying out"
+   ],
+   "answer": 1,
+   "why": "Nitrogen replaces air in food packets to prevent food from reacting with oxygen.",
+   "quote": "Nitrogen is used to replace the air in food packets.",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "What can liquid nitrogen be used for?",
+   "options": [
+    "Storage of living cells or tissues",
+    "Filling balloons",
+    "Filling neon signs",
+    "Producing a dense fog"
+   ],
+   "answer": 0,
+   "why": "Liquid nitrogen can be used in the storage of living cells or tissues.",
+   "quote": "Liquid nitrogen can be used in the storage of living cells or tissues (e.g. cord blood).",
+   "level": "apply"
+  },
+  {
+   "no": 18,
+   "prompt": "What gas is contained in some fire extinguishers?",
+   "options": [
+    "Nitrogen",
+    "Helium",
+    "Carbon dioxide",
+    "Oxygen"
+   ],
+   "answer": 2,
+   "why": "Some fire extinguishers contain carbon dioxide.",
+   "quote": "Some fire extinguishers contain carbon dioxide.",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Why does carbon dioxide from a fire extinguisher put out a fire?",
+   "options": [
+    "It cools the fire down",
+    "It produces a hot flame",
+    "It displaces the surrounding air",
+    "It turns the fire into fog"
+   ],
+   "answer": 2,
+   "why": "Carbon dioxide sinks and displaces the air around the fire, cutting off oxygen supply.",
+   "quote": "Carbon dioxide released from the fire extinguisher sinks and displaces the air surrounding the fire. This cuts off the oxygen supply and helps put out the fire.",
+   "level": "apply"
+  },
+  {
+   "no": 20,
+   "prompt": "What is liquid nitrogen used for in commercial freezing systems?",
+   "options": [
+    "Filling balloons",
+    "Storage of living cells",
+    "Filling neon signs",
+    "Freezing foods rapidly"
+   ],
+   "answer": 3,
+   "why": "Liquid nitrogen is used to freeze foods like fruits rapidly.",
+   "quote": "Liquid nitrogen is used in commercial freezing systems to freeze foods like fruits rapidly.",
+   "level": "recall"
+  }
+ ]
+}

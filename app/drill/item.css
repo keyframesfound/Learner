@@ -27,7 +27,7 @@
 .v-item .v-x {
   flex: 0 0 auto;
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   line-height: 1;
   color: var(--ink);
@@ -64,7 +64,7 @@
   margin-left: auto;
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: 1px;
   color: var(--ink-2);
   white-space: nowrap;
@@ -92,7 +92,7 @@
   border-radius: 4px;
   color: var(--red-ink);
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
@@ -104,6 +104,14 @@
   line-height: 1.14;
   letter-spacing: -.7px;
   overflow-wrap: anywhere;
+  /* numbered statements are imported one per line; keep them that way */
+  white-space: pre-line;
+}
+
+.v-item .v-q.long {
+  font-size: clamp(20px, 5.4vw, 26px);
+  line-height: 1.24;
+  letter-spacing: -.2px;
 }
 
 .v-item .v-code {
@@ -115,7 +123,7 @@
   box-shadow: 5px 5px 0 var(--line);
   color: #E8E6DC;
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.8;
   white-space: pre;
   overflow-x: auto;
@@ -140,7 +148,7 @@
   box-shadow: 4px 4px 0 var(--ink);
   color: var(--ink);
   font-family: inherit;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   text-align: left;
   cursor: pointer;
@@ -158,20 +166,20 @@
   border-radius: 4px;
   background: var(--paper);
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 }
 .v-item .v-opt .v-codetext {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 15px;
 }
 .v-item .v-opt.sel {
-  background: var(--blue);
-  border-color: var(--blue);
+  background: var(--ink);
+  border-color: var(--ink);
   color: #fff;
-  box-shadow: 4px 4px 0 var(--ink);
+  box-shadow: 4px 4px 0 var(--line);
 }
-.v-item .v-opt.sel .v-letter { background: #fff; border-color: #fff; color: var(--blue); }
+.v-item .v-opt.sel .v-letter { background: var(--lime); border-color: var(--lime); color: var(--ink); }
 .v-item .v-opt.good {
   background: var(--lime);
   border-color: var(--ink);
@@ -201,14 +209,14 @@
   display: block;
   margin-bottom: 4px;
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 20px;
   letter-spacing: -.3px;
 }
 .v-item .v-why {
   max-height: 24vh;
   margin-bottom: 12px;
   overflow-y: auto;
-  font-size: 12.5px;
+  font-size: 14.5px;
   font-weight: 500;
   line-height: 1.5;
   opacity: .88;
@@ -227,7 +235,7 @@
   box-shadow: 5px 5px 0 rgba(0, 0, 0, .35);
   color: var(--lime);
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 17px;
   letter-spacing: 0;
   text-align: center;
   text-decoration: none;
@@ -261,7 +269,7 @@
 .v-item .v-kicker {
   margin-top: 12px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.4px;
   text-transform: uppercase;
@@ -270,14 +278,14 @@
 .v-item .v-ntitle {
   margin: 6px 0 14px;
   font-family: var(--font-display);
-  font-size: 30px;
+  font-size: 32px;
   line-height: 1.05;
   letter-spacing: -.9px;
   overflow-wrap: anywhere;
 }
 .v-item .v-p {
   margin-bottom: 12px;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1.65;
   color: var(--ink-2);
   overflow-wrap: anywhere;
@@ -291,7 +299,7 @@
   box-shadow: 4px 4px 0 var(--line);
   overflow-x: auto;
 }
-.v-item .v-cmp { width: 100%; border-collapse: collapse; font-size: 12.5px; line-height: 1.4; }
+.v-item .v-cmp { width: 100%; border-collapse: collapse; font-size: 14.5px; line-height: 1.4; }
 .v-item .v-cmp th,
 .v-item .v-cmp td {
   padding: 8px 10px;
@@ -303,7 +311,7 @@
   background: var(--ink);
   color: var(--paper);
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .6px;
   text-transform: uppercase;
@@ -319,7 +327,7 @@
   border-left: 4px solid var(--blue);
   border-radius: 0 6px 6px 0;
   background: #EEF3F8;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.55;
   color: var(--ink);
 }
@@ -327,7 +335,7 @@
   flex: 0 0 auto;
   padding-top: 2px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: .5px;
   color: var(--blue);
@@ -361,14 +369,14 @@
 .v-item .v-done-title {
   margin-top: 4px;
   font-family: var(--font-display);
-  font-size: 34px;
+  font-size: 36px;
   line-height: 1.05;
   letter-spacing: -1.2px;
 }
 .v-item .v-done-sub {
   margin-top: 6px;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 12.5px;
   color: var(--ink-3);
 }
 .v-item .v-stats { display: flex; gap: 9px; width: 100%; max-width: 340px; margin: 22px 0 26px; }
@@ -383,12 +391,12 @@
 .v-item .v-stat b {
   display: block;
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 26px;
   letter-spacing: -.8px;
 }
 .v-item .v-stat span {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: .6px;
   text-transform: uppercase;
   color: var(--ink-3);
@@ -398,7 +406,7 @@
   justify-self: center;
   margin-top: 6px;
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 12.5px;
   font-weight: 700;
   letter-spacing: .4px;
   color: var(--ink-3);
@@ -426,10 +434,10 @@
   display: block;
   margin-bottom: 6px;
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--ink);
 }
-.v-item .v-empty p { font-size: 12.5px; line-height: 1.6; }
+.v-item .v-empty p { font-size: 14.5px; line-height: 1.6; }
 .v-item .v-empty .v-btn { margin-top: 14px; }
 
 @keyframes v-pop {
@@ -443,9 +451,9 @@
 }
 
 @media (max-width: 400px) {
-  .v-item .v-q { font-size: 28px; }
-  .v-item .v-done-title { font-size: 30px; }
-  .v-item .v-ntitle { font-size: 27px; }
+  .v-item .v-q { font-size: 30px; }
+  .v-item .v-done-title { font-size: 32px; }
+  .v-item .v-ntitle { font-size: 29px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -457,3 +465,94 @@
   .v-item .v-btn:active { transform: none; }
   .v-item .v-burst { animation: none; }
 }
+
+/* desktop: these plates were phone-width, which left the column floating in dead space */
+@media (min-width: 900px) {
+  .v-item { max-width: 860px; }
+}
+
+/* ── fill in the blank ──────────────────────────────────────── */
+.v-item .v-fill { display: grid; gap: 8px; padding: 0 18px 18px; }
+.v-item .v-fill-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.v-item .v-input {
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 12px;
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 20px;
+  font-weight: 600;
+}
+.v-item .v-input::placeholder { color: var(--ink-3); font-size: 14px; font-weight: 400; }
+.v-item .v-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0 var(--ink), inset 0 -3px 0 var(--lime);
+}
+.v-item .v-input.good { background: var(--lime); }
+.v-item .v-input.bad { background: #FFE0DC; }
+.v-item .v-input:disabled { opacity: 1; }
+.v-item .v-fill-hint {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-3);
+}
+
+/* provenance: which paper and question an item came from */
+.v-item .v-source {
+  margin: 0 18px 14px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: .4px;
+  color: var(--ink-3);
+}
+
+/* a failed save must be visible, not swallowed */
+.v-item .v-error {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+/* ── completion screen: the room itself, in pixel art ─────────────────── */
+.v-item.is-done { background: var(--paper); }
+.v-item.is-done .v-scroll.v-center { position: relative; }
+.v-item.is-done .v-scroll.v-center::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(246, 243, 234, .16),
+    rgba(246, 243, 234, .3) 55%,
+    rgba(246, 243, 234, .46)
+  );
+  pointer-events: none;
+}
+.v-item.is-done .v-done {
+  position: relative;
+  z-index: 1;
+  margin: auto;
+  padding: 26px 20px 24px;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 7px 7px 0 var(--ink);
+}
+@media (max-width: 430px) {
+  .v-item.is-done .v-done { margin: 18px auto; }
+}
+

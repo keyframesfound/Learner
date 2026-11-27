@@ -8,6 +8,7 @@ import {
   blocksOf,
   createLesson,
   deleteBlock,
+  deleteCurriculum,
   deleteLesson,
   lessonById,
   moveBlock,
@@ -15,7 +16,7 @@ import {
   updateBlock,
   updateLesson,
 } from "@/lib/teach";
-import { createModule, insertNoteBlock } from "./data";
+import { createModuleQuick, insertNoteBlock } from "./data";
 
 type LessonRecord = {
   id: string;
@@ -76,6 +77,14 @@ async function ownsBlock(v: Viewer, lessonId: string, blockId: string) {
 }
 
 /** parse and validate the mcq contract the drill player renders */
+/** Easy / Medium / Hard map onto the enum's recognise / recall / apply */
+function levelOf(fd: FormData): "recognize" | "recall" | "apply" {
+  const v = text(fd, "level");
+  if (v === "hard") return "apply";
+  if (v === "medium") return "recall";
+  return "recognize";
+}
+
 function parseMcq(fd: FormData): McqPayload | null {
   const prompt = text(fd, "prompt");
   const why = text(fd, "why");
@@ -117,24 +126,18 @@ function parseMcq(fd: FormData): McqPayload | null {
 
 /* ── curriculum ────────────────────────────────────────────────────────── */
 
-export async function createModuleAction(formData: FormData) {
+export async function quickCreateCurriculumAction(formData: FormData) {
   const v = await viewer();
   if (!isStaff(v)) redirect("/login");
-  const staff = v as Viewer;
 
   const name = text(formData, "name");
   const trackId = text(formData, "trackId");
-  const mode = text(formData, "mode");
-  const copyFrom = mode === "copy" ? text(formData, "copyFrom") || null : null;
+  if (!name) redirect("/teach/curriculum");
 
-  const created = await createModule({ name, trackId, copyFrom });
-  if (!created.ok) {
-    redirect("/teach/new?error=" + encodeURIComponent(created.error));
-  }
+  const created = await createModuleQuick({ name, trackId });
+  if (!created.ok) redirect("/teach/curriculum?error=" + encodeURIComponent(created.error));
 
-  revalidatePath("/teach/curriculum");
-  revalidatePath("/teach/admin");
-  revalidatePath("/teach/new");
+  revalidate();
   redirect("/teach/curriculum?c=" + encodeURIComponent(created.id));
 }
 
@@ -190,6 +193,21 @@ export async function updateLessonAction(formData: FormData) {
 
   await updateLesson(lessonId, patch);
   revalidate();
+}
+
+export async function deleteCurriculumAction(formData: FormData) {
+  const v = await viewer();
+  if (!isStaff(v)) redirect("/login");
+  const staff = v as Viewer;
+
+  const moduleId = text(formData, "moduleId");
+  if (!moduleId) return;
+  const back = text(formData, "back") || "/teach/curriculum";
+
+  const gone = await deleteCurriculum(staff, moduleId);
+  revalidate();
+  /* the curriculum list is the only place that can show the outcome after a cascade */
+  redirect(gone ? "/teach/curriculum" : `${back}${back.includes("?") ? "&" : "?"}error=delete-denied`);
 }
 
 export async function deleteLessonAction(formData: FormData) {
@@ -274,7 +292,7 @@ export async function addMcqAction(formData: FormData) {
   if (!(await ownLesson(staff, lessonId))) return;
 
   const back = backPath(formData, `/teach/questions?c=${lesson.module_id}&l=${lessonId}`);
-  const id = await addBlock(lessonId, "mcq", payload);
+  const id = await addBlock(lessonId, "mcq", payload, levelOf(formData));
   revalidate();
   redirect(withParam(back, "q", id));
 }
@@ -295,7 +313,7 @@ export async function updateBlockAction(formData: FormData) {
   if (text(formData, "kind") === "mcq") {
     const payload = parseMcq(formData);
     if (!payload) return;
-    await updateBlock(blockId, payload);
+    await updateBlock(blockId, payload, levelOf(formData));
   } else {
     const md = text(formData, "md");
     if (!md) return;

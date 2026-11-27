@@ -1,0 +1,272 @@
+{
+ "section": "7.3",
+ "title": "Respiration",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "What is the process by which energy is released gradually from food?",
+   "options": [
+    "Photosynthesis",
+    "Boiling",
+    "Respiration",
+    "Digestion"
+   ],
+   "answer": 2,
+   "why": "Energy in food is released gradually by respiration.",
+   "quote": "In living things, energy in food is released gradually when food is broken down through a process called respiration.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "Where does respiration take place?",
+   "options": [
+    "Outside cells",
+    "Inside cells",
+    "In the leaves",
+    "In the roots"
+   ],
+   "answer": 1,
+   "why": "Respiration occurs inside cells.",
+   "quote": "Respiration occurs inside cells.",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "What is usually needed in the process of respiration?",
+   "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Nitrogen",
+    "Water"
+   ],
+   "answer": 0,
+   "why": "Oxygen is usually needed for respiration.",
+   "quote": "Oxygen is usually needed in the process.",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "What are usually produced during respiration?",
+   "options": [
+    "Oxygen and food",
+    "Starch and energy",
+    "Glucose and oxygen",
+    "Carbon dioxide and water"
+   ],
+   "answer": 3,
+   "why": "Carbon dioxide and water are usually produced.",
+   "quote": "food (glucose) + oxygen carbon dioxide + water",
+   "level": "recall"
+  },
+  {
+   "no": 5,
+   "prompt": "What happens to the chemical energy stored in food during respiration?",
+   "options": [
+    "Lost forever",
+    "Converted to other useful energy",
+    "Converted to starch",
+    "Converted to oxygen"
+   ],
+   "answer": 1,
+   "why": "Some chemical energy is converted to other useful forms of energy.",
+   "quote": "Some of the chemical energy in food is converted to other useful forms of energy to support body activities.",
+   "level": "recognize"
+  },
+  {
+   "no": 6,
+   "prompt": "Which chemical equation matches respiration?",
+   "options": [
+    "C6H12O6+6O2→6CO2+6H2O",
+    "6CO2+6H2O→C6H12O6+6O2",
+    "C6H12O6→CO2+H2O",
+    "6O2+6H2O→C6H12O6"
+   ],
+   "answer": 0,
+   "why": "Glucose reacts with oxygen to form carbon dioxide and water.",
+   "quote": "C6H12O6 + 6 O2 6 CO2 + 6 H2O",
+   "level": "recall"
+  },
+  {
+   "no": 7,
+   "prompt": "Where is the energy value of a food shown?",
+   "options": [
+    "Medicine bottles",
+    "Shoe boxes",
+    "Weather reports",
+    "Nutrition labels"
+   ],
+   "answer": 3,
+   "why": "The energy value is shown on nutrition labels.",
+   "quote": "The energy value of food shows the amount of energy provided by a certain quantity of the food.",
+   "level": "recognize"
+  },
+  {
+   "no": 8,
+   "prompt": "What is 1 kcal equal to in kJ?",
+   "options": [
+    "2.1 kJ",
+    "10 kJ",
+    "4.2 kJ",
+    "1 kJ"
+   ],
+   "answer": 2,
+   "why": "1 kcal = 4.2 kJ.",
+   "quote": "1 kcal = 4.2 kJ.",
+   "level": "recall"
+  },
+  {
+   "no": 9,
+   "prompt": "What does the burning of food demonstrate?",
+   "options": [
+    "Food has no energy",
+    "Energy is released when food burns",
+    "Food turns into oxygen",
+    "Respiration happens instantly"
+   ],
+   "answer": 1,
+   "why": "Burning food releases energy.",
+   "quote": "In Practical 7.8, we learnt that energy is released when food burns.",
+   "level": "apply"
+  },
+  {
+   "no": 10,
+   "prompt": "What is food a source of for all living things?",
+   "options": [
+    "Energy",
+    "Oxygen",
+    "Nitrogen",
+    "Starch"
+   ],
+   "answer": 0,
+   "why": "Food is a source of energy for all living things.",
+   "quote": "Food is a source of energy for all living things.",
+   "level": "recognize"
+  },
+  {
+   "no": 11,
+   "prompt": "Why do we still need energy when we sleep?",
+   "options": [
+    "To run and play",
+    "To keep our heart beating",
+    "To digest our food",
+    "To store energy"
+   ],
+   "answer": 1,
+   "why": "Even when we sleep, we need energy to breathe and keep our heart beating.",
+   "quote": "Even when we sleep, we still need energy to breathe and keep our heart beating.",
+   "level": "apply"
+  },
+  {
+   "no": 12,
+   "prompt": "In what units can energy value be expressed?",
+   "options": [
+    "kcal or kJ",
+    "kg or g",
+    "cm or m",
+    "kW or W"
+   ],
+   "answer": 0,
+   "why": "Energy value is often expressed in kilocalories (kcal) or kilojoules (kJ).",
+   "quote": "It is often expressed in kilocalories (kcal) or kilojoules (kJ).",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "How does respiration occur inside cells?",
+   "options": [
+    "A single chemical reaction",
+    "A series of controlled chemical reactions",
+    "In the absence of energy",
+    "As a physical change"
+   ],
+   "answer": 1,
+   "why": "Respiration involves a series of controlled chemical reactions.",
+   "quote": "Respiration involves a series of controlled chemical reactions.",
+   "level": "recall"
+  },
+  {
+   "no": 15,
+   "prompt": "What does the energy value of food show?",
+   "options": [
+    "The weight of the food",
+    "Energy provided by the food",
+    "The colour of the food",
+    "The price of the food"
+   ],
+   "answer": 1,
+   "why": "Energy value shows the amount of energy a certain quantity of food provides.",
+   "quote": "The energy value of food shows the amount of energy provided by a certain quantity of the food.",
+   "level": "recognize"
+  },
+  {
+   "no": 16,
+   "prompt": "What do photosynthesis and respiration do to the same substances?",
+   "options": [
+    "Both make food",
+    "Both release oxygen",
+    "Convert each other's products and reactants",
+    "Neither involves carbon dioxide and water"
+   ],
+   "answer": 2,
+   "why": "Photosynthesis converts carbon dioxide and water into food; respiration converts the food back.",
+   "quote": "Carbon dioxide and water are converted into food in photosynthesis. The food is converted back into carbon dioxide and water in respiration.",
+   "level": "recognize"
+  },
+  {
+   "no": 17,
+   "prompt": "What happens to the energy in food during respiration?",
+   "options": [
+    "It becomes other useful energy",
+    "It disappears completely",
+    "It becomes light only",
+    "It turns into water"
+   ],
+   "answer": 0,
+   "why": "Respiration converts the chemical energy in food into other useful forms.",
+   "quote": "in food (glucose) is converted to other useful",
+   "level": "apply"
+  },
+  {
+   "no": 18,
+   "prompt": "Which unit is used for the energy value of food?",
+   "options": [
+    "Kilocalorie",
+    "Kilogram",
+    "Litre",
+    "Metre"
+   ],
+   "answer": 0,
+   "why": "Energy values on food labels are given in kilocalories.",
+   "quote": "1 kcal",
+   "level": "recognize"
+  },
+  {
+   "no": 19,
+   "prompt": "Which substances react in respiration according to the word equation?",
+   "options": [
+    "Carbon dioxide and water",
+    "Glucose and oxygen",
+    "Carbon dioxide and oxygen",
+    "Water and oxygen"
+   ],
+   "answer": 1,
+   "why": "Glucose and oxygen react in respiration.",
+   "quote": "food (glucose) + oxygen carbon dioxide + water",
+   "level": "recall"
+  },
+  {
+   "no": 20,
+   "prompt": "Where is the energy value of a food usually printed?",
+   "options": [
+    "On the nutrition label",
+    "On the barcode",
+    "On the receipt",
+    "On the packaging date"
+   ],
+   "answer": 0,
+   "why": "Nutrition labels state the energy a food provides.",
+   "quote": "Nutrition labels",
+   "level": "recognize"
+  }
+ ]
+}

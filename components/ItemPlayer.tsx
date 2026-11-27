@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import type { NoteBlock, PlayerItem } from "@/lib/repo";
@@ -36,6 +36,15 @@ function codeLine(line: string, k: number) {
   );
 }
 
+/** What the server says about one answer. The key never travels with the page. */
+type Verdict = {
+  correct: boolean;
+  answerIndex: number | null;
+  answerText: string;
+  why: string;
+  wrongWhy: string;
+};
+
 type Props = {
   items: PlayerItem[];
   lessonId: string;
@@ -59,16 +68,112 @@ export default function ItemPlayer({
 }: Props) {
   const [i, setI] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
+  const [typed, setTyped] = useState("");
   const [checked, setChecked] = useState(false);
+  const [verdict, setVerdict] = useState<Verdict | null>(null);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [correctCount, setCorrectCount] = useState(0);
   const [done, setDone] = useState(false);
   const [reading, setReading] = useState(notes.length > 0);
   const start = useRef(0);
+  const field = useRef<HTMLInputElement | null>(null);
   const step = String(lessonNumber ?? 1).padStart(2, "0");
 
   useEffect(() => {
     start.current = performance.now();
   }, [i]);
+
+  const item = items[i];
+
+  /* ── answering ─────────────────────────────────────────────── */
+
+  const check = useCallback(async () => {
+    if (!item || checked || pending) return;
+    const isFill = item.kind === "fill";
+    if (isFill ? typed.trim() === "" : picked === null) return;
+
+    const ms = start.current > 0 ? Math.max(0, Math.round(performance.now() - start.current)) : 0;
+    setPending(true);
+    setError(null);
+    try {
+      const res = await fetch("/learner/api/attempt", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          blockId: item.id,
+          lessonId,
+          moduleId,
+          choice: isFill ? null : picked,
+          text: isFill ? typed : null,
+          ms,
+        }),
+        keepalive: true,
+      });
+      const data = (await res.json().catch(() => ({}))) as Verdict & { error?: string };
+      if (!res.ok) throw new Error(data.error ?? `Save failed (${res.status})`);
+      setVerdict({
+        correct: !!data.correct,
+        answerIndex: data.answerIndex ?? null,
+        answerText: data.answerText ?? "",
+        why: data.why ?? "",
+        wrongWhy: data.wrongWhy ?? "",
+      });
+      setChecked(true);
+      if (data.correct) setCorrectCount((n) => n + 1);
+    } catch (err) {
+      /* never swallow this: an unrecorded answer is a hole in the student's record */
+      setError(err instanceof Error ? err.message : "Could not save that answer.");
+    } finally {
+      setPending(false);
+    }
+  }, [checked, item, lessonId, moduleId, pending, picked, typed]);
+
+  const next = useCallback(() => {
+    if (i + 1 >= items.length) setDone(true);
+    else {
+      setI(i + 1);
+      setPicked(null);
+      setTyped("");
+      setChecked(false);
+      setVerdict(null);
+      setError(null);
+    }
+  }, [i, items.length]);
+
+  const pick = (k: number) => {
+    if (checked || pending) return;
+    setPicked(k);
+  };
+
+  /* ── keyboard: 1-4 / A-D to choose, Enter to check, Enter to continue ── */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (done || reading) return;
+      const el = e.target as HTMLElement | null;
+      const typing = el?.tagName === "INPUT" || el?.tagName === "TEXTAREA";
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (checked) next();
+        else void check();
+        return;
+      }
+      if (checked || typing || !item || item.kind === "fill") return;
+      const k = "1234".indexOf(e.key) >= 0 ? "1234".indexOf(e.key) : "abcd".indexOf(e.key.toLowerCase());
+      if (k >= 0 && k < item.options.length) {
+        e.preventDefault();
+        pick(k);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [checked, check, done, item, next, reading]);
+
+  useEffect(() => {
+    if (item?.kind === "fill" && !checked) field.current?.focus();
+  }, [i, item, checked]);
+
+  /* ── chrome ────────────────────────────────────────────────── */
 
   const topBar = (at: number) => (
     <div className="v-top">
@@ -92,7 +197,7 @@ export default function ItemPlayer({
     const pct = items.length ? Math.round((correctCount / items.length) * 100) : 0;
     const perfect = correctCount === items.length && items.length > 0;
     return (
-      <div className="v-item">
+      <div className="v-item is-done">
         <div className="v-scroll v-center">
           <div className="v-done">
             <div className={"v-burst" + (perfect ? " perfect" : "")}>
@@ -190,7 +295,6 @@ export default function ItemPlayer({
     );
   }
 
-  const item = items[i];
   if (items.length === 0 || !item) {
     return (
       <div className="v-item">
@@ -209,45 +313,17 @@ export default function ItemPlayer({
     );
   }
 
-  const correct = picked === item.answer;
+  const isFill = item.kind === "fill";
   const last = i === items.length - 1;
-
-  const pick = (k: number) => {
-    if (checked) return;
-    setPicked(k);
-  };
-
-  const check = () => {
-    if (picked === null || checked) return;
-    const ms = start.current > 0 ? Math.max(0, Math.round(performance.now() - start.current)) : 0;
-    const isCorrect = picked === item.answer;
-    setChecked(true);
-    if (isCorrect) setCorrectCount((n) => n + 1);
-    void fetch("/learner/api/attempt", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        blockId: item.id,
-        lessonId,
-        moduleId,
-        choice: picked,
-        correct: isCorrect,
-        ms,
-      }),
-      keepalive: true,
-    }).catch(() => {
-      /* the attempt is best-effort; the player keeps moving */
-    });
-  };
-
-  const next = () => {
-    if (last) setDone(true);
-    else {
-      setI(i + 1);
-      setPicked(null);
-      setChecked(false);
-    }
-  };
+  const canCheck = isFill ? typed.trim() !== "" : picked !== null;
+  const answerLine = verdict
+    ? verdict.answerText
+      ? `Answer: ${verdict.answerIndex != null ? "ABCD"[verdict.answerIndex] + " — " : ""}${verdict.answerText}`
+      : ""
+    : "";
+  const feedback = verdict
+    ? (verdict.correct ? verdict.why : verdict.wrongWhy) || answerLine
+    : "";
 
   return (
     <div className="v-item">
@@ -255,36 +331,59 @@ export default function ItemPlayer({
 
       <div className="v-scroll">
         <span className="v-tag">{item.level}</span>
-        <h2 className="v-q">{item.prompt}</h2>
+        <h2 className={"v-q" + (item.prompt.length > 90 ? " long" : "")}>{item.prompt}</h2>
         {item.code && <div className="v-code">{item.code.map(codeLine)}</div>}
 
-        <div className="v-opts">
-          {item.options.map((o, k) => {
-            const state = !checked
-              ? k === picked ? " sel" : ""
-              : k === item.answer ? " good" : k === picked ? " bad" : "";
-            return (
-              <button
-                key={k}
-                type="button"
-                className={"v-opt" + state}
-                aria-pressed={k === picked}
-                disabled={checked}
-                onClick={() => pick(k)}
-              >
-                <span className="v-letter">{"ABCD"[k]}</span>
-                <span className={o.code ? "v-codetext" : undefined}>{o.text}</span>
-              </button>
-            );
-          })}
-        </div>
+        {isFill ? (
+          <div className="v-fill">
+            <label htmlFor="answer" className="v-fill-label">Your answer</label>
+            <input
+              id="answer"
+              ref={field}
+              className={"v-input" + (checked ? (verdict?.correct ? " good" : " bad") : "")}
+              value={typed}
+              onChange={(e) => setTyped(e.target.value)}
+              disabled={checked || pending}
+              autoComplete="off"
+              autoCapitalize="off"
+              autoCorrect="off"
+              spellCheck={false}
+              placeholder="Type it exactly as the paper would"
+            />
+            <p className="v-fill-hint">Case and spacing do not matter.</p>
+          </div>
+        ) : (
+          <div className="v-opts">
+            {item.options.map((o, k) => {
+              const state = !checked
+                ? k === picked ? " sel" : ""
+                : k === verdict?.answerIndex ? " good" : k === picked ? " bad" : "";
+              return (
+                <button
+                  key={k}
+                  type="button"
+                  className={"v-opt" + state}
+                  aria-pressed={k === picked}
+                  disabled={checked || pending}
+                  onClick={() => pick(k)}
+                >
+                  <span className="v-letter">{"ABCD"[k]}</span>
+                  <span className={o.code ? "v-codetext" : undefined}>{o.text}</span>
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {item.source ? <p className="v-source">{item.source}</p> : null}
       </div>
 
-      <div className={"v-band" + (checked ? (correct ? " ok" : " bad") : "")}>
+      <div className={"v-band" + (checked ? (verdict?.correct ? " ok" : " bad") : "")}>
+        {error ? <p className="v-error">{error}</p> : null}
         {checked && (
           <>
-            <b className="v-verdict">{correct ? "Correct" : "Not quite"}</b>
-            <p className="v-why">{correct ? item.why : item.wrongWhy}</p>
+            <b className="v-verdict">{verdict?.correct ? "Correct" : "Not quite"}</b>
+            {feedback ? <p className="v-why">{feedback}</p> : null}
           </>
         )}
         {checked ? (
@@ -292,8 +391,8 @@ export default function ItemPlayer({
             {last ? "Finish lesson" : "Continue"}
           </button>
         ) : (
-          <button className="v-btn" onClick={check} disabled={picked === null}>
-            Check
+          <button className="v-btn" onClick={() => void check()} disabled={!canCheck || pending}>
+            {pending ? "Saving…" : "Check"}
           </button>
         )}
       </div>

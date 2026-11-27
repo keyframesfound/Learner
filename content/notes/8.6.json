@@ -1,0 +1,272 @@
+{
+ "section": "8.6",
+ "title": "Household electricity",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "What is the mains voltage in Hong Kong?",
+   "options": [
+    "12 V",
+    "380 V",
+    "120 V",
+    "220 V"
+   ],
+   "answer": 3,
+   "why": "The mains voltage in Hong Kong is 220 V.",
+   "quote": "The mains voltage in Hong Kong is 220 V.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "Electrical appliances are best described as",
+   "options": [
+    "Energy converters",
+    "Energy stores",
+    "Energy generators",
+    "Energy meters"
+   ],
+   "answer": 0,
+   "why": "Appliances convert electrical energy into other forms of energy.",
+   "quote": "Electrical appliances are energy converters.",
+   "level": "recognize"
+  },
+  {
+   "no": 3,
+   "prompt": "How are sockets in a domestic circuit connected?",
+   "options": [
+    "In parallel",
+    "In series",
+    "Open",
+    "Closed"
+   ],
+   "answer": 0,
+   "why": "Sockets are in parallel, so each works independently.",
+   "quote": "All sockets are connected in parallel in domestic circuits.",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "What causes overloading of a mains socket?",
+   "options": [
+    "Too few appliances",
+    "A fuse blowing",
+    "Too many appliances drawing large current",
+    "Low mains voltage"
+   ],
+   "answer": 2,
+   "why": "Too many appliances draw large current, overloading the socket.",
+   "quote": "When too many appliances are connected to a mains socket, they draw a large current and overloading occurs.",
+   "level": "apply"
+  },
+  {
+   "no": 5,
+   "prompt": "A short circuit occurs when current flows through a branch with what?",
+   "options": [
+    "Very high resistance",
+    "High resistance",
+    "Low or even zero resistance",
+    "Medium resistance"
+   ],
+   "answer": 2,
+   "why": "A very low-resistance branch lets a large current flow.",
+   "quote": "A short circuit occurs when current flows through a branch with very low (or even zero) resistance.",
+   "level": "recall"
+  },
+  {
+   "no": 6,
+   "prompt": "A suitable fuse should have a rating slightly higher than what?",
+   "options": [
+    "The power consumption",
+    "The normal operating current",
+    "The maximum current allowed",
+    "The earth pin"
+   ],
+   "answer": 1,
+   "why": "The fuse rating should be slightly higher than the appliance’s normal operating current.",
+   "quote": "A suitable fuse should have a rating slightly higher than the normal operating current of the electrical appliance.",
+   "level": "apply"
+  },
+  {
+   "no": 7,
+   "prompt": "When the live wire touches the case, where does the current flow?",
+   "options": [
+    "Through your body",
+    "Through the neutral wire",
+    "Through the earth wire to ground",
+    "Nothing"
+   ],
+   "answer": 2,
+   "why": "The earth wire carries the current away to the ground.",
+   "quote": "The current flows through the earth wire to the ground.",
+   "level": "apply"
+  },
+  {
+   "no": 8,
+   "prompt": "What does a circuit breaker do when the current exceeds its rating?",
+   "options": [
+    "Increases the current",
+    "Cuts off the current",
+    "Stays off",
+    "Resets the fuse"
+   ],
+   "answer": 1,
+   "why": "A circuit breaker cuts off the current when it exceeds its rating.",
+   "quote": "A circuit breaker cuts off the current when the current exceeds its rating.",
+   "level": "recognize"
+  },
+  {
+   "no": 9,
+   "prompt": "Electricity is supplied to homes through which wires?",
+   "options": [
+    "Earth wire",
+    "Neutral wire only",
+    "Earth and live wires",
+    "Live and neutral wires"
+   ],
+   "answer": 3,
+   "why": "Homes receive electricity through the live and neutral wires.",
+   "quote": "Electricity is supplied to our homes through the live wire and the neutral wire.",
+   "level": "recall"
+  },
+  {
+   "no": 10,
+   "prompt": "Switching one appliance on or off does not affect what?",
+   "options": [
+    "Other appliances",
+    "The fuse",
+    "The mains supply",
+    "The earth wire"
+   ],
+   "answer": 0,
+   "why": "Because sockets are wired in parallel, switching one appliance does not affect the others.",
+   "quote": "Switching on or off each appliance does not affect the operation of other appliances.",
+   "level": "recognize"
+  },
+  {
+   "no": 11,
+   "prompt": "What does the voltage rating on an appliance show?",
+   "options": [
+    "The voltage it needs",
+    "Its power output",
+    "Its fuse size",
+    "Its weight"
+   ],
+   "answer": 0,
+   "why": "Appliances are rated for a supply voltage.",
+   "quote": "voltage rating",
+   "level": "apply"
+  },
+  {
+   "no": 12,
+   "prompt": "How many pins does a Hong Kong plug have?",
+   "options": [
+    "Three",
+    "Two",
+    "Four",
+    "One"
+   ],
+   "answer": 0,
+   "why": "Hong Kong appliances use three-pin plugs.",
+   "quote": "Electrical appliances in Hong Kong are fitted with three-pin plugs",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "Which wire connects the metal casing for safety?",
+   "options": [
+    "The earth wire",
+    "The live wire",
+    "The neutral wire",
+    "The fuse wire"
+   ],
+   "answer": 0,
+   "why": "The earth wire protects the user.",
+   "quote": "earth wire is for safety",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "Which two wires carry the supply to an appliance?",
+   "options": [
+    "Live and neutral",
+    "Earth and live",
+    "Earth and neutral",
+    "Live and fuse"
+   ],
+   "answer": 0,
+   "why": "Power arrives on live and neutral.",
+   "quote": "Electricity is supplied to our homes through the live wire and",
+   "level": "apply"
+  },
+  {
+   "no": 15,
+   "prompt": "Which wire is the live wire marked as in a plug?",
+   "options": [
+    "L",
+    "N",
+    "E",
+    "F"
+   ],
+   "answer": 0,
+   "why": "The live wire is marked L.",
+   "quote": "the live wire (L)",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "What can too many appliances on one socket cause?",
+   "options": [
+    "Overloading",
+    "Earthing",
+    "Insulation",
+    "Rectification"
+   ],
+   "answer": 0,
+   "why": "Too much current in one socket overloads it.",
+   "quote": "overloading",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "What does a fuse contain?",
+   "options": [
+    "A thin metal wire",
+    "A copper coil",
+    "A magnet",
+    "A capacitor"
+   ],
+   "answer": 0,
+   "why": "The fuse wire melts and breaks the circuit.",
+   "quote": "there is a metal wire with a low melting point",
+   "level": "apply"
+  },
+  {
+   "no": 18,
+   "prompt": "When does a fuse melt?",
+   "options": [
+    "When the current is too large",
+    "When the voltage is too low",
+    "When it gets cold",
+    "When switched off"
+   ],
+   "answer": 0,
+   "why": "A large current heats the thin wire until it melts.",
+   "quote": "Fuses are found in plugs, universal adapters and many appliances",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "What is a short circuit?",
+   "options": [
+    "A path with very low resistance",
+    "A broken wire",
+    "An earth connection",
+    "A fused plug"
+   ],
+   "answer": 0,
+   "why": "Current bypasses the appliance through a low-resistance path.",
+   "quote": "short circuits",
+   "level": "recall"
+  }
+ ]
+}

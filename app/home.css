@@ -19,14 +19,14 @@
 }
 .v-home .vh-greet {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   letter-spacing: .4px;
   color: var(--ink-3);
 }
 .v-home .vh-name {
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 26px;
   letter-spacing: -.7px;
   line-height: 1.05;
   margin-top: 3px;
@@ -42,7 +42,7 @@
   border-radius: 999px;
   box-shadow: 3px 3px 0 var(--line);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -64,7 +64,7 @@
 }
 .v-home .vh-tag {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 1.4px;
   text-transform: uppercase;
@@ -73,7 +73,7 @@
 .v-home .vh-hero h2 {
   margin-top: 5px;
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: -.4px;
   line-height: 1.12;
 }
@@ -86,7 +86,7 @@
 }
 .v-home .vh-done {
   font-family: var(--font-mono);
-  font-size: 10.5px;
+  font-size: 12.5px;
   color: #B9B9AE;
 }
 
@@ -102,7 +102,7 @@
   border-radius: 8px;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, .45);
   font-family: var(--font-body);
-  font-size: 13.5px;
+  font-size: 15.5px;
   font-weight: 700;
   letter-spacing: .4px;
   text-decoration: none;
@@ -143,7 +143,7 @@
 .v-home .vh-label {
   padding: 20px 18px 8px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .8px;
   color: var(--ink-3);
@@ -161,12 +161,12 @@
   margin-bottom: 7px;
 }
 .v-home .vh-rev-row > span:first-child {
-  font-size: 12.5px;
+  font-size: 14.5px;
   color: var(--ink-2);
 }
 .v-home .vh-rev-count {
   font-family: var(--font-display);
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 400;
   letter-spacing: -.4px;
   line-height: 1;
@@ -176,7 +176,7 @@
 }
 .v-home .vh-rev-count i {
   font-style: normal;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--ink-3);
 }
 .v-home .vh-seg {
@@ -240,7 +240,7 @@
 .v-home .vh-cls-name {
   flex: 1;
   min-width: 0;
-  font-size: 13.5px;
+  font-size: 15.5px;
   font-weight: 700;
   line-height: 1.15;
   overflow: hidden;
@@ -250,7 +250,7 @@
 .v-home .vh-cls-sub {
   display: block;
   margin: 2px 0 9px;
-  font-size: 11.5px;
+  font-size: 13.5px;
   color: var(--ink-3);
 }
 .v-home .vh-cls-top + .vh-cls-foot {
@@ -268,7 +268,7 @@
 .v-home .vh-pct {
   width: 34px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   text-align: right;
 }
@@ -286,11 +286,11 @@
   display: block;
   margin-bottom: 6px;
   font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--ink);
 }
 .v-home .vh-empty p {
-  font-size: 12.5px;
+  font-size: 14.5px;
   line-height: 1.6;
 }
 
@@ -302,10 +302,10 @@
 
 @media (max-width: 359px) {
   .v-home .vh-name {
-    font-size: 21px;
+    font-size: 23px;
   }
   .v-home .vh-hero h2 {
-    font-size: 17px;
+    font-size: 19px;
   }
 }
 
@@ -319,4 +319,21 @@
   .v-home .vh-cls:active {
     transform: none;
   }
+}
+
+/* desktop: these plates were phone-width, which left the column floating in dead space */
+@media (min-width: 900px) {
+  .v-home { max-width: 860px; }
+}
+
+/* the class cards share a row on a wide plate; display:contents keeps the phone layout */
+.v-home .vh-cls-list { display: contents; }
+@media (min-width: 900px) {
+  .v-home .vh-cls-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 12px;
+    padding: 0 18px;
+  }
+  .v-home .vh-cls-list .vh-cls { margin: 0; }
 }

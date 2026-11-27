@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf8"><style>
+body{background:#F2EFE6;font-family:monospace;margin:24px;color:#111}
+.row{display:flex;gap:32px;align-items:flex-end}
+figure{margin:0;text-align:center}
+img{background:#fff;border:3px solid #111}
+</style>
+<div class="row" id="r" style="flex-wrap:wrap"></div>
+<script>
+const files=["a-bust","b-full","c-boss"];
+for (const f of files){
+  const fig=document.createElement("figure");
+  fig.innerHTML=`<img src="svg/${f}.svg" width="300"><figcaption>${f}</figcaption>`;
+  document.getElementById("r").appendChild(fig);
+}
+</script>

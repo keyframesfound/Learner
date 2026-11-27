@@ -1,0 +1,714 @@
+{
+ "year": "2023",
+ "staged": false,
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "Which of the following statements about direct access on a storage device are correct? (1) Writing the data of a file starts from the beginning of the storage device. (2) In general, the seek time to search for a file is faster than that of sequential access. (3) It is more commonly used in hard disks than sequential access.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 57,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q1",
+   "answer": 2
+  },
+  {
+   "no": 3,
+   "prompt": "Mary only has a computer without any network connections. Which of the following systems can she carry out? (1) Distributed processing system (2) Real-time system (3) Batch processing system",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 37,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q3",
+   "answer": 3
+  },
+  {
+   "no": 4,
+   "prompt": "In which of the following 8-bit representations will the addition of integers 01100000 and 01100000 result in an overflow error? (1) Sign-and-magnitude (2) One's complement (3) Two's complement",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 32,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q4",
+   "answer": 3
+  },
+  {
+   "no": 5,
+   "prompt": "Which of the following clauses should be used in a SELECT SQL command for displaying information where salary is greater than 5000 in ascending order of salary?",
+   "options": [
+    "WHERE salary > 5000 ORDER BY salary",
+    "HAVING salary > 5000 ORDER BY salary",
+    "WHERE salary > 5000 AND ORDER BY salary",
+    "HAVING salary > 5000 OR ORDER BY salary"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 79,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q5",
+   "answer": 0
+  },
+  {
+   "no": 6,
+   "prompt": "Consider the following pseudocode for checking a normal school exam result: Which of the following sets of test values is appropriate?",
+   "options": [
+    "-10 30 40",
+    "10 25 45",
+    "100 99 98",
+    "99 0 50"
+   ],
+   "code": [
+    "IF (MARKS >= 50) THEN",
+    "    OUTPUT 'PASS'",
+    "ELSE",
+    "    OUTPUT 'FAIL'"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 91,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q6",
+   "answer": 3
+  },
+  {
+   "no": 7,
+   "prompt": "Which of the following should be considered when creating a presentation for a project using presentation software? (1) Layout of the slides (2) Colour scheme (3) Sequence of the slides",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 81,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q7",
+   "answer": 3
+  },
+  {
+   "no": 8,
+   "prompt": "When entering formulas in a spreadsheet, which of the following results is incorrect?",
+   "options": [
+    "LEN(\"HKDSE\") 5",
+    "UPPER(\"technology\") Technology",
+    "FIND(\"for\",\"information\") 3",
+    "TRIM(\" ICT \") ICT"
+   ],
+   "code": null,
+   "figure": "table",
+   "figure_note": "Options A-D each show a Formula column and a Result column: A LEN(\"HKDSE\")/5, B UPPER(\"technology\")/Technology, C FIND(\"for\",\"information\")/3, D TRIM(\" ICT \")/ICT",
+   "level": "recall",
+   "percent": 57,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q8",
+   "answer": 1
+  },
+  {
+   "no": 9,
+   "prompt": "Which of the following is not required for a mail merge using a word processor?",
+   "options": [
+    "Data source",
+    "Main document",
+    "Merge fields",
+    "Field length"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 64,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q9",
+   "answer": 3
+  },
+  {
+   "no": 10,
+   "prompt": "What is/are the benefit(s) of creating a report in PDF format instead of DOCX format?\n(1) The text format can be preserved.\n(2) Hyperlinks can be inserted.\n(3) Colour fonts can be used.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 68,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q10",
+   "answer": 0
+  },
+  {
+   "no": 11,
+   "prompt": "Which of the following image file formats support transparent background images?\n(1) PNG\n(2) GIF\n(3) JPG",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 59,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q11",
+   "answer": 0
+  },
+  {
+   "no": 12,
+   "prompt": "Which of the following may involve Object Linking and Embedding (OLE)?\n(1) Using mail merge to create documents\n(2) Creating a pivot table\n(3) Inserting images in a presentation slide",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 38,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q12",
+   "answer": 1
+  },
+  {
+   "no": 13,
+   "prompt": "Which of the following regarding Unicode and Big-5 code is correct?",
+   "options": [
+    "In a computer, the use of Big-5 code and Unicode depends on the operating system.",
+    "Big-5 code is used for representing characters in Chinese only.",
+    "Unicode is used for representing characters in English and other languages.",
+    "For web browsing, the use of a character set depends on the browser."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 57,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q13",
+   "answer": 2
+  },
+  {
+   "no": 14,
+   "prompt": "For a CPU with the specifications of 16 cores, 5 GHz and a 30 MB cache, which of the following are correct?\n(1) The clock rate of the CPU is 5 GHz.\n(2) The maximum number of programs that the CPU can handle at the same time is 16.\n(3) The CPU accesses data in the cache memory faster than that in RAM.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 55,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q14",
+   "answer": 1
+  },
+  {
+   "no": 15,
+   "prompt": "Which of the following is the main function of a network interface card in a computer?",
+   "options": [
+    "To connect to a wired router and project Wi-Fi signals to a designated area.",
+    "To direct data packets from one network to another network.",
+    "To filter and forward data packets from the computer to another device.",
+    "To send and receive network signals."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 73,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q15",
+   "answer": 3
+  },
+  {
+   "no": 16,
+   "prompt": "Which of the following are functions of an operating system?\n(1) Allocate hardware resources.\n(2) Schedule jobs.\n(3) Store user programs permanently.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": [
+    "(1)  Allocate hardware resources.",
+    "(2)  Schedule jobs.",
+    "(3)  Store user programs permanently."
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 57,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q16",
+   "answer": 0
+  },
+  {
+   "no": 17,
+   "prompt": "Which of the following is not a specification of a projector?",
+   "options": [
+    "WiFi 802.11ac supported",
+    "3800 lm (lumen)",
+    "4K UHD (Ultra High Definition)",
+    "5400 rpm (revolutions per minute)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 50,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q17",
+   "answer": 3
+  },
+  {
+   "no": 18,
+   "prompt": "In a computer, the performance of each individual task is shown below:\n(1) Network interface card\n(2) Display card\n(3) CPU",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": [
+    "| Task                                  | Performance   |",
+    "|---------------------------------------|---------------|",
+    "| Execution of database queries         | Poor          |",
+    "| Online meetings                       | Smooth        |",
+    "| Playing of 4K videos on a hard disk   | Fair          |"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 80,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q18",
+   "answer": 2
+  },
+  {
+   "no": 19,
+   "prompt": "John has just connected a new USB printer to a computer. Why is he able to use the printer immediately?",
+   "options": [
+    "The RAM size of the printer is large enough to store the data for printing.",
+    "The operating system of the computer already has a driver program for the printer.",
+    "USB printers do not need driver programs.",
+    "There is a built-in CPU in the printer to manage the printing."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 71,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q19",
+   "answer": 1
+  },
+  {
+   "no": 20,
+   "prompt": "Which of the following about the use of HTTP is correct?",
+   "options": [
+    "It can convert a domain name into an IP address.",
+    "It can distinguish a wireless network from a wired network.",
+    "It can retrieve a web page from a web server.",
+    "It can encrypt and decrypt data through a secure channel."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 60,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q20",
+   "answer": 2
+  },
+  {
+   "no": 21,
+   "prompt": "Peter browses a new web site and sees the following message:\n(1) Personal information may be collected.\n(2) The bandwidth of the network may be decreased.\n(3) The address book of his email account may be disclosed.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "screenshot",
+   "figure_note": "A dialog box containing the text 'We use third-party cookies to personalize content and to analyse web traffic. Read more about cookies.' with two buttons labelled 'Accept' and 'Reject'.",
+   "level": "recall",
+   "percent": 61,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q21",
+   "answer": 0
+  },
+  {
+   "no": 22,
+   "prompt": "Mary uploads a photo to her social media account through a browser. Which of the following protocols will probably be involved?\n(1) IP\n(2) DNS\n(3) HTTP",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 64,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q22",
+   "answer": 3
+  },
+  {
+   "no": 24,
+   "prompt": "Which of the following about IP addresses is/are correct? (1) They contain location information and make network devices accessible for communication. (2) They are used to reassemble the data received back into the original order. (3) They can be used with both the Internet and Intranet.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 68,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q24",
+   "answer": 2
+  },
+  {
+   "no": 25,
+   "prompt": "Which of the following is the common input and output of a domain name system (DNS) server?",
+   "options": [
+    "HTML / IP address",
+    "IP address / MAC address",
+    "Domain name / MAC address",
+    "Domain name / IP address"
+   ],
+   "code": [
+    "      Input            Output",
+    "A.    HTML             IP address",
+    "B.    IP address       MAC address",
+    "C.    Domain name      MAC address",
+    "D.    Domain name      IP address"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 78,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q25",
+   "answer": 3
+  },
+  {
+   "no": 26,
+   "prompt": "Which of following about wired networks and wireless networks is correct?",
+   "options": [
+    "A more stable connection / Flexible network access",
+    "Higher network security / A more stable connection",
+    "Flexible network access / Higher network security",
+    "Flexible network access / A more stable connection"
+   ],
+   "code": [
+    "   Wired network        Wireless network",
+    "A. A more stable connection    Flexible network access",
+    "B. Higher network security     A more stable connection",
+    "C. Flexible network access     Higher network security",
+    "D. Flexible network access     A more stable connection"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 93,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q26",
+   "answer": 0
+  },
+  {
+   "no": 27,
+   "prompt": "Dry run the following algorithm. How many '*' are output?",
+   "options": [
+    "0",
+    "2",
+    "3",
+    "4"
+   ],
+   "code": [
+    "N ← 2",
+    "WHILE N < 8 DO",
+    "    OUTPUT '*'",
+    "    N ← N + 3"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 83,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q27",
+   "answer": 1
+  },
+  {
+   "no": 28,
+   "prompt": "Suppose that all values in the array N are 2. What is the output of Algorithm 1?",
+   "options": [
+    "0",
+    "5",
+    "10",
+    "20"
+   ],
+   "code": [
+    "Algorithm 1                Algorithm 2",
+    "S ← 0                      S ← 0",
+    "i ← 0                      WHILE (i <= 5) DO",
+    "FOR i FROM 1 TO 5 DO       S ← S + N[i]",
+    "    S ← S + N[i]           OUTPUT S",
+    "OUTPUT S"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 77,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q28",
+   "answer": 2
+  },
+  {
+   "no": 29,
+   "prompt": "The purposes of Algorithm 1 and Algorithm 2 should be the same. What are the missing statements in Algorithm 2?\n(1) i ← 0\n(2) i ← 1\n(3) i ← i + 1\n(4) IF i=1 THEN i ← i+1",
+   "options": [
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1) and (4) only",
+    "(2) and (4) only"
+   ],
+   "code": [
+    "Algorithm 1                Algorithm 2",
+    "S ← 0                      S ← 0",
+    "i ← 0                      WHILE (i <= 5) DO",
+    "FOR i FROM 1 TO 5 DO       S ← S + N[i]",
+    "    S ← S + N[i]           OUTPUT S",
+    "OUTPUT S"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 51,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q29",
+   "answer": 1
+  },
+  {
+   "no": 30,
+   "prompt": "What is the output of the following algorithm? A ← 5 B ← 11 C ← 7 FOR C FROM 2 TO 3 DO B ← A + B OUTPUT (A + B)",
+   "options": [
+    "16",
+    "21",
+    "26",
+    "32"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 38,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q30",
+   "answer": 2
+  },
+  {
+   "no": 31,
+   "prompt": "What is the output of the following algorithm for the input 'Y', 'N', 'Y', 'N', 'Y'?",
+   "options": [
+    "1#2#3",
+    "1#1#1",
+    "##3",
+    "###"
+   ],
+   "code": [
+    "S ← 0",
+    "FOR i FROM 1 TO 5 DO",
+    "  INPUT CH",
+    "  IF CH = 'Y' THEN",
+    "    S ← S + 1",
+    "  ELSE",
+    "    OUTPUT '#'",
+    "OUTPUT S"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 41,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q31",
+   "answer": 2
+  },
+  {
+   "no": 32,
+   "prompt": "NUM is an integer array with N values. What is the purpose of the following algorithm?",
+   "options": [
+    "To count the number of values in NUM.",
+    "To calculate the sum of values in NUM.",
+    "To find the maximum value in NUM.",
+    "To find the minimum value in NUM."
+   ],
+   "code": [
+    "i ← 1",
+    "A ← NUM[i]",
+    "WHILE i < N DO",
+    "  i ← i + 1",
+    "  IF NUM[i] > A THEN",
+    "    A ← NUM[i]"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 71,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q32",
+   "answer": 2
+  },
+  {
+   "no": 33,
+   "prompt": "Which of the following are advantages of using the modular approach when designing algorithms?\n(1) A module can be reused in other scenarios.\n(2) The execution time of an algorithm is shorter.\n(3) The modules are easier to design and test.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 59,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q33",
+   "answer": 1
+  },
+  {
+   "no": 34,
+   "prompt": "Which of the following is/are the advantage(s) of using open source software over freeware?\n(1) It is easier to set up and use.\n(2) Users can improve the source code and share it in the community.\n(3) Open source software is cross-platform.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 71,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q34",
+   "answer": 1
+  },
+  {
+   "no": 35,
+   "prompt": "Which of the following are proper measures when using social media platforms? (1) Manage the privacy settings to control who can see your posts. (2) Use a strong login password and change it regularly. (3) Be aware of what personal information you have provided.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 86,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q35",
+   "answer": 3
+  },
+  {
+   "no": 36,
+   "prompt": "Which of the following programs can enhance the security of using a computer? (1) Adware (2) A firewall (3) An encryption program",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 90,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q36",
+   "answer": 2
+  },
+  {
+   "no": 37,
+   "prompt": "Which of the following can help bridge the digital divide? (1) Providing free access to computers in public libraries. (2) Providing Internet access for students in need. (3) Providing online English lessons for students in need.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 78,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q37",
+   "answer": 0
+  },
+  {
+   "no": 38,
+   "prompt": "What is/are the advantage(s) of using Secure Socket Layer (SSL) on web sites? (1) The data transfer rate is higher. (2) The transferred data is encrypted. (3) The IP addresses of the web sites can be hidden.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 69,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q38",
+   "answer": 1
+  },
+  {
+   "no": 39,
+   "prompt": "Why do many companies prefer commercial software to open source software? (1) Open source software contains more software bugs. (2) Commercial software developers can provide better support. (3) Open source software cannot be modified by companies.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 81,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q39",
+   "answer": 1
+  },
+  {
+   "no": 40,
+   "prompt": "How can updating an operating system frequently protect computers from virus attacks?",
+   "options": [
+    "Security loopholes can be fixed.",
+    "More support from the developer of the operating system can be provided.",
+    "The computer performance can be enhanced.",
+    "A virus check can be conducted."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 79,
+   "source": "HKDSE ICT Paper 1 · Section A · 2023 · Q40",
+   "answer": 0
+  }
+ ]
+}

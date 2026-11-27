@@ -1,0 +1,49 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boss art — pick one</title>
+<style>
+  :root { --paper:#F2EFE6; --ink:#111; --line:#D8D4C6; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:28px; background:var(--paper); color:var(--ink);
+         font-family:ui-monospace,"JetBrains Mono",monospace; }
+  h1 { font-family:"Archivo Black",system-ui,sans-serif; font-size:26px; letter-spacing:-.6px; margin:0 0 6px; }
+  p.lead { margin:0 0 22px; font-size:12px; color:#55524B; max-width:70ch; line-height:1.6; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+  figure { margin:0; background:#fff; border:3px solid var(--ink); border-radius:10px;
+           box-shadow:5px 5px 0 var(--ink); padding:14px; }
+  .art { display:grid; place-items:center; min-height:260px; }
+  .art img { width:220px; image-rendering:pixelated; }
+  figcaption { margin-top:10px; }
+  figcaption b { font-family:"Archivo Black",system-ui,sans-serif; font-size:15px; display:block; }
+  figcaption span { font-size:11px; color:#55524B; line-height:1.5; display:block; margin-top:4px; }
+  .sizes { display:flex; align-items:flex-end; gap:14px; margin-top:12px; padding-top:10px; border-top:2px dashed var(--line); }
+  .sizes img { image-rendering:pixelated; }
+  .sizes small { font-size:9px; color:#8C8A80; }
+</style>
+<h1>Boss art — pick one</h1>
+<p class="lead">Three hand-drawn takes plus one built from the photo itself. The row under each card shows the
+sizes the sprite actually appears at: 54px on the boss card, 62px in the lobby, 210px in the arena.</p>
+<div class="grid">
+  <figure>
+    <div class="art"><img src="a-bust.svg" alt="A: bust"></div>
+    <figcaption><b>A · Bust</b><span>White shirt, dark tie, round spectacles, low fringe. Closest to the card shape.</span></figcaption>
+    <div class="sizes"><img src="a-bust.svg" width="54"><img src="a-bust.svg" width="62"><img src="a-bust.svg" width="120"><small>54 · 62 · 120</small></div>
+  </figure>
+  <figure>
+    <div class="art"><img src="b-full.svg" alt="B: full body"></div>
+    <figcaption><b>B · Full body</b><span>Whole figure with a pointer, shoes and tie. Looks best in the arena, small on the card.</span></figcaption>
+    <div class="sizes"><img src="b-full.svg" width="54"><img src="b-full.svg" width="62"><img src="b-full.svg" width="120"><small>54 · 62 · 120</small></div>
+  </figure>
+  <figure>
+    <div class="art"><img src="c-boss.svg" alt="C: boss variant"></div>
+    <figcaption><b>C · Boss</b><span>Same bust, red tie, a glint on the lens and a smirk — reads as “final boss”.</span></figcaption>
+    <div class="sizes"><img src="c-boss.svg" width="54"><img src="c-boss.svg" width="62"><img src="c-boss.svg" width="120"><small>54 · 62 · 120</small></div>
+  </figure>
+
+  <figure>
+    <div class="art"><img src="eric-photo@4x.png" alt="D: photo pixel portrait" style="width:240px"></div>
+    <figcaption><b>D · Photo pixel</b><span>The actual photograph, cropped, faded to paper and snapped to a 24-colour pixel grid. Most like him.</span></figcaption>
+    <div class="sizes"><img src="eric-photo.png" width="54"><img src="eric-photo.png" width="62"><img src="eric-photo.png" width="120"><small>54 · 62 · 120</small></div>
+  </figure>
+</div>

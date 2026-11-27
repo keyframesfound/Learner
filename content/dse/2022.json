@@ -1,0 +1,717 @@
+{
+ "year": "2022",
+ "staged": false,
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "A computer receives the three data sequences, shown below. Each sequence includes a parity bit. Two of the sequences are found to be corrupted during transmission. First: 0101 0111 Second: 1101 0101 Third: 1110 1011 Which of the following best describes the situation?",
+   "options": [
+    "The first and second Even",
+    "The second and third Even",
+    "The first and second Odd",
+    "The second and third Odd"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 39,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q1",
+   "answer": 0
+  },
+  {
+   "no": 2,
+   "prompt": "A supermarket uses a database table FRUIT, which stores fruit name FNAME and the corresponding quantity in stock QTY. Which of the following best describes the result of the query below?",
+   "options": [
+    "Fruits are listed in descending order of fruit name.",
+    "Fruits are listed in ascending order of the quantity in stock.",
+    "Fruits with low quantities in stock are listed in ascending order of fruit name.",
+    "Fruits are listed in descending order of the quantity in stock."
+   ],
+   "code": [
+    "SELECT FNAME",
+    "FROM FRUIT",
+    "WHERE QTY > 0",
+    "ORDER BY QTY DESC"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 72,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q2",
+   "answer": 3
+  },
+  {
+   "no": 3,
+   "prompt": "What are the advantages of using the following calendar box over a text box for entering a date?\n(1) Avoids impossible dates.\n(2) Ensures that the input is error-free.\n(3) Provides a user-friendly interface.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "screenshot",
+   "figure_note": "Calendar box screenshot showing April 2021, day headers Mo Tu We Th Fr Sa Su, dates 1-30 in a grid, with date 11 highlighted/selected.",
+   "level": "apply",
+   "percent": 39,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q3",
+   "answer": 1
+  },
+  {
+   "no": 4,
+   "prompt": "Which of the following additions of 4-bit numbers using two's complement representation will result in an overflow error?",
+   "options": [
+    "0011 + 1001",
+    "1111 + 1111",
+    "1100 + 1011",
+    "1010 + 0100 + 0001"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 54,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q4",
+   "answer": 2
+  },
+  {
+   "no": 5,
+   "prompt": "How many bits are required to represent an image of 8×8 black-and-white pixels?",
+   "options": [
+    "64",
+    "64²",
+    "8⁸",
+    "2⁶⁴"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 39,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q5",
+   "answer": 0
+  },
+  {
+   "no": 6,
+   "prompt": "Which of the following is correct?",
+   "options": [
+    "Data collection — Creating a statistical chart",
+    "Data preparation — Validating questionnaires before input",
+    "Data processing — Sorting questionnaires for data entry",
+    "Data organisation — Designing an online questionnaire"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 43,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q6",
+   "answer": 1
+  },
+  {
+   "no": 7,
+   "prompt": "For a photo, the file size of its BMP image is larger than that of its JPG image because __________.\n(1) the BMP image is uncompressed\n(2) BMP represents a bitmap image\n(3) the BMP image cannot be shown in a browser",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 83,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q7",
+   "answer": 0
+  },
+  {
+   "no": 8,
+   "prompt": "Which of the following about mail merge are correct?\n(1) A database file can be used as the data source for mail merge.\n(2) A main document and a data source can be merged to produce a merged document.\n(3) The content of merge fields is inserted in the merged document when the merging completes.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 49,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q8",
+   "answer": 3
+  },
+  {
+   "no": 9,
+   "prompt": "Which of the following about a presentation of several slides supplemented with verbal annotation in presentation software is correct?",
+   "options": [
+    "The presentation should be web-based.",
+    "The presentation should be in a video file format such as MP4.",
+    "Verbal annotation can be recorded for slides individually.",
+    "The duration of each slide for verbal annotation is the same."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 72,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q9",
+   "answer": 2
+  },
+  {
+   "no": 10,
+   "prompt": "In the following spreadsheet, a formula is entered in B6 based on B2:B4 to calculate the class fee. Classmates want to limit the class fee to $1,000 by cutting the budget for the study tour. When using the 'goal seek' function for 'what-if' analysis, which of the following sets of data should be used?",
+   "options": [
+    "Set cell: $B$4 To value: 1000 By changing cell: $B$6",
+    "Set cell: $B$4 To value: 30000 By changing cell: $B$6",
+    "Set cell: $B$6 To value: 1000 By changing cell: $B$4",
+    "Set cell: $B$6 To value: 30000 By changing cell: $B$4"
+   ],
+   "code": [
+    "     A                          B",
+    "1    Expenditure for S6 (30 classmates)  $",
+    "2    Reference books                    6,000",
+    "3    Photocopy fee                      900",
+    "4    Budget for the study tour          30,000",
+    "5                                    ",
+    "6    Class fee per classmate            1,230"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 74,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q10",
+   "answer": 2
+  },
+  {
+   "no": 11,
+   "prompt": "Why should characters be represented by character sets such as ASCII in computers? (1) To standardise the data representation (2) To enhance the data encryption (3) As data in computers is stored in binary numbers",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 25,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q11",
+   "answer": 0
+  },
+  {
+   "no": 12,
+   "prompt": "Why is information literacy important in a knowledge-based society? (1) People should be able to identify fake information and hoaxes on the Internet. (2) People should be able to write artificial intelligence (AI) programs. (3) People should understand that some information from the Internet lacks credibility.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 93,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q12",
+   "answer": 1
+  },
+  {
+   "no": 13,
+   "prompt": "When developing a management information system, which of the following should be the first item to be considered?",
+   "options": [
+    "The technologies involved",
+    "The personnel involved",
+    "The cost of the system",
+    "The purpose of the system"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 82,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q13",
+   "answer": 3
+  },
+  {
+   "no": 14,
+   "prompt": "Which of the following is/are the common specification(s) of a home use printer? (1) 802.11n (2) Parallel port (3) 1200 dpi",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 48,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q14",
+   "answer": 2
+  },
+  {
+   "no": 15,
+   "prompt": "A standalone computer runs slow when working on database software. Which of the following hardware components should be upgraded? (1) RAM (2) ROM (3) Network interface card",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 72,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q15",
+   "answer": 0
+  },
+  {
+   "no": 16,
+   "prompt": "Why would a fast food shop install a thermal printer instead of a laser printer to print receipts at the cashier? (1) The printout is black and white. (2) The printer is smaller in size. (3) The text on the printout will fade faster.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 74,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q16",
+   "answer": 1
+  },
+  {
+   "no": 17,
+   "prompt": "One day, Mary finds that she cannot access the Internet through her computer at home. Which of the following is a possible cause?",
+   "options": [
+    "The size of ROM is small.",
+    "The data transfer rate of the hard disk is low.",
+    "The graphics card is out of order.",
+    "The network interface card is out of order."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 95,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q17",
+   "answer": 3
+  },
+  {
+   "no": 18,
+   "prompt": "Why do we need to regularly update software? (1) Fix program bugs. (2) Provide new functions. (3) Improve the software performance.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 84,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q18",
+   "answer": 3
+  },
+  {
+   "no": 19,
+   "prompt": "A company develops a computer system for autopilot driving, so that a vehicle can collect and use image data from the environment and drive on the road safely. It is a real-time processing system because _______.",
+   "options": [
+    "the computers involved should have a high processing power",
+    "there should be no time delay between data input and the data processing",
+    "a large amount of data should be collected over a period of time",
+    "it provides resources and services to multiple users at a time"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 85,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q19",
+   "answer": 1
+  },
+  {
+   "no": 20,
+   "prompt": "There are one hundred 300GB surveillance video files. Without any file reorganisation and compression, how many 2TB hard disks are needed to store all the video files?",
+   "options": [
+    "15",
+    "16",
+    "17",
+    "32"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 7,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q20",
+   "answer": 2
+  },
+  {
+   "no": 22,
+   "prompt": "Which of the following describe(s) the URL, https://www.abc.edu.hk/en/ ?\n(1) en is a path on the web server.\n(2) The domain name is abc.\n(3) The web site is registered as an educational institution in Hong Kong.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 55,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q22",
+   "answer": 2
+  },
+  {
+   "no": 23,
+   "prompt": "Which of the following are the potential benefits of e-learning? (1) It can track individual learning progress. (2) It reduces computer hardware resources. (3) It provides flexible learning schedules.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 93,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q23",
+   "answer": 1
+  },
+  {
+   "no": 24,
+   "prompt": "Which of the following should be considered when designing web pages? (1) The time for loading web pages (2) The user-friendliness of browsing (3) The colour combination",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 49,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q24",
+   "answer": 3
+  },
+  {
+   "no": 25,
+   "prompt": "Fibre optics is used in a computer network because ________________. (1) it supports both wired and wireless connections (2) its data transfer rate is very high (3) it supports a connection with a long distance",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 70,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q25",
+   "answer": 2
+  },
+  {
+   "no": 26,
+   "prompt": "Internet Protocol (IP) is used in a computer network because ________________.",
+   "options": [
+    "data can be transmitted under the same communication rules",
+    "computers in the network are installed with the same operating system",
+    "the maximum data transfer rates between computers are the same",
+    "the network is a LAN instead of a WAN"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 83,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q26",
+   "answer": 0
+  },
+  {
+   "no": 27,
+   "prompt": "Amy uses a computer to watch streaming videos. Which of the following should she consider? (1) Network bandwidth (2) Anti-virus software (3) Hard disk storage size",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 81,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q27",
+   "answer": 0
+  },
+  {
+   "no": 28,
+   "prompt": "The final values of X and Y in the following two algorithms are the same:",
+   "options": [
+    "(X = 20) AND (Y > 15)",
+    "(X = 20) OR (Y > 15)",
+    "(X <> 20) AND (Y <= 15)",
+    "(X <> 20) OR (Y <= 15)"
+   ],
+   "code": [
+    "Algorithm 1",
+    "X ← 10",
+    "Y ← 0",
+    "REPEAT",
+    "  X ← X + 1",
+    "  Y ← Y + 2",
+    "UNTIL (X = 20) OR (Y > 15)",
+    "Algorithm 2",
+    "X ← 10",
+    "Y ← 0",
+    "WHILE Missing part DO",
+    "  X ← X + 1",
+    "  Y ← Y + 2"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 27,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q28",
+   "answer": 2
+  },
+  {
+   "no": 29,
+   "prompt": "What input value for the algorithm below will not output 'Complete!'?",
+   "options": [
+    "1",
+    "2",
+    "4",
+    "6"
+   ],
+   "code": [
+    "Input N",
+    "flag ← TRUE",
+    "While flag = TRUE do",
+    "  If remainder of (N/4) > 0 then",
+    "    flag ← FALSE",
+    "Output 'Complete!'"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 69,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q29",
+   "answer": 2
+  },
+  {
+   "no": 30,
+   "prompt": "What is the purpose of the algorithm?",
+   "options": [
+    "Counts the number of input values.",
+    "Finds the maximum input value.",
+    "Calculates the sum of input values.",
+    "Calculates the average of input values."
+   ],
+   "code": [
+    "j ← 0",
+    "Input N",
+    "While N <> 888 do",
+    "  j ← j + N",
+    "  Input N",
+    "Output j"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 67,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q30",
+   "answer": 2
+  },
+  {
+   "no": 31,
+   "prompt": "What is the use of the value '888'?",
+   "options": [
+    "Terminates the input.",
+    "Checks positive input values.",
+    "Limits the range of input values.",
+    "Adds input values to j."
+   ],
+   "code": [
+    "j ← 0",
+    "Input N",
+    "While N <> 888 do",
+    "  j ← j + N",
+    "  Input N",
+    "Output j"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 48,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q31",
+   "answer": 0
+  },
+  {
+   "no": 32,
+   "prompt": "What is the importance of a problem definition in problem-solving?",
+   "options": [
+    "The design and the scope of work can be set.",
+    "Problem analysis can be skipped.",
+    "There is no need to define sub-problems.",
+    "An error-free algorithm will be developed."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 74,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q32",
+   "answer": 0
+  },
+  {
+   "no": 33,
+   "prompt": "Which of the following is/are the advantage(s) of modularity in programming? (1) The user manual is simpler. (2) It is easier to trace a program. (3) It facilitates programming through team work.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 53,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q33",
+   "answer": 3
+  },
+  {
+   "no": 34,
+   "prompt": "Why should appropriate test data be prepared? (1) To detect mistakes in algorithms (2) To test whether exceptional input data can be handled (3) To verify expected results from given input data",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 72,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q34",
+   "answer": 3
+  },
+  {
+   "no": 35,
+   "prompt": "Peter just finds that he cannot open some important files in a computer in his office due to a ransomware attack. What should he do immediately?",
+   "options": [
+    "Format the hard disk.",
+    "Disconnect the network connection.",
+    "Update anti-virus software.",
+    "Enable a firewall."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 46,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q35",
+   "answer": 1
+  },
+  {
+   "no": 36,
+   "prompt": "A shopping mall plans to develop a mobile application for customers to register their shopping records and gain bonus points for gifts. Which of the following considerations should be the least important?",
+   "options": [
+    "Network security",
+    "Personal data privacy",
+    "Operating system",
+    "Application file size"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 75,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q36",
+   "answer": 3
+  },
+  {
+   "no": 37,
+   "prompt": "John plays Internet games and uses social media all the time. Which of the following are likely the consequences of such indulgence in Internet activities? (1) A higher chance of having anxiety and attention problems (2) Infringement of copyright in Internet activities (3) A decline in physical fitness",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 78,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q37",
+   "answer": 1
+  },
+  {
+   "no": 38,
+   "prompt": "Which of the following are appropriate when using a social media application? (1) Understand the terms of use of the application. (2) Provide necessary personal information only. (3) Forward information sent from others to friends as soon as possible.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 94,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q38",
+   "answer": 0
+  },
+  {
+   "no": 39,
+   "prompt": "Peter installs a software package on his computer. He also installs it on another computer. He does not infringe copyright because ________________.\n(1) the license of the software package allows such installation\n(2) the two computers are located in different countries\n(3) the operating systems of the two computers are different",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 90,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q39",
+   "answer": 0
+  },
+  {
+   "no": 40,
+   "prompt": "Which of the following about the use of robots are correct? (1) Robots can follow working procedures accurately. (2) Robots can replace the work of all the employees. (3) Robots can take up dirty, dangerous jobs.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 85,
+   "source": "HKDSE ICT Paper 1 · Section A · 2022 · Q40",
+   "answer": 1
+  }
+ ]
+}

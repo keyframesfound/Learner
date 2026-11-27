@@ -1,7 +1,31 @@
 import type { Metadata, Viewport } from "next";
+import { Archivo_Black, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import TabBar from "@/components/TabBar";
 import { getStats, viewer } from "@/lib/repo";
+
+/* Typography — Archivo Black display, Space Grotesk body, JetBrains Mono labels.
+   next/font downloads these at build time and serves them from /_next/static/media,
+   so the page never waits on fonts.googleapis.com and a blocked Google cannot
+   drop the app back to system fonts. */
+const display = Archivo_Black({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-archivo-black",
+  display: "swap",
+});
+const body = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "600", "700"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 const DESCRIPTION =
   "ICT and Physics revision for HKDSE: short drills, quick notes and boss raids that make the exam feel smaller.";
@@ -43,15 +67,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const v = await viewer();
   const streak = v ? (await getStats(v.id)).streak : 0;
   return (
-    <html lang="en-HK">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en-HK" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body>
         <div className="app"><main className="page">{children}</main></div>
         <TabBar badge={streak} />

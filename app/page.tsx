@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { subjects } from "@/lib/content";
-import { getModules, getPath, getStats, myClass, viewer } from "@/lib/repo";
+import { enrolledModuleIds, getModulesFor, getPath, getStats, myClass, viewer } from "@/lib/repo";
 import "./home.css";
 
 type ModuleRow = {
@@ -135,18 +135,19 @@ export default async function Learn() {
             <h1 className="vh-name">Learner</h1>
           </div>
         </header>
-        <div className="vh-empty">
-          <b>Sign in to see today</b>
-          <p>Your due items, streak and progress appear here.</p>
-        </div>
       </div>
     );
   }
 
-  const [stats, rows, clsRow] = await Promise.all([getStats(v.id), getModules(), myClass(v.id)]);
+  const [stats, rows, clsRow, allowed] = await Promise.all([
+    getStats(v.id),
+    getModulesFor(v),
+    myClass(v.id),
+    v.role === "student" ? enrolledModuleIds(v.id) : Promise.resolve(undefined),
+  ]);
   const modules = rows as ModuleRow[];
   const cls = clsRow as ClassRow | null;
-  const paths = await Promise.all(modules.map((m) => getPath(v.id, m.id)));
+  const paths = await Promise.all(modules.map((m) => getPath(v.id, m.id, allowed)));
 
   const byModule = new Map<string, (typeof paths)[number]>();
   for (const p of paths) if (p.module) byModule.set(p.module.id, p);
@@ -261,6 +262,7 @@ export default async function Learn() {
       ) : null}
 
       <div className="vh-label">Classes</div>
+      <div className="vh-cls-list">
       {cls ? (
         <ClsCard
           href={classModule ? `/drill?m=${encodeURIComponent(classModule.id)}` : "/drill"}
@@ -291,6 +293,7 @@ export default async function Learn() {
           <p>A teacher can publish the first module.</p>
         </div>
       )}
+      </div>
     </div>
   );
 }

@@ -23,14 +23,10 @@ export default async function Login({ searchParams }: { searchParams: LoginSearc
         <div style={{ fontFamily: "var(--font-display)", fontSize: 40, letterSpacing: "-1.4px", lineHeight: 1 }}>
           Learner
         </div>
-        <p className="mono" style={{ fontSize: 10.5, color: "var(--ink-3)", lineHeight: 1.8 }}>
-          Sign in with your school Google account.<br />
-          One account, one streak, one class.
-        </p>
         <SignIn />
         {code ? <AuthError error={code} /> : null}
         <p className="mono" style={{ fontSize: 9, color: "var(--ink-3)" }}>
-          DSE 2027 · ICT and Physics
+          HKDSE ICT · Junior Science
         </p>
       </div>
     </div>

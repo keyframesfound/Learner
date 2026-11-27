@@ -1,0 +1,146 @@
+{
+ "section": "7.6",
+ "title": "Balance of oxygen and carbon dioxide in Nature",
+ "questions": [
+  {
+   "no": 11,
+   "prompt": "When was the atmospheric carbon dioxide level relatively constant?",
+   "options": [
+    "before 1700s",
+    "after 1700s",
+    "during the 1800s only",
+    "never"
+   ],
+   "answer": 0,
+   "why": "The carbon dioxide level was relatively constant before the 1700s.",
+   "quote": "The level was relatively constant before 1700s. But it has risen sharply in the last few hundred years.",
+   "level": "recall"
+  },
+  {
+   "no": 12,
+   "prompt": "Since when has energy needs increased greatly?",
+   "options": [
+    "Industrial Revolution in late 1700s",
+    "1500s",
+    "2000s",
+    "1900s"
+   ],
+   "answer": 0,
+   "why": "Energy needs increased greatly since the Industrial Revolution.",
+   "quote": "Since the Industrial Revolution in the late 1700s, the energy needs for transport, industrial activities",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "What does burning fossil fuels release?",
+   "options": [
+    "little carbon dioxide",
+    "oxygen",
+    "a lot of carbon dioxide",
+    "water"
+   ],
+   "answer": 2,
+   "why": "Burning fossil fuels releases a lot of carbon dioxide.",
+   "quote": "The burning of fossil fuels releases a lot of carbon dioxide.",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "What are large areas of forest cleared to obtain?",
+   "options": [
+    "energy",
+    "timber or land",
+    "gold",
+    "water"
+   ],
+   "answer": 1,
+   "why": "Large areas of forest are cleared to obtain timber or land.",
+   "quote": "large areas of forest have been cleared to obtain timber or land",
+   "level": "recall"
+  },
+  {
+   "no": 15,
+   "prompt": "Besides carbon dioxide, what other gas is a major greenhouse gas?",
+   "options": [
+    "nitrogen",
+    "methane",
+    "carbon dioxide",
+    "argon"
+   ],
+   "answer": 1,
+   "why": "Methane is also a major greenhouse gas.",
+   "quote": "Apart from carbon dioxide, methane is also a major greenhouse gas.",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "One source of methane is rearing of which animals?",
+   "options": [
+    "coal mining",
+    "solar power",
+    "burning forests",
+    "cattle and sheep"
+   ],
+   "answer": 3,
+   "why": "Methane is released by rearing animals such as cattle and sheep.",
+   "quote": "One of its sources is rearing of animals such as cattle and sheep.",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "What is the Moon's average surface temperature?",
+   "options": [
+    "0 °C",
+    "18 °C",
+    "100 °C",
+    "–18 °C"
+   ],
+   "answer": 3,
+   "why": "The Moon's average surface temperature is –18 °C.",
+   "quote": "the average temperature of its surface is –18 °C",
+   "level": "recognize"
+  },
+  {
+   "no": 18,
+   "prompt": "How did the Arctic Ocean ice in 2020 compare with 1980?",
+   "options": [
+    "much larger",
+    "much smaller",
+    "the same",
+    "doubled"
+   ],
+   "answer": 1,
+   "why": "The Arctic Ocean ice in 2020 was much smaller than in 1980.",
+   "quote": "Ice covering the Arctic Ocean was much smaller in 2020 compared with that in 1980.",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Which is an unusual weather pattern possibly caused by climate change?",
+   "options": [
+    "more typhoons",
+    "more polar ice",
+    "more photosynthesis",
+    "calm weather"
+   ],
+   "answer": 0,
+   "why": "Climate change may lead to unusual weather patterns such as more typhoons.",
+   "quote": "Unusual weather patterns may result, e.g. more typhoons",
+   "level": "apply"
+  },
+  {
+   "no": 20,
+   "prompt": "What temperature rise limit did countries agree to?",
+   "options": [
+    "below 1 °C",
+    "below 5 °C",
+    "below 2 °C",
+    "below 10 °C"
+   ],
+   "answer": 2,
+   "why": "Countries agreed to help limit the rise in global temperature below 2 °C.",
+   "quote": "limit the rise in global temperature below 2 °C",
+   "level": "recall"
+  }
+ ]
+}

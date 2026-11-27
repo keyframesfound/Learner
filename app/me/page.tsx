@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import JoinClass from "@/components/JoinClass";
 import SignOut from "@/components/SignOut";
-import { getModules, getStats, isStaff, joinClass, myClass, viewer } from "@/lib/repo";
+import { getModulesFor, getStats, isStaff, joinClass, myClass, viewer } from "@/lib/repo";
 
 type JoinState = { error?: string; ok?: boolean; className?: string };
 
@@ -45,7 +45,7 @@ export default async function Me() {
   const [stats, clsRaw, modulesRaw] = await Promise.all([
     getStats(v.id),
     myClass(v.id),
-    getModules(),
+    getModulesFor(v),
   ]);
 
   const cls = clsRaw as ClassRow | null;
@@ -80,13 +80,13 @@ export default async function Me() {
                 <path d="M4 6h16M4 12h16M4 18h10" />
               </svg>
             </span>
-            <span className="txt"><b>Teaching portal</b><span>classes, curriculum, questions</span></span>
+            <span className="txt"><b>Teaching portal</b><span>Classes, curriculum, questions</span></span>
             <span className="go">Open</span>
           </Link>
         </div>
       )}
 
-      <div className="sec"><h2>This week</h2><span>honest numbers only</span></div>
+      <div className="sec"><h2>This week</h2><span>Honest numbers only</span></div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 9, padding: "0 16px" }}>
         {statsGrid.map(([k, val]) => (
           <div key={k} style={{ border: "3px solid var(--ink)", borderRadius: 9, background: "#fff",

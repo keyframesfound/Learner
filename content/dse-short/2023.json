@@ -1,0 +1,397 @@
+{
+ "year": "2023",
+ "items": [
+  {
+   "no": 1,
+   "prompt": "Which statement about direct access is true?",
+   "options": [
+    "Faster seek time than sequential access",
+    "Sequential access is faster",
+    "Writes start from the disk's start",
+    "Hard disks rarely use direct access"
+   ],
+   "answer": 0,
+   "why": "Direct access reaches data directly, generally giving faster seek time than sequential access."
+  },
+  {
+   "no": 3,
+   "prompt": "Which system needs a network connection?",
+   "options": [
+    "Batch processing",
+    "Distributed processing",
+    "Real-time processing",
+    "Neither"
+   ],
+   "answer": 1,
+   "why": "Distributed processing spans multiple computers, so it needs a network; real-time and batch processing can run locally."
+  },
+  {
+   "no": 4,
+   "prompt": "What happens when 01100000 is added to 01100000?",
+   "options": [
+    "The value wraps around",
+    "Result is 00110000",
+    "Overflow error",
+    "No error occurs"
+   ],
+   "answer": 2,
+   "why": "Two copies of 96 exceed the 8-bit sign-and-magnitude range, so the addition overflows."
+  },
+  {
+   "no": 5,
+   "prompt": "Which clause filters salary above 5000 and sorts ascending?",
+   "options": [
+    "HAVING salary > 5000 ORDER BY",
+    "WHERE salary > 5000 ASC",
+    "ORDER BY salary only",
+    "WHERE salary > 5000 ORDER BY"
+   ],
+   "answer": 3,
+   "why": "WHERE filters rows before sorting and ORDER BY sorts the results ascending."
+  },
+  {
+   "no": 6,
+   "skip": "needs the printed pseudocode"
+  },
+  {
+   "no": 7,
+   "prompt": "Which should be considered when creating a presentation?",
+   "options": [
+    "Layout, colour scheme and slide sequence",
+    "Slide layout and colour only",
+    "Font size and colour only",
+    "Slide sequence only"
+   ],
+   "answer": 0,
+   "why": "Layout, colour scheme and slide sequence should all be considered."
+  },
+  {
+   "no": 8,
+   "prompt": "Which string does UPPER(\"technology\") return?",
+   "options": [
+    "Technology",
+    "TECHNOLOGY",
+    "technology",
+    "TeChNoLoGy"
+   ],
+   "answer": 1,
+   "why": "UPPER converts every letter to uppercase, giving TECHNOLOGY."
+  },
+  {
+   "no": 9,
+   "prompt": "Which is not required for a mail merge?",
+   "options": [
+    "Data source",
+    "Main document",
+    "Field length",
+    "Merge fields"
+   ],
+   "answer": 2,
+   "why": "Mail merge needs a data source, a main document and merge fields, but no field length."
+  },
+  {
+   "no": 10,
+   "prompt": "Which is a benefit of creating a report in PDF?",
+   "options": [
+    "Easier editing after printing",
+    "Compressing all images",
+    "Enabling interactive animations",
+    "Preserving text format"
+   ],
+   "answer": 3,
+   "why": "PDF preserves the text format of the report."
+  },
+  {
+   "no": 11,
+   "prompt": "Which image formats support transparent backgrounds?",
+   "options": [
+    "PNG and GIF",
+    "JPG and PNG",
+    "PNG only",
+    "GIF only"
+   ],
+   "answer": 0,
+   "why": "PNG and GIF support transparent backgrounds; JPG does not."
+  },
+  {
+   "no": 12,
+   "prompt": "Which activity involves Object Linking and Embedding?",
+   "options": [
+    "Creating a pivot table",
+    "Inserting an image in a slide",
+    "Sorting a worksheet",
+    "Changing font colour"
+   ],
+   "answer": 1,
+   "why": "OLE is used when inserting objects, such as images, into a slide."
+  },
+  {
+   "no": 13,
+   "prompt": "Which statement about Unicode is correct?",
+   "options": [
+    "Used for Chinese characters only",
+    "Depends on the operating system",
+    "Used for English and other languages",
+    "Depends on the browser"
+   ],
+   "answer": 2,
+   "why": "Unicode represents characters in English and other languages."
+  },
+  {
+   "no": 14,
+   "prompt": "Which is faster — cache memory or RAM?",
+   "options": [
+    "RAM",
+    "Both are equally fast",
+    "Neither",
+    "Cache memory"
+   ],
+   "answer": 3,
+   "why": "Cache memory is accessed faster than RAM."
+  },
+  {
+   "no": 15,
+   "prompt": "What is the main function of a network interface card?",
+   "options": [
+    "Send and receive network signals",
+    "Project Wi-Fi signals",
+    "Direct packets between networks",
+    "Filter and forward packets"
+   ],
+   "answer": 0,
+   "why": "A network interface card sends and receives network signals."
+  },
+  {
+   "no": 16,
+   "prompt": "Which is a function of an operating system?",
+   "options": [
+    "Compiling code",
+    "Allocating hardware resources",
+    "Storing user programs permanently",
+    "Compiling web pages"
+   ],
+   "answer": 1,
+   "why": "An OS allocates hardware resources between programs."
+  },
+  {
+   "no": 17,
+   "prompt": "Which is not a specification of a projector?",
+   "options": [
+    "WiFi 802.11ac",
+    "3800 lm",
+    "5400 rpm",
+    "4K UHD"
+   ],
+   "answer": 2,
+   "why": "5400 rpm measures hard disk speed, not a projector."
+  },
+  {
+   "no": 18,
+   "skip": "needs the printed task-performance table"
+  },
+  {
+   "no": 19,
+   "prompt": "Why does a new USB printer work immediately?",
+   "options": [
+    "The printer has a built-in CPU",
+    "USB printers need no driver",
+    "The RAM size is large enough",
+    "The OS already has a driver"
+   ],
+   "answer": 3,
+   "why": "The operating system already has a driver program for the printer."
+  },
+  {
+   "no": 20,
+   "prompt": "Which statement about HTTP is correct?",
+   "options": [
+    "Fetches web pages from a server",
+    "Converts domain names to IP addresses",
+    "Distinguishes wireless and wired networks",
+    "Encrypts and decrypts data"
+   ],
+   "answer": 0,
+   "why": "HTTP is used to retrieve web pages from a web server."
+  },
+  {
+   "no": 21,
+   "prompt": "What does a third-party cookies notice mean?",
+   "options": [
+    "The network will be faster",
+    "Personal information may be collected",
+    "Email address book may be disclosed",
+    "A virus is about to arrive"
+   ],
+   "answer": 1,
+   "why": "A third-party cookies notice means personal information may be collected."
+  },
+  {
+   "no": 22,
+   "prompt": "Which protocol is used to upload a photo to a website?",
+   "options": [
+    "DNS",
+    "SMTP",
+    "HTTP",
+    "FTP"
+   ],
+   "answer": 2,
+   "why": "HTTP transfers the photo to the browser and website."
+  },
+  {
+   "no": 24,
+   "prompt": "Which statement about IP addresses is correct?",
+   "options": [
+    "Reassemble data in order",
+    "Replace DNS lookups",
+    "Shown beside the MAC address",
+    "Works with the Internet and Intranet"
+   ],
+   "answer": 3,
+   "why": "IP addresses work on both the Internet and an Intranet."
+  },
+  {
+   "no": 25,
+   "prompt": "What are the input and output of a DNS server?",
+   "options": [
+    "Domain name / IP address",
+    "HTML / IP address",
+    "IP address / MAC address",
+    "Domain name / MAC address"
+   ],
+   "answer": 0,
+   "why": "A DNS server takes a domain name and returns an IP address."
+  },
+  {
+   "no": 26,
+   "prompt": "What is a typical advantage of wired networks?",
+   "options": [
+    "Flexible network access",
+    "More stable connection",
+    "Higher network security",
+    "Easy wireless setup"
+   ],
+   "answer": 1,
+   "why": "Wired networks offer a more stable connection."
+  },
+  {
+   "no": 27,
+   "skip": "needs the printed pseudocode"
+  },
+  {
+   "no": 28,
+   "skip": "needs the printed Algorithm 1/2 listing"
+  },
+  {
+   "no": 29,
+   "skip": "needs the printed Algorithm 1/2 listing"
+  },
+  {
+   "no": 30,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 31,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 32,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 33,
+   "prompt": "Which is an advantage of modular design?",
+   "options": [
+    "Execution time is always shorter",
+    "Modules cannot be reused",
+    "A module can be reused",
+    "Modules make code longer"
+   ],
+   "answer": 2,
+   "why": "Modules can be reused in other scenarios."
+  },
+  {
+   "no": 34,
+   "prompt": "What is an advantage of open source software?",
+   "options": [
+    "Easier to set up",
+    "Always cross-platform",
+    "No configuration needed",
+    "Users can improve and share code"
+   ],
+   "answer": 3,
+   "why": "Open source users can improve the code and share it with the community."
+  },
+  {
+   "no": 35,
+   "prompt": "Which are proper measures when using social media?",
+   "options": [
+    "Privacy, strong password and awareness",
+    "Privacy settings only",
+    "Strong passwords only",
+    "None of the above"
+   ],
+   "answer": 0,
+   "why": "Proper measures include managing privacy settings, using a strong password and checking what you have provided."
+  },
+  {
+   "no": 36,
+   "prompt": "Which programs can enhance computer security?",
+   "options": [
+    "Adware only",
+    "Firewall and encryption program",
+    "Firewall only",
+    "Adware and encryption"
+   ],
+   "answer": 1,
+   "why": "Firewalls and encryption programs enhance security; adware does not."
+  },
+  {
+   "no": 37,
+   "prompt": "Which can help bridge the digital divide?",
+   "options": [
+    "Only online English lessons",
+    "Only paid cybercafés",
+    "Free computers and Internet access",
+    "Adware removal only"
+   ],
+   "answer": 2,
+   "why": "Free computers in libraries and Internet access for students in need help bridge the digital divide."
+  },
+  {
+   "no": 38,
+   "prompt": "What is a benefit of SSL on websites?",
+   "options": [
+    "Higher data transfer rate",
+    "Hiding site IP addresses",
+    "Lower bandwidth usage",
+    "Encrypted data transfer"
+   ],
+   "answer": 3,
+   "why": "SSL encrypts the data transferred over the website."
+  },
+  {
+   "no": 39,
+   "prompt": "Why do companies prefer commercial software?",
+   "options": [
+    "Better support from developers",
+    "Fewer bugs",
+    "Cannot be modified",
+    "Free of charges"
+   ],
+   "answer": 0,
+   "why": "Commercial software developers can provide better support."
+  },
+  {
+   "no": 40,
+   "prompt": "How does frequent OS updating protect against viruses?",
+   "options": [
+    "It speeds up the computer",
+    "It fixes security loopholes",
+    "It gives more developer support",
+    "It runs a virus check"
+   ],
+   "answer": 1,
+   "why": "Frequent updates fix security loopholes that viruses exploit."
+  }
+ ]
+}

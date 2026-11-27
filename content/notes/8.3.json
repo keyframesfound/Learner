@@ -1,0 +1,286 @@
+{
+ "section": "8.3",
+ "title": "Voltage",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "What does the voltage of a cell indicate?",
+   "options": [
+    "How much energy supplied to charges",
+    "How much current the cell consumes",
+    "How bright the bulb will be",
+    "How many cells in the circuit"
+   ],
+   "answer": 0,
+   "why": "Voltage indicates how much energy the cell supplies to the charges.",
+   "quote": "It indicates how much energy is supplied by the cell for the electric charges to flow around the circuit.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "What is the unit of voltage?",
+   "options": [
+    "Ampere",
+    "Ohm",
+    "Volt",
+    "Watt"
+   ],
+   "answer": 2,
+   "why": "The unit of voltage is the volt.",
+   "quote": "The unit of voltage is the volt (V).",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "Which instrument measures the size of voltage?",
+   "options": [
+    "Ammeter",
+    "Voltmeter",
+    "Ohmmeter",
+    "Galvanometer"
+   ],
+   "answer": 1,
+   "why": "A voltmeter measures the size of voltage.",
+   "quote": "We measure the size of voltage with a voltmeter (Fig 8.23).",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "How should a voltmeter be connected across a cell?",
+   "options": [
+    "In series with the cell",
+    "Reversed across the cell",
+    "Across, red knob to negative",
+    "Across, red knob to positive"
+   ],
+   "answer": 3,
+   "why": "The voltmeter is placed across the cell with the red knob to the positive terminal.",
+   "quote": "A voltmeter is connected across a cell to measure its voltage. Its red knob (+) should be connected to the positive terminal of the cell and its black knob (–) to the negative terminal (Fig 8.26).",
+   "level": "apply"
+  },
+  {
+   "no": 5,
+   "prompt": "One of three 1.5-V cells is reversed. What is the overall voltage?",
+   "options": [
+    "1.5 V",
+    "3.0 V",
+    "4.5 V",
+    "0 V"
+   ],
+   "answer": 0,
+   "why": "The reversed cell subtracts: 1.5 - 1.5 + 1.5 = 1.5 V.",
+   "quote": "Overall voltage = 1.5 - 1.5 + 1.5 = 1.5 V",
+   "level": "apply"
+  },
+  {
+   "no": 6,
+   "prompt": "What happens to voltage when cells are connected in the same direction?",
+   "options": [
+    "Voltage is unchanged",
+    "Voltages cancel out",
+    "Voltages add up",
+    "Voltage decreases"
+   ],
+   "answer": 2,
+   "why": "Cells in the same direction add up their voltages.",
+   "quote": "When more than one cell is connected in the same direction, the voltage across the cells is added up.",
+   "level": "apply"
+  },
+  {
+   "no": 7,
+   "prompt": "What happens to the current when the voltage increases?",
+   "options": [
+    "It stays the same",
+    "It increases",
+    "It decreases",
+    "It becomes zero"
+   ],
+   "answer": 1,
+   "why": "The higher the voltage, the larger the current.",
+   "quote": "The higher the voltage, the larger the current flowing through the circuit.",
+   "level": "apply"
+  },
+  {
+   "no": 8,
+   "prompt": "How does the voltage of two cells in opposite directions compare to the sum?",
+   "options": [
+    "It is higher",
+    "It equals the sum",
+    "It is zero",
+    "It is lower"
+   ],
+   "answer": 3,
+   "why": "Opposite-direction cells give a voltage lower than the sum of the individual voltages.",
+   "quote": "When one of the cells is connected in the opposite direction, the voltage across the cells is lower than the sum of the individual voltages.",
+   "level": "apply"
+  },
+  {
+   "no": 9,
+   "prompt": "What is the overall voltage of three 1.5-V cells in the same direction?",
+   "options": [
+    "3.0 V",
+    "6.0 V",
+    "4.5 V",
+    "1.5 V"
+   ],
+   "answer": 2,
+   "why": "Three 1.5-V cells give an overall voltage of 4.5 V.",
+   "quote": "Overall voltage = 1.5 + 1.5 + 1.5 = 4.5 V",
+   "level": "apply"
+  },
+  {
+   "no": 10,
+   "prompt": "Who invented the first battery, and in what year?",
+   "options": [
+    "Alessandro Volta, 1800",
+    "Andre-Marie Ampere, 1800",
+    "Alessandro Volta, 1900",
+    "Andre-Marie Ampere, 1775"
+   ],
+   "answer": 0,
+   "why": "Alessandro Volta invented the first battery in 1800.",
+   "quote": "The unit of voltage is named after the scientist Alessandro Volta. He invented the first battery in 1800.",
+   "level": "recognize"
+  },
+  {
+   "no": 11,
+   "prompt": "A higher-voltage cell works like which water flow model part?",
+   "options": [
+    "A stronger pump",
+    "A weaker pump",
+    "A turbine",
+    "A water channel"
+   ],
+   "answer": 0,
+   "level": "recognize",
+   "why": "A higher-voltage cell works like a stronger pump.",
+   "quote": "A cell of a higher voltage works like a stronger pump."
+  },
+  {
+   "no": 12,
+   "prompt": "A larger cell stores ___ chemical energy than a smaller one?",
+   "options": [
+    "The same amount of",
+    "More",
+    "Less",
+    "No"
+   ],
+   "answer": 1,
+   "level": "recognize",
+   "why": "The larger the size of a cell, the more chemical energy it stores.",
+   "quote": "The larger the size, the more chemical energy the cell stores."
+  },
+  {
+   "no": 13,
+   "prompt": "To what does a voltmeter's black knob connect?",
+   "options": [
+    "Positive terminal of the cell",
+    "Across the bulb",
+    "Negative terminal of the cell",
+    "The voltmeter's red knob"
+   ],
+   "answer": 2,
+   "level": "recall",
+   "why": "The black knob connects to the negative terminal.",
+   "quote": "its black knob (–) to the negative terminal"
+  },
+  {
+   "no": 14,
+   "prompt": "When measuring a voltage below 5 V, which knob should be connected?",
+   "options": [
+    "10-V knob",
+    "15-V knob",
+    "3-V knob",
+    "5-V knob"
+   ],
+   "answer": 3,
+   "level": "recall",
+   "why": "The 5-V knob gives a more precise reading below 5 V.",
+   "quote": "the 5-V knob should be connected when we measure a voltage below 5 V."
+  },
+  {
+   "no": 15,
+   "prompt": "What must the voltmeter never be used to measure?",
+   "options": [
+    "Mains voltage",
+    "Voltage of a cell",
+    "Voltage across a bulb",
+    "Voltage of a battery"
+   ],
+   "answer": 0,
+   "level": "recognize",
+   "why": "The voltmeter must not be used to measure mains voltage.",
+   "quote": "Do NOT use the voltmeter to measure mains voltage."
+  },
+  {
+   "no": 16,
+   "prompt": "What is the voltage of mains electricity?",
+   "options": [
+    "5.0 V",
+    "220 V",
+    "3.7 V",
+    "25 000 V"
+   ],
+   "answer": 1,
+   "level": "recognize",
+   "why": "Mains electricity is 220 V.",
+   "quote": "mains electricity (220 V)"
+  },
+  {
+   "no": 17,
+   "prompt": "What does the output specification of a USB charger mean?",
+   "options": [
+    "The charger accepts 5.0 V",
+    "The charger runs at 100-240 V",
+    "5.0 V at 2.0 A max",
+    "Accepts 5.0 V at 0.35 A"
+   ],
+   "answer": 2,
+   "level": "recognize",
+   "why": "The output specification means the charger supplies 5.0 V at up to 2.0 A.",
+   "quote": "the charger supplies 5.0 V of electricity with a maximum current of 2.0 A."
+  },
+  {
+   "no": 18,
+   "prompt": "Which preposition follows 'voltage' when describing a cell?",
+   "options": [
+    "With",
+    "In",
+    "Through",
+    "Across"
+   ],
+   "answer": 3,
+   "level": "recall",
+   "why": "We say 'voltage across a cell'.",
+   "quote": "voltage across a cell / bulb"
+  },
+  {
+   "no": 19,
+   "prompt": "The higher the voltage in a circuit, the ___ the current?",
+   "options": [
+    "Larger",
+    "Smaller",
+    "Zero",
+    "Unchanged"
+   ],
+   "answer": 0,
+   "level": "apply",
+   "why": "Higher voltage produces larger current.",
+   "quote": "The higher the voltage, the larger the current flowing through the circuit."
+  },
+  {
+   "no": 20,
+   "prompt": "What happens to the bulb's brightness when the voltage increases?",
+   "options": [
+    "It stays the same",
+    "It increases",
+    "It decreases",
+    "It turns off"
+   ],
+   "answer": 1,
+   "level": "apply",
+   "why": "As voltage increases, current increases and the bulb becomes brighter.",
+   "quote": "the current flowing through the circuit also increases and the bulb becomes brighter."
+  }
+ ]
+}

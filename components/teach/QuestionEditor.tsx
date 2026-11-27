@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { addMcqAction, deleteBlockAction, updateBlockAction } from "@/app/teach/content-actions";
+import LevelPicker, { type Level } from "@/components/teach/LevelPicker";
 
 export type EditorOption = { text: string; code?: boolean };
 export type EditorEvidence = { letter: string; pct: number; graded: number };
@@ -43,6 +44,14 @@ export default function QuestionEditor(props: Props) {
     props.answer >= 0 && props.answer < options.length ? props.answer : 0,
   );
   const [why, setWhy] = useState(props.why);
+  /* the enum has four values, the portal shows two difficulties */
+  const [level, setLevel] = useState<Level>(
+    String(props.level).toLowerCase() === "hard"
+      ? "hard"
+      : String(props.level).toLowerCase() === "medium"
+        ? "medium"
+        : "easy",
+  );
   const [code, setCode] = useState(props.code.join("\n"));
   const [error, setError] = useState<string | null>(null);
 
@@ -68,16 +77,17 @@ export default function QuestionEditor(props: Props) {
 
   return (
     <div className="qed">
-      <div className="hd">
-        <b>{blockId ? `Editing item ${props.itemNumber}` : "New item"}</b>
-        <span className="lvl">{props.level}</span>
-      </div>
-
       <form
         action={blockId ? updateBlockAction : addMcqAction}
         onSubmit={onSubmit}
         style={{ display: "flex", flexDirection: "column", gap: 10 }}
       >
+        {/* inside the form on purpose: a select outside it never submits */}
+        <div className="hd">
+          <b>{blockId ? `Editing item ${props.itemNumber}` : "New item"}</b>
+          <LevelPicker value={level} onChange={setLevel} />
+        </div>
+
         <input type="hidden" name="lessonId" value={lessonId} />
         {blockId ? <input type="hidden" name="blockId" value={blockId} /> : null}
         <input type="hidden" name="kind" value="mcq" />
@@ -86,12 +96,13 @@ export default function QuestionEditor(props: Props) {
         <input type="hidden" name="wrongWhy" value={props.wrongWhy} />
         <input type="hidden" name="back" value={props.back} />
 
-        <input
+        <textarea
           className="fld"
           name="prompt"
           value={prompt}
           onChange={(event) => setPrompt(event.target.value)}
-          style={{ fontSize: 13, fontWeight: 700, lineHeight: 1.45 }}
+          rows={2}
+          style={{ fontSize: 14, fontWeight: 700, lineHeight: 1.4, resize: "vertical" }}
           aria-label="Question stem"
           maxLength={240}
           required
@@ -133,7 +144,7 @@ export default function QuestionEditor(props: Props) {
               value={code}
               onChange={(event) => setCode(event.target.value)}
               rows={Math.min(8, Math.max(2, code.split("\n").length))}
-              style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 11.5 }}
+              style={{ fontFamily: "var(--font-mono)", fontSize: 12.5 }}
               spellCheck={false}
             />
           </>
@@ -147,7 +158,7 @@ export default function QuestionEditor(props: Props) {
           name="why"
           value={why}
           onChange={(event) => setWhy(event.target.value)}
-          rows={2}
+          rows={4}
           required
         />
 

@@ -1,0 +1,653 @@
+{
+ "year": "2020",
+ "staged": false,
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "A Hong Kong identity card number is wrongly entered into a computer system, as shown below. Which of the following can help detect this error?\n(1) Range check\n(2) Input data twice\n(3) Check digit",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": [
+    "Original number    Wrong input",
+    "A123456(3)         A213456(3)"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 74,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q1",
+   "answer": 2
+  },
+  {
+   "no": 2,
+   "prompt": "Which of the following decimal values is equivalent to 1010 0001 in 8-bit two's complement representation?",
+   "options": [
+    "33",
+    "-33",
+    "95",
+    "-95"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 53,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q2",
+   "answer": 3
+  },
+  {
+   "no": 3,
+   "prompt": "Amy uses JPG format instead of BMP format when scanning photos. What is/are the possible reason(s) for this?\n(1) To decrease the file size of the photos\n(2) To increase the number of pixels per photo\n(3) To increase the number of colours displayed",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 78,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q3",
+   "answer": 0
+  },
+  {
+   "no": 4,
+   "prompt": "A company has 30 000 employees. Each employee has a staff number. What is the minimum number of bits required to represent the staff numbers?",
+   "options": [
+    "5",
+    "14",
+    "15",
+    "32"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 61,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q4",
+   "answer": 2
+  },
+  {
+   "no": 5,
+   "prompt": "Assume that X = 2 and Y = 3. Which of the following Boolean expressions returns TRUE?",
+   "options": [
+    "((X > Y) AND (Y > 4)) OR (1 > X)",
+    "((X < Y) AND (Y > 4)) OR (1 > X)",
+    "(X > Y) AND ((Y < 4) OR (1 < X))",
+    "(X < Y) AND ((Y < 4) OR (1 < X))"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 91,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q5",
+   "answer": 3
+  },
+  {
+   "no": 6,
+   "prompt": "Which of the following character sets can be used to represent simplified Chinese characters, traditional Chinese characters and English characters?\n(1) ASCII\n(2) Unicode\n(3) GB code",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 79,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q6",
+   "answer": 1
+  },
+  {
+   "no": 7,
+   "prompt": "What of the following is/are the benefit(s) of e-government?\n(1) Government information can be more easily accessed by the public in digital format.\n(2) The data security of the government information is enhanced.\n(3) The digital divide in society can be closed.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 64,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q7",
+   "answer": 0
+  },
+  {
+   "no": 8,
+   "prompt": "Mary sends an email with a document in PDF instead of DOC format. What is/are the possible reason(s) for this?\n(1) The document can be encrypted.\n(2) The page layout of the document can be preserved.\n(3) Multimedia elements can be included.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 41,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q8",
+   "answer": 1
+  },
+  {
+   "no": 9,
+   "prompt": "Ms Li plans to design and produce student result slips using student information and examination marks stored in a database. What should she do?",
+   "options": [
+    "Create reports using database software.",
+    "Create hyperlinks to the database using word processing software.",
+    "Create SQL commands using spreadsheet software.",
+    "Import data and create a pivot table using spreadsheet software."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 39,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q9",
+   "answer": 0
+  },
+  {
+   "no": 10,
+   "prompt": "For which of the following tasks should spreadsheet 'what-if' scenarios be created?\n(1) Find the students who are awarded 90 marks or above in a Mathematics examination.\n(2) Estimate the cost of a product produced by different manufacturers.\n(3) Create a chart of monthly average temperatures.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 58,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q10",
+   "answer": 1
+  },
+  {
+   "no": 11,
+   "prompt": "There are 6 records in a database table PET, as shown below: What value(s) will be included in the output of the following SQL statement? SELECT SUM(WEIGHT) FROM PET GROUP BY PTYPE (1) 109 (2) 15 (3) 34 (4) 60",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(3) and (4) only",
+    "(2), (3) and (4) only"
+   ],
+   "code": [
+    "PID  WEIGHT  PTYPE",
+    "103  15      A",
+    "105  18      P",
+    "106  12      P",
+    "109  30      D",
+    "110  4       P",
+    "112  30      D"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 73,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q11",
+   "answer": 3
+  },
+  {
+   "no": 12,
+   "prompt": "A teacher creates a presentation which includes the following slide. Which element(s) of the slide should the teacher edit to create a more attractive presentation? (1) SQL (2) Font (3) Chart",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "screenshot",
+   "figure_note": "Slide titled Survey data on ways of going home with a pie chart showing three segments: On foot, by school bus, by MTR",
+   "level": "recognize",
+   "percent": 73,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q12",
+   "answer": 3
+  },
+  {
+   "no": 13,
+   "prompt": "Which of the following processes is an example of data collection?",
+   "options": [
+    "Taking Towngas meter readings",
+    "Inserting a bank card into an automated teller machine",
+    "Putting a photo on a scanner for scanning",
+    "Entering test marks written on a mark sheet into a spreadsheet"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 53,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q13",
+   "answer": 0
+  },
+  {
+   "no": 14,
+   "prompt": "Answer Questions 14 and 15 with reference to the following specifications of computers X, Y and Z. All computers use the same operating system. Which computer(s) has/have the best computational power?",
+   "options": [
+    "X",
+    "Y",
+    "Z",
+    "Y and Z"
+   ],
+   "code": [
+    "      | X | Y | Z",
+    "CPU | Quad-core, 2.8 GHz | Dual-core, 1.8 GHz | Quad-core, 2.4 GHz",
+    "RAM | 4 GB | 2 GB | 4 GB",
+    "Storage device | 2TB hard drive | 512 GB SSD | 512 GB SSD",
+    "Network | LAN port (1000 Mbps) | 802.11ac WiFi | LAN port (1000 Mbps) 802.11ac WiFi"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 83,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q14",
+   "answer": 0
+  },
+  {
+   "no": 15,
+   "prompt": "Answer Questions 14 and 15 with reference to the following specifications of computers X, Y and Z. All computers use the same operating system. Which computer(s) take(s) the shortest time to boot up?",
+   "options": [
+    "X",
+    "Y",
+    "Z",
+    "X and Z"
+   ],
+   "code": [
+    "      | X | Y | Z",
+    "CPU | Quad-core, 2.8 GHz | Dual-core, 1.8 GHz | Quad-core, 2.4 GHz",
+    "RAM | 4 GB | 2 GB | 4 GB",
+    "Storage device | 2TB hard drive | 512 GB SSD | 512 GB SSD",
+    "Network | LAN port (1000 Mbps) | 802.11ac WiFi | LAN port (1000 Mbps) 802.11ac WiFi"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 47,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q15",
+   "answer": 2
+  },
+  {
+   "no": 16,
+   "prompt": "Which of the following is not an advantage of an SSD over a hard drive?",
+   "options": [
+    "Consumes less electricity.",
+    "Generates less heat.",
+    "Supports random access.",
+    "Provides a higher access speed."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 51,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q16",
+   "answer": 2
+  },
+  {
+   "no": 17,
+   "prompt": "Which of the following descriptions of a driver program is correct?",
+   "options": [
+    "Enables the operating system to manage files.",
+    "Enables the operating system to control a scanner.",
+    "Monitors the status of virus checking.",
+    "Monitors the usage of RAM."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 55,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q17",
+   "answer": 1
+  },
+  {
+   "no": 18,
+   "prompt": "Consider the following instruction. In the fetch-decode-execute cycle, what does 'fetch' do?",
+   "options": [
+    "Obtains the instruction from the main memory with the address 1000.",
+    "Obtains the instruction from the main memory with the address 1111.",
+    "Obtains the content of the accumulator.",
+    "Calculates the address of the next instruction by using the control unit (CU)."
+   ],
+   "code": [
+    "Address | Instruction | Description",
+    "1000 | STORE 1111 | Store the content of the accumulator into the main memory with the address 1111"
+   ],
+   "figure": "table",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 60,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q18",
+   "answer": 0
+  },
+  {
+   "no": 21,
+   "prompt": "Which of the following only support(s) sequential access? (1) DVD-RW (2) Magnetic tape (3) Flash memory",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 79,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q21",
+   "answer": 1
+  },
+  {
+   "no": 22,
+   "prompt": "Which of the following statements about the components in a computer is not correct?",
+   "options": [
+    "The arithmetic and logic unit (ALU) is used to perform arithmetic operations.",
+    "The accumulator is a register that stores arithmetic and logic results.",
+    "The data transfer rate of registers is higher than that of the main memory.",
+    "Data buses are used to transfer control signals between the main board and input/output devices."
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "apply",
+   "percent": 33,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q22",
+   "answer": 3
+  },
+  {
+   "no": 23,
+   "prompt": "Which of the following is not appropriate for enhancing students' information literacy?",
+   "options": [
+    "Watching documentaries about the ocean online",
+    "Searching for the installation password of a software package through an online discussion forum",
+    "Reading school newsletters through the school intranet",
+    "Finding the history of computers through the Internet"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 81,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q23",
+   "answer": 1
+  },
+  {
+   "no": 24,
+   "prompt": "Which of the following can improve the quality of video conferencing? (1) A camera with a higher resolution (2) A larger storage capacity (3) A higher network bandwidth",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 91,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q24",
+   "answer": 2
+  },
+  {
+   "no": 25,
+   "prompt": "Which of the following protocols is/are involved when browsing https://www.gov.hk? (1) FTP (2) IP (3) DNS",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 62,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q25",
+   "answer": 3
+  },
+  {
+   "no": 26,
+   "prompt": "Which of the following can be used to identify a host computer on the Internet? (1) Email address (2) IP address (3) Computer name",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 78,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q26",
+   "answer": 1
+  },
+  {
+   "no": 27,
+   "prompt": "What is the main function of a network interface card?",
+   "options": [
+    "To find a route for sending data packets",
+    "To make a computer communicate over a network",
+    "To enhance the security level of a communication link",
+    "To support satellite communication"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 83,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q27",
+   "answer": 1
+  },
+  {
+   "no": 28,
+   "prompt": "When Eva logs on to a web site, she will receive an SMS message on her phone with a password. What is the SMS message about?",
+   "options": [
+    "Parity checking",
+    "Digital watermark",
+    "Digital signature",
+    "Authentication"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 90,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q28",
+   "answer": 3
+  },
+  {
+   "no": 31,
+   "prompt": "What is the output of the following algorithm?",
+   "options": [
+    "14",
+    "33",
+    "46",
+    "60"
+   ],
+   "code": [
+    "N ← 10",
+    "K ← 0",
+    "While N < 14 do",
+    "    K ← K + N",
+    "    N ← N + 1",
+    "Output K"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 68,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q31",
+   "answer": 2
+  },
+  {
+   "no": 32,
+   "prompt": "What is the output of the following algorithm?",
+   "options": [
+    "1 1 2 2 4",
+    "1 1 2 3 5",
+    "1 2 3 4 5",
+    "1 2 4 8 16"
+   ],
+   "code": [
+    "p ← 0",
+    "Q ← 1",
+    "For i from 1 to 5 do",
+    "  If i < 2 then",
+    "    Output i",
+    "  else",
+    "    R ← P + Q",
+    "    P ← Q",
+    "    Q ← R",
+    "    Output R"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 73,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q32",
+   "answer": 1
+  },
+  {
+   "no": 33,
+   "prompt": "What is the output of the following algorithm?",
+   "options": [
+    "4",
+    "5",
+    "16",
+    "32"
+   ],
+   "code": [
+    "P ← 1",
+    "Q ← 2",
+    "Repeat",
+    "  P ← P + 1",
+    "  Q ← Q * 2",
+    "Until (P > 4)",
+    "Output Q"
+   ],
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 75,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q33",
+   "answer": 3
+  },
+  {
+   "no": 34,
+   "prompt": "A bank updates its automatic teller machine system with new restrictions on cash withdrawals, as follows: • Available cash notes $100, $500 and $1 000 • Minimum withdrawal amount = $200 • Maximum withdrawal amount = $10 000 Which of the following sets of withdrawal amounts should be used as test data for this system update?",
+   "options": [
+    "50, 500, 7 000, 8 000, 9 000, 10 000",
+    "100, 200, 300, 500, 1 000, 30 000",
+    "100, 200, 600, 950, 10 000, 11 000",
+    "100, 1 000, 15 000, 20 000, 25 000, 30 000"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 70,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q34",
+   "answer": 2
+  },
+  {
+   "no": 35,
+   "prompt": "A student is addicted to online gaming and plays more than 8 hours every day. Which of the following health problems might be encounter?\n(1) Sleep problems\n(2) Vision problems\n(3) Emotional problems",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 69,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q35",
+   "answer": 3
+  },
+  {
+   "no": 36,
+   "prompt": "In a computer network, which of the following can protect a user's privacy from a hacker attack?\n(1) Create backup of data.\n(2) Update the operating system.\n(3) Install a firewall.",
+   "options": [
+    "(1) and (2) only",
+    "(1) and (3) only",
+    "(2) and (3) only",
+    "(1), (2) and (3)"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recall",
+   "percent": 68,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q36",
+   "answer": 2
+  },
+  {
+   "no": 37,
+   "prompt": "What is/are the major characteristic(s) of open source software?\n(1) Developers can set the selling price.\n(2) Users can change the source code.\n(3) All functions of the software can be used during the trial period.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 80,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q37",
+   "answer": 1
+  },
+  {
+   "no": 38,
+   "prompt": "An online shop collects its members' personal information. Which of the following actions is/are not appropriate without members' consent?\n(1) The shop encrypts and uploads all personal information to cloud storage.\n(2) The shop sends all personal information to other online shops which provide other services to members.\n(3) When a member unregisters his/her membership, the shop keeps the personal information permanently to help with his/her re-registration in the future.",
+   "options": [
+    "(1) only",
+    "(2) only",
+    "(1) and (3) only",
+    "(2) and (3) only"
+   ],
+   "code": null,
+   "figure": "none",
+   "figure_note": "",
+   "level": "recognize",
+   "percent": 71,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q38",
+   "answer": 3
+  },
+  {
+   "no": 39,
+   "prompt": "When Peter installs a game from a hyperlink sent by his friend, a dialogue box pops up, as shown below:",
+   "options": [
+    "Firewall",
+    "Browser",
+    "File manager application",
+    "Device manager application"
+   ],
+   "code": null,
+   "figure": "screenshot",
+   "figure_note": "A 'Message' dialogue box reading: 'X has blocked some features of this program.' 'Allow this program to access your private networks?' with two buttons: 'Cancel' and 'Allow'.",
+   "level": "recognize",
+   "percent": 84,
+   "source": "HKDSE ICT Paper 1 · Section A · 2020 · Q39",
+   "answer": 0
+  }
+ ]
+}

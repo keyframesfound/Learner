@@ -12,10 +12,11 @@ import {
   questionRows,
   savedLabel,
 } from "@/app/teach/data";
-import ChapterSelect from "@/components/teach/ChapterSelect";
+import ChapterPicker from "@/components/teach/ChapterPicker";
 import QuestionEditor, { type EditorOption } from "@/components/teach/QuestionEditor";
+import NewCurriculumField from "@/components/teach/NewCurriculumField";
 
-type Params = { c?: string; l?: string; q?: string };
+type Params = { c?: string; l?: string; q?: string; error?: string };
 
 type McqView = {
   prompt: string;
@@ -62,7 +63,7 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
     return (
       <section className="screen on" id="questions">
         <div className="topstrip">
-          <Link className="fchip add" href="/teach/new">+ New curriculum</Link>
+          <NewCurriculumField trackId="" placeholder="New curriculum" />
           <span className="spacer" />
         </div>
         <div className="body">
@@ -72,9 +73,9 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
               <div className="thint" style={{ padding: 0 }}>
                 Questions live inside a chapter. Create a curriculum and a chapter first.
               </div>
-              <Link className="b solid" href="/teach/new" style={{ display: "inline-flex", alignItems: "center", marginTop: 14 }}>
-                New curriculum
-              </Link>
+              <div style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 10 }}>
+                <NewCurriculumField trackId={sp.c ?? ""} placeholder="Name the curriculum" />
+              </div>
             </div>
           </div>
         </div>
@@ -107,18 +108,9 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
   return (
     <section className="screen on" id="questions">
       <div className="topstrip">
-        {modules.map((module) => (
-          <Link
-            key={module.id}
-            className={"fchip" + (module.id === active.id ? " on" : "")}
-            href={`/teach/questions?c=${encodeURIComponent(module.id)}`}
-          >
-            {module.name}
-            <span className="c">{module.classes} {module.classes === 1 ? "class" : "classes"}</span>
-          </Link>
-        ))}
-        <Link className="fchip add" href="/teach/new">+ New curriculum</Link>
-        <span className="div" />
+        {sp.error === "delete-denied" ? (
+          <span className="topnote">Another teacher&rsquo;s class follows that curriculum — move the class first.</span>
+        ) : null}
         <div className="seg">
           <Link href={notesHref}>Notes</Link>
           <Link href={lessonHref} className="on">Questions</Link>
@@ -133,7 +125,7 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
         <div className="qbar">
           <span className="lbl">Chapter</span>
           {selectedLesson ? (
-            <ChapterSelect
+            <ChapterPicker
               moduleId={active.id}
               value={selectedLesson.id}
               options={lessons.map((lesson) => ({ id: lesson.id, title: lesson.title }))}
@@ -148,10 +140,36 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
           ) : null}
         </div>
 
+        {!selectedLesson ? (
+          /* nothing to write in yet: one centred action instead of an empty table */
+          <div className="qwrap blank">
+            <div className="emptyq">
+              <div className="etitle">No chapter yet</div>
+              <div className="thint">
+                A chapter holds the questions students answer. Add the first one to this curriculum.
+              </div>
+              <Link className="b solid" href={`/teach/curriculum?c=${encodeURIComponent(active.id)}&new=lesson`}>
+                + Add chapter
+              </Link>
+            </div>
+          </div>
+        ) : rows.length === 0 && sp.q !== "new" ? (
+          <div className="qwrap blank">
+            <div className="emptyq">
+              <div className="etitle">No questions in {selectedLesson.title}</div>
+              <div className="thint">
+                Write the first one: a question, its options, and why the answer is right.
+              </div>
+              <Link className="b solid" href={`${lessonHref}&q=new`}>
+                + Add question
+              </Link>
+            </div>
+          </div>
+        ) : (
         <div className="qwrap">
           <div className="qlist">
             <div className="bt">
-              <div className="r h" style={{ gridTemplateColumns: "1fr 190px 90px 100px 90px" }}>
+              <div className="r h">
                 <div>Question</div><div>Answer</div><div>Wrong</div><div>Level</div><div>Edited</div>
               </div>
 
@@ -169,7 +187,7 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
                   <Link
                     key={row.id}
                     className={"r" + (current ? " cur" : "")}
-                    style={{ gridTemplateColumns: "1fr 190px 90px 100px 90px" }}
+                   
                     href={`${lessonHref}&q=${encodeURIComponent(row.id)}`}
                   >
                     <div className="stem">{mcq.prompt}</div>
@@ -195,6 +213,11 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
 
           {selectedLesson && (selected || newMode) ? (
             <QuestionEditor
+              /* Remount per item: without this, navigating from one question to
+                 "+ New question" keeps the previous item's useState values, so the
+                 form opens pre-filled with the last question and adding saves a
+                 duplicate of it. */
+              key={selected?.id ?? "new"}
               lessonId={selectedLesson.id}
               blockId={selected?.id ?? null}
               itemNumber={selectedIndex >= 0 ? selectedIndex + 1 : 0}
@@ -208,22 +231,9 @@ export default async function QuestionsPage({ searchParams }: { searchParams: Pr
               evidence={evidence ? { letter: evidence.letter, pct: evidence.pct, graded: evidence.graded } : null}
               back={`${lessonHref}`}
             />
-          ) : (
-            <div className="qed">
-              <div className="hd"><b>Questions</b></div>
-              <div className="thint" style={{ padding: 0 }}>
-                Add the first chapter before writing questions.
-              </div>
-              <Link
-                className="b solid"
-                href={`/teach/curriculum?c=${encodeURIComponent(active.id)}&new=lesson`}
-                style={{ display: "inline-flex", alignItems: "center", alignSelf: "flex-start" }}
-              >
-                New chapter
-              </Link>
-            </div>
-          )}
+          ) : null}
         </div>
+        )}
       </div>
     </section>
   );

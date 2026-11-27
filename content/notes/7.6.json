@@ -1,0 +1,286 @@
+{
+ "section": "7.6",
+ "title": "Balance of oxygen and carbon dioxide in Nature",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "What keeps a natural balance of oxygen and carbon dioxide in Nature?",
+   "options": [
+    "Respiration and photosynthesis",
+    "Only photosynthesis",
+    "Only respiration",
+    "Burning of fossil fuels"
+   ],
+   "answer": 0,
+   "why": "Respiration and photosynthesis keep the balance.",
+   "quote": "Respiration and photosynthesis keep a balance of oxygen and carbon dioxide in Nature.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "What do living things take up during respiration?",
+   "options": [
+    "Carbon dioxide",
+    "Nitrogen",
+    "Methane",
+    "Oxygen"
+   ],
+   "answer": 3,
+   "why": "Respiration consumes oxygen from the atmosphere.",
+   "quote": "When living things carry out respiration, they take up oxygen from the atmosphere.",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "Where does the oxygen taken up in respiration get replaced?",
+   "options": [
+    "By carbon dioxide from plants",
+    "By oxygen from animals",
+    "By oxygen produced by plants during photosynthesis",
+    "By methane from factories"
+   ],
+   "answer": 2,
+   "why": "Photosynthesis in plants produces the replacement oxygen.",
+   "quote": "The oxygen is replaced by the oxygen produced by plants during photosynthesis.",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "What do plants do with the carbon dioxide produced by living things?",
+   "options": [
+    "Release it as heat",
+    "Store it underground",
+    "Convert it into timber",
+    "Take it up for photosynthesis"
+   ],
+   "answer": 3,
+   "why": "Plants absorb carbon dioxide for photosynthesis.",
+   "quote": "The carbon dioxide is taken up by plants for photosynthesis.",
+   "level": "recall"
+  },
+  {
+   "no": 5,
+   "prompt": "Which human activities disrupt the balance of carbon dioxide?",
+   "options": [
+    "Planting forests only",
+    "Recycling waste",
+    "Burning fossil fuels and clearing forests",
+    "Building houses"
+   ],
+   "answer": 2,
+   "why": "Fossil fuel burning and forest clearing disrupt the balance.",
+   "quote": "Some human activities (e.g. burning fossil fuels and clearing forests) are disrupting the balance of carbon dioxide in Nature.",
+   "level": "recognize"
+  },
+  {
+   "no": 6,
+   "prompt": "Which gases trap thermal energy in the atmosphere?",
+   "options": [
+    "Oxygen only",
+    "Greenhouse gases such as carbon dioxide",
+    "Nitrogen only",
+    "Water vapour only"
+   ],
+   "answer": 1,
+   "why": "Greenhouse gases like carbon dioxide trap thermal energy.",
+   "quote": "Some gases that are naturally present in the atmosphere (e.g. carbon dioxide) trap thermal energy in the atmosphere.",
+   "level": "recognize"
+  },
+  {
+   "no": 7,
+   "prompt": "What does the greenhouse effect keep the Earth's surface at?",
+   "options": [
+    "A freezing temperature",
+    "A boiling temperature",
+    "A temperature suitable for life",
+    "A constant zero temperature"
+   ],
+   "answer": 2,
+   "why": "The greenhouse effect keeps the surface warm enough for life.",
+   "quote": "The greenhouse effect is an important natural process. It keeps the Earth's surface at a temperature suitable for life.",
+   "level": "recall"
+  },
+  {
+   "no": 8,
+   "prompt": "What does the increasing amount of carbon dioxide enhance?",
+   "options": [
+    "The natural balance",
+    "Photosynthesis rate",
+    "Air pressure",
+    "The greenhouse effect"
+   ],
+   "answer": 3,
+   "why": "More carbon dioxide traps more heat and strengthens the greenhouse effect.",
+   "quote": "The increasing amount of carbon dioxide in the atmosphere traps more thermal energy and enhances the greenhouse effect.",
+   "level": "apply"
+  },
+  {
+   "no": 9,
+   "prompt": "What is the rise in average temperatures of the Earth known as?",
+   "options": [
+    "Global cooling",
+    "Global warming",
+    "Greenhouse cooling",
+    "Heat island effect"
+   ],
+   "answer": 1,
+   "why": "The rise in global temperatures is global warming.",
+   "quote": "This is known as global warming.",
+   "level": "recognize"
+  },
+  {
+   "no": 10,
+   "prompt": "What happens to living things in the Polar regions as ice melts?",
+   "options": [
+    "They lose their habitats and die",
+    "They migrate to warmer climates",
+    "They breed faster",
+    "They adapt fully"
+   ],
+   "answer": 0,
+   "why": "Polar ice melting destroys habitats and kills polar species.",
+   "quote": "Living things in the Polar regions (e.g. Polar Bear) lose their habitats and die.",
+   "level": "apply"
+  },
+  {
+   "no": 11,
+   "prompt": "When was the atmospheric carbon dioxide level relatively constant?",
+   "options": [
+    "before 1700s",
+    "after 1700s",
+    "during the 1800s only",
+    "never"
+   ],
+   "answer": 0,
+   "why": "The carbon dioxide level was relatively constant before the 1700s.",
+   "quote": "The level was relatively constant before 1700s. But it has risen sharply in the last few hundred years.",
+   "level": "recall"
+  },
+  {
+   "no": 12,
+   "prompt": "Since when has energy needs increased greatly?",
+   "options": [
+    "Industrial Revolution in late 1700s",
+    "1500s",
+    "2000s",
+    "1900s"
+   ],
+   "answer": 0,
+   "why": "Energy needs increased greatly since the Industrial Revolution.",
+   "quote": "Since the Industrial Revolution in the late 1700s, the energy needs for transport, industrial activities",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "What does burning fossil fuels release?",
+   "options": [
+    "little carbon dioxide",
+    "oxygen",
+    "a lot of carbon dioxide",
+    "water"
+   ],
+   "answer": 2,
+   "why": "Burning fossil fuels releases a lot of carbon dioxide.",
+   "quote": "The burning of fossil fuels releases a lot of carbon dioxide.",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "What are large areas of forest cleared to obtain?",
+   "options": [
+    "energy",
+    "timber or land",
+    "gold",
+    "water"
+   ],
+   "answer": 1,
+   "why": "Large areas of forest are cleared to obtain timber or land.",
+   "quote": "large areas of forest have been cleared to obtain timber or land",
+   "level": "recall"
+  },
+  {
+   "no": 15,
+   "prompt": "Besides carbon dioxide, what other gas is a major greenhouse gas?",
+   "options": [
+    "nitrogen",
+    "methane",
+    "carbon dioxide",
+    "argon"
+   ],
+   "answer": 1,
+   "why": "Methane is also a major greenhouse gas.",
+   "quote": "Apart from carbon dioxide, methane is also a major greenhouse gas.",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "One source of methane is rearing of which animals?",
+   "options": [
+    "coal mining",
+    "solar power",
+    "burning forests",
+    "cattle and sheep"
+   ],
+   "answer": 3,
+   "why": "Methane is released by rearing animals such as cattle and sheep.",
+   "quote": "One of its sources is rearing of animals such as cattle and sheep.",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "What is the Moon's average surface temperature?",
+   "options": [
+    "0 °C",
+    "18 °C",
+    "100 °C",
+    "–18 °C"
+   ],
+   "answer": 3,
+   "why": "The Moon's average surface temperature is –18 °C.",
+   "quote": "the average temperature of its surface is –18 °C",
+   "level": "recognize"
+  },
+  {
+   "no": 18,
+   "prompt": "How did the Arctic Ocean ice in 2020 compare with 1980?",
+   "options": [
+    "much larger",
+    "much smaller",
+    "the same",
+    "doubled"
+   ],
+   "answer": 1,
+   "why": "The Arctic Ocean ice in 2020 was much smaller than in 1980.",
+   "quote": "Ice covering the Arctic Ocean was much smaller in 2020 compared with that in 1980.",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Which is an unusual weather pattern possibly caused by climate change?",
+   "options": [
+    "more typhoons",
+    "more polar ice",
+    "more photosynthesis",
+    "calm weather"
+   ],
+   "answer": 0,
+   "why": "Climate change may lead to unusual weather patterns such as more typhoons.",
+   "quote": "Unusual weather patterns may result, e.g. more typhoons",
+   "level": "apply"
+  },
+  {
+   "no": 20,
+   "prompt": "What temperature rise limit did countries agree to?",
+   "options": [
+    "below 1 °C",
+    "below 5 °C",
+    "below 2 °C",
+    "below 10 °C"
+   ],
+   "answer": 2,
+   "why": "Countries agreed to help limit the rise in global temperature below 2 °C.",
+   "quote": "limit the rise in global temperature below 2 °C",
+   "level": "recall"
+  }
+ ]
+}

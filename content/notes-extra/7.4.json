@@ -1,0 +1,146 @@
+{
+ "section": "7.4",
+ "title": "Gas exchange in plants",
+ "questions": [
+  {
+   "no": 11,
+   "prompt": "Which colour does hydrogencarbonate indicator show at higher than normal carbon dioxide levels?",
+   "options": [
+    "red",
+    "blue",
+    "yellow",
+    "purple"
+   ],
+   "answer": 2,
+   "why": "Higher-than-normal carbon dioxide makes the indicator yellow.",
+   "quote": "Hydrogencarbonate indicator shows different colours at different levels of carbon dioxide.",
+   "level": "recall"
+  },
+  {
+   "no": 12,
+   "prompt": "What does Practical 7.9 aim to find out?",
+   "options": [
+    "changes in carbon dioxide content",
+    "changes in oxygen content",
+    "changes in light",
+    "changes in temperature"
+   ],
+   "answer": 0,
+   "why": "Practical 7.9 studies carbon dioxide changes in boiling tubes with green leaves.",
+   "quote": "To find out the changes in carbon dioxide content in boiling tubes with green leaves under light and dark conditions",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "How much hydrogencarbonate indicator is added to each tube in Practical 7.9?",
+   "options": [
+    "5 cm3",
+    "10 cm3",
+    "1 cm3",
+    "3 cm3"
+   ],
+   "answer": 3,
+   "why": "Practical 7.9 adds 3 cm3 of indicator to each tube.",
+   "quote": "Add 3 cm3 of hydrogencarbonate indicator to each of four boiling tubes",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "Which tubes are wrapped with aluminium foil in Practical 7.9?",
+   "options": [
+    "C and D",
+    "A and B",
+    "A and C",
+    "B and D"
+   ],
+   "answer": 0,
+   "why": "Tubes C and D are wrapped in foil to make them dark.",
+   "quote": "Wrap tubes C and D with aluminium foil.",
+   "level": "recall"
+  },
+  {
+   "no": 15,
+   "prompt": "How long are the four tubes left in bright light in Practical 7.9?",
+   "options": [
+    "one hour",
+    "one day",
+    "one minute",
+    "five hours"
+   ],
+   "answer": 3,
+   "why": "The tubes are left in bright light for five hours.",
+   "quote": "Leave the four tubes in bright light for five hours.",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "What does Practical 7.11 aim to observe?",
+   "options": [
+    "stomata on the leaf epidermis",
+    "air sacs in the lungs",
+    "photosynthesis in flowers",
+    "seed germination"
+   ],
+   "answer": 0,
+   "why": "Practical 7.11 aims to observe stomata on the leaf epidermis.",
+   "quote": "To observe stomata on the leaf epidermis under a microscope",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "What can the data logger with an oxygen sensor measure?",
+   "options": [
+    "sunlight intensity",
+    "wind speed",
+    "changes in oxygen content",
+    "air pressure"
+   ],
+   "answer": 2,
+   "why": "The data logger with an oxygen sensor measures oxygen content around the leaves.",
+   "quote": "The data logger with an oxygen sensor can measure and record the changes in oxygen content",
+   "level": "recall"
+  },
+  {
+   "no": 18,
+   "prompt": "At what magnification is the prepared slide first observed in Practical 7.11?",
+   "options": [
+    "10X",
+    "100X",
+    "400X",
+    "40X"
+   ],
+   "answer": 1,
+   "why": "The slide is first observed at a low magnification, e.g. 100X.",
+   "quote": "at a low magnification (e.g. 100X)",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Approximately what percentage of carbon dioxide is in normal air?",
+   "options": [
+    "4%",
+    "0.9%",
+    "0.04%",
+    "21%"
+   ],
+   "answer": 2,
+   "why": "Normal air contains about 0.04% carbon dioxide.",
+   "quote": "normal level in air (about 0.04%)",
+   "level": "recall"
+  },
+  {
+   "no": 20,
+   "prompt": "What gas do green plants use during photosynthesis?",
+   "options": [
+    "Oxygen",
+    "Carbon dioxide",
+    "Water",
+    "Nitrogen"
+   ],
+   "answer": 1,
+   "why": "Plants use carbon dioxide during photosynthesis.",
+   "quote": "During photosynthesis, they use carbon dioxide and produce oxygen.",
+   "level": "recall"
+  }
+ ]
+}

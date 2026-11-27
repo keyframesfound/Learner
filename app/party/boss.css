@@ -19,12 +19,12 @@
   padding: 9px 16px;
   border-bottom: 3px solid var(--ink);
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: .5px;
 }
 .v-boss .vb-top b { font-variant-numeric: tabular-nums; }
-.v-boss .vb-x { font-size: 15px; line-height: 1; cursor: pointer; color: inherit; text-decoration: none; }
+.v-boss .vb-x { font-size: 17px; line-height: 1; cursor: pointer; color: inherit; text-decoration: none; }
 
 /* ── stage ─────────────────────────────────── */
 .v-boss .vb-arena {
@@ -32,38 +32,42 @@
   flex: 1;
   min-height: 420px;
   overflow: hidden;
-  background:
-    repeating-linear-gradient(135deg, transparent 0 10px, rgba(17, 17, 17, .05) 10px 12px) 0 100% / 100% 48% no-repeat,
-    var(--paper);
+  /* the school courtyard, pixel-drawn: the backdrop the raid is fought in */
+  background-image:
+    linear-gradient(to bottom, rgba(12, 20, 30, .10) 0%, rgba(12, 20, 30, 0) 38%,
+                    rgba(12, 20, 30, .18) 100%),
+    url("/learner/scene/boss-campus.png");
+  background-size: cover, cover;
+  background-position: center top, center 38%;
+  background-repeat: no-repeat, no-repeat;
+  image-rendering: pixelated;
 }
-.v-boss .vb-arena::before {
+/* a slow drift over the sky so the courtyard is not a dead photograph */
+.v-boss .vb-arena::after {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 52%;
-  border-top: 3px solid var(--ink);
+  inset: 0 0 55% 0;
+  background: radial-gradient(120% 90% at 70% 0%, rgba(255, 255, 255, .18), transparent 65%);
+  animation: vb-drift 26s ease-in-out infinite alternate;
+  pointer-events: none;
 }
-.v-boss .vb-plat {
-  position: absolute;
-  border: 3px solid var(--ink);
-  border-radius: 50%;
-  background: #fff;
-  z-index: 1;
+@keyframes vb-drift {
+  from { transform: translate3d(-2%, 0, 0); opacity: .55; }
+  to   { transform: translate3d(3%, 1%, 0); opacity: .9; }
 }
-.v-boss .vb-plat-boss { width: 204px; aspect-ratio: 4 / 1; right: 1%; top: 146px; }
-.v-boss .vb-plat-party { left: 2%; right: 2%; width: auto; aspect-ratio: 10 / 1; bottom: 10px; background: var(--lime); }
-
+/* the courtyard is the horizon now; the old ink rule across the middle is gone */
+/* no stages: the boss and the party stand straight on the courtyard */
 .v-boss .vb-actor { position: absolute; z-index: 2; transition: transform .22s cubic-bezier(.3, 1.6, .5, 1); }
 .v-boss .vb-actor svg { display: block; width: 100%; height: auto; overflow: visible; }
-.v-boss .vb-boss-actor { right: 4%; top: 14px; width: 152px; animation: vb-breathe 2.6s ease-in-out infinite; }
+.v-boss .vb-boss-actor { right: 7%; bottom: 18px; top: auto; width: 140px; animation: vb-breathe 2.6s ease-in-out infinite; }
 .v-boss .vb-boss-actor .vb-art { display: block; }
 
 /* the party lineup: one slot per player */
 .v-boss .vb-party {
   position: absolute;
+  /* the party holds the left of the field, the boss holds the right */
   left: 2%;
-  right: 2%;
+  right: 36%;
   bottom: 18px;
   display: flex;
   align-items: flex-end;
@@ -81,7 +85,7 @@
 .v-boss .vb-slot .vb-actor { position: relative; width: 100%; max-width: 86px; }
 .v-boss .vb-slot .vb-art { display: block; }
 .v-boss .vb-hname {
-  font-size: 7px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: .1px;
   padding: 1px 3px;
@@ -92,7 +96,7 @@
   text-overflow: ellipsis;
 }
 .v-boss .vb-hyou {
-  font-size: 6.5px;
+  font-size: 8.5px;
   font-weight: 700;
   letter-spacing: .4px;
   line-height: 1;
@@ -128,27 +132,37 @@
   display: grid;
   gap: 4px;
 }
-.v-boss .vb-status-boss { top: 12px; left: 10px; }
-.v-boss .vb-status-party { bottom: 138px; right: 8px; width: 50%; box-shadow: 4px 4px 0 var(--ink); }
+.v-boss .vb-status-boss {
+  /* sits directly above the boss portrait, both anchored to the same ground line */
+  bottom: 186px; top: auto; left: auto; right: 2%; width: 46%; max-width: 212px;
+}
+.v-boss .vb-status-party {
+  bottom: 128px; left: 2%; right: auto; width: 46%; max-width: 212px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
 .v-boss .vb-row { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .v-boss .vb-name {
   font-weight: 700;
-  font-size: 12.5px;
+  font-size: 14.5px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .v-boss .vb-level {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--ink-3);
   white-space: nowrap;
+  min-width: 0;
+  max-width: 62%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .v-boss .vb-hpline { display: flex; align-items: center; gap: 6px; }
 .v-boss .vb-tag {
   font-family: var(--font-mono);
-  font-size: 8.5px;
+  font-size: 10.5px;
   font-weight: 700;
   background: var(--ink);
   color: var(--lime);
@@ -171,10 +185,61 @@
 }
 .v-boss .vb-num {
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 700;
   text-align: right;
   font-variant-numeric: tabular-nums;
+}
+
+/* ── a beaten boss: dizzy stars, then he lies down ──────────── */
+.v-boss .vb-stars {
+  position: absolute;
+  left: 50%;
+  top: -4px;
+  width: 78px;
+  height: 26px;
+  margin-left: -39px;
+  z-index: 4;
+  pointer-events: none;
+}
+.v-boss .vb-stars i {
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--ink);
+  animation: vb-orbit 1.15s linear infinite;
+}
+.v-boss .vb-stars i:nth-child(2) { animation-delay: -.38s; }
+.v-boss .vb-stars i:nth-child(3) { animation-delay: -.77s; }
+@keyframes vb-orbit {
+  0%   { transform: translate(-50%, 5px) scale(.72); opacity: .35; }
+  25%  { transform: translate(calc(-50% - 24px), -1px) scale(1.05); opacity: 1; }
+  50%  { transform: translate(-50%, -7px) scale(.85); opacity: .7; }
+  75%  { transform: translate(calc(-50% + 24px), -1px) scale(1.05); opacity: 1; }
+  100% { transform: translate(-50%, 5px) scale(.72); opacity: .35; }
+}
+/* stop breathing, wobble while the stars spin, then go over on his side — to the
+   LEFT, because the boss sits against the right edge of the arena */
+.v-boss .vb-boss-actor.is-downed { animation: vb-dizzy 1.4s ease-in-out 2; }
+.v-boss .vb-boss-actor.is-downed .vb-stars { animation: vb-stars-out .45s ease-in 2.9s forwards; }
+.v-boss .vb-boss-actor.is-downed .vb-art {
+  transform-origin: 50% 92%;
+  animation: vb-fall 1.15s cubic-bezier(.45, 0, .85, .35) 2.9s forwards;
+}
+@keyframes vb-dizzy {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-4deg); }
+  75% { transform: rotate(4deg); }
+}
+@keyframes vb-stars-out { to { opacity: 0; } }
+@keyframes vb-fall {
+  0%   { transform: translateY(0) rotate(0deg); }
+  55%  { transform: translateY(14px) rotate(-96deg); }
+  78%  { transform: translateY(21px) rotate(-86deg); }
+  100% { transform: translateY(26px) rotate(-90deg); filter: saturate(.5) brightness(.9); }
 }
 
 /* ── strike feedback ───────────────────────── */
@@ -184,7 +249,7 @@
   z-index: 5;
   pointer-events: none;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
   padding: 3px 7px;
   border: 3px solid var(--ink);
   border-radius: 4px;
@@ -230,19 +295,23 @@
   justify-content: space-between;
   gap: 8px;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--ink-3);
 }
 .v-boss .vb-meta .vb-t { color: var(--blue); }
 .v-boss .vb-meta .vb-miss { color: var(--orange); }
 .v-boss .vb-clock {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--ink);
   letter-spacing: .3px;
   font-variant-numeric: tabular-nums;
 }
+/* the last five seconds go red; at zero the raid has already moved on */
+.v-boss .vb-clock.is-urgent { color: var(--red-ink); animation: vb-tick .5s steps(2, end) infinite; }
+.v-boss .vb-clock.is-out { color: var(--red-ink); }
+@keyframes vb-tick { 50% { opacity: .45; } }
 .v-boss .vb-tbar {
   height: 6px;
   border: 2px solid var(--ink);
@@ -260,32 +329,14 @@
 .v-boss .vb-prompt {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 24px;
+  font-size: 26px;
   line-height: 1.14;
   letter-spacing: -.6px;
 }
-.v-boss .vb-say { margin: 0; font-size: 14.5px; font-weight: 700; line-height: 1.35; }
+.v-boss .vb-say { margin: 0; font-size: 16.5px; font-weight: 700; line-height: 1.35; }
 .v-boss .vb-prompt code,
 .v-boss .vb-say code,
 .v-boss .vb-answer code,
-.v-boss .vb-result code {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  font-size: .86em;
-  background: var(--paper);
-  border: 2px solid var(--ink);
-  border-radius: 3px;
-  padding: 0 4px;
-}
-.v-boss .vb-result {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 600;
-  color: var(--ink-3);
-  line-height: 1.5;
-}
-.v-boss .vb-result b { color: var(--ink); }
 
 /* ── answer cards, borrowed from the item screen ───────── */
 .v-boss .vb-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -303,7 +354,7 @@
   border: 3px solid var(--ink);
   border-radius: 8px;
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 15.5px;
   font-weight: 700;
   cursor: pointer;
   box-shadow: 4px 4px 0 var(--ink);
@@ -318,7 +369,7 @@
   border-radius: 4px;
   background: var(--paper);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
 }
 .v-boss .vb-answer .vb-txt { flex: 1; min-width: 0; overflow-wrap: anywhere; }
@@ -343,19 +394,19 @@
 }
 .v-boss .vb-spectate b {
   font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 17px;
   letter-spacing: -.3px;
   color: var(--red-ink);
 }
 .v-boss .vb-spectate span {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--ink-3);
 }
 .v-boss .vb-hint {
   font-family: var(--font-mono);
-  font-size: 8.5px;
+  font-size: 10.5px;
   font-weight: 600;
   color: var(--ink-3);
   text-align: center;
@@ -365,16 +416,23 @@
 /* ── end banner ────────────────────────────── */
 .v-boss .vb-banner {
   position: absolute;
-  inset: 0;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 7;
   display: grid;
-  place-content: center;
   justify-items: center;
   gap: 10px;
-  padding: 16px;
+  padding: 20px 22px;
+  min-width: 250px;
   text-align: center;
-  background: rgba(242, 239, 230, .94);
+  background: rgba(246, 243, 234, .97);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 8px 8px 0 var(--ink);
 }
+.v-boss .vb-banner.is-down { box-shadow: 8px 8px 0 var(--red-ink); }
+.v-boss .vb-banner:not(.is-down) { box-shadow: 8px 8px 0 var(--lime); }
 .v-boss .vb-banner h2 {
   margin: 0;
   font-family: var(--font-display);
@@ -385,14 +443,14 @@
 .v-boss .vb-banner p {
   margin: 0;
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 11.5px;
   color: var(--ink-3);
 }
 .v-boss .vb-btn {
   display: inline-grid;
   place-items: center;
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 15px;
   background: var(--orange);
   color: var(--ink);
   border: 3px solid var(--ink);
@@ -413,8 +471,8 @@
   background: #fff;
   box-shadow: 5px 5px 0 var(--ink);
 }
-.v-boss .vb-note b { font-family: var(--font-display); font-size: 18px; letter-spacing: -.4px; }
-.v-boss .vb-note p { margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: var(--ink-2); }
+.v-boss .vb-note b { font-family: var(--font-display); font-size: 20px; letter-spacing: -.4px; }
+.v-boss .vb-note p { margin-top: 6px; font-size: 14.5px; line-height: 1.5; color: var(--ink-2); }
 .v-boss .vb-cta {
   display: grid;
   place-items: center;
@@ -425,7 +483,7 @@
   background: var(--ink);
   color: var(--lime);
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 15px;
   text-decoration: none;
   box-shadow: 4px 4px 0 rgba(0, 0, 0, .3);
 }
@@ -448,17 +506,17 @@
   display: grid;
   place-items: center;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   border: 2px solid var(--ink);
   background: var(--paper);
 }
 .v-boss .vb-seat.is-you .vb-av { background: var(--lime); }
-.v-boss .vb-seat b { font-size: 12.5px; font-weight: 700; display: block; line-height: 1.1; }
+.v-boss .vb-seat b { font-size: 14.5px; font-weight: 700; display: block; line-height: 1.1; }
 .v-boss .vb-seat i {
   font-style: normal;
   font-family: var(--font-mono);
-  font-size: 8.5px;
+  font-size: 10.5px;
   font-weight: 700;
   color: var(--ink-3);
 }
@@ -486,7 +544,6 @@
 @media (max-height: 720px) {
   .v-boss .vb-arena { min-height: 368px; }
   .v-boss .vb-boss-actor { width: 128px; }
-  .v-boss .vb-plat-boss { width: 176px; top: 124px; }
   .v-boss .vb-status-party { bottom: 126px; }
   .v-boss .vb-slot .vb-actor { max-width: 72px; }
 }
@@ -497,8 +554,168 @@
   .v-boss .vb-shake,
   .v-boss .vb-sticker,
   .v-boss .vb-flash { animation: none !important; }
+  /* a reduced-motion boss still ends up on the floor, just without the fall */
+  .v-boss .vb-stars i { animation: none !important; opacity: 1; }
+  .v-boss .vb-boss-actor.is-downed,
+  .v-boss .vb-boss-actor.is-downed .vb-art {
+    animation: none !important;
+    transform: translateY(26px) rotate(-90deg);
+    transform-origin: 50% 92%;
+  }
+  .v-boss .vb-boss-actor.is-downed .vb-stars { display: none; }
+  .v-boss .vb-clock.is-urgent { animation: none !important; }
   .v-boss .vb-tbar i,
   .v-boss .vb-pip,
   .v-boss .vb-actor,
   .v-boss .vb-answer { transition: none !important; }
+}
+
+/* the Eric boss is a pixel portrait (an <img>), not an inline drawing: it gets a
+   card frame so the portrait reads as deliberate rather than a floating photo */
+.v-boss .vb-art img,
+.v-boss .vb-boss-actor img {
+  width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated;
+  display: block; background: #fff;
+  border: 3px solid var(--ink); border-radius: 10px;
+  box-shadow: 6px 6px 0 rgba(17, 17, 17, .28);
+}
+
+/* ── attacking the boss ─────────────────────────────────────────────────── */
+@keyframes vb-lunge {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  30%  { transform: translate3d(-6%, -2%, 0) rotate(2deg) scale(.98); }
+  55%  { transform: translate3d(96%, -12%, 0) rotate(-8deg) scale(1.08); }
+  75%  { transform: translate3d(74%, -6%, 0) rotate(-4deg) scale(1.04); }
+  100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+}
+.v-boss .vb-slot.vb-strike .vb-actor { animation: vb-lunge .62s cubic-bezier(.34, 1.3, .5, 1); }
+
+.v-boss .vb-slot .vb-actor::after {
+  content: "";
+  position: absolute;
+  right: -6%;
+  top: 26%;
+  width: 44%;
+  height: 5px;
+  border-radius: 99px;
+  background: var(--lime);
+  border: 2px solid var(--ink);
+  transform-origin: right center;
+  opacity: 0;
+}
+.v-boss .vb-slot.vb-strike .vb-actor::after { animation: vb-slash .62s ease-out; }
+@keyframes vb-slash {
+  0%   { opacity: 0; transform: rotate(-24deg) scaleX(.15); }
+  45%  { opacity: 1; transform: rotate(-24deg) scaleX(1.15); }
+  100% { opacity: 0; transform: rotate(-24deg) scaleX(1); }
+}
+
+/* the boss answers back when it knocks a life off */
+@keyframes vb-counter {
+  0%   { transform: translate3d(0, 0, 0); }
+  40%  { transform: translate3d(-14%, 4%, 0) scale(1.04); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+.v-boss .vb-boss-actor.vb-strike-back { animation: vb-counter .5s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v-boss .vb-slot.vb-strike .vb-actor,
+  .v-boss .vb-slot.vb-strike .vb-actor::after,
+  .v-boss .vb-boss-actor.vb-strike-back { animation: none; }
+}
+
+/* ── spectale: camera punch, speed lines, phase two ────────────────────── */
+.v-boss .vb-arena.vb-impact { animation: vb-punch-in .3s ease-out; }
+@keyframes vb-punch-in {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.045); }
+  100% { transform: scale(1); }
+}
+
+/* speed lines converging on the boss */
+.v-boss .vb-arena.vb-impact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  background:
+    repeating-conic-gradient(from 0deg at 78% 62%,
+      rgba(255, 255, 255, .55) 0deg 1.2deg,
+      transparent 1.2deg 9deg);
+  mask-image: radial-gradient(circle at 78% 62%, transparent 12%, #000 55%);
+  -webkit-mask-image: radial-gradient(circle at 78% 62%, transparent 12%, #000 55%);
+  animation: vb-lines .3s ease-out forwards;
+}
+@keyframes vb-lines {
+  0%   { opacity: 0; transform: scale(1.06); }
+  40%  { opacity: .85; }
+  100% { opacity: 0; transform: scale(1); }
+}
+
+/* phase two: the afternoon turns */
+.v-boss .vb-arena.is-phase2 { background-blend-mode: multiply; }
+.v-boss .vb-arena.is-phase2::after {
+  background:
+    radial-gradient(120% 90% at 70% 0%, rgba(196, 39, 27, .45), transparent 65%),
+    linear-gradient(to bottom, rgba(28, 8, 10, .55), rgba(28, 8, 10, .2) 50%, rgba(28, 8, 10, .6));
+  animation: vb-drift 18s ease-in-out infinite alternate;
+}
+.v-boss .vb-arena.is-phase2 .vb-boss-actor { animation-duration: 1.5s; }
+.v-boss .vb-phase {
+  position: absolute;
+  left: 50%;
+  top: 12px;
+  transform: translateX(-50%);
+  z-index: 7;
+  padding: 4px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 99px;
+  background: var(--red-ink);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+/* embers drifting through the second half */
+.v-boss .vb-embers {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(2px 2px at 18% 80%, rgba(255, 201, 74, .9), transparent 60%),
+    radial-gradient(2px 2px at 62% 88%, rgba(255, 77, 28, .8), transparent 60%),
+    radial-gradient(1.6px 1.6px at 84% 74%, rgba(255, 201, 74, .8), transparent 60%),
+    radial-gradient(1.6px 1.6px at 40% 92%, rgba(255, 138, 76, .8), transparent 60%);
+  animation: vb-ember-rise 7s linear infinite;
+  opacity: .8;
+}
+@keyframes vb-ember-rise {
+  from { background-position: 0 0, 0 0, 0 0, 0 0; }
+  to   { background-position: 14px -120px, -10px -160px, 8px -140px, -16px -110px; }
+}
+
+/* the end of the raid gets letterbox bars */
+.v-boss .vb-arena.is-over::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(17, 17, 17, .72) 0 12%, transparent 12% 88%, rgba(17, 17, 17, .72) 88% 100%);
+  animation: vb-bars .35s ease-out;
+}
+@keyframes vb-bars { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .v-boss .vb-arena.vb-impact,
+  .v-boss .vb-arena.vb-impact::before,
+  .v-boss .vb-embers,
+  .v-boss .vb-arena.is-over::before { animation: none; }
 }

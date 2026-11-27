@@ -1,0 +1,441 @@
+{
+ "year": "2022",
+ "items": [
+  {
+   "no": 1,
+   "skip": "needs the printed parity sequences"
+  },
+  {
+   "no": 2,
+   "prompt": "What does ORDER BY QTY DESC with a QTY > 0 filter return?",
+   "options": [
+    "Fruits by name, descending",
+    "Fruits by stock, descending",
+    "Fruits by stock, ascending",
+    "Low-stock fruits by name, ascending"
+   ],
+   "answer": 1,
+   "why": "The filter keeps rows with stock over zero and ORDER BY sorts them by quantity in descending order."
+  },
+  {
+   "no": 3,
+   "prompt": "Using a calendar box instead of a text box provides which benefit?",
+   "options": [
+    "Guarantees accurate entry",
+    "Eliminates all typos",
+    "Avoids impossible dates",
+    "Requires no user training"
+   ],
+   "answer": 2,
+   "why": "A calendar only offers valid dates, so impossible dates cannot be entered."
+  },
+  {
+   "no": 4,
+   "prompt": "Which 4-bit two's complement addition overflows?",
+   "options": [
+    "0011 + 1001",
+    "1111 + 1111",
+    "1010 + 0100 + 0001",
+    "1100 + 1011"
+   ],
+   "answer": 3,
+   "why": "-4 + -5 = -9, which is outside the 4-bit two's complement range of -8 to +7."
+  },
+  {
+   "no": 5,
+   "prompt": "How many bits are needed to store an 8×8 black-and-white image?",
+   "options": [
+    "64",
+    "64²",
+    "2⁶⁴",
+    "8⁸"
+   ],
+   "answer": 0,
+   "why": "An 8×8 image has 64 pixels, and each black-and-white pixel needs 1 bit."
+  },
+  {
+   "no": 6,
+   "prompt": "Which stage involves validating questionnaires before input?",
+   "options": [
+    "Data collection",
+    "Data preparation",
+    "Data processing",
+    "Data organisation"
+   ],
+   "answer": 1,
+   "why": "Validating questionnaires before input is part of data preparation."
+  },
+  {
+   "no": 7,
+   "prompt": "Why is the BMP version of a photo larger than the JPG?",
+   "options": [
+    "It is a bitmap image",
+    "It cannot be shown in browsers",
+    "It is uncompressed",
+    "It uses more colours"
+   ],
+   "answer": 2,
+   "why": "BMP stores pixels uncompressed, so the file is larger than the compressed JPG."
+  },
+  {
+   "no": 8,
+   "prompt": "Which can be a mail merge data source?",
+   "options": [
+    "A web page",
+    "A photo",
+    "A spreadsheet with no data",
+    "A database file"
+   ],
+   "answer": 3,
+   "why": "Mail merge merges a main document with a data source such as a database file."
+  },
+  {
+   "no": 9,
+   "prompt": "What is true about verbal annotation in slide presentations?",
+   "options": [
+    "Can be recorded per slide",
+    "Must be web-based",
+    "Must be in MP4",
+    "Each slide lasts the same time"
+   ],
+   "answer": 0,
+   "why": "Verbal annotation can be recorded individually for each slide, with each slide allowed its own duration."
+  },
+  {
+   "no": 10,
+   "prompt": "In Goal Seek, which two cells do you set?",
+   "options": [
+    "Chart type and range",
+    "Target cell and changing cell",
+    "Font and the colour scheme",
+    "Rows and columns"
+   ],
+   "answer": 1,
+   "why": "Goal Seek sets the target cell to a value by changing the input cell."
+  },
+  {
+   "no": 11,
+   "prompt": "Why do computers use character sets such as ASCII?",
+   "options": [
+    "To enhance encryption",
+    "To shrink storage space",
+    "To standardise the representation",
+    "To speed up output"
+   ],
+   "answer": 2,
+   "why": "Character sets standardise how text is represented so different systems agree on the same codes."
+  },
+  {
+   "no": 12,
+   "prompt": "Why is information literacy important?",
+   "options": [
+    "To write AI programs",
+    "To avoid all sources",
+    "To trust every headline",
+    "To identify fake information"
+   ],
+   "answer": 3,
+   "why": "Information literacy lets people recognise fake information and assess credibility online."
+  },
+  {
+   "no": 13,
+   "prompt": "What should be considered first when developing a management information system?",
+   "options": [
+    "Purpose of the system",
+    "Technologies involved",
+    "Personnel involved",
+    "Cost of the system"
+   ],
+   "answer": 0,
+   "why": "The purpose of the system drives every later decision, from design to implementation."
+  },
+  {
+   "no": 14,
+   "prompt": "Which is a common specification of a home-use printer?",
+   "options": [
+    "Parallel port",
+    "1200 dpi",
+    "Database server",
+    "Graphene ink"
+   ],
+   "answer": 1,
+   "why": "1200 dpi is a resolution spec found in home-use printers; 802.11n is a wireless spec, not a data-rate spec."
+  },
+  {
+   "no": 15,
+   "prompt": "A standalone computer is slow on database software. What should be upgraded?",
+   "options": [
+    "ROM",
+    "Network interface card",
+    "RAM",
+    "Printer"
+   ],
+   "answer": 2,
+   "why": "More RAM lets the database software work faster; ROM and the network card are not the bottleneck."
+  },
+  {
+   "no": 16,
+   "prompt": "Why use a thermal printer instead of a laser one for receipts?",
+   "options": [
+    "Black-and-white only",
+    "Text fades faster",
+    "Better colour quality",
+    "Smaller size"
+   ],
+   "answer": 3,
+   "why": "Thermal printers are smaller and compact, which suits a cashier counter."
+  },
+  {
+   "no": 17,
+   "prompt": "No Internet access. Which hardware failure could cause this?",
+   "options": [
+    "Out-of-order network interface card",
+    "Small ROM size",
+    "Low hard disk transfer rate",
+    "Out-of-order graphics card"
+   ],
+   "answer": 0,
+   "why": "The network interface card handles the connection; if it fails, the computer cannot reach the Internet."
+  },
+  {
+   "no": 18,
+   "prompt": "Why should software be updated often?",
+   "options": [
+    "Replace all hardware",
+    "Fix program bugs",
+    "Disable antivirus",
+    "Increase paper size"
+   ],
+   "answer": 1,
+   "why": "Regular updates fix program bugs so the software runs correctly."
+  },
+  {
+   "no": 19,
+   "prompt": "Why is autopilot driving a real-time processing system?",
+   "options": [
+    "High processing power needed",
+    "Large data collected over time",
+    "No delay between input and processing",
+    "Multiple users at one time"
+   ],
+   "answer": 2,
+   "why": "Real-time processing responds immediately, with no delay between data input and processing."
+  },
+  {
+   "no": 20,
+   "prompt": "How many 2TB disks store 100 uncompressed 300GB files, without reorganisation?",
+   "options": [
+    "15",
+    "16",
+    "32",
+    "17"
+   ],
+   "answer": 3,
+   "why": "Each 2TB disk holds six 300GB files (1.8TB), so 100 files need 17 disks."
+  },
+  {
+   "no": 22,
+   "prompt": "In https://www.abc.edu.hk/en/, what is 'en'?",
+   "options": [
+    "A path on the web server",
+    "A port number",
+    "The domain name",
+    "A file extension"
+   ],
+   "answer": 0,
+   "why": "In a URL the part after the domain (/en/) is the path on the web server."
+  },
+  {
+   "no": 23,
+   "prompt": "Which is a potential benefit of e-learning?",
+   "options": [
+    "Reduces hardware resources",
+    "Tracks individual learning progress",
+    "Replaces all classrooms",
+    "Guarantees perfect attendance"
+   ],
+   "answer": 1,
+   "why": "E-learning can track each learner's progress, and it also offers flexible schedules."
+  },
+  {
+   "no": 24,
+   "prompt": "Which should be considered when designing web pages?",
+   "options": [
+    "Favourite colour",
+    "Keyboard layout",
+    "Loading time",
+    "Paper stock"
+   ],
+   "answer": 2,
+   "why": "Web-page design considers loading time, browsing ease and colour combination."
+  },
+  {
+   "no": 25,
+   "prompt": "Why is fibre optics used in a computer network?",
+   "options": [
+    "Supports wireless connections",
+    "Cheap enough for any device",
+    "Works best at very low distances",
+    "High data transfer rate"
+   ],
+   "answer": 3,
+   "why": "Fibre optics provides very high data transfer rates over long distances."
+  },
+  {
+   "no": 26,
+   "prompt": "Why is Internet Protocol used in a computer network?",
+   "options": [
+    "Same communication rules",
+    "Same operating system",
+    "Same transfer rates",
+    "Only works in LANs"
+   ],
+   "answer": 0,
+   "why": "IP defines the same communication rules so computers can talk to each other."
+  },
+  {
+   "no": 27,
+   "prompt": "What should Amy consider for streaming videos?",
+   "options": [
+    "Anti-virus software",
+    "Network bandwidth",
+    "Hard disk storage size",
+    "Monitor resolution"
+   ],
+   "answer": 1,
+   "why": "Streaming needs enough network bandwidth; local storage is not the issue."
+  },
+  {
+   "no": 28,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 29,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 30,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 31,
+   "prompt": "What is the use of the value '888' in a summation loop?",
+   "options": [
+    "Checks positive values",
+    "Limits the value range",
+    "Terminates the input",
+    "Adds values to j"
+   ],
+   "answer": 2,
+   "why": "The loop keeps going while the input is not 888, so 888 stops the input."
+  },
+  {
+   "no": 32,
+   "prompt": "What does a good problem definition do?",
+   "options": [
+    "Skips analysis",
+    "Removes sub-problems",
+    "Guarantees a correct algorithm",
+    "Sets the design and scope"
+   ],
+   "answer": 3,
+   "why": "A clear problem definition fixes the design and the scope of work."
+  },
+  {
+   "no": 33,
+   "prompt": "Which is an advantage of modularity in programming?",
+   "options": [
+    "Easier to trace a program",
+    "Simpler user manual",
+    "Smaller memory footprint",
+    "Guarantees speed"
+   ],
+   "answer": 0,
+   "why": "Breaking a program into modules makes it easier to trace and team-work."
+  },
+  {
+   "no": 34,
+   "prompt": "Why should appropriate test data be prepared?",
+   "options": [
+    "Prevents users logging in",
+    "Detects mistakes in algorithms",
+    "Increases file size",
+    "Avoids every bug"
+   ],
+   "answer": 1,
+   "why": "Good test data reveals mistakes in the algorithm and checks exceptional inputs."
+  },
+  {
+   "no": 35,
+   "prompt": "Files locked by ransomware. What should he do immediately?",
+   "options": [
+    "Format the hard disk",
+    "Update antivirus",
+    "Disconnect the network",
+    "Enable a firewall"
+   ],
+   "answer": 2,
+   "why": "Disconnecting the network stops the ransomware from spreading; format and antivirus are not first steps."
+  },
+  {
+   "no": 36,
+   "prompt": "Which consideration is least important for the shopping-mall app?",
+   "options": [
+    "Network security",
+    "Personal data privacy",
+    "Operating system",
+    "Application file size"
+   ],
+   "answer": 3,
+   "why": "Security, privacy and the operating system matter; the app's file size does not."
+  },
+  {
+   "no": 37,
+   "prompt": "Which is a likely consequence of heavy Internet use?",
+   "options": [
+    "A decline in physical fitness",
+    "Infringement of copyright",
+    "Better sleep quality",
+    "Higher IQ"
+   ],
+   "answer": 0,
+   "why": "Excessive use can harm physical fitness and attention, unlike copyright infringement, which is not a direct consequence."
+  },
+  {
+   "no": 38,
+   "prompt": "Which is appropriate when using a social media app?",
+   "options": [
+    "Forward all messages instantly",
+    "Understand the terms of use",
+    "Post everyone's password",
+    "Disable age verification"
+   ],
+   "answer": 1,
+   "why": "Read the terms of use and share only necessary personal information before posting."
+  },
+  {
+   "no": 39,
+   "prompt": "Peter installs the software on two computers. What makes him copyright-safe?",
+   "options": [
+    "The computers are in different countries",
+    "The operating systems differ",
+    "The licence allows it",
+    "Both computers are online"
+   ],
+   "answer": 2,
+   "why": "The licence permitting installation keeps Peter within copyright."
+  },
+  {
+   "no": 40,
+   "prompt": "Which is correct about the use of robots?",
+   "options": [
+    "Robots replace all employees",
+    "Robots are only for toys",
+    "Robots cannot work",
+    "Robots can follow procedures accurately"
+   ],
+   "answer": 3,
+   "why": "Robots follow working procedures accurately and can take dirty, dangerous jobs."
+  }
+ ]
+}

@@ -1,0 +1,377 @@
+{
+ "year": "2020",
+ "items": [
+  {
+   "no": 1,
+   "prompt": "Which check detects a mistyped ID card number?",
+   "options": [
+    "Check digit",
+    "Range check",
+    "Data type check",
+    "Parity check"
+   ],
+   "answer": 0,
+   "why": "A check digit catches a swapped or mistyped digit."
+  },
+  {
+   "no": 2,
+   "prompt": "What decimal value is 1010 0001 in 8-bit two's complement?",
+   "options": [
+    "33",
+    "-95",
+    "-33",
+    "95"
+   ],
+   "answer": 1,
+   "why": "1010 0001 is 161 unsigned, which is 161 - 256 = -95 in two's complement."
+  },
+  {
+   "no": 3,
+   "prompt": "Why would Amy scan photos as JPG instead of BMP?",
+   "options": [
+    "More pixels per photo",
+    "More colours displayed",
+    "Smaller file size",
+    "Faster scanning"
+   ],
+   "answer": 2,
+   "why": "JPG is a compressed format, so the same photos take less storage than BMP."
+  },
+  {
+   "no": 4,
+   "prompt": "Minimum bits needed to represent 30 000 staff numbers?",
+   "options": [
+    "5 bits",
+    "14 bits",
+    "32 bits",
+    "15 bits"
+   ],
+   "answer": 3,
+   "why": "15 bits give 32 768 combinations, enough for 30 000 numbers."
+  },
+  {
+   "no": 5,
+   "prompt": "What is (2 < 3) AND (3 < 4)?",
+   "options": [
+    "True",
+    "Unknown",
+    "False",
+    "Error"
+   ],
+   "answer": 0,
+   "why": "Both comparisons are true, so the AND returns true."
+  },
+  {
+   "no": 6,
+   "prompt": "Which character set covers Simplified Chinese, Traditional Chinese and English?",
+   "options": [
+    "ASCII",
+    "Unicode",
+    "GB code",
+    "EBCDIC"
+   ],
+   "answer": 1,
+   "why": "Unicode encodes Simplified and Traditional Chinese along with English."
+  },
+  {
+   "no": 7,
+   "prompt": "What is a benefit of e-government?",
+   "options": [
+    "Government data is perfectly secure",
+    "The digital divide disappears",
+    "Easy public access to government information",
+    "Citizens need no registration"
+   ],
+   "answer": 2,
+   "why": "E-government lets the public access government information more easily in digital form."
+  },
+  {
+   "no": 8,
+   "prompt": "Why would Mary send a document as PDF instead of DOC?",
+   "options": [
+    "To encrypt it",
+    "To add multimedia",
+    "To make it smaller",
+    "To keep the page layout"
+   ],
+   "answer": 3,
+   "why": "PDF preserves the page layout so the document looks the same on any device."
+  },
+  {
+   "no": 9,
+   "prompt": "What should Ms Li use to create student result slips?",
+   "options": [
+    "Database report",
+    "Word hyperlink",
+    "Pivot table",
+    "SQL commands in a spreadsheet"
+   ],
+   "answer": 0,
+   "why": "Database reports use stored student information and marks to produce result slips."
+  },
+  {
+   "no": 10,
+   "prompt": "Which task benefits from spreadsheet 'what-if' scenarios?",
+   "options": [
+    "Award 90+ marks",
+    "Estimate product cost",
+    "Chart average temperatures",
+    "Sort student marks"
+   ],
+   "answer": 1,
+   "why": "What-if scenarios estimate outcomes like product cost for different manufacturers."
+  },
+  {
+   "no": 11,
+   "skip": "needs the printed PET table"
+  },
+  {
+   "no": 12,
+   "prompt": "What should a teacher edit to make a slide more attractive?",
+   "options": [
+    "SQL text only",
+    "Title only",
+    "Font and chart",
+    "Nothing"
+   ],
+   "answer": 2,
+   "why": "Improving the font and the chart makes the presentation look more attractive."
+  },
+  {
+   "no": 13,
+   "prompt": "Which process is an example of data collection?",
+   "options": [
+    "Inserting a card into an ATM",
+    "Placing a photo on a scanner",
+    "Entering marks into a spreadsheet",
+    "Taking Towngas meter readings"
+   ],
+   "answer": 3,
+   "why": "Taking meter readings gathers data; the other processes are input or capture tasks."
+  },
+  {
+   "no": 14,
+   "skip": "needs the printed spec table"
+  },
+  {
+   "no": 15,
+   "prompt": "Which storage device lets a computer boot up quickest?",
+   "options": [
+    "Solid-state drive",
+    "Hard disk drive",
+    "Magnetic tape",
+    "Optical disc"
+   ],
+   "answer": 0,
+   "why": "SSDs boot much faster than hard disks, so Z with an SSD boots up quickest."
+  },
+  {
+   "no": 16,
+   "prompt": "Which is NOT an advantage of an SSD over a hard drive?",
+   "options": [
+    "Lower power use",
+    "Supports random access",
+    "Less heat",
+    "Higher access speed"
+   ],
+   "answer": 1,
+   "why": "Both SSDs and hard drives support random access."
+  },
+  {
+   "no": 17,
+   "prompt": "Which is correct about a device driver?",
+   "options": [
+    "Enables the OS to manage files",
+    "Monitors virus checking",
+    "OS controls a scanner",
+    "Monitors RAM usage"
+   ],
+   "answer": 2,
+   "why": "A driver lets the operating system control a specific hardware device like a scanner."
+  },
+  {
+   "no": 18,
+   "prompt": "What does 'fetch' do in the fetch-decode-execute cycle?",
+   "options": [
+    "Stores the accumulator content",
+    "Calculates the next address",
+    "Decodes the instruction",
+    "Obtains the instruction from main memory"
+   ],
+   "answer": 3,
+   "why": "Fetch retrieves the next instruction from main memory."
+  },
+  {
+   "no": 21,
+   "prompt": "Which storage medium supports only sequential access?",
+   "options": [
+    "Magnetic tape",
+    "DVD-RW",
+    "Flash memory",
+    "Hard disk"
+   ],
+   "answer": 0,
+   "why": "Magnetic tapes can only be read sequentially, unlike DVD or flash."
+  },
+  {
+   "no": 22,
+   "prompt": "Which statement about computer components is NOT correct?",
+   "options": [
+    "The ALU performs arithmetic",
+    "Data buses carry control signals",
+    "The accumulator stores results",
+    "Registers transfer faster than RAM"
+   ],
+   "answer": 1,
+   "why": "Data buses carry data; control signals travel on the control bus."
+  },
+  {
+   "no": 23,
+   "prompt": "Which is NOT appropriate for enhancing information literacy?",
+   "options": [
+    "Watching ocean documentaries",
+    "Reading school newsletters",
+    "Searching online for an install password",
+    "Finding computer history online"
+   ],
+   "answer": 2,
+   "why": "Finding an installation password online is not a legitimate literacy practice."
+  },
+  {
+   "no": 24,
+   "prompt": "Which factor improves video conferencing quality?",
+   "options": [
+    "Larger storage capacity",
+    "Lower camera resolution",
+    "Slower upload speed",
+    "Higher network bandwidth"
+   ],
+   "answer": 3,
+   "why": "Higher network bandwidth gives a smoother, higher quality video call."
+  },
+  {
+   "no": 25,
+   "prompt": "Which protocol is involved when browsing https://www.gov.hk?",
+   "options": [
+    "DNS",
+    "FTP",
+    "SMTP",
+    "IMAP"
+   ],
+   "answer": 0,
+   "why": "DNS resolves the domain name before the browser fetches the page."
+  },
+  {
+   "no": 26,
+   "prompt": "Which identifies a host computer on the Internet?",
+   "options": [
+    "Email address",
+    "IP address",
+    "Computer name",
+    "Username"
+   ],
+   "answer": 1,
+   "why": "An IP address uniquely identifies a host computer on the Internet."
+  },
+  {
+   "no": 27,
+   "prompt": "What is the main function of a network interface card?",
+   "options": [
+    "Find a route for data packets",
+    "Enhance the security of a link",
+    "Let computers communicate over a network",
+    "Support satellite communication"
+   ],
+   "answer": 2,
+   "why": "A network interface card lets a computer communicate over a network."
+  },
+  {
+   "no": 28,
+   "prompt": "What is the SMS message about?",
+   "options": [
+    "Parity checking",
+    "Digital watermark",
+    "Digital signature",
+    "Authentication"
+   ],
+   "answer": 3,
+   "why": "An SMS password is used to authenticate the user."
+  },
+  {
+   "no": 31,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 32,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 33,
+   "skip": "needs the printed algorithm"
+  },
+  {
+   "no": 34,
+   "skip": "needs the printed restrictions and test-data sets"
+  },
+  {
+   "no": 35,
+   "prompt": "Which health problem might heavy online gaming cause?",
+   "options": [
+    "Sleep problems",
+    "Stronger memory",
+    "Better eyesight",
+    "Higher immunity"
+   ],
+   "answer": 0,
+   "why": "Gaming more than 8 hours a day can disrupt sleep."
+  },
+  {
+   "no": 36,
+   "prompt": "Which action protects a user from a hacker attack?",
+   "options": [
+    "Create a backup of data",
+    "Install a firewall",
+    "Delete unused files",
+    "Ignore software updates"
+   ],
+   "answer": 1,
+   "why": "A firewall blocks unauthorised access from outside the network."
+  },
+  {
+   "no": 37,
+   "prompt": "Which is a major characteristic of open source software?",
+   "options": [
+    "Developers set the selling price",
+    "Trial period covers all functions",
+    "Users can change the source code",
+    "Cannot be used freely"
+   ],
+   "answer": 2,
+   "why": "Open source software lets users view, change and share the source code."
+  },
+  {
+   "no": 38,
+   "prompt": "Which action is not appropriate without members' consent?",
+   "options": [
+    "Encrypting and uploading data",
+    "Deleting unneeded records",
+    "Updating the privacy policy",
+    "Sending personal information to other shops"
+   ],
+   "answer": 3,
+   "why": "Sharing members' personal information with other shops needs their consent."
+  },
+  {
+   "no": 39,
+   "prompt": "Which application shows a dialogue blocking a program from private networks?",
+   "options": [
+    "Firewall",
+    "Browser",
+    "File manager",
+    "Device manager"
+   ],
+   "answer": 0,
+   "why": "A firewall blocks the program from accessing private networks and asks for permission."
+  }
+ ]
+}

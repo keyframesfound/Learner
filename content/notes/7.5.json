@@ -1,0 +1,286 @@
+{
+ "section": "7.5",
+ "title": "Gas exchange in animals",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "Where does gas exchange take place in humans?",
+   "options": [
+    "Air sacs",
+    "Bronchi",
+    "Nose",
+    "Intercostal muscles"
+   ],
+   "answer": 0,
+   "why": "Gas exchange occurs in the air sacs of the lungs.",
+   "quote": "In humans, gas exchange takes place at the air sacs.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "Compared with inhaled air, exhaled air contains less of which gas?",
+   "options": [
+    "Carbon dioxide",
+    "Oxygen",
+    "Nitrogen",
+    "Helium"
+   ],
+   "answer": 1,
+   "why": "Exhaled air has less oxygen than inhaled air.",
+   "quote": "Compared with inhaled air, exhaled air contains less oxygen, more carbon dioxide, more water vapour and has a higher temperature.",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "Where does the oxygen in inhaled air go inside the air sacs?",
+   "options": [
+    "It enters the blood in the capillaries",
+    "It is stored in air sacs",
+    "It is exhaled as heat",
+    "It is absorbed by mucus"
+   ],
+   "answer": 0,
+   "why": "Oxygen from inhaled air passes into the blood.",
+   "quote": "oxygen in the inhaled air enters the blood in the capillaries.",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "What does the blood carry from body cells to the air sacs?",
+   "options": [
+    "Oxygen",
+    "Water vapour",
+    "Carbon dioxide",
+    "Nitrogen"
+   ],
+   "answer": 2,
+   "why": "Body cells release carbon dioxide, which the blood carries to the air sacs.",
+   "quote": "The blood carries carbon dioxide to the air sacs.",
+   "level": "recall"
+  },
+  {
+   "no": 5,
+   "prompt": "In the path of air when breathing in, what does the trachea divide into?",
+   "options": [
+    "Bronchioles",
+    "Air sacs",
+    "Nasal cavity",
+    "Two smaller tubes called bronchi"
+   ],
+   "answer": 3,
+   "why": "The trachea splits into two bronchi.",
+   "quote": "The trachea divides into two smaller tubes called bronchi.",
+   "level": "recall"
+  },
+  {
+   "no": 6,
+   "prompt": "Which structure protects the lungs from injury?",
+   "options": [
+    "Diaphragm",
+    "Rib cage",
+    "Bronchi",
+    "Nasal cavity"
+   ],
+   "answer": 1,
+   "why": "The rib cage shields the lungs.",
+   "quote": "The lungs are protected by the rib cage.",
+   "level": "recall"
+  },
+  {
+   "no": 7,
+   "prompt": "Which process is the physical movement of air into and out of the lungs?",
+   "options": [
+    "Respiration",
+    "Digestion",
+    "Photosynthesis",
+    "Breathing"
+   ],
+   "answer": 3,
+   "why": "Breathing is physical; respiration is chemical.",
+   "quote": "Breathing is the physical process of moving air into and out of the lungs.",
+   "level": "recognize"
+  },
+  {
+   "no": 8,
+   "prompt": "What does tar deposited in the lungs do to the air sacs?",
+   "options": [
+    "It cleans the surface",
+    "It thickens the blood",
+    "It covers some of the surface",
+    "It restores elasticity"
+   ],
+   "answer": 2,
+   "why": "Tar covers air sac surface and reduces gas exchange efficiency.",
+   "quote": "It covers some of the surface of the air sacs. As a result, the efficiency of gas exchange is reduced.",
+   "level": "apply"
+  },
+  {
+   "no": 9,
+   "prompt": "What does carbon monoxide reduce?",
+   "options": [
+    "Breathing rate",
+    "Oxygen-carrying ability of blood",
+    "Temperature control",
+    "Lung size"
+   ],
+   "answer": 1,
+   "why": "Carbon monoxide lowers blood's oxygen-carrying ability.",
+   "quote": "Carbon monoxide reduces the oxygen-carrying ability of blood.",
+   "level": "recall"
+  },
+  {
+   "no": 10,
+   "prompt": "Approximately how many people die each year from smoking-related diseases?",
+   "options": [
+    "8 million",
+    "15 million",
+    "80 million",
+    "800,000"
+   ],
+   "answer": 0,
+   "why": "About 8 million people die each year from smoking-related diseases.",
+   "quote": "About 8 million people around the world die from diseases related to smoking each year.",
+   "level": "apply"
+  },
+  {
+   "no": 11,
+   "prompt": "Inside the lungs, what do the bronchi further divide into?",
+   "options": [
+    "bronchioles",
+    "trachea",
+    "air sacs",
+    "lungs"
+   ],
+   "answer": 0,
+   "why": "Bronchi divide into bronchioles inside the lungs.",
+   "quote": "the bronchi further divide into bronchioles",
+   "level": "recall"
+  },
+  {
+   "no": 12,
+   "prompt": "How many air sacs are in the lungs?",
+   "options": [
+    "thousands",
+    "millions",
+    "hundreds",
+    "billions"
+   ],
+   "answer": 1,
+   "why": "The lungs contain millions of tiny cup-shaped air sacs.",
+   "quote": "In the lungs, there are millions of tiny cup-shaped structures called air sacs.",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "What are the surfaces of the air sacs covered with?",
+   "options": [
+    "stomata",
+    "mucus",
+    "capillaries",
+    "guard cells"
+   ],
+   "answer": 2,
+   "why": "Air sac surfaces are covered with capillaries.",
+   "quote": "Their surfaces are covered with capillaries.",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "In the air sacs, what warms the air?",
+   "options": [
+    "sunlight",
+    "mucus",
+    "warm blood in capillaries",
+    "oxygen"
+   ],
+   "answer": 2,
+   "why": "Blood in the capillaries warms the air in the air sacs.",
+   "quote": "It is also warmed by the blood in the capillaries near the air sacs.",
+   "level": "recall"
+  },
+  {
+   "no": 15,
+   "prompt": "Approximately what percentage of carbon dioxide is in exhaled air?",
+   "options": [
+    "0.04%",
+    "1%",
+    "16%",
+    "4%"
+   ],
+   "answer": 3,
+   "why": "Exhaled air contains about 4% carbon dioxide.",
+   "quote": "Carbon dioxide 0.04% 4%",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "About how many air sacs are in our lungs?",
+   "options": [
+    "80 million",
+    "800 million",
+    "600 million",
+    "600 thousand"
+   ],
+   "answer": 2,
+   "why": "About 600 million air sacs are in our lungs.",
+   "quote": "There are about 600 million air sacs in our lungs.",
+   "level": "recognize"
+  },
+  {
+   "no": 17,
+   "prompt": "In emphysema, what happens to the walls of air sacs?",
+   "options": [
+    "hardened",
+    "destroyed",
+    "strengthened",
+    "dissolved"
+   ],
+   "answer": 1,
+   "why": "In emphysema, the walls of air sacs are destroyed.",
+   "quote": "In emphysema, the walls of air sacs are destroyed and become less elastic.",
+   "level": "recall"
+  },
+  {
+   "no": 18,
+   "prompt": "What narrows the bronchi and bronchioles in chronic bronchitis?",
+   "options": [
+    "inflammation and excess mucus",
+    "tar only",
+    "oxygen depletion",
+    "lung collapse"
+   ],
+   "answer": 0,
+   "why": "Inflammation and excess mucus narrow the bronchi and bronchioles.",
+   "quote": "the bronchi and bronchioles become narrower due to inflammation and excess mucus secretion",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Which substance in cigarette smoke is addictive?",
+   "options": [
+    "tar",
+    "carbon monoxide",
+    "nicotine",
+    "sulphate"
+   ],
+   "answer": 2,
+   "why": "Nicotine in cigarette smoke is addictive.",
+   "quote": "nicotine in cigarette smoke is addictive",
+   "level": "recall"
+  },
+  {
+   "no": 20,
+   "prompt": "What is the status of e-cigarette selling in Hong Kong?",
+   "options": [
+    "Allowed",
+    "Only in schools",
+    "Only online",
+    "Banned"
+   ],
+   "answer": 3,
+   "why": "The selling of e-cigarettes is banned in Hong Kong.",
+   "quote": "The selling of e-cigarettes is banned in Hong Kong.",
+   "level": "recognize"
+  }
+ ]
+}

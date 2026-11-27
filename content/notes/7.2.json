@@ -1,0 +1,286 @@
+{
+ "section": "7.2",
+ "title": "Photosynthesis",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "Which pigment absorbs light energy for photosynthesis?",
+   "options": [
+    "Chlorophyll",
+    "Carotene",
+    "Chloroplast",
+    "Starch"
+   ],
+   "answer": 0,
+   "why": "Chlorophyll absorbs light energy in chloroplasts.",
+   "quote": "Inside chloroplasts, a green pigment called chlorophyll absorbs light energy for the process",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "Where does photosynthesis mainly occur?",
+   "options": [
+    "Roots",
+    "Flowers",
+    "Leaves",
+    "Stems"
+   ],
+   "answer": 2,
+   "why": "Photosynthesis mainly occurs in the leaves.",
+   "quote": "Photosynthesis mainly occurs in the leaves of the plants.",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "What are the two main products of photosynthesis?",
+   "options": [
+    "Water and carbon dioxide",
+    "Glucose and oxygen",
+    "Starch and light",
+    "Glucose and water"
+   ],
+   "answer": 1,
+   "why": "Carbon dioxide and water change into food (glucose) and oxygen.",
+   "quote": "The light energy absorbed by chlorophyll is used to change carbon dioxide and water into food (glucose). At the same time, oxygen is produced as a by-product (Fig 7.5).",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "What happens to the light energy absorbed by chlorophyll?",
+   "options": [
+    "Released as heat",
+    "Stored as starch",
+    "Converted to chemical energy in food",
+    "Released as oxygen"
+   ],
+   "answer": 2,
+   "why": "Light energy is converted to chemical energy in food.",
+   "quote": "In the process, light energy absorbed by chlorophyll is converted to chemical energy in food.",
+   "level": "recall"
+  },
+  {
+   "no": 5,
+   "prompt": "How is excess glucose stored in leaves?",
+   "options": [
+    "Stored as oxygen",
+    "Stored as water",
+    "Stored as carbon dioxide",
+    "Stored as starch"
+   ],
+   "answer": 3,
+   "why": "Glucose not used immediately is converted to starch and stored.",
+   "quote": "Glucose produced in plants during photosynthesis can be used immediately for energy or stored as starch for later use.",
+   "level": "recall"
+  },
+  {
+   "no": 6,
+   "prompt": "What colour does iodine solution turn in the presence of starch?",
+   "options": [
+    "Red",
+    "Blue-black",
+    "Colourless",
+    "Green"
+   ],
+   "answer": 1,
+   "why": "Iodine turns from brown to blue-black in the presence of starch.",
+   "quote": "It turns from brown to blue-black in the presence of starch.",
+   "level": "recall"
+  },
+  {
+   "no": 7,
+   "prompt": "Which factors are necessary for photosynthesis?",
+   "options": [
+    "Light, chlorophyll, carbon dioxide and water",
+    "Light, chlorophyll and oxygen",
+    "Water, glucose and oxygen",
+    "Light and carbon dioxide only"
+   ],
+   "answer": 0,
+   "why": "Light, chlorophyll, carbon dioxide and water are necessary.",
+   "quote": "Light, chlorophyll, carbon dioxide and water are the necessary factors for photosynthesis.",
+   "level": "recognize"
+  },
+  {
+   "no": 8,
+   "prompt": "For how long should plants be kept in the dark to be destarched?",
+   "options": [
+    "Exactly 4 hours",
+    "At least 1 hour",
+    "At least 24 hours",
+    "At least 48 hours"
+   ],
+   "answer": 2,
+   "why": "Plants are destarched by putting them in the dark for at least 24 hours.",
+   "quote": "We can do this by putting the plants in the dark for at least 24 hours.",
+   "level": "recall"
+  },
+  {
+   "no": 9,
+   "prompt": "In most food chains, plants are classified as…",
+   "options": [
+    "Consumers",
+    "Decomposers",
+    "Herbivores",
+    "Producers"
+   ],
+   "answer": 3,
+   "why": "Plants can make their own food, so they are producers.",
+   "quote": "Most food chains start with plants because plants can make their own food. They are called producers.",
+   "level": "recognize"
+  },
+  {
+   "no": 10,
+   "prompt": "What does photosynthesis supply to other living things?",
+   "options": [
+    "A source of energy and oxygen",
+    "Only heat",
+    "Only carbon dioxide",
+    "Only water"
+   ],
+   "answer": 0,
+   "why": "Photosynthesis provides energy and supplies oxygen.",
+   "quote": "providing a source of energy through converting light energy to chemical energy",
+   "level": "apply"
+  },
+  {
+   "no": 11,
+   "prompt": "What kind of change is photosynthesis?",
+   "options": [
+    "Physical change",
+    "Chemical change",
+    "No change",
+    "Heating"
+   ],
+   "answer": 1,
+   "why": "Photosynthesis is a chemical change in which new substances are formed.",
+   "quote": "The process of photosynthesis is an example of chemical change.",
+   "level": "recognize"
+  },
+  {
+   "no": 12,
+   "prompt": "Which of the following describes glucose?",
+   "options": [
+    "Insoluble and does not taste sweet",
+    "Insoluble and tastes sweet",
+    "Soluble and tastes sweet",
+    "Soluble and does not taste sweet"
+   ],
+   "answer": 2,
+   "why": "Glucose is soluble in water and tastes sweet.",
+   "quote": "Glucose is a kind of sugar. It is soluble in water and tastes sweet.",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "What is a control set-up used for?",
+   "options": [
+    "To replace the experimental set-up",
+    "To isolate the tested factor",
+    "To make the experiment take longer",
+    "To test the independent variable"
+   ],
+   "answer": 1,
+   "why": "A control set-up is identical to the experimental set-up except the factor under investigation is absent.",
+   "quote": "The control set-up is identical to the experimental set-up except that the factor under investigation is absent.",
+   "level": "recognize"
+  },
+  {
+   "no": 14,
+   "prompt": "What is the purpose of destarching the plant?",
+   "options": [
+    "To make the leaves green",
+    "To check starch is newly made",
+    "To make the plant grow faster",
+    "To test the presence of light"
+   ],
+   "answer": 1,
+   "why": "Destarching ensures any starch detected at the end was made during the experiment.",
+   "quote": "To ensure any starch detected at the end of the experiment is made during the experiment.",
+   "level": "apply"
+  },
+  {
+   "no": 15,
+   "prompt": "What does soda lime do to the air?",
+   "options": [
+    "Absorbs carbon dioxide from air",
+    "Releases oxygen",
+    "Dissolves chlorophyll",
+    "Turns iodine blue-black"
+   ],
+   "answer": 0,
+   "why": "Soda lime can absorb carbon dioxide from the air.",
+   "quote": "It can be used to absorb carbon dioxide from the air.",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "Why is the leaf boiled in water during the iodine test?",
+   "options": [
+    "To dissolve chlorophyll",
+    "To make the leaf soft",
+    "To destroy the cell membranes",
+    "To add starch"
+   ],
+   "answer": 2,
+   "why": "Boiling destroys cell membranes so alcohol and iodine can enter the cells.",
+   "quote": "This destroys the cell membranes of the leaf cells, so that alcohol and iodine solution (to be added later) can get into the cells.",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "What do ocean algae and bacteria do?",
+   "options": [
+    "Sink oxygen to the seabed",
+    "Produce over half of Earth's oxygen",
+    "Only eat fish in the ocean",
+    "Provide carbon dioxide for plants"
+   ],
+   "answer": 1,
+   "why": "Algae and some bacteria in the ocean are major producers and produce more than half of the oxygen on Earth.",
+   "quote": "Apart from providing food for animals in the ocean, they also produce more than half of the oxygen on Earth.",
+   "level": "recall"
+  },
+  {
+   "no": 18,
+   "prompt": "Which way does an arrow point in a food chain?",
+   "options": [
+    "From prey to predator",
+    "From predator to prey",
+    "From consumer to producer",
+    "From top consumer to bottom consumer"
+   ],
+   "answer": 0,
+   "why": "Arrows point from the living thing being eaten to the thing that eats it.",
+   "quote": "An arrow in food chain points from the living thing being eaten to the living thing that eats it.",
+   "level": "recognize"
+  },
+  {
+   "no": 19,
+   "prompt": "What is the source of carbon in all living things?",
+   "options": [
+    "Oxygen in the air",
+    "Carbon dioxide in the air",
+    "Sunlight",
+    "Soil water"
+   ],
+   "answer": 1,
+   "why": "Carbon dioxide taken up for photosynthesis is the source of carbon in carbon-containing compounds.",
+   "quote": "Carbon dioxide taken up for photosynthesis is the source of carbon in these compounds.",
+   "level": "apply"
+  },
+  {
+   "no": 20,
+   "prompt": "Why is the leaf put in hot alcohol before the iodine test?",
+   "options": [
+    "To dissolve the chlorophyll",
+    "To destroy cell membranes",
+    "To remove the starch",
+    "To soften the leaf"
+   ],
+   "answer": 0,
+   "why": "Hot alcohol dissolves chlorophyll so the colour change can be observed.",
+   "quote": "This dissolves chlorophyll from the leaf cells, so that any colour change of the leaf will not be masked by its green colour.",
+   "level": "recall"
+  }
+ ]
+}

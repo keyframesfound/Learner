@@ -1,0 +1,286 @@
+{
+ "section": "8.5",
+ "title": "Electrical circuits",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "Current flows along one path in which circuit?",
+   "options": [
+    "Series circuit",
+    "Parallel circuit",
+    "Open circuit",
+    "Closed circuit"
+   ],
+   "answer": 0,
+   "why": "A series circuit has only one path for current.",
+   "quote": "In circuit 1 in Let’s begin, current flows along one path only.",
+   "level": "recognize"
+  },
+  {
+   "no": 2,
+   "prompt": "In a series circuit, where is the current the same?",
+   "options": [
+    "The cells only",
+    "All points",
+    "The bulbs only",
+    "The switch only"
+   ],
+   "answer": 1,
+   "why": "The current is the same at every point in a series circuit.",
+   "quote": "The current is the same at all points.",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "In a series circuit, the sum of voltages across appliances equals what?",
+   "options": [
+    "Each bulb voltage",
+    "Larger than the source voltage",
+    "The voltage of the energy source",
+    "Zero"
+   ],
+   "answer": 2,
+   "why": "The voltages across the bulbs add up to the source voltage.",
+   "quote": "appliance (e.g. the bulb) is equal to the voltage of the energy source.",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "If a series circuit is broken, what happens to current?",
+   "options": [
+    "Still flows",
+    "Flows through other branches",
+    "Flows more slowly",
+    "Will not flow"
+   ],
+   "answer": 3,
+   "why": "A break in the single path stops all current.",
+   "quote": "If the series circuit is broken at any point, current will not flow",
+   "level": "recall"
+  },
+  {
+   "no": 5,
+   "prompt": "Current flows in more than one path in which circuit?",
+   "options": [
+    "Series circuit",
+    "Parallel circuit",
+    "Open circuit",
+    "Closed circuit"
+   ],
+   "answer": 1,
+   "why": "A parallel circuit has more than one path for current.",
+   "quote": "current can flow in more than one path. It can flow through either bulb.",
+   "level": "recognize"
+  },
+  {
+   "no": 6,
+   "prompt": "In a parallel circuit, what equals the current in the main loop?",
+   "options": [
+    "Each branch current",
+    "Larger than the branch currents",
+    "The sum of branch currents",
+    "Zero"
+   ],
+   "answer": 2,
+   "why": "The main-loop current equals the sum of the branch currents.",
+   "quote": "I3 = I1 + I2",
+   "level": "recall"
+  },
+  {
+   "no": 7,
+   "prompt": "In a parallel circuit, how do the voltages across branches compare?",
+   "options": [
+    "The same",
+    "Different",
+    "Doubling",
+    "The sum of the other branches"
+   ],
+   "answer": 0,
+   "why": "Each branch has the same voltage.",
+   "quote": "The voltage across each branch is the same.",
+   "level": "recall"
+  },
+  {
+   "no": 8,
+   "prompt": "If a parallel circuit is broken at one branch, what happens to current?",
+   "options": [
+    "Stops flowing",
+    "Flows through all branches",
+    "Flows through only that branch",
+    "Flows in the other branches"
+   ],
+   "answer": 3,
+   "why": "The other branches still form a complete circuit.",
+   "quote": "If the parallel circuit is broken at any branch, current will still flow",
+   "level": "apply"
+  },
+  {
+   "no": 9,
+   "prompt": "In a parallel circuit, which branch carries more current?",
+   "options": [
+    "The higher-resistance branch",
+    "The lower-resistance branch",
+    "The branch with the switch",
+    "Both branches equally"
+   ],
+   "answer": 1,
+   "why": "Lower resistance allows a larger current to flow.",
+   "quote": "In a parallel circuit, a larger current flows through a branch with a lower resistance",
+   "level": "apply"
+  },
+  {
+   "no": 10,
+   "prompt": "Street lamps are connected in what?",
+   "options": [
+    "A series circuit",
+    "An earth-wire circuit",
+    "A parallel circuit",
+    "An open circuit"
+   ],
+   "answer": 2,
+   "why": "Street lamps are in parallel, so one can go off without affecting the others.",
+   "quote": "Street lamps are connected in parallel.",
+   "level": "recognize"
+  },
+  {
+   "no": 11,
+   "prompt": "How many paths does current take in a series circuit?",
+   "options": [
+    "One",
+    "Two",
+    "Three",
+    "As many as branches"
+   ],
+   "answer": 0,
+   "why": "A series circuit has a single path.",
+   "quote": "Such a circuit is called a series",
+   "level": "recall"
+  },
+  {
+   "no": 12,
+   "prompt": "In a series circuit, how does the current compare at different points?",
+   "options": [
+    "It is the same",
+    "It halves",
+    "It doubles",
+    "It stops"
+   ],
+   "answer": 0,
+   "why": "The same current flows all the way round.",
+   "quote": "the current is the same",
+   "level": "apply"
+  },
+  {
+   "no": 13,
+   "prompt": "What do the voltages across appliances in series add up to?",
+   "options": [
+    "The supply voltage",
+    "Zero",
+    "Twice the supply",
+    "The current"
+   ],
+   "answer": 0,
+   "why": "The parts share the supply voltage.",
+   "quote": "is equal to the voltage of the",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "What happens to current if a series circuit breaks?",
+   "options": [
+    "It stops everywhere",
+    "It continues",
+    "It doubles",
+    "It reverses"
+   ],
+   "answer": 0,
+   "why": "A break leaves no complete path.",
+   "quote": "If the series circuit is broken at any point, current will not flow",
+   "level": "recall"
+  },
+  {
+   "no": 15,
+   "prompt": "What is the current in the main loop of a parallel circuit?",
+   "options": [
+    "The sum of the branch currents",
+    "The smallest branch current",
+    "The largest branch current",
+    "Zero"
+   ],
+   "answer": 0,
+   "why": "The main loop carries the total.",
+   "quote": "The current in the main loop is equal to the sum of the currents in the",
+   "level": "apply"
+  },
+  {
+   "no": 16,
+   "prompt": "How do voltages across parallel branches compare?",
+   "options": [
+    "They are equal",
+    "They add up",
+    "They halve",
+    "They differ wildly"
+   ],
+   "answer": 0,
+   "why": "Branches share the same voltage.",
+   "quote": "the voltages across",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "If one branch of a parallel circuit breaks, what happens?",
+   "options": [
+    "Other branches keep working",
+    "All current stops",
+    "The supply triples",
+    "The voltage doubles"
+   ],
+   "answer": 0,
+   "why": "Each branch has its own path.",
+   "quote": "If the parallel circuit is broken at any branch, current will still flow",
+   "level": "recall"
+  },
+  {
+   "no": 18,
+   "prompt": "Which parallel branch carries the larger current?",
+   "options": [
+    "The lower-resistance branch",
+    "The higher-resistance branch",
+    "The longest branch",
+    "All equally"
+   ],
+   "answer": 0,
+   "why": "Less resistance means more current.",
+   "quote": "the current flowing in the branch with a lower resistance is",
+   "level": "apply"
+  },
+  {
+   "no": 19,
+   "prompt": "Why can each lamp in a parallel circuit be switched separately?",
+   "options": [
+    "Each lamp has its own path",
+    "They all share one path",
+    "The voltage is zero",
+    "The current is equal"
+   ],
+   "answer": 0,
+   "why": "Separate branches carry current to each lamp.",
+   "quote": "current will still flow in the other branches",
+   "level": "recall"
+  },
+  {
+   "no": 20,
+   "prompt": "What happens to the main current when more parallel branches are added?",
+   "options": [
+    "It increases",
+    "It decreases",
+    "It stays the same",
+    "It stops"
+   ],
+   "answer": 0,
+   "why": "More branches draw more total current.",
+   "quote": "when more parallel branches are added",
+   "level": "recall"
+  }
+ ]
+}

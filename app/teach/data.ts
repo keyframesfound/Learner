@@ -184,26 +184,6 @@ export async function adminModules() {
   return rows as AdminModuleRow[];
 }
 
-export type TeacherRow = {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  curricula: number;
-};
-
-export async function teacherRows() {
-  const { rows } = await pool.query(
-    `select u.id, u.name, u.email, u.role,
-            (select count(distinct c.module_id)::int from classes c
-              where c.teacher_id = u.id and c.module_id is not null) as curricula
-       from users u
-      where u.role in ('teacher','admin')
-      order by u.name`,
-  );
-  return rows as TeacherRow[];
-}
-
 export async function schoolCounts() {
   const { rows } = await pool.query(
     `select
@@ -234,6 +214,39 @@ const slugOf = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40);
 
 export type Created = { ok: true; id: string } | { ok: false; error: string };
+
+/**
+ * Inline creation: the teacher types a name and presses Enter, so there is no form
+ * to fill and no subject to pick. Any name is allowed (people name curricula "F1f"),
+ * the subject comes from the curriculum already open — or the first one — and a
+ * clashing code gets a numeric suffix instead of an error nobody can act on.
+ */
+export async function createModuleQuick(input: { name: string; trackId: string }): Promise<Created> {
+  const name = input.name.trim().slice(0, 60);
+  if (!name) return { ok: false, error: "Type a name first." };
+
+  const { rows: trackRows } = await pool.query(
+    input.trackId ? "select id from tracks where id = $1" : "select id from tracks order by ord, name limit 1",
+    input.trackId ? [input.trackId] : [],
+  );
+  if (trackRows.length === 0) return { ok: false, error: "No subject to put it in." };
+  const trackId = trackRows[0].id as string;
+
+  const base = (name.replace(/[^A-Za-z0-9]/g, "").toUpperCase().slice(0, 8)) || "CUR";
+  for (let n = 0; n < 20; n++) {
+    const code = n === 0 ? base : `${base.slice(0, 6)}${n + 1}`;
+    const id = `${trackId}.${slugOf(code) || "new"}`;
+    const { rows } = await pool.query(
+      `insert into modules (id, track_id, code, name, ord)
+       values ($1, $2, $3, $4, coalesce((select max(ord) + 1 from modules where track_id = $2), 1))
+       on conflict do nothing
+       returning id`,
+      [id, trackId, code, name],
+    );
+    if (rows.length > 0) return { ok: true, id };
+  }
+  return { ok: false, error: "Could not create that curriculum." };
+}
 
 export async function createModule(input: {
   name: string;
@@ -371,12 +384,12 @@ export function savedLabel(value: Date | string | null | undefined) {
 }
 
 const LEVEL_LABEL: Record<string, string> = {
-  recognize: "Core",
-  recall: "Core",
+  recognize: "Easy",
+  recall: "Medium",
   apply: "Hard",
   construct: "Hard",
 };
 
 export function levelLabel(level: string | null | undefined) {
-  return level ? LEVEL_LABEL[level] ?? "Core" : "Core";
+  return level ? LEVEL_LABEL[level] ?? "Easy" : "Easy";
 }

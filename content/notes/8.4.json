@@ -1,0 +1,272 @@
+{
+ "section": "8.4",
+ "title": "Resistance",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "What does resistance measure about a conductor?",
+   "options": [
+    "How difficult current passes through it",
+    "How much current flows",
+    "How hot a wire becomes",
+    "How much voltage a cell provides"
+   ],
+   "answer": 0,
+   "why": "Resistance measures how difficult it is for current to pass through a conductor.",
+   "quote": "Resistance measures how difficult it is for a current to pass through a conductor.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "What is the unit of resistance?",
+   "options": [
+    "Volt",
+    "Ohm",
+    "Ampere",
+    "Watt"
+   ],
+   "answer": 1,
+   "why": "The ohm (Ω) is the unit of resistance.",
+   "quote": "The unit of resistance is the ohm (Ω).",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "What is a resistor?",
+   "options": [
+    "A component with a certain resistance",
+    "A device that stores energy",
+    "A device that measures current",
+    "A device that provides light"
+   ],
+   "answer": 0,
+   "why": "A resistor is a circuit component with a certain value of resistance.",
+   "quote": "A resistor is a circuit component that has a certain value of resistance.",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "When resistance increases, what happens to current?",
+   "options": [
+    "Increases",
+    "Remains the same",
+    "Doubles",
+    "Decreases"
+   ],
+   "answer": 3,
+   "why": "Higher resistance makes it harder for current to flow, so the current decreases.",
+   "quote": "If a resistor with a higher resistance is connected to a cell, it will result in a smaller current in the circuit.",
+   "level": "apply"
+  },
+  {
+   "no": 5,
+   "prompt": "For same material and length, what does a thinner wire have?",
+   "options": [
+    "Lower resistance",
+    "Higher resistance",
+    "The same as a thick wire",
+    "No resistance"
+   ],
+   "answer": 1,
+   "why": "A thinner wire has a higher resistance than a thicker wire of the same length.",
+   "quote": "For wires made of the same material, a thinner wire has a higher resistance than a thicker wire of the same length.",
+   "level": "recognize"
+  },
+  {
+   "no": 6,
+   "prompt": "For same material and thickness, what does a longer wire have?",
+   "options": [
+    "Higher resistance",
+    "Lower resistance",
+    "The same resistance",
+    "No resistance"
+   ],
+   "answer": 0,
+   "why": "A longer wire has a higher resistance than a shorter wire of the same thickness.",
+   "quote": "For wires made of the same material, a longer wire has a higher resistance than a shorter wire of the same thickness.",
+   "level": "recognize"
+  },
+  {
+   "no": 7,
+   "prompt": "What do wires made of different materials have?",
+   "options": [
+    "The same resistance",
+    "Lower resistance",
+    "No resistance",
+    "Different resistances"
+   ],
+   "answer": 3,
+   "why": "Wires made of different materials have different resistances.",
+   "quote": "wires made of different materials have different resistances.",
+   "level": "apply"
+  },
+  {
+   "no": 8,
+   "prompt": "Which of these is a rheostat?",
+   "options": [
+    "A resistor with adjustable resistance",
+    "An ammeter",
+    "A component with fixed resistance",
+    "A fuse"
+   ],
+   "answer": 0,
+   "why": "A rheostat is a resistor with an adjustable resistance.",
+   "quote": "A rheostat is a resistor with an adjustable resistance. It is used to adjust the size of the current in a circuit.",
+   "level": "recall"
+  },
+  {
+   "no": 9,
+   "prompt": "Which symbol stands for the ohm?",
+   "options": [
+    "Ω",
+    "V",
+    "A",
+    "W"
+   ],
+   "answer": 0,
+   "why": "Resistance is measured in ohms, written with the Greek letter omega.",
+   "quote": "The unit of resistance is the ohm (Ω).",
+   "level": "recall"
+  },
+  {
+   "no": 10,
+   "prompt": "Why is copper commonly used to make connecting wires?",
+   "options": [
+    "It is expensive",
+    "It is heavy",
+    "It has low resistance",
+    "It is magnetic"
+   ],
+   "answer": 2,
+   "why": "Copper has a low resistance, so it is commonly used for connecting wires.",
+   "quote": "Since copper has a low resistance, it is commonly used to make connecting wires (Fig 8.36).",
+   "level": "recall"
+  },
+  {
+   "no": 11,
+   "prompt": "Which symbol is used for the ohm?",
+   "options": [
+    "Ω",
+    "V",
+    "A",
+    "W"
+   ],
+   "answer": 0,
+   "why": "The ohm is written with the Greek letter omega.",
+   "quote": "The unit of resistance is the ohm",
+   "level": "apply"
+  },
+  {
+   "no": 12,
+   "prompt": "Who is the unit of resistance named after?",
+   "options": [
+    "Georg Ohm",
+    "Alessandro Volta",
+    "Andre-Marie Ampere",
+    "Isaac Newton"
+   ],
+   "answer": 0,
+   "why": "The unit of resistance honours Georg Ohm.",
+   "quote": "The unit of resistance is named after the scientist",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "Which wire has the higher resistance?",
+   "options": [
+    "A thinner wire",
+    "A thicker wire",
+    "A shorter wire",
+    "A coiled wire"
+   ],
+   "answer": 0,
+   "why": "A thinner wire leaves less room for current.",
+   "quote": "a thinner wire has a higher resistance",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "Wires made of different materials have what?",
+   "options": [
+    "Different resistances",
+    "The same resistance",
+    "No resistance",
+    "Zero current"
+   ],
+   "answer": 0,
+   "why": "Material changes how easily current flows.",
+   "quote": "wires made of different materials have different",
+   "level": "apply"
+  },
+  {
+   "no": 15,
+   "prompt": "What is a rheostat?",
+   "options": [
+    "A variable resistor",
+    "A fixed resistor",
+    "A small cell",
+    "A type of switch"
+   ],
+   "answer": 0,
+   "why": "Rheostats are variable resistors.",
+   "quote": "are called variable resistors",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "What is a resistor in a circuit used for?",
+   "options": [
+    "Limiting the current",
+    "Storing charge",
+    "Creating voltage",
+    "Measuring current"
+   ],
+   "answer": 0,
+   "why": "A resistor has a resistance that limits current.",
+   "quote": "a resistor has a certain value of resistance",
+   "level": "recall"
+  },
+  {
+   "no": 17,
+   "prompt": "When resistance falls, what does the current do?",
+   "options": [
+    "It increases",
+    "It decreases",
+    "It stops",
+    "It stays the same"
+   ],
+   "answer": 0,
+   "why": "Less resistance lets more current through.",
+   "quote": "resistance decreases and the current increases",
+   "level": "apply"
+  },
+  {
+   "no": 18,
+   "prompt": "What happens to a bulb when the current through it increases?",
+   "options": [
+    "It becomes brighter",
+    "It becomes dimmer",
+    "It goes off",
+    "It cools down"
+   ],
+   "answer": 0,
+   "why": "More current makes the bulb brighter.",
+   "quote": "the current increases. As a result, the bulb",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Which change would make a wire's resistance higher?",
+   "options": [
+    "Making it longer",
+    "Making it shorter",
+    "Making it thicker",
+    "Cooling it"
+   ],
+   "answer": 0,
+   "why": "A longer wire resists current more.",
+   "quote": "the resistance is higher",
+   "level": "recall"
+  }
+ ]
+}

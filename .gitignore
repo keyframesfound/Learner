@@ -17,3 +17,6 @@ backups/
 *.tsbuildinfo
 *.apps.googleusercontent.com.json
 client_secret*.json
+
+# Local Supabase prototype scaffold — not the deployed app
+drill-raid/

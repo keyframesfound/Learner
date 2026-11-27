@@ -1,0 +1,286 @@
+{
+ "section": "8.2",
+ "title": "Current",
+ "questions": [
+  {
+   "no": 1,
+   "prompt": "What is an electric current?",
+   "options": [
+    "A flow of electric charges",
+    "A flow of electrical energy",
+    "A movement of only the electrons",
+    "A push from the voltmeter"
+   ],
+   "answer": 0,
+   "why": "Current is a flow of electric charges.",
+   "quote": "Current is a flow of electric charges.",
+   "level": "recall"
+  },
+  {
+   "no": 2,
+   "prompt": "What is the unit of current?",
+   "options": [
+    "Volt",
+    "Ohm",
+    "Ampere",
+    "Joule"
+   ],
+   "answer": 2,
+   "why": "The unit of current is the ampere.",
+   "quote": "The unit of current is the Ampere ( A ).",
+   "level": "recall"
+  },
+  {
+   "no": 3,
+   "prompt": "Which instrument measures the size of a current?",
+   "options": [
+    "Voltmeter",
+    "Ammeter",
+    "Ohmmeter",
+    "Galvanometer"
+   ],
+   "answer": 1,
+   "why": "An ammeter measures the size of a current.",
+   "quote": "We measure the size of current with an ammeter.",
+   "level": "recall"
+  },
+  {
+   "no": 4,
+   "prompt": "In a closed circuit, which terminal does current flow from?",
+   "options": [
+    "Negative terminal",
+    "Voltmeter",
+    "Positive terminal",
+    "Bulb"
+   ],
+   "answer": 2,
+   "why": "Current flows from the positive terminal of the cell to the negative terminal.",
+   "quote": "The current flows from the positive terminal of a cell to the negative terminal through an appliance (e.g. a bulb).",
+   "level": "recognize"
+  },
+  {
+   "no": 5,
+   "prompt": "How is an ammeter connected in a circuit?",
+   "options": [
+    "In series in the circuit",
+    "Across the cell",
+    "In parallel",
+    "Outside the loop"
+   ],
+   "answer": 0,
+   "why": "An ammeter is connected in series in a circuit.",
+   "quote": "An ammeter is connected in series in a circuit.",
+   "level": "recognize"
+  },
+  {
+   "no": 6,
+   "prompt": "What should an ammeter's red knob connect to?",
+   "options": [
+    "The bulb",
+    "The black knob",
+    "The positive terminal of the cell",
+    "The negative terminal of the cell"
+   ],
+   "answer": 2,
+   "why": "The red knob (+) should lead to the positive terminal of the cell.",
+   "quote": "When an ammeter is connected in a circuit, its red knob (+) should lead to the positive terminal of the cell and its black knob (–) to the negative terminal",
+   "level": "apply"
+  },
+  {
+   "no": 7,
+   "prompt": "What is the equivalent of 1 milliampere?",
+   "options": [
+    "0.1 A",
+    "0.001 A",
+    "1 A",
+    "0.01 A"
+   ],
+   "answer": 1,
+   "why": "1 mA equals 0.001 A.",
+   "quote": "1 mA = 0.001 A",
+   "level": "recall"
+  },
+  {
+   "no": 8,
+   "prompt": "What happens to a conductor when current flows through it?",
+   "options": [
+    "It becomes an insulator",
+    "It produces only light energy",
+    "It becomes an electromagnet",
+    "It gives out thermal energy"
+   ],
+   "answer": 3,
+   "why": "Thermal energy is given out when a current flows through a conductor.",
+   "quote": "This shows that thermal energy is given out when a current flows through a conductor.",
+   "level": "apply"
+  },
+  {
+   "no": 9,
+   "prompt": "What does a coil of wire become when current flows through it?",
+   "options": [
+    "Ammeter",
+    "A battery",
+    "An insulator",
+    "An electromagnet"
+   ],
+   "answer": 3,
+   "why": "A coil of wire carrying current becomes an electromagnet.",
+   "quote": "When a current flows through a coil of wire, the coil becomes an electromagnet.",
+   "level": "recognize"
+  },
+  {
+   "no": 10,
+   "prompt": "What increases when more cells are added to a circuit?",
+   "options": [
+    "The current",
+    "The voltmeter reading",
+    "The bulb's mass",
+    "The resistance"
+   ],
+   "answer": 0,
+   "why": "More cells mean more current and a brighter bulb.",
+   "quote": "In Practical 8.4, we can see that when more cells are added to the circuit, the current increases.",
+   "level": "apply"
+  },
+  {
+   "no": 11,
+   "prompt": "Who was the unit of current named after?",
+   "options": [
+    "Andre-Marie Ampere",
+    "Alessandro Volta",
+    "Michael Faraday",
+    "Wilhelm Weber"
+   ],
+   "answer": 0,
+   "level": "recall",
+   "why": "The unit of current, the ampere, is named after Andre-Marie Ampere.",
+   "quote": "The unit of current is named after the scientist Andre-Marie Ampere."
+  },
+  {
+   "no": 12,
+   "prompt": "For a current under 1 A, which knob should an ammeter use?",
+   "options": [
+    "5-A knob",
+    "1-A knob",
+    "10-A knob",
+    "Neither"
+   ],
+   "answer": 1,
+   "level": "recall",
+   "why": "The 1-A knob gives a more precise reading for currents under 1 A.",
+   "quote": "If the current is under 1 A, the 1-A knob should be connected to give a more precise reading."
+  },
+  {
+   "no": 13,
+   "prompt": "Why must an ammeter never be connected directly to the cell?",
+   "options": [
+    "It may melt",
+    "The current is too small",
+    "Large current may damage it",
+    "The cell may overheat"
+   ],
+   "answer": 2,
+   "level": "apply",
+   "why": "A large current flowing through the ammeter can damage it.",
+   "quote": "Never connect the ammeter to the cell directly. Otherwise, a large current may flow through the ammeter and damage it."
+  },
+  {
+   "no": 14,
+   "prompt": "To what should an ammeter's black knob lead?",
+   "options": [
+    "The bulb",
+    "The positive terminal of the cell",
+    "The ammeter's red knob",
+    "The negative terminal of the cell"
+   ],
+   "answer": 3,
+   "level": "recall",
+   "why": "The black knob leads to the negative terminal of the cell.",
+   "quote": "its black knob (–) to the negative terminal"
+  },
+  {
+   "no": 15,
+   "prompt": "When more cells are added to a circuit, what happens to the bulb?",
+   "options": [
+    "It becomes brighter",
+    "It becomes dimmer",
+    "It turns off",
+    "It stops working"
+   ],
+   "answer": 0,
+   "level": "apply",
+   "why": "More cells increase the current, so the bulb becomes brighter.",
+   "quote": "when more cells are added to the circuit, the current increases. The bulb also becomes brighter."
+  },
+  {
+   "no": 16,
+   "prompt": "What happens to the heating effect when the current increases?",
+   "options": [
+    "It stays the same",
+    "It becomes greater",
+    "It disappears",
+    "It becomes magnetic"
+   ],
+   "answer": 1,
+   "level": "recall",
+   "why": "The heating effect becomes greater when the current increases.",
+   "quote": "This is the heating effect of current. This effect becomes greater when the current increases."
+  },
+  {
+   "no": 17,
+   "prompt": "What is the current produced by an electric eel large enough to do?",
+   "options": [
+    "Power the MTR train",
+    "Cool the room",
+    "Kill a human",
+    "Charge a phone"
+   ],
+   "answer": 2,
+   "level": "recognize",
+   "why": "The current from an electric eel is large enough to kill a human.",
+   "quote": "The current produced by an electric eel is large enough to kill a human."
+  },
+  {
+   "no": 18,
+   "prompt": "In the water flow model, what does the cell correspond to?",
+   "options": [
+    "The turbine",
+    "The water channel",
+    "The water flow",
+    "The water pump"
+   ],
+   "answer": 3,
+   "level": "recognize",
+   "why": "The cell works like the water pump in the water flow model.",
+   "quote": "The cell works like the water pump and the bulb consumes energy like the turbine does."
+  },
+  {
+   "no": 19,
+   "prompt": "Which part of the water flow model consumes energy?",
+   "options": [
+    "Turbine",
+    "Water pump",
+    "Water pipe",
+    "Water flow"
+   ],
+   "answer": 0,
+   "level": "recognize",
+   "why": "The turbine consumes energy as it turns.",
+   "quote": "The turbine consumes energy as it turns."
+  },
+  {
+   "no": 20,
+   "prompt": "What does an electric motor convert electrical energy into?",
+   "options": [
+    "Light energy",
+    "Kinetic energy",
+    "Chemical energy",
+    "Thermal energy"
+   ],
+   "answer": 1,
+   "level": "recall",
+   "why": "An electric motor converts electrical energy to kinetic energy.",
+   "quote": "An electric motor converts electrical energy to kinetic energy."
+  }
+ ]
+}

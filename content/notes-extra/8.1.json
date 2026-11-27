@@ -1,0 +1,146 @@
+{
+ "section": "8.1",
+ "title": "Simple circuits",
+ "questions": [
+  {
+   "no": 11,
+   "prompt": "What does the term battery refer to?",
+   "options": [
+    "A cell or several cells linked",
+    "A single cell only",
+    "Several disconnected cells",
+    "A generator"
+   ],
+   "answer": 0,
+   "level": "recall",
+   "why": "A battery can be a single cell or several cells connected together.",
+   "quote": "A battery refers to a single cell or several cells connected together."
+  },
+  {
+   "no": 12,
+   "prompt": "Which of these can serve as a source of electrical energy?",
+   "options": [
+    "A bulb",
+    "A generator",
+    "A switch",
+    "A connector"
+   ],
+   "answer": 1,
+   "level": "recognize",
+   "why": "Generators and solar panels are sources of electrical energy.",
+   "quote": "Other energy sources include a generator and a solar panel."
+  },
+  {
+   "no": 13,
+   "prompt": "What is the first condition for an appliance to work?",
+   "options": [
+    "A switch",
+    "A bulb",
+    "A source of electrical energy",
+    "A battery"
+   ],
+   "answer": 2,
+   "level": "recall",
+   "why": "The first condition is a source of electrical energy.",
+   "quote": "The first condition for an appliance to work is the presence of a source of electrical energy."
+  },
+  {
+   "no": 14,
+   "prompt": "Are the switches in a keyboard normally open or closed?",
+   "options": [
+    "Closed",
+    "Broken",
+    "Disconnected",
+    "Open"
+   ],
+   "answer": 3,
+   "level": "recall",
+   "why": "The switches in keyboard keys are kept open until pressed.",
+   "quote": "The switches are kept open."
+  },
+  {
+   "no": 15,
+   "prompt": "What parts does a switch contain?",
+   "options": [
+    "Conducting and insulating parts",
+    "Only insulating parts",
+    "Only conducting parts",
+    "Only cells"
+   ],
+   "answer": 0,
+   "level": "recognize",
+   "why": "A switch has both conducting and insulating parts.",
+   "quote": "There are conducting and insulating parts in the switch (Fig 8.7)."
+  },
+  {
+   "no": 16,
+   "prompt": "What do standard circuit symbols represent?",
+   "options": [
+    "Voltage readings",
+    "Circuit components",
+    "Heating effects",
+    "Current flow"
+   ],
+   "answer": 1,
+   "level": "recall",
+   "why": "Standard circuit symbols represent different circuit components.",
+   "quote": "We use some standard circuit symbols to represent different circuit components of a circuit."
+  },
+  {
+   "no": 17,
+   "prompt": "What should be placed at each wire junction when drawing a circuit diagram?",
+   "options": [
+    "An open switch",
+    "A bulb",
+    "A solid dot",
+    "A cell"
+   ],
+   "answer": 2,
+   "level": "recall",
+   "why": "A solid dot marks each wire junction in a circuit diagram.",
+   "quote": "Put a solid dot at each wire junction."
+  },
+  {
+   "no": 18,
+   "prompt": "Is a switch a necessary component to form a complete circuit?",
+   "options": [
+    "Yes",
+    "Only for bulbs",
+    "Only for keyboards",
+    "No"
+   ],
+   "answer": 3,
+   "level": "apply",
+   "why": "A switch is not required; a complete circuit needs only a source and a closed loop.",
+   "quote": "A switch is a necessary component to form a complete circuit."
+  },
+  {
+   "no": 19,
+   "prompt": "What happens to a torch when its switch is opened?",
+   "options": [
+    "It goes off",
+    "It becomes brighter",
+    "It becomes a battery",
+    "It conducts better"
+   ],
+   "answer": 0,
+   "level": "apply",
+   "why": "Opening the switch breaks the circuit, so the torch goes off.",
+   "quote": "(b) when the switch is open, the circuit is incomplete and the torch goes off"
+  },
+  {
+   "no": 20,
+   "prompt": "What happens if an LED is connected directly to the cell?",
+   "options": [
+    "It works fine",
+    "It may be damaged",
+    "It becomes brighter",
+    "It turns into a bulb"
+   ],
+   "answer": 1,
+   "level": "recognize",
+   "why": "Connecting the LED directly to the cell can damage it.",
+   "quote": "Never connect the LED to the cell directly. Otherwise, the LED will be damaged."
+  }
+ ]
+}

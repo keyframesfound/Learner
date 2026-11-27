@@ -5,6 +5,7 @@ import { blocksOf, lessonsOf, teacherClasses, type BlockRow, type LessonRow } fr
 import { lessonCounts, moduleList, pickModule, savedLabel } from "@/app/teach/data";
 import {
   createLessonAction,
+  deleteCurriculumAction,
   deleteLessonAction,
   setStatusAction,
   updateLessonAction,
@@ -12,6 +13,7 @@ import {
 import NoteBlock, { type BlockView } from "@/components/teach/NoteBlock";
 import AddBlock from "@/components/teach/AddBlock";
 import ConfirmSubmit from "@/components/teach/ConfirmSubmit";
+import NewCurriculumField from "@/components/teach/NewCurriculumField";
 
 type Params = {
   c?: string;
@@ -65,7 +67,7 @@ export default async function CurriculumPage({
     return (
       <section className="screen on" id="curriculum">
         <div className="topstrip">
-          <Link className="fchip add" href="/teach/new">+ New curriculum</Link>
+          <NewCurriculumField trackId="" placeholder="New curriculum" />
           <span className="spacer" />
         </div>
         <div className="body">
@@ -77,9 +79,9 @@ export default async function CurriculumPage({
               <div className="thint" style={{ padding: 0 }}>
                 A curriculum holds chapters, notes and questions. Create one, then add its first chapter.
               </div>
-              <Link className="b solid" href="/teach/new" style={{ display: "inline-flex", alignItems: "center", marginTop: 14 }}>
-                New curriculum
-              </Link>
+              <div style={{ marginTop: 14, display: "flex", alignItems: "center", gap: 10 }}>
+                <NewCurriculumField trackId={sp.c ?? ""} placeholder="Name the curriculum" />
+              </div>
             </div>
           </div>
         </div>
@@ -113,24 +115,22 @@ export default async function CurriculumPage({
   return (
     <section className="screen on" id="curriculum">
       <div className="topstrip">
-        {modules.map((module) => (
-          <Link
-            key={module.id}
-            className={"fchip" + (module.id === active.id ? " on" : "")}
-            href={`/teach/curriculum?c=${encodeURIComponent(module.id)}`}
-          >
-            {module.name}
-            <span className="c">{module.classes} {module.classes === 1 ? "class" : "classes"}</span>
-          </Link>
-        ))}
-        <Link className="fchip add" href="/teach/new">+ New curriculum</Link>
-        <span className="div" />
+        {sp.error === "delete-denied" ? (
+          <span className="topnote">Another teacher&rsquo;s class follows that curriculum — move the class first.</span>
+        ) : null}
         <div className="seg">
           <Link href={lessonHref} className="on">Notes</Link>
           <Link href={questionsHref}>Questions</Link>
         </div>
         <span className="spacer" />
         <span className="autosave">{savedLabel(updatedAt)}</span>
+        <ConfirmSubmit
+          action={deleteCurriculumAction}
+          hidden={{ moduleId: active.id, back: `/teach/curriculum?c=${encodeURIComponent(active.id)}` }}
+          label="Delete curriculum"
+          className="b del"
+          message={`Delete “${active.name}”?\n\nIts ${active.lessons} chapter(s), their questions and notes are removed for good, and any class following it loses the curriculum.`}
+        />
         {selectedLesson ? (
           <form action={setStatusAction} style={{ marginLeft: 12 }}>
             <input type="hidden" name="lessonId" value={selectedLesson.id} />

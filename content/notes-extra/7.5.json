@@ -1,0 +1,146 @@
+{
+ "section": "7.5",
+ "title": "Gas exchange in animals",
+ "questions": [
+  {
+   "no": 11,
+   "prompt": "Inside the lungs, what do the bronchi further divide into?",
+   "options": [
+    "bronchioles",
+    "trachea",
+    "air sacs",
+    "lungs"
+   ],
+   "answer": 0,
+   "why": "Bronchi divide into bronchioles inside the lungs.",
+   "quote": "the bronchi further divide into bronchioles",
+   "level": "recall"
+  },
+  {
+   "no": 12,
+   "prompt": "How many air sacs are in the lungs?",
+   "options": [
+    "thousands",
+    "millions",
+    "hundreds",
+    "billions"
+   ],
+   "answer": 1,
+   "why": "The lungs contain millions of tiny cup-shaped air sacs.",
+   "quote": "In the lungs, there are millions of tiny cup-shaped structures called air sacs.",
+   "level": "recall"
+  },
+  {
+   "no": 13,
+   "prompt": "What are the surfaces of the air sacs covered with?",
+   "options": [
+    "stomata",
+    "mucus",
+    "capillaries",
+    "guard cells"
+   ],
+   "answer": 2,
+   "why": "Air sac surfaces are covered with capillaries.",
+   "quote": "Their surfaces are covered with capillaries.",
+   "level": "recall"
+  },
+  {
+   "no": 14,
+   "prompt": "In the air sacs, what warms the air?",
+   "options": [
+    "sunlight",
+    "mucus",
+    "warm blood in capillaries",
+    "oxygen"
+   ],
+   "answer": 2,
+   "why": "Blood in the capillaries warms the air in the air sacs.",
+   "quote": "It is also warmed by the blood in the capillaries near the air sacs.",
+   "level": "recall"
+  },
+  {
+   "no": 15,
+   "prompt": "Approximately what percentage of carbon dioxide is in exhaled air?",
+   "options": [
+    "0.04%",
+    "1%",
+    "16%",
+    "4%"
+   ],
+   "answer": 3,
+   "why": "Exhaled air contains about 4% carbon dioxide.",
+   "quote": "Carbon dioxide 0.04% 4%",
+   "level": "recall"
+  },
+  {
+   "no": 16,
+   "prompt": "About how many air sacs are in our lungs?",
+   "options": [
+    "80 million",
+    "800 million",
+    "600 million",
+    "600 thousand"
+   ],
+   "answer": 2,
+   "why": "About 600 million air sacs are in our lungs.",
+   "quote": "There are about 600 million air sacs in our lungs.",
+   "level": "recognize"
+  },
+  {
+   "no": 17,
+   "prompt": "In emphysema, what happens to the walls of air sacs?",
+   "options": [
+    "hardened",
+    "destroyed",
+    "strengthened",
+    "dissolved"
+   ],
+   "answer": 1,
+   "why": "In emphysema, the walls of air sacs are destroyed.",
+   "quote": "In emphysema, the walls of air sacs are destroyed and become less elastic.",
+   "level": "recall"
+  },
+  {
+   "no": 18,
+   "prompt": "What narrows the bronchi and bronchioles in chronic bronchitis?",
+   "options": [
+    "inflammation and excess mucus",
+    "tar only",
+    "oxygen depletion",
+    "lung collapse"
+   ],
+   "answer": 0,
+   "why": "Inflammation and excess mucus narrow the bronchi and bronchioles.",
+   "quote": "the bronchi and bronchioles become narrower due to inflammation and excess mucus secretion",
+   "level": "recall"
+  },
+  {
+   "no": 19,
+   "prompt": "Which substance in cigarette smoke is addictive?",
+   "options": [
+    "tar",
+    "carbon monoxide",
+    "nicotine",
+    "sulphate"
+   ],
+   "answer": 2,
+   "why": "Nicotine in cigarette smoke is addictive.",
+   "quote": "nicotine in cigarette smoke is addictive",
+   "level": "recall"
+  },
+  {
+   "no": 20,
+   "prompt": "What is the status of e-cigarette selling in Hong Kong?",
+   "options": [
+    "Allowed",
+    "Only in schools",
+    "Only online",
+    "Banned"
+   ],
+   "answer": 3,
+   "why": "The selling of e-cigarettes is banned in Hong Kong.",
+   "quote": "The selling of e-cigarettes is banned in Hong Kong.",
+   "level": "recognize"
+  }
+ ]
+}

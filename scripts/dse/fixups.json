@@ -1,0 +1,17 @@
+{
+  "_why": "Questions whose options were printed inside a table, so the page OCR put them in `code` instead of `options`. Transcribed by hand from the page image.",
+  "2022": {
+    "6": {
+      "options": {
+        "A": "Data collection — Creating a statistical chart",
+        "B": "Data preparation — Validating questionnaires before input",
+        "C": "Data processing — Sorting questionnaires for data entry",
+        "D": "Data organisation — Designing an online questionnaire"
+      },
+      "code": null,
+      "stem": "Which of the following is correct?",
+      "figure": "none",
+      "figure_note": ""
+    }
+  }
+}

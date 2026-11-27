@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import type { PartyView } from "@/lib/party";
-import { ROBOT_SVG } from "@/lib/sprites";
+import type { PartyView, RaidSource } from "@/lib/party";
+import { BOSSES, bossById, bossLine } from "@/lib/bosses";
 
 const API = "/learner/api/party";
 const SEATS = 5;
@@ -27,15 +27,34 @@ function initials(name: string) {
 
 type Mode = "choose" | "join" | "lobby";
 
-export default function PartyGate() {
+export default function PartyGate({ sources = [] }: { sources?: RaidSource[] }) {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("choose");
+  const [picking, setPicking] = useState(false);
   const [view, setView] = useState<PartyView | null>(null);
   const [typed, setTyped] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [signedOut, setSignedOut] = useState(false);
   const [resume, setResume] = useState<PartyView | null>(null);
+  const [srcOpen, setSrcOpen] = useState(false);
+  const srcBox = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!srcOpen) return;
+    const away = (e: MouseEvent) => {
+      if (srcBox.current && !srcBox.current.contains(e.target as Node)) setSrcOpen(false);
+    };
+    const esc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSrcOpen(false);
+    };
+    document.addEventListener("mousedown", away);
+    document.addEventListener("keydown", esc);
+    return () => {
+      document.removeEventListener("mousedown", away);
+      document.removeEventListener("keydown", esc);
+    };
+  }, [srcOpen]);
 
   /* resume a raid that is already running, or a lobby you are still sitting in */
   useEffect(() => {
@@ -146,6 +165,61 @@ export default function PartyGate() {
     }
   }, [view, busy, router]);
 
+  /* the host swaps bosses from the lobby, before the first question */
+  const changeBoss = useCallback(
+    async (id: string) => {
+      if (!view || busy) return;
+      setBusy(true);
+      setError("");
+      try {
+        const r = await fetch(`${API}/${view.code}/boss`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ boss: id }),
+        });
+        const data = (await r.json().catch(() => null)) as PartyView | { error?: string } | null;
+        if (!r.ok || !data || !("code" in data)) {
+          setError((data && "error" in data && data.error) || "Could not change the boss.");
+          return;
+        }
+        setView(data);
+        setPicking(false);
+      } catch {
+        setError("Could not change the boss.");
+      } finally {
+        setBusy(false);
+      }
+    },
+    [view, busy],
+  );
+
+  /* host swaps the class whose questions the raid draws from */
+  const changeSource = useCallback(
+    async (moduleId: string) => {
+      if (!view || busy) return;
+      setBusy(true);
+      setError("");
+      try {
+        const r = await fetch(`${API}/${view.code}/source`, {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({ moduleId }),
+        });
+        const data = (await r.json().catch(() => null)) as PartyView | { error?: string } | null;
+        if (!r.ok || !data || !("code" in data)) {
+          setError((data && "error" in data && data.error) || "Could not change the class.");
+          return;
+        }
+        setView(data);
+      } catch {
+        setError("Could not change the class.");
+      } finally {
+        setBusy(false);
+      }
+    },
+    [view, busy],
+  );
+
   const leave = useCallback(async () => {
     if (!view || busy) return;
     setBusy(true);
@@ -167,7 +241,7 @@ export default function PartyGate() {
         <div className="hd">
           <div>
             <h1>Boss battle</h1>
-            <div className="mod" style={{ marginTop: 4 }}>5 players · 30s a question · 4 lives</div>
+            <div className="mod" style={{ marginTop: 4 }}>5 players · your own pace · 4 lives</div>
           </div>
         </div>
         <div className="empty" style={{ margin: 16 }}>
@@ -187,9 +261,8 @@ export default function PartyGate() {
         <div className="hd">
           <div>
             <h1>Boss battle</h1>
-            <div className="mod" style={{ marginTop: 4 }}>5 players · 30s a question · 4 lives</div>
+            <div className="mod" style={{ marginTop: 4 }}>5 players · your own pace · 4 lives</div>
           </div>
-          <span className="streak">Unit 1 · Mr Eric Chan</span>
         </div>
 
         <div className="party-grid">
@@ -225,7 +298,7 @@ export default function PartyGate() {
               </span>
               <b>Raid in progress</b>
               <span>
-                Party {display(resume.code)} · round {resume.round} of {resume.total}. Rejoin your friends.
+                Party {display(resume.code)} · question {resume.round} of {resume.total}. Rejoin your friends.
               </span>
             </Link>
           </div>
@@ -239,7 +312,7 @@ export default function PartyGate() {
         )}
 
         <div className="party-note">
-          Five seats, one question each, thirty seconds a round. The host starts the raid.
+          Five seats, your own questions, your own pace. The host starts the raid.
         </div>
       </>
     );
@@ -319,12 +392,92 @@ export default function PartyGate() {
       </div>
 
       <div className="preview">
-        <div dangerouslySetInnerHTML={{ __html: ROBOT_SVG }} />
-        <div>
-          <h1>Segfault</h1>
-          <span>Boss · level 3 · 12,000 HP</span>
+        <div dangerouslySetInnerHTML={{ __html: bossById(view.boss).sprite }} />
+        <div className="pv-body">
+          <h1>{bossById(view.boss).name}</h1>
+          <span>{bossLine(bossById(view.boss))}</span>
         </div>
+        {host && inLobby ? (
+          <button
+            className="pv-change"
+            onClick={() => setPicking((p) => !p)}
+            disabled={busy}
+            aria-expanded={picking}
+            title="Fight a different boss"
+          >
+            {picking ? "Cancel" : "Change"}
+          </button>
+        ) : null}
       </div>
+
+      <div className="sourcebar" ref={srcBox}>
+        <span className="sl">Questions from</span>
+        {host && inLobby && sources.length > 0 ? (
+          <>
+            <button
+              type="button"
+              className="src-pick"
+              aria-haspopup="menu"
+              aria-expanded={srcOpen}
+              aria-label={`Questions from: ${view.moduleLabel ?? "choose a class"}`}
+              disabled={busy}
+              onClick={() => setSrcOpen((v) => !v)}
+            >
+              <b>{view.moduleLabel ?? "Choose a class"}</b>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d={srcOpen ? "M6 14.5 12 8.5l6 6" : "M6 9.5 12 15.5l6-6"} />
+              </svg>
+            </button>
+            {srcOpen ? (
+              <div className="src-menu" role="menu" aria-label="Classes you can raid">
+                {sources.map((s) => {
+                  const on = view.moduleLabel === s.label;
+                  return (
+                    <button
+                      key={s.id}
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked={on}
+                      className={on ? "on" : ""}
+                      onClick={() => {
+                        setSrcOpen(false);
+                        if (!on) void changeSource(s.id);
+                      }}
+                    >
+                      <span>{s.label}</span>
+                      <em>{s.questions}</em>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+          </>
+        ) : (
+          <span className="sv">{view.moduleLabel ?? "—"}</span>
+        )}
+      </div>
+
+      {picking && host && inLobby ? (
+        <div className="boss-row pick" role="radiogroup" aria-label="Choose your boss">
+          {BOSSES.map((b) => (
+            <button
+              key={b.id}
+              type="button"
+              role="radio"
+              aria-checked={view.boss === b.id}
+              className={`boss-card b-${b.id}` + (view.boss === b.id ? " on" : "")}
+              onClick={() => void changeBoss(b.id)}
+              disabled={busy}
+            >
+              <span className="bc-art" dangerouslySetInnerHTML={{ __html: b.sprite }} />
+              <span className="bc-body">
+                <b>{b.name}</b>
+                <i>{bossLine(b)}</i>
+              </span>
+            </button>
+          ))}
+        </div>
+      ) : null}
 
       <div className="codebar">
         <div>
@@ -393,7 +546,7 @@ export default function PartyGate() {
           </button>
         )}
         <p className="note">
-          Friends join with the code above. Five seats, one question each, thirty seconds a round.
+          Friends join with the code above. Five seats, your own questions, your own pace.
         </p>
       </div>
     </div>

@@ -1,44 +1,45 @@
 import Link from "next/link";
-import { subjects, chapters } from "@/lib/content";
-import { getReads, viewer } from "@/lib/repo";
+import { subjects } from "@/lib/content";
 
-export default async function QuickBits() {
-  const v = await viewer();
-  const reads = v ? await getReads(v.id) : new Set<string>();
-  const readIn = (id: string) => {
-    let n = 0;
-    for (const k of reads) if (k.startsWith(id + "/")) n++;
-    return n;
-  };
-  const read = chapters.reduce((n, c) => n + readIn(c.id), 0);
-  const total = chapters.reduce((n, c) => n + c.fragments, 0);
-
+/* The notes surface, ready and reachable, deliberately empty: chapters get a page
+   when they are authored, and until then this screen says so instead of listing
+   placeholder notes that nobody can read. */
+export default function QuickBits() {
   return (
     <>
       <div className="hd">
         <div>
           <h1>QuickBits</h1>
-          <div className="mod" style={{ marginTop: 4 }}>{read} of {total} notes read · one concept a screen</div>
+          <div className="mod" style={{ marginTop: 4 }}>One concept a screen · notes are being written</div>
         </div>
       </div>
 
-      <div className="sec"><h2>Subjects</h2><span>study, don&apos;t drill</span></div>
+      <div style={{ padding: "18px 16px 0" }}>
+        <div className="empty">
+          <b>No notes yet.</b>
+          <p style={{ marginTop: 6 }}>
+            The first chapter is not written. Drills are live — start there.
+          </p>
+          <Link href="/drill" className="btn sm"
+            style={{ display: "inline-grid", placeItems: "center", marginTop: 12, textDecoration: "none" }}>
+            Start a drill
+          </Link>
+        </div>
+      </div>
+
+      <div className="sec" style={{ marginTop: 8 }}><h2>Subjects</h2><span>Study, don&apos;t drill</span></div>
       <div className="cards">
         {subjects.map((s) => (
-          <Link key={s.id} href={`/quickbits/${s.id}`} className="card">
+          <div key={s.id} className="card">
             <span className="mk" style={{ background: s.colour }}>
               <svg viewBox="0 0 24 24" width="17" height="17" fill="#fff"><path d={s.d} /></svg>
             </span>
             <span className="txt">
               <b>{s.name}</b>
-              <span>
-                {s.id === "ict"
-                  ? `${chapters.length} chapters · ${read} read`
-                  : "No notes yet"}
-              </span>
+              <span>No notes yet</span>
             </span>
-            <span className="go">{s.id === "ict" ? "Study" : "Soon"}</span>
-          </Link>
+            <span className="go">Soon</span>
+          </div>
         ))}
       </div>
       <div style={{ height: 24 }} />

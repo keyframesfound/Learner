@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { isStaff, viewer } from "@/lib/repo";
 import { teacherClasses } from "@/lib/teach";
 import { ageShort, classLastActive, isStale, moduleList } from "@/app/teach/data";
-import ClassForm from "@/components/teach/ClassForm";
+import NewClassRow from "@/components/teach/NewClassRow";
 
 type ClassRow = {
   id: string;
@@ -47,16 +47,18 @@ export default async function ClassesPage({
         <h1>Classes</h1>
         <div className="sub">A class is a group of students · the curriculum is chosen when you create it</div>
 
-        <div className="cwrap" style={{ marginTop: 16 }}>
+        <div className="cwrap onecol" style={{ marginTop: 16 }}>
           <div>
             <div className="bt">
               <div className="r h" style={{ gridTemplateColumns: "90px 1.4fr 110px 130px 130px 40px" }}>
                 <div>Class</div><div>Curriculum</div><div>Students</div><div>Join code</div><div>Last active</div><div />
               </div>
 
+              <NewClassRow modules={modules.map((m) => ({ id: m.id, name: m.name, code: m.code, lessons: m.lessons }))} />
+
               {classes.length === 0 ? (
                 <div style={{ padding: "18px 14px", background: "#fff", fontSize: 12.5, color: "var(--ink-3)" }}>
-                  No classes yet. Create one on the right and share its join code.
+                  No classes yet. Add one above and share its join code.
                 </div>
               ) : null}
 
@@ -100,7 +102,7 @@ export default async function ClassesPage({
             </div>
           </div>
 
-          <ClassForm modules={modules} error={sp.error ?? null} />
+          {null}
         </div>
       </div>
     </section>
